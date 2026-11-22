@@ -125,21 +125,22 @@ const gmean = (xs) => {
   return v.length ? Math.exp(v.reduce((s, x) => s + Math.log(x), 0) / v.length) : null;
 };
 const fmt = (x) => (x == null ? '—' : x.toFixed(3));
-const S = { campaign: null, reference: 'master-dev', cxx: null, series: null, centre: 'own', stat: 'min', precs: ['float', 'double'], fixed: true };
+const S = { campaign: null, reference: null, cxx: null, series: null, centre: 'own', stat: 'min', precs: ['float', 'double'], fixed: true };
 let ROWS = [], CAMPAIGNS = [], VERSIONS = {}, LIBS = {};
 
-// a campaign : the sessions of one master-dev commit, one commit of the libraries and one set of
+// a campaign : the sessions of one reference (its name and commit), one commit of the libraries and one set of
 // compared versions, one per C++ compiler
 function prepare(rows) {
-  const versionsOf = {}, md = {}, lib = {};
+  const versionsOf = {}, md = {}, refName = {}, lib = {};
   for (const r of rows) {
+    r.role = r.role || (r.version === 'master-dev' ? 'reference' : 'version');
     (versionsOf[r.session] ??= new Set()).add(r.version);
-    if (r.version === 'master-dev') md[r.session] = r.commit;
+    if (r.role === 'reference') { md[r.session] = r.commit; refName[r.session] = r.version; }
     lib[r.session] = r.libraries || '';
   }
   const campaignOf = {};
   for (const s of Object.keys(versionsOf)) {
-    campaignOf[s] = (md[s] || '?') + '|' + [...versionsOf[s]].filter((v) => v !== 'master-dev').sort().join(',') + '|' + lib[s];
+    campaignOf[s] = (refName[s] || '?') + ' ' + (md[s] || '?') + '|' + [...versionsOf[s]].filter((v) => v !== refName[s]).sort().join(',') + '|' + lib[s];
   }
   const by = {};
   for (const r of rows) {
@@ -151,7 +152,7 @@ function prepare(rows) {
   }
   CAMPAIGNS = Object.values(by).map((c) => {
     const [mdc, vs, lb] = c.id.split('|');
-    return { ...c, libraries: lb, label: c.date.slice(0, 10) + ' · ' + (vs || '—').replaceAll(',', ', ') + ' · master-dev ' + mdc + ' · libraries ' + (lb ? lb.slice(0, 7) : '?') + ' · ' + c.cxx.size + ' compiler' + (c.cxx.size > 1 ? 's' : '') };
+    return { ...c, libraries: lb, refName: mdc.split(' ')[0], label: c.date.slice(0, 10) + ' · ' + (vs || '—').replaceAll(',', ', ') + ' · ' + mdc + ' · libraries ' + (lb ? lb.slice(0, 7) : '?') + ' · ' + c.cxx.size + ' compiler' + (c.cxx.size > 1 ? 's' : '') };
   }).sort((a, b) => b.date.localeCompare(a.date) || b.cxx.size - a.cxx.size);
   ROWS = rows;
 }
@@ -159,7 +160,8 @@ function prepare(rows) {
 const inCampaign = () => ROWS.filter((r) => r.campaign === S.campaign);
 const cxxList = () => [...new Set(inCampaign().map((r) => r.cx))].sort();
 const colorOf = (cx) => COLORS[Math.max(0, cxxList().indexOf(cx)) % COLORS.length];
-const versions = () => [...new Set(inCampaign().map((r) => r.version))].sort((a, b) => (a === 'master-dev' ? -1 : b === 'master-dev' ? 1 : a.localeCompare(b)));
+const campaignRef = () => { const c = CAMPAIGNS.find((x) => x.id === S.campaign); return c ? c.refName : ''; };
+const versions = () => [...new Set(inCampaign().map((r) => r.version))].sort((a, b) => (a === campaignRef() ? -1 : b === campaignRef() ? 1 : a.localeCompare(b)));
 const compared = () => versions().filter((v) => v !== S.reference);
 const shade = (v) => [1, 0.62, 0.4, 0.26][Math.max(0, compared().indexOf(v)) % 4];
 const symbolOf = (gen) => (gen === 'cpp' ? d3.symbolSquare : d3.symbolCircle);
@@ -197,9 +199,9 @@ function ratios() {
 function ensure() {
   if (!S.campaign || !CAMPAIGNS.some((c) => c.id === S.campaign)) {
     S.campaign = [...CAMPAIGNS].sort((a, b) => b.cxx.size - a.cxx.size || b.date.localeCompare(a.date))[0].id;
-    S.cxx = null; S.series = null; S.reference = 'master-dev';
+    S.cxx = null; S.series = null; S.reference = null;
   }
-  if (!versions().includes(S.reference)) S.reference = versions()[0];
+  if (!versions().includes(S.reference)) S.reference = campaignRef() || versions()[0];
   if (!S.cxx) S.cxx = cxxList();
   if (!S.series) S.series = [...new Set(inCampaign().map((r) => r.version + ' ' + r.generator))];
 }
@@ -426,7 +428,7 @@ function draw() {
   drawLead(R);
 }
 
-document.getElementById('campaign').addEventListener('change', (e) => { S.campaign = e.target.value; S.cxx = null; S.series = null; S.reference = 'master-dev'; draw(); });
+document.getElementById('campaign').addEventListener('change', (e) => { S.campaign = e.target.value; S.cxx = null; S.series = null; S.reference = null; draw(); });
 document.getElementById('reference').addEventListener('change', (e) => { S.reference = e.target.value; S.series = null; draw(); });
 for (const el of document.querySelectorAll('input[name="centre"]')) el.addEventListener('change', () => { S.centre = el.value; draw(); });
 for (const el of document.querySelectorAll('input[name="stat"]')) el.addEventListener('change', () => { S.stat = el.value; draw(); });

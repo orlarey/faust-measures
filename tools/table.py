@@ -24,7 +24,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-COLUMNS = ["session", "date", "machine", "cxx", "cxx_full", "libraries", "version", "commit", "options",
+COLUMNS = ["session", "date", "machine", "cxx", "cxx_full", "libraries", "role", "version", "commit", "options",
            "generator", "precision", "program", "ns_min", "ns_median", "rounds"]
 LIBRARIES_REPO = os.environ.get("FAUST_LIBRARIES_REPO", "")
 
@@ -102,11 +102,12 @@ def rows_of(path, info, libs):
     machine, cxx = short_machine(meta["machine"]), short_cxx(meta["cxx"])
     prov = meta.get("provenance", {}).get("binaries", {})
     lib = note_libraries(libs, meta.get("provenance", {}).get("libraries", {}))
+    ref_name = meta.get("ref_name", "master-dev")
     for b in meta["binaries"]:
-        vname = "master-dev" if b == "ref" else b
+        vname = ref_name if b == "ref" else b
         note_version(info, vname, commit.get(b, ""), prov.get(b, {}), fopts.get(vname, ""),
                      meta.get("descriptions", {}).get(vname, ""))
-    series = [("R", "master-dev", "cpp", "ref"), ("md-ocpp", "master-dev", "ocpp", "ref")]
+    series = [("R", ref_name, "cpp", "ref"), ("md-ocpp", ref_name, "ocpp", "ref")]
     series += [(f"{n}-{g}", n, g, n) for n in meta["versions"] for g in ("cpp", "ocpp")]
     out = []
     for prog in meta["entries"]:
@@ -118,7 +119,7 @@ def rows_of(path, info, libs):
                     continue
                 out.append({
                     "session": name, "date": when, "machine": machine, "cxx": cxx, "cxx_full": meta["cxx"],
-                    "libraries": lib,
+                    "libraries": lib, "role": "reference" if b == "ref" else "version",
                     "version": version, "commit": commit.get(b, ""), "options": fopts.get(version, ""),
                     "generator": gen, "precision": "float" if p == "f" else "double", "program": prog,
                     "ns_min": round(min(t), 4), "ns_median": round(statistics.median(t), 4), "rounds": len(t),

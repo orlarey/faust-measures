@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-r"""mesure.py : a branch of the Faust compiler measured against master-dev
-(SPEC.md ; first written in faust-migration, LA-MESURE-CONTRE-MASTER-DEV.md).
+r"""mesure.py : versions of the Faust compiler measured against a reference (SPEC.md ; first
+written in faust-migration, LA-MESURE-CONTRE-MASTER-DEV.md).
 
-One reference per precision, R_f and R_d : master-dev in cpp, default options, compiled by
-clang in -O3 -ffast-math -march=native. Every time of the branch, in cpp and ocpp, compiled
-under its execution contract (-fno-fast-math -ffp-contract=fast -fno-math-errno, the
-denormals flushed to zero at start), is divided by the reference of its precision ; master-dev
-in ocpp is given for information, against the same reference.
+One reference per precision, R_f and R_d : the reference binary (named by --ref-name, master-dev
+by default) in cpp, default options, compiled by the C++ compiler with --ref-flags (-O3
+-ffast-math -march=native by default). Every version, in cpp and ocpp, is compiled with
+--version-flags (by default the same as the reference) or, under --contract, under the execution
+contract of the certification branch (-fno-fast-math -ffp-contract=fast -fno-math-errno, the
+denormals flushed to zero at start), and divided by the reference of its precision ; the
+reference in ocpp is given for information, against the same reference.
 
   mesure.py run --ref <faust> --version NAME=<faust> [--version NAME=<faust> ...] --out DIR
       [--entries basket/entries.txt] [--faust-root DIR] [--cxx clang++] [--rounds 9]
@@ -178,15 +180,25 @@ def parse_faust_options(items, versions):
     return out
 
 
-def parse_descriptions(items, versions):
-    """--describe NAME="<text>" : what a version tries to do, master-dev for the reference"""
-    names, out = {n for n, _ in versions} | {"master-dev"}, {}
+def parse_descriptions(items, versions, ref_name):
+    """--describe NAME="<text>" : what a version tries to do, the reference by its name"""
+    names, out = {n for n, _ in versions} | {ref_name}, {}
     for it in items:
         name, _, text = it.partition("=")
         if name not in names or not text.strip():
-            sys.exit(f"--describe {it} : NAME=<text>, NAME a version or master-dev")
+            sys.exit(f"--describe {it} : NAME=<text>, NAME a version or the reference ({ref_name})")
         out[name] = text.strip()
     return out
+
+
+def version_flags(args):
+    """the C++ options of the versions : those of the reference by default ; under --contract,
+    the execution contract of the certification branch (no -ffast-math, ftz.h included)"""
+    if args.contract and args.version_flags:
+        sys.exit("--contract and --version-flags : one or the other")
+    if args.contract:
+        return BRANCH_FLAGS
+    return args.version_flags or args.ref_flags
 
 
 def faust_options(v, fopts):
@@ -386,7 +398,9 @@ def cmd_run(args):
     fopts = parse_faust_options(args.faust_options, args.versions)
     prov = provenance(args.ref, args.versions, root, args.entries)
     check_modified(prov, args.allow_modified)
-    flags = {"ref": REF_FLAGS.split(), "branch": BRANCH_FLAGS.split() + ["-include", ftz],
+    vflags = version_flags(args)
+    flags = {"ref": shlex.split(args.ref_flags),
+             "branch": shlex.split(vflags) + (["-include", ftz] if args.contract else []),
              **{f"lever:{l}": lever_flags(l, ftz) for l in LEVERS}}
 
     def build(e, v):
@@ -446,12 +460,13 @@ def cmd_run(args):
         "date": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
         "machine": machine(),
         "cxx": cxx_version(args.cxx),
-        "flags": {"ref": REF_FLAGS, "branch": BRANCH_FLAGS + " + ftz.h",
+        "ref_name": args.ref_name,
+        "flags": {"ref": args.ref_flags, "branch": vflags + (" + ftz.h" if args.contract else ""),
                   **{f"lever:{l}": " ".join(lever_flags(l, "ftz.h")) for l in
                      (args.levers.split(",") if args.levers else [])}},
         "levers": args.levers.split(",") if args.levers else [],
         "faust_options": {n: " ".join(o) for n, o in fopts.items()},
-        "descriptions": parse_descriptions(args.describe, args.versions),
+        "descriptions": parse_descriptions(args.describe, args.versions, args.ref_name),
         "arch": [arch, sha256_file(arch) if os.path.exists(arch) else None],
         "rounds": args.rounds,
         "configs": args.configs.split(","),
@@ -668,8 +683,9 @@ def plot(D, n, path, median=False):
     progs = [e for e in meta["entries"] if e in times]
     precs = [p for p in "fd" if any(c.endswith(f"-{p}") for c in configs)]
     BLUE, RED = "#2a6fdb", "#d6403a"
-    series = [("R", None, "master-dev cpp (-ffast-math)", BLUE, "o"),
-              ("md-ocpp", None, "master-dev ocpp (-ffast-math)", RED, "o"),
+    rn = meta.get("ref_name", "master-dev")
+    series = [("R", None, f"{rn} cpp", BLUE, "o"),
+              ("md-ocpp", None, f"{rn} ocpp", RED, "o"),
               (n, "cpp", f"{n} cpp", BLUE, "s"),
               (n, "ocpp", f"{n} ocpp", RED, "s")]
 
@@ -723,7 +739,7 @@ def plot(D, n, path, median=False):
         ax.set_axisbelow(True)
         for s in ("top", "right"):
             ax.spines[s].set_visible(False)
-        ax.set_ylabel("temps / master-dev cpp")
+        ax.set_ylabel(f"time / {rn} cpp")
         name = "simple précision (float)" if p == "f" else "double précision"
         ax.set_title(f"{name} — moyennes géométriques : " + ", ".join(gm).replace(".", ","), loc="left", fontsize=11)
     axes[-1, 0].set_xticks(range(len(progs)))
@@ -733,7 +749,7 @@ def plot(D, n, path, median=False):
     fig.legend(handles=handles, loc="upper center", ncol=4, frameon=False, bbox_to_anchor=(0.5, 0.99))
     commit = lambda b: meta["binaries"][b][1].rpartition(": ")[2]
     fig.text(0.01, 0.005,
-             f"{meta['machine']}, {meta['cxx']}, {meta['date'][:10]} ; master-dev {commit('ref')} {meta['flags']['ref']} ;\n"
+             f"{meta['machine']}, {meta['cxx']}, {meta['date'][:10]} ; {rn} {commit('ref')} {meta['flags']['ref']} ;\n"
              f"{n} {commit(n)} {meta['flags']['branch']} ; {'médiane' if median else 'minimum'} de "
              f"{meta['rounds']} tours ; < 1 = plus rapide", fontsize=8, color="#555")
     fig.tight_layout(rect=(0, 0.04, 1, 0.95))
@@ -1125,7 +1141,12 @@ def main():
     r.add_argument("--faust-options", action="append", default=[], metavar='NAME="<options>"',
                    help="options of faust for the version NAME")
     r.add_argument("--describe", action="append", default=[], metavar='NAME="<text>"',
-                   help="what the version NAME tries to do (master-dev : the reference)")
+                   help="what the version NAME, or the reference, tries to do")
+    r.add_argument("--ref-name", default="master-dev", help="the name of the reference (default master-dev)")
+    r.add_argument("--ref-flags", default=REF_FLAGS, help=f"C++ options of the reference (default {REF_FLAGS})")
+    r.add_argument("--version-flags", help="C++ options of the versions (default : those of the reference)")
+    r.add_argument("--contract", action="store_true",
+                   help=f"the versions under the contract of the certification branch : {BRANCH_FLAGS} + ftz.h")
     r.add_argument("--levers", help="the diagnostic : a comma-separated list among " + ",".join(LEVERS))
     r.set_defaults(func=cmd_run)
     q = S.add_parser("report")

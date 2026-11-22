@@ -5,6 +5,8 @@ compiler, measured on a fixed basket of programs, kept over time so that any two
 compiler (two branches, two options, two C++ compilers, or the same branch at two dates) can be
 compared.
 
+**Site** : <https://orlarey.github.io/faust-measures/> — every campaign, interactive.
+
 ## Layout
 
 | path | what it holds |
@@ -18,45 +20,119 @@ compared.
 | `versions.json` | what each measured version tries to do, shown on the site |
 | `SPEC.md` | what a session is, what makes two measures comparable |
 
-## Measuring
+## Getting started
 
-`mesure.py run` needs a Faust source tree (`--faust-root`) for the sources of the basket and the
-harness `libraries/arch/cpu_arch.cpp`, the reference binary and one binary per version to
-compare :
+### What you need
+
+- Python 3 (matplotlib is optional : it draws a graph beside the report of a session) ;
+- a C++ compiler : `clang++` by default, any other with `--cxx` (`--cxx g++`) ;
+- a Faust source tree with its `libraries` submodule. It gives the sources of the basket
+  (`examples/…`, `tests/impulse-tests/dsp/…`) and the harness `libraries/arch/cpu_arch.cpp`.
+  Every series of a session is compiled with the libraries of this tree : choose its commit
+  knowingly, it is recorded ;
+- one Faust binary for the reference and one for each version to compare, each built from a
+  clean commit.
 
 ```sh
-python3 tools/mesure.py run --faust-root ~/faust \
-    --ref ~/faust-master-dev/build/bin/faust \
-    --version mybranch=~/faust-mybranch/build/bin/faust \
-    --cxx clang++ --out /tmp/session --archive mybranch
-FAUST_LIBRARIES_REPO=~/faust/libraries python3 tools/table.py   # the repository gives the dates of the libraries
+git clone https://github.com/orlarey/faust-measures.git
+git clone https://github.com/grame-cncm/faust.git
+cd faust && git submodule update --init libraries && cd ..
 ```
 
-The session lands in `sessions/<date>-<machine>-<C++ compiler>-<name>/` with every round of every
-program (`results.json`), the provenance of every binary (commit, tree hash, local changes), of the
-sources, the libraries and the basket, the report and the graphs. A binary built with local changes
-(`Source commit: <sha>-modified`) is refused unless `--allow-modified`, which marks the session as
-work in progress.
+### Building the binaries
 
-Run nothing else on the machine during a session, on mains power : the reference and the versions
-are measured in alternated rounds so that their ratio is taken under the same conditions.
+One worktree per commit, built with `make` at its root :
 
-## Contributing
+```sh
+cd faust
+git worktree add ../faust-ref master-dev          # the reference
+git worktree add ../faust-mine my-branch          # a version to compare
+for d in ../faust-ref ../faust-mine; do (cd $d && git submodule update --init libraries && make); done
+../faust-ref/build/bin/faust --version            # recent versions print : Source commit: <sha>
+```
 
-One session per pull request : the session directory, its lines in `sessions/INDEX.tsv`, and the
-table and the site's copy rebuilt by `tools/table.py`. Say what a new version tries to do, with
-`mesure.py run --describe NAME="..."` or with an entry of `versions.json` (its name, the start of
-its commit, a sentence) ; the site shows it above the subject of its last commit. Say in the description which machine, which C++ compiler, and
-what the versions are.
+A binary built with local changes prints `Source commit: <sha>-modified` and is refused, unless
+`--allow-modified`, which marks the session as a work in progress.
+
+### A quick check (a minute)
+
+Two programs, two rounds, one configuration : it checks the tools, the tree and the binaries.
+
+```sh
+head -2 faust-measures/basket/entries.txt > two.txt
+python3 faust-measures/tools/mesure.py run --faust-root faust \
+    --ref faust-ref/build/bin/faust --version mine=faust-mine/build/bin/faust \
+    --entries two.txt --rounds 2 --configs cpp-f --out /tmp/check
+```
+
+It prints a report : every time of `mine` divided by the time of the reference, program by
+program, and their geometric mean.
+
+### A session
+
+The whole basket, 9 rounds, in cpp and ocpp, single and double precision, archived in
+`sessions/` :
+
+```sh
+python3 faust-measures/tools/mesure.py run --faust-root faust \
+    --ref faust-ref/build/bin/faust --version mine=faust-mine/build/bin/faust \
+    --describe mine="what my branch tries to do, in one sentence" \
+    --cxx clang++ --out /tmp/session --archive mine --machine my-laptop
+FAUST_LIBRARIES_REPO=faust/libraries python3 faust-measures/tools/table.py
+```
+
+The options that change what is compared :
+
+| option | what it does |
+| :--- | :--- |
+| `--version NAME=<faust>` | a version to compare ; repeat it for several versions |
+| `--faust-options NAME="…"` | Faust options for one version (`-vec`, `-fam`…) |
+| `--ref-name NAME` | the name of the reference (default `master-dev`) |
+| `--ref-flags "…"` | C++ options of the reference (default `-O3 -ffast-math -march=native`) |
+| `--version-flags "…"` | C++ options of the versions (default : those of the reference) |
+| `--contract` | the versions under the execution contract of the certification branch (no `-ffast-math`, denormals flushed to zero) |
+| `--describe NAME="…"` | what a version, or the reference, tries to do |
+
+The session holds every round of every program (`results.json`), the provenance of every binary
+(commit, tree hash, branch, local changes), of the sources, the libraries and the basket, and the
+reports. `python3 faust-measures/tools/mesure.py report DIR` prints the report again.
+
+### A clean machine
+
+A ratio is only as good as the conditions of its two terms. The reference and the versions are
+measured in alternated rounds so that they share the conditions ; the machine must still be quiet :
+
+- on mains power, nothing else running (a browser, an indexer, a build) ;
+- on Linux with a hybrid processor (performance and efficiency cores), pin the measure on the
+  performance cores : `taskset -c 0-3 python3 …` (the cores depend on the processor) ;
+- one session at a time on a machine.
+
+`results.json` records the load of the machine at the start and at the end of the session.
+
+## Contributing a session
+
+1. Fork this repository and clone your fork.
+2. Run the session with `--archive NAME` from your clone : it lands in `sessions/` and its lines in
+   `sessions/INDEX.tsv`.
+3. Rebuild the table and the site's copy : `FAUST_LIBRARIES_REPO=<faust>/libraries python3 tools/table.py`.
+4. If a version is new, say what it tries to do : `--describe` at step 2, or an entry of
+   `versions.json` (its name, the start of its commit, a sentence).
+5. Open a pull request : the machine, the C++ compiler, the versions and what they try to do.
+
+One session per pull request. A session is never rewritten : a mistake is corrected by a new
+session, or a note beside it.
 
 ## Reading
 
-The site of the repository (GitHub Pages, `docs/`) shows every campaign : one panel per precision,
-every time divided by the centre of its program, the geometric mean of the chosen reference in cpp
-and ocpp, on a logarithmic axis ; the reference, the C++ compilers and the series are chosen on the
-page, with the commit of every series. It reads `docs/measures.json`, which `tools/table.py` writes
-beside `table/measures.json` and `table/measures.csv`. To look at it locally :
+The site shows every campaign : the sessions of one reference, one commit of the libraries and one
+set of compared versions, one session per C++ compiler. Every time is divided by the centre of its
+program, the geometric mean of the reference in cpp and ocpp, on a logarithmic axis ; the
+reference, the C++ compilers and the series are chosen on the page, with the commit, the branch and
+the description of every version. It reads `docs/measures.json`. To look at it locally :
 
 ```sh
 cd docs && python3 -m http.server 8000    # then http://localhost:8000
 ```
+
+`SPEC.md` says what a measure is and what compares : two series of one session always, two sessions
+of one machine through their reference, two machines never in absolute time.
