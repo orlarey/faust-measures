@@ -17,7 +17,7 @@ in ocpp is given for information, against the same reference.
     and every version of the branch, compiles it with the harness cpu_arch.cpp, then runs
     the executables program after program, 9 rounds, the versions of a program in an order
     shifted by one at each round ; writes DIR/results.json (every round kept),
-    DIR/report.txt and the graphs DIR/panier-<version>.png. --cxx-times also measures the
+    DIR/report.txt and the graphs DIR/panier-<version>.png (not archived). --cxx-times also measures the
     C++ compile time (CPU, the minimum of 3). results.json records the provenance of the
     measure : every binary (its commit, tree hash, branches, hash), the sources and the
     libraries (commit, local changes), the basket (the hash of every program), the hash of
@@ -53,7 +53,7 @@ in ocpp is given for information, against the same reference.
 
   mesure.py archive DIR --name NAME [--machine NAME] [--note TEXT]
     copies the measure into sessions/<date>-<machine>-<C++ compiler>-<name>/ (results.json,
-    the reports, the graphs) and appends its lines to sessions/INDEX.tsv ; a directory
+    the reports ; not the graphs) and appends its lines to sessions/INDEX.tsv ; a directory
     already under sessions/ is indexed in place. An archived measure is never rewritten.
 
   mesure.py history [--key KEY] [--machine TEXT] [--version TEXT] [--type TYPE]
@@ -1023,12 +1023,11 @@ def archive(directory, name, machine_name=None, note=None, legacy_date=None):
                 if os.path.exists(os.path.join(directory, f)):
                     shutil.copy2(os.path.join(directory, f), dest)
     if D is not None and measure_kind(D) == "panier":
-        # the reports and graphs derive from results.json : written when missing
+        # the reports derive from results.json : written when missing ; the graphs are not
+        # archived (the site draws them, mesure.py plot DIR redraws them from results.json)
         for f, med in (("report.txt", False), ("report-median.txt", True)):
             if not os.path.exists(os.path.join(dest, f)):
                 open(os.path.join(dest, f), "w").write(report(D, median=med))
-        if not any(f.startswith("panier-") and f.endswith(".png") for f in os.listdir(dest)):
-            plot_all(dest)
     append_index(rows)
     rel = os.path.relpath(dest, os.path.dirname(MESURES))
     print(f"archived : {rel} ({len(rows)} line(s) in sessions/INDEX.tsv)\n"
