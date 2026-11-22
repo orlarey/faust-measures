@@ -5,7 +5,7 @@ compiler, measured on a fixed basket of programs, kept over time so that any two
 compiler (two branches, two options, two C++ compilers, or the same branch at two dates) can be
 compared.
 
-**Site** : <https://orlarey.github.io/faust-measures/> — every campaign, interactive.
+**Site**: <https://orlarey.github.io/faust-measures/>, every campaign, interactive.
 
 ## Layout
 
@@ -24,41 +24,48 @@ compared.
 
 ### What you need
 
-- Python 3 (matplotlib is optional : it draws a graph beside the report of a session) ;
-- a C++ compiler : `clang++` by default, any other with `--cxx` (`--cxx g++`) ;
+- Python 3 (matplotlib is optional: it draws a graph beside the report of a session);
+- a C++ compiler: `clang++` by default, any other with `--cxx` (`--cxx g++`);
 - a Faust source tree with its `libraries` submodule. It gives the sources of the basket
   (`examples/…`, `tests/impulse-tests/dsp/…`) and the harness `libraries/arch/cpu_arch.cpp`.
-  Every series of a session is compiled with the libraries of this tree : choose its commit
-  knowingly, it is recorded ;
+  Every series of a session is compiled with the libraries of this tree: choose its commit
+  knowingly, it is recorded;
 - one Faust binary for the reference and one for each version to compare, each built from a
   clean commit.
 
+Every command below runs from one working directory that holds the clones side by side:
+`faust-measures`, `faust`, and the worktrees of the binaries. To contribute sessions, fork this
+repository on GitHub first and clone your fork; to only measure, clone this repository.
+
 ```sh
-git clone https://github.com/orlarey/faust-measures.git
+mkdir work && cd work
+git clone https://github.com/<you>/faust-measures.git   # your fork, or orlarey/faust-measures
 git clone https://github.com/grame-cncm/faust.git
 cd faust && git submodule update --init libraries && cd ..
 ```
 
 ### Building the binaries
 
-One worktree per commit, built with `make` at its root (a branch, a tag or a commit : a campaign
-usually aims at a commit, `git worktree add ../faust-ref e3665b800`). Two binaries take about three
-minutes to build :
+One worktree per commit, built with `make` at its root. A worktree takes a branch, a tag or a
+commit; a campaign usually aims at a commit (`git worktree add ../faust-ref e3665b800`). Two
+binaries take about three minutes to build:
 
 ```sh
 cd faust
 git worktree add ../faust-ref master-dev          # the reference
 git worktree add ../faust-mine my-branch          # a version to compare
 for d in ../faust-ref ../faust-mine; do (cd $d && git submodule update --init libraries && make); done
-../faust-ref/build/bin/faust --version            # recent versions print : Source commit: <sha>
+cd ..
+faust-ref/build/bin/faust --version               # its second line: Source commit: <sha>
 ```
 
-A binary built with local changes prints `Source commit: <sha>-modified` and is refused, unless
+The tools identify a binary by its `Source commit:` line. A binary without that line (an older
+release) or built with local changes (`Source commit: <sha>-modified`) is refused, unless
 `--allow-modified`, which marks the session as a work in progress.
 
 ### A quick check (a minute)
 
-Two programs, two rounds, one configuration : it checks the tools, the tree and the binaries.
+Two programs, two rounds, one configuration: it checks the tools, the tree and the binaries.
 
 ```sh
 head -2 faust-measures/basket/entries.txt > two.txt
@@ -67,34 +74,52 @@ python3 faust-measures/tools/mesure.py run --faust-root faust \
     --entries two.txt --rounds 2 --configs cpp-f --out /tmp/check
 ```
 
-It prints a report : every time of `mine` divided by the time of the reference, program by
+It prints a report: every time of `mine` divided by the time of the reference, program by
 program, and their geometric mean.
 
 ### A session
 
 The whole basket, 9 rounds, in cpp and ocpp, single and double precision, archived in
-`sessions/`. It takes about ten minutes. Give the machine one stable name with `--machine`, the
-same in every session (without it, the session takes the host name of the machine) :
+`faust-measures/sessions/`. It takes about ten minutes. Give the machine one stable name with
+`--machine`, the same in every session (without it, the session takes the host name of the
+machine):
 
 ```sh
 python3 faust-measures/tools/mesure.py run --faust-root faust \
     --ref faust-ref/build/bin/faust --version mine=faust-mine/build/bin/faust \
     --describe mine="what my branch tries to do, in one sentence" \
     --cxx clang++ --out /tmp/session --archive mine --machine my-laptop
-FAUST_LIBRARIES_REPO=faust/libraries python3 faust-measures/tools/table.py
 ```
 
-The options that change what is compared :
+One session measures with one C++ compiler. To compare several compilers on one machine, run one
+session per compiler, one after the other:
+
+```sh
+for cxx in clang++ g++; do
+  python3 faust-measures/tools/mesure.py run --faust-root faust \
+      --ref faust-ref/build/bin/faust --version mine=faust-mine/build/bin/faust \
+      --cxx $cxx --out /tmp/session-$cxx --archive mine --machine my-laptop
+done
+```
+
+The options that change what is compared:
 
 | option | what it does |
 | :--- | :--- |
-| `--version NAME=<faust>` | a version to compare ; repeat it for several versions |
+| `--version NAME=<faust>` | a version to compare; repeat it for several versions |
 | `--faust-options NAME="…"` | Faust options for one version (`-vec`, `-fam`…) |
 | `--ref-name NAME` | the name of the reference (default `master-dev`) |
 | `--ref-flags "…"` | C++ options of the reference (default `-O3 -ffast-math -march=native`) |
-| `--version-flags "…"` | C++ options of the versions (default : those of the reference) |
-| `--contract` | the versions under the execution contract of the certification branch (no `-ffast-math`, denormals flushed to zero) |
+| `--version-flags "…"` | C++ options of the versions (default: those of the reference) |
+| `--contract` | the versions under the execution contract of the certification branch, see below |
 | `--describe NAME="…"` | what a version, or the reference, tries to do |
+
+**The certification branch.** Its generated code is meant to be compiled without `-ffast-math`,
+under an execution contract: `-O3 -march=native -fno-fast-math -ffp-contract=fast
+-fno-math-errno`, with denormals flushed to zero by a header the tool includes (`ftz.h`). Pass
+`--contract` whenever a version comes from that branch. The reference keeps its own options
+(`-ffast-math` by default, as master-dev is used), so the ratio compares each side as it is
+meant to run. `--contract` and `--version-flags` exclude each other.
 
 The session holds every round of every program (`results.json`), the provenance of every binary
 (commit, tree hash, branch, local changes), of the sources, the libraries and the basket, and the
@@ -103,45 +128,63 @@ reports. `python3 faust-measures/tools/mesure.py report DIR` prints the report a
 ### A clean machine
 
 A ratio is only as good as the conditions of its two terms. The reference and the versions are
-measured in alternated rounds so that they share the conditions ; the machine must still be quiet :
+measured in alternated rounds so that they share the conditions; the machine must still be quiet:
 
-- on mains power, nothing else running (a browser, an indexer, a build) ;
+- on mains power, nothing else running (a browser, an indexer, a build);
 - on macOS, a new clone of Faust (about 1 GB) is indexed by Spotlight right away, at a whole core
-  for minutes : wait for it, or exclude the working directory from Spotlight (System Settings,
-  Spotlight, Privacy) ; the end of a build leaves the load high for a minute too ;
+  for minutes: wait for it, or exclude the working directory from Spotlight (System Settings,
+  Spotlight, Privacy); the end of a build leaves the load high for a minute too;
 - on Linux with a hybrid processor (performance and efficiency cores), pin the measure on the
-  performance cores : `taskset -c 0-3 python3 …` (the cores depend on the processor) ;
+  performance cores: `taskset -c 0-3 python3 …` (the cores depend on the processor);
 - one session at a time on a machine.
 
 `results.json` records the load of the machine at the start and at the end of the session.
 
-## Contributing a session
+## Contributing a campaign
 
-1. Fork this repository and clone your fork.
-2. Run the session with `--archive NAME` from your clone : it lands in `sessions/` and its lines in
-   `sessions/INDEX.tsv`.
-3. Rebuild the table and the site's copy : `FAUST_LIBRARIES_REPO=<faust>/libraries python3 tools/table.py`.
-4. If a version is new, say what it tries to do : `--describe` at step 2, or an entry of
+1. Fork this repository and clone your fork into the working directory (see *Getting started*).
+   If you cloned this repository instead, add your fork:
+   `git -C faust-measures remote add fork https://github.com/<you>/faust-measures.git`.
+2. Run the sessions with `--archive NAME`: each lands in `faust-measures/sessions/` and its lines
+   in `faust-measures/sessions/INDEX.tsv`.
+3. Rebuild the table and the site's copy:
+   `FAUST_LIBRARIES_REPO=faust/libraries python3 faust-measures/tools/table.py`.
+   `FAUST_LIBRARIES_REPO` is optional: it names a clone of the libraries, from which the site
+   shows the date of their commit.
+4. If a version is new, say what it tries to do: `--describe` at step 2, or an entry of
    `versions.json` (its name, the start of its commit, a sentence).
-5. Open a pull request : the machine, the C++ compiler, the versions and what they try to do.
+5. Commit on a branch, push it to your fork, and open a pull request: the machines, the C++
+   compilers, the versions and what they try to do.
 
-One campaign per pull request : the sessions of one reference and one version, one per C++
-compiler. When they come from several machines, gather them in one clone before step 3 : copy
+One campaign per pull request: the sessions of one reference and one set of versions, one per C++
+compiler. When they come from several machines, gather them in one clone before step 3: copy
 each session directory into `sessions/`, and append its lines of `sessions/INDEX.tsv`. A session is
-never rewritten : a mistake is corrected by a new session, or a note beside it.
+never rewritten: a mistake is corrected by a new session, or a note beside it.
 
 ## Reading
 
-The site shows every campaign : the sessions of one reference, one commit of the libraries and one
-set of compared versions, one session per C++ compiler. Every time is divided by the centre of its
-program, the geometric mean of the reference in cpp and ocpp, on a logarithmic axis ; the
-reference, the C++ compilers and the series are chosen on the page, with the commit, the branch and
-the description of every version. It reads `docs/measures.json`. To look at it locally :
+The site shows every campaign: the sessions of one reference, one commit of the libraries and one
+set of compared versions, one session per C++ compiler. The campaign and the reference are chosen
+at the top of the page, with the commit, the branch and the description of every version; below,
+a bar chooses what the charts show: the C++ compilers, the series, the precisions, the statistic
+and the centre.
+
+Every time is divided by the centre of its program, the geometric mean of a reference in cpp and
+ocpp, on a logarithmic axis. The centre is chosen among three: *same compiler*, each column on its
+own reference; *whole machine*, the reference of every compiler of the machine; *one compiler*,
+the reference of one chosen compiler for every column, which then divides all columns by the same
+nanoseconds, so that machines and compilers compare in absolute time. *Lock* keeps the centre of
+one compiler as the unit when the campaign changes. *Combined* draws single and double
+precision on one chart, both centred on the single precision reference, so that the cost of double
+shows. A click on a mark pins it: a pinned measure stays on the charts of every campaign, at its
+time divided by the current centre. The lock and the pins are kept in the browser.
+
+The site reads `docs/measures.json`. To look at it locally:
 
 ```sh
-cd docs && python3 -m http.server 8000    # then http://localhost:8000
+cd faust-measures/docs && python3 -m http.server 8000    # then http://localhost:8000
 ```
 
-`SPEC.md` says what a measure is and what compares : two series of one session always, two sessions
+`SPEC.md` says what a measure is and what compares: two series of one session always, two sessions
 of one machine through their reference, two machines in gain over their own reference or, divided by
 the same reference, in absolute time.

@@ -324,7 +324,7 @@ def provenance(ref, versions, root, entries=None):
     P = {"binaries": {"ref": binary_provenance(ref), **{n: binary_provenance(b) for n, b in versions}},
          "sources": tree_provenance(root, "examples", "tests"),
          "libraries": tree_provenance(os.path.join(root, "libraries")),
-         "tool": tree_provenance(HERE, "tools", "panier"),
+         "tool": tree_provenance(HERE, "tools", "basket"),
          "host": host_provenance(),
          "command": sys.argv}
     if entries:
