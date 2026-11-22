@@ -9,7 +9,8 @@ writes table/measures.json ({rows, versions, meta}), table/measures.csv, and doc
 the copy the site reads. versions describes every version measured, by its name and commit : its
 branch, its last commit (subject, date, full hash), its Faust options and what it tries to do, from
 the provenance of the sessions, their --describe, and versions.json, which completes and overrides
-them.
+them. libraries describes the commits of the Faust libraries the sessions compiled with (their date
+from the repository named by FAUST_LIBRARIES_REPO, when given).
 A session without results.json (an older protocol, see its NOTICE.md) has no rows.
 """
 import argparse
@@ -23,8 +24,9 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-COLUMNS = ["session", "date", "machine", "cxx", "cxx_full", "version", "commit", "options", "generator",
-           "precision", "program", "ns_min", "ns_median", "rounds"]
+COLUMNS = ["session", "date", "machine", "cxx", "cxx_full", "libraries", "version", "commit", "options",
+           "generator", "precision", "program", "ns_min", "ns_median", "rounds"]
+LIBRARIES_REPO = os.environ.get("FAUST_LIBRARIES_REPO", "")
 
 
 def short_machine(m):
@@ -74,7 +76,21 @@ def apply_versions_file(info, path):
                         e[k] = v[k]
 
 
-def rows_of(path, info):
+def note_libraries(libs, prov):
+    """the libraries a session compiled with : their commit, the subject and date of that commit"""
+    c = prov.get("commit", "")[:9]
+    if not c:
+        return ""
+    e = libs.setdefault(c, {"commit": c, "commit_full": prov.get("commit", ""), "subject": prov.get("subject", ""),
+                            "date": "", "changed": bool(prov.get("changes"))})
+    if not e["date"] and LIBRARIES_REPO:
+        import subprocess
+        r = subprocess.run(["git", "-C", LIBRARIES_REPO, "log", "-1", "--format=%cs", c], capture_output=True, text=True)
+        e["date"] = r.stdout.strip() if r.returncode == 0 else ""
+    return c + ("-modified" if e["changed"] else "")
+
+
+def rows_of(path, info, libs):
     D = json.load(open(path))
     if "meta" not in D:
         return []
@@ -85,6 +101,7 @@ def rows_of(path, info):
     when = meta["date"][:16].replace("T", " ") + "Z"
     machine, cxx = short_machine(meta["machine"]), short_cxx(meta["cxx"])
     prov = meta.get("provenance", {}).get("binaries", {})
+    lib = note_libraries(libs, meta.get("provenance", {}).get("libraries", {}))
     for b in meta["binaries"]:
         vname = "master-dev" if b == "ref" else b
         note_version(info, vname, commit.get(b, ""), prov.get(b, {}), fopts.get(vname, ""),
@@ -101,6 +118,7 @@ def rows_of(path, info):
                     continue
                 out.append({
                     "session": name, "date": when, "machine": machine, "cxx": cxx, "cxx_full": meta["cxx"],
+                    "libraries": lib,
                     "version": version, "commit": commit.get(b, ""), "options": fopts.get(version, ""),
                     "generator": gen, "precision": "float" if p == "f" else "double", "program": prog,
                     "ns_min": round(min(t), 4), "ns_median": round(statistics.median(t), 4), "rounds": len(t),
@@ -113,18 +131,18 @@ def main():
     ap.add_argument("sessions", nargs="?", default=os.path.join(ROOT, "sessions"))
     ap.add_argument("--out", default=os.path.join(ROOT, "table", "measures"))
     a = ap.parse_args()
-    rows, info = [], {}
+    rows, info, libs = [], {}, {}
     for f in sorted(glob.glob(os.path.join(a.sessions, "*", "results.json"))):
-        rows += rows_of(f, info)
+        rows += rows_of(f, info, libs)
     apply_versions_file(info, os.path.join(ROOT, "versions.json"))
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
-    json.dump({"rows": rows, "versions": info, "meta": [
+    json.dump({"rows": rows, "versions": info, "libraries": libs, "meta": [
         {"label": "table.py", "value": open(__file__).read(), "type": "code", "lang": "python"},
         {"label": "Input", "value": "faust-measures/sessions/*/results.json"},
     ]}, open(a.out + ".json", "w"), separators=(",", ":"))
     # the copy the site reads (GitHub Pages serves docs/)
     site = os.path.join(ROOT, "docs", "measures.json")
-    json.dump({"rows": rows, "versions": info}, open(site, "w"), separators=(",", ":"))
+    json.dump({"rows": rows, "versions": info, "libraries": libs}, open(site, "w"), separators=(",", ":"))
     with open(a.out + ".csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=COLUMNS)
         w.writeheader()

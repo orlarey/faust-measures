@@ -29,7 +29,7 @@ python3 tools/mesure.py run --faust-root ~/faust \
     --ref ~/faust-master-dev/build/bin/faust \
     --version mybranch=~/faust-mybranch/build/bin/faust \
     --cxx clang++ --out /tmp/session --archive mybranch
-python3 tools/table.py
+FAUST_LIBRARIES_REPO=~/faust/libraries python3 tools/table.py   # the repository gives the dates of the libraries
 ```
 
 The session lands in `sessions/<date>-<machine>-<C++ compiler>-<name>/` with every round of every

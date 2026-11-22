@@ -96,6 +96,7 @@
   <section>
     <h2>Versions</h2>
     <div class="versions" id="versions"></div>
+    <p class="muted" id="libraries"></p>
   </section>
 
   <section>
@@ -125,18 +126,20 @@ const gmean = (xs) => {
 };
 const fmt = (x) => (x == null ? '—' : x.toFixed(3));
 const S = { campaign: null, reference: 'master-dev', cxx: null, series: null, centre: 'own', stat: 'min', precs: ['float', 'double'], fixed: true };
-let ROWS = [], CAMPAIGNS = [], VERSIONS = {};
+let ROWS = [], CAMPAIGNS = [], VERSIONS = {}, LIBS = {};
 
-// a campaign : the sessions of one master-dev commit and one set of compared versions, one per C++ compiler
+// a campaign : the sessions of one master-dev commit, one commit of the libraries and one set of
+// compared versions, one per C++ compiler
 function prepare(rows) {
-  const versionsOf = {}, md = {};
+  const versionsOf = {}, md = {}, lib = {};
   for (const r of rows) {
     (versionsOf[r.session] ??= new Set()).add(r.version);
     if (r.version === 'master-dev') md[r.session] = r.commit;
+    lib[r.session] = r.libraries || '';
   }
   const campaignOf = {};
   for (const s of Object.keys(versionsOf)) {
-    campaignOf[s] = (md[s] || '?') + '|' + [...versionsOf[s]].filter((v) => v !== 'master-dev').sort().join(',');
+    campaignOf[s] = (md[s] || '?') + '|' + [...versionsOf[s]].filter((v) => v !== 'master-dev').sort().join(',') + '|' + lib[s];
   }
   const by = {};
   for (const r of rows) {
@@ -147,8 +150,8 @@ function prepare(rows) {
     if (r.date < c.date) c.date = r.date;
   }
   CAMPAIGNS = Object.values(by).map((c) => {
-    const [mdc, vs] = c.id.split('|');
-    return { ...c, label: c.date.slice(0, 10) + ' · ' + (vs || '—').replaceAll(',', ', ') + ' · master-dev ' + mdc + ' · ' + c.cxx.size + ' compiler' + (c.cxx.size > 1 ? 's' : '') };
+    const [mdc, vs, lb] = c.id.split('|');
+    return { ...c, libraries: lb, label: c.date.slice(0, 10) + ' · ' + (vs || '—').replaceAll(',', ', ') + ' · master-dev ' + mdc + ' · libraries ' + (lb ? lb.slice(0, 7) : '?') + ' · ' + c.cxx.size + ' compiler' + (c.cxx.size > 1 ? 's' : '') };
   }).sort((a, b) => b.date.localeCompare(a.date) || b.cxx.size - a.cxx.size);
   ROWS = rows;
 }
@@ -252,6 +255,12 @@ function drawLegend() {
 
 function drawVersions() {
   const list = [S.reference, ...compared()];
+  const camp = CAMPAIGNS.find((c) => c.id === S.campaign);
+  const lb = camp ? camp.libraries : '', li = LIBS[(lb || '').replace('-modified', '')];
+  const libLine = document.getElementById('libraries');
+  libLine.textContent = lb
+    ? 'Every series of this campaign compiled with the Faust libraries ' + lb + (li && li.date ? ' (' + li.date + ')' : '') + (li && li.subject ? ': ' + li.subject : '') + (lb.endsWith('-modified') ? ' — with local changes' : '') + '.'
+    : 'The libraries of this campaign were not recorded (a session without provenance).';
   document.getElementById('versions').replaceChildren(...list.map((v) => {
     const e = infoOf(v), card = document.createElement('div');
     card.className = 'version';
@@ -325,7 +334,7 @@ function drawChart(R) {
       const box = wrap.getBoundingClientRect();
       tip.replaceChildren();
       [r.program + ' · ' + (r.precision === 'float' ? 'single' : 'double') + (what ? ' · ' + what : ''), r.cx,
-        r.version + ' ' + r.generator + ' (' + r.commit + ')' + (r.options ? ' ' + r.options : '') + (infoOf(r.version).branch ? ' · ' + infoOf(r.version).branch : ''), 'session ' + r.session,
+        r.version + ' ' + r.generator + ' (' + r.commit + ')' + (r.options ? ' ' + r.options : '') + (infoOf(r.version).branch ? ' · ' + infoOf(r.version).branch : ''), 'session ' + r.session + (r.libraries ? ' · libraries ' + r.libraries : ''),
         'time: ' + fmt(S.stat === 'min' ? r.ns_min : r.ns_median) + ' ns/frame (' + S.stat + ' of ' + r.rounds + ' rounds)',
         '/ centre: ' + fmt(r.y), '/ reference cpp: ' + fmt(r.vsref)]
         .forEach((t, i) => { const d = document.createElement('div'); d.textContent = t; if (i === 0) d.style.fontWeight = '600'; tip.append(d); });
@@ -427,7 +436,7 @@ let lastW = 0;
 new ResizeObserver(() => { const w = document.getElementById('chart').clientWidth; if (ROWS.length && Math.abs(w - lastW) > 4) { lastW = w; draw(); } }).observe(document.getElementById('chart'));
 
 fetch('measures.json').then((r) => { if (!r.ok) throw new Error('measures.json: HTTP ' + r.status); return r.json(); })
-  .then((d) => { VERSIONS = d.versions || {}; prepare(d.rows); draw(); })
+  .then((d) => { VERSIONS = d.versions || {}; LIBS = d.libraries || {}; prepare(d.rows); draw(); })
   .catch((e) => { document.getElementById('lead').textContent = 'The measures could not be read (' + e.message + ').'; });
 </script>
 </body>

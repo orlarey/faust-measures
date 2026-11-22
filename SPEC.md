@@ -13,6 +13,7 @@ the median the check.
 | the Faust options | `meta.faust_options` |
 | the generator | `cpp` or `ocpp` |
 | the precision | `float` (`-single`) or `double` |
+| the Faust libraries | `meta.provenance.libraries` : their commit and local changes ; every series of a session compiles with the same libraries |
 | the C++ compiler and its options | `meta.cxx`, `meta.flags` |
 | the machine | `meta.machine`, the host's provenance |
 | the session | the directory name : the date and hour (UTC) of its start, the machine, the C++ compiler, a name |
@@ -36,7 +37,10 @@ comparing two series.
 ## The reference of a session
 
 Every session so far measures master-dev, `R`, in cpp and in ocpp, besides the versions it compares.
-The dashboard centres every program on the geometric mean of master-dev cpp and ocpp of its session.
+The site groups the sessions in campaigns : one master-dev commit, one commit of the libraries and one
+set of compared versions, one session per C++ compiler ; two sessions compiled with other libraries
+never share a centre. It centres every program on the geometric mean of the chosen reference in cpp
+and ocpp.
 
 To be decided : a fixed standard, one Faust binary built from a tag and measured in every session
 whatever it compares, so that sessions far apart in time compare through it even when master-dev has
