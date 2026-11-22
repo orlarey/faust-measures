@@ -31,8 +31,10 @@ comparing two series.
    Every time is first divided by the reference of its own session. On the machines of the first
    sessions, with nothing else running, the same binaries measured a day apart moved by about 0.2 %
    in geometric mean, and up to a few percent on single programs.
-3. **Across machines** : never in absolute time. Two machines compare through their ratios to the
-   same reference.
+3. **Across machines** : two ways, which answer two questions. Divided each by its own reference,
+   two machines compare in gain over that reference (which version gains more, here or there).
+   Divided both by the same nanoseconds, the reference of one compiler of one machine, they compare
+   in absolute time (which machine and compiler run the program faster).
 
 ## The reference of a session
 
@@ -40,7 +42,9 @@ Every session so far measures master-dev, `R`, in cpp and in ocpp, besides the v
 The site groups the sessions in campaigns : one master-dev commit, one commit of the libraries and one
 set of compared versions, one session per C++ compiler ; two sessions compiled with other libraries
 never share a centre. It centres every program on the geometric mean of the chosen reference in cpp
-and ocpp.
+and ocpp : of each compiler, of each machine, or of one compiler for every column. The centre of one
+compiler can be locked : its nanoseconds stay the unit when the campaign changes, and a measure pinned
+in one campaign is placed in another at its time divided by that unit.
 
 To be decided : a fixed standard, one Faust binary built from a tag and measured in every session
 whatever it compares, so that sessions far apart in time compare through it even when master-dev has

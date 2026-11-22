@@ -43,6 +43,10 @@
   .chip:has(input:checked) { color: var(--fg); background: var(--bg); border-color: var(--ref); box-shadow: inset 0 0 0 1px var(--ref); }
   .chip:has(input:checked) .swatch, .chip:has(input:checked) svg { opacity: 1; }
   .chip:has(input:focus-visible) { outline: 2px solid var(--c1); outline-offset: 2px; }
+  .bar select { width: auto; padding: 1px 4px; font-size: 13px; }
+  .chip.pin { color: var(--fg); background: var(--bg); border-color: var(--ref); cursor: default; }
+  .chip.pin.away { border-style: dashed; color: var(--muted); }
+  .chip.pin button { border: 0; background: none; color: inherit; cursor: pointer; padding: 0 0 0 2px; font: inherit; }
   .key { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
   .chartwrap { position: relative; overflow-x: auto; }
   details summary { cursor: pointer; font-weight: 600; }
@@ -93,10 +97,15 @@
       <label class="chip"><input type="radio" name="stat" value="median">median</label></div>
     <div class="grp"><span class="tag">Centre</span>
       <label class="chip" title="the reference of the same compiler"><input type="radio" name="centre" value="own" checked>same compiler</label>
-      <label class="chip" title="the reference of every compiler of the machine"><input type="radio" name="centre" value="machine">whole machine</label></div>
+      <label class="chip" title="the reference of every compiler of the machine"><input type="radio" name="centre" value="machine">whole machine</label>
+      <label class="chip" title="the reference of one compiler, the same nanoseconds for every column : machines compare in absolute time"><input type="radio" name="centre" value="one">one compiler</label>
+      <select id="centreCx" aria-label="The compiler whose reference is the centre" hidden></select>
+      <label class="chip" id="lockChip" title="keep these nanoseconds as the centre when the campaign changes" hidden><input type="checkbox" id="lock">lock</label>
+      <span class="key" id="lockInfo" hidden></span></div>
     <div class="grp"><span class="tag">Axis</span>
       <label class="chip" title="the vertical axis covers every measure of the campaign"><input type="checkbox" id="fixed" checked>fixed</label></div>
     <span class="key"><svg width="24" height="14" aria-hidden="true"><line x1="1" x2="23" y1="7" y2="7" stroke="currentColor" stroke-width="0.8"/></svg>fastest of the campaign</span>
+    <div class="grp" id="pinsGrp" hidden><span class="tag" title="click a mark to pin it ; a pin keeps its time when the campaign changes">Pins</span><span id="pins" class="grp"></span></div>
   </section>
 
   <section aria-label="Times relative to the centre of each program">
@@ -116,7 +125,8 @@
 
   <details>
     <summary>How to read the charts</summary>
-    <p class="muted">Every time, in nanoseconds per frame, is divided by the centre of its program: the geometric mean of the reference in cpp and in ocpp, on a logarithmic axis; below 1, faster than the centre. The reference is a level line, solid for cpp, dashed for ocpp; a compared version is a filled square for cpp, a filled circle for ocpp; several versions follow each other in a column, each a little lighter. The colour says the C++ compiler. A thin grey line marks, in each column, the fastest value of the campaign, every series and compiler included, shown or not. Data: <a href="https://github.com/orlarey/faust-measures">faust-measures</a>, <code>table/measures.csv</code>.</p>
+    <p class="muted">Every time, in nanoseconds per frame, is divided by the centre of its program: the geometric mean of the reference in cpp and in ocpp, on a logarithmic axis; below 1, faster than the centre. The reference is a level line, solid for cpp, dashed for ocpp; a compared version is a filled square for cpp, a filled circle for ocpp; several versions follow each other in a column, each a little lighter. The colour says the C++ compiler. A thin grey line marks, in each column, the fastest value of the campaign, every series and compiler included, shown or not.</p>
+    <p class="muted">The centre decides what compares. With <em>same compiler</em> or <em>whole machine</em>, each column is divided by the reference of its own compiler or machine: two machines then compare in gain over their own reference, not in speed. With <em>one compiler</em>, every column is divided by the same nanoseconds, those of the reference of the chosen compiler: machines and compilers compare in absolute time. <em>Lock</em> keeps those nanoseconds when the campaign changes, so that every campaign reads in the same unit. A click on a mark pins it: the pin keeps its time and is placed, in any campaign, at that time divided by the centre of its column there (under <em>one compiler</em>, in any column; otherwise only where its compiler was measured); a click on the pin removes it. Two sessions of one machine differ by about 0.2 % in geometric mean and by a few percent on one program, and two campaigns with other libraries compile slightly different programs: a gap of one or two percent between campaigns says nothing. Pins and the lock are kept in this browser. Data: <a href="https://github.com/orlarey/faust-measures">faust-measures</a>, <code>table/measures.csv</code>.</p>
   </details>
 </div>
 
@@ -129,8 +139,23 @@ const gmean = (xs) => {
   return v.length ? Math.exp(v.reduce((s, x) => s + Math.log(x), 0) / v.length) : null;
 };
 const fmt = (x) => (x == null ? '—' : x.toFixed(3));
-const S = { campaign: null, reference: null, cxx: null, series: null, centre: 'own', stat: 'min', precs: ['float', 'double'], combined: false, fixed: true };
+// centre : own (the reference of the same session), machine (of every session of the machine) or one (of the
+// compiler centreCx, for every column) ; lock : the centres of one, kept when the campaign changes ; pins : measures
+// kept with their times, placed in any campaign by the centre of that campaign
+const S = { campaign: null, reference: null, cxx: null, series: null, centre: 'own', centreCx: null, lock: null, pins: [], stat: 'min', precs: ['float', 'double'], combined: false, fixed: true };
 let ROWS = [], CAMPAIGNS = [], VERSIONS = {}, LIBS = {};
+
+// the lock and the pins stay in this browser ; the page works without them
+const STORE = 'faust-measures';
+function save() { try { localStorage.setItem(STORE, JSON.stringify({ pins: S.pins, lock: S.lock })); } catch (e) { /* no storage */ } }
+function load() {
+  try {
+    const v = JSON.parse(localStorage.getItem(STORE) || '{}');
+    S.pins = Array.isArray(v.pins) ? v.pins : [];
+    S.lock = v.lock && v.lock.centres ? v.lock : null;
+    if (S.lock) { S.centre = 'one'; S.centreCx = S.lock.cx; }
+  } catch (e) { S.pins = []; S.lock = null; }
+}
 
 // a campaign : the sessions of one reference (its name and commit), one commit of the libraries and one set of
 // compared versions, one per C++ compiler
@@ -173,11 +198,25 @@ const commitOf = (v) => { const r = inCampaign().find((q) => q.version === v); r
 // what a version is : its branch, its last commit, its options, and what it tries to do (versions.json)
 const infoOf = (v) => VERSIONS[v + '|' + commitOf(v)] || { version: v, commit: commitOf(v) };
 
+// the centre of every program and precision given by one compiler : the geometric mean of its reference in cpp
+// and in ocpp, in nanoseconds
+function centresOf(rows, cx, ref) {
+  const acc = {}, out = {};
+  for (const r of rows) {
+    if (r.cx !== cx || r.version !== ref) continue;
+    for (const s of ['ns_min', 'ns_median']) ((acc[r.program + '|' + r.precision] ??= {})[s] ??= []).push(r[s]);
+  }
+  for (const [k, a] of Object.entries(acc)) out[k] = { ns_min: gmean(a.ns_min), ns_median: gmean(a.ns_median) };
+  return out;
+}
+const oneCentres = () => (S.lock ? S.lock.centres : centresOf(inCampaign(), S.centreCx, S.reference));
+
 // the ratios of the campaign to the centre (own : the reference of the same session ; machine :
-// the reference of every session of the machine) and to the reference in cpp of the same session,
-// each in the same precision, or in single precision (the f keys) so that both precisions share a centre
+// the reference of every session of the machine ; one : the reference of one compiler) and to the reference in
+// cpp of the same session, each in the same precision, or in single precision (the f keys) so that both
+// precisions share a centre
 function ratios() {
-  const rows = inCampaign(), stat = S.stat === 'min' ? 'ns_min' : 'ns_median';
+  const rows = inCampaign(), stat = S.stat === 'min' ? 'ns_min' : 'ns_median', one = oneCentres();
   const own = {}, mach = {};
   for (const r of rows) {
     if (r.version !== S.reference) continue;
@@ -200,9 +239,36 @@ function ratios() {
       val['ownf_' + s] = cof ? r[s] / cof : null;
       val['machinef_' + s] = cmf ? r[s] / cmf : null;
       val['reff_' + s] = of.cpp && of.cpp[s] ? r[s] / of.cpp[s] : null;
+      const c1 = one[r.program + '|' + r.precision], c1f = one[r.program + '|float'];
+      val['one_' + s] = c1 && c1[s] ? r[s] / c1[s] : null;
+      val['onef_' + s] = c1f && c1f[s] ? r[s] / c1f[s] : null;
     }
     return { ...r, ...val, y: val[S.centre + (S.combined ? 'f_' : '_') + stat], vsref: val['ref_' + stat], vsreff: val['reff_' + stat] };
   });
+}
+
+// a pin : a measure and its times, wherever it was measured
+const pinKey = (r) => [r.session, r.program, r.precision, r.version, r.generator].join('|');
+function togglePin(r) {
+  const k = pinKey(r), i = S.pins.findIndex((p) => p.key === k);
+  if (i >= 0) S.pins.splice(i, 1);
+  else {
+    const camp = CAMPAIGNS.find((c) => c.id === r.campaign);
+    S.pins.push({ key: k, campaign: camp ? camp.label.split(' · ').slice(0, 2).join(' · ') : '',
+      ...Object.fromEntries(['program', 'precision', 'cx', 'machine', 'cxx', 'version', 'generator', 'commit', 'options', 'session', 'libraries', 'ns_min', 'ns_median', 'rounds'].map((f) => [f, r[f]])) });
+  }
+  save(); draw();
+}
+// the place of a pin in this campaign, for one statistic : its time divided by the centre its column would have.
+// Under one compiler, every column shares the centre ; otherwise the pin needs its own compiler (own) or its
+// machine (machine) in this campaign.
+function pinY(p, s) {
+  const prec = S.combined ? 'float' : p.precision;
+  let c;
+  if (S.centre === 'one') { const o = oneCentres()[p.program + '|' + prec]; c = o && o[s]; }
+  else c = gmean(inCampaign().filter((r) => r.version === S.reference && r.program === p.program && r.precision === prec
+    && (S.centre === 'own' ? r.cx === p.cx : r.machine === p.machine)).map((r) => r[s]));
+  return c ? p[s] / c : null;
 }
 
 function ensure() {
@@ -212,6 +278,7 @@ function ensure() {
   }
   if (!versions().includes(S.reference)) S.reference = campaignRef() || versions()[0];
   if (!S.cxx) S.cxx = cxxList();
+  if (!S.lock && !cxxList().includes(S.centreCx)) S.centreCx = cxxList()[0];
   if (!S.series) S.series = [...new Set(inCampaign().map((r) => r.version + ' ' + r.generator))];
 }
 
@@ -261,6 +328,37 @@ function drawControls() {
       S.series = on ? [...S.series, s] : S.series.filter((x) => x !== s); draw();
     }, glyphOf(v, gen), commitOf(v) + (v === S.reference ? ' (reference)' : ''));
   }));
+  for (const el of document.querySelectorAll('input[name="centre"]')) el.checked = el.value === S.centre;
+  const one = S.centre === 'one', cs = document.getElementById('centreCx');
+  cs.replaceChildren(...cxxList().map((cx) => new Option(cx, cx)));
+  cs.value = S.centreCx;
+  cs.hidden = !one || !!S.lock;
+  document.getElementById('lockChip').hidden = !one;
+  document.getElementById('lock').checked = !!S.lock;
+  const li = document.getElementById('lockInfo');
+  li.hidden = !one || !S.lock;
+  li.textContent = S.lock ? lockText() : '';
+  document.getElementById('pinsGrp').hidden = !S.pins.length;
+  const stat = S.stat === 'min' ? 'ns_min' : 'ns_median';
+  document.getElementById('pins').replaceChildren(...S.pins.map((p, i) => {
+    const c = document.createElement('span'), away = pinY(p, stat) == null;
+    c.className = 'chip pin' + (away ? ' away' : '');
+    c.title = 'campaign ' + p.campaign + ' · session ' + p.session + ' · ' + fmt(p[stat]) + ' ns/frame'
+      + (away ? ' — not placed here : ' + (S.centre === 'one' ? 'no centre for this program' : 'its compiler was not measured in this campaign ; choose one compiler as the centre') : '');
+    const x = document.createElement('button');
+    x.type = 'button'; x.textContent = '✕'; x.setAttribute('aria-label', 'remove pin ' + (i + 1));
+    x.onclick = () => { S.pins.splice(i, 1); save(); draw(); };
+    c.append((i + 1) + ' · ' + p.program + ' · ' + p.version + ' ' + p.generator + ' · ' + (p.precision === 'float' ? 'single' : 'double') + ' · ' + p.cx, x);
+    return c;
+  }));
+}
+
+const lockText = () => 'locked: ' + S.lock.ref + ' ' + S.lock.commit + ' on ' + S.lock.cx + ', campaign ' + S.lock.campaign;
+// what 1 is on the chart
+function centreText() {
+  if (S.centre === 'own') return 'centre: the reference of each compiler';
+  if (S.centre === 'machine') return 'centre: the reference of every compiler of each machine';
+  return 'centre, for every compiler: ' + (S.lock ? S.lock.ref + ' ' + S.lock.commit + ' on ' + S.lock.cx + ', campaign ' + S.lock.campaign + ' (locked)' : S.reference + ' on ' + S.centreCx);
 }
 
 function drawVersions() {
@@ -309,10 +407,13 @@ function drawChart(R) {
     const k = r.precision + '|' + r.program;
     if (!fastest[k] || r.y < fastest[k].y) fastest[k] = r;
   }
-  const keys = (S.combined ? ['ownf_ns_min', 'ownf_ns_median', 'machinef_ns_min', 'machinef_ns_median']
-    : ['own_ns_min', 'own_ns_median', 'machine_ns_min', 'machine_ns_median']);
-  const vals = S.fixed ? R.flatMap((r) => keys.map((k) => r[k])).filter((v) => v > 0)
-    : [...shown.map((r) => r.y), ...Object.values(fastest).map((r) => r.y)];
+  const f = S.combined ? 'f_' : '_';
+  const keys = S.centre === 'one' ? ['one' + f + 'ns_min', 'one' + f + 'ns_median']
+    : ['own' + f + 'ns_min', 'own' + f + 'ns_median', 'machine' + f + 'ns_min', 'machine' + f + 'ns_median'];
+  const statK = S.stat === 'min' ? 'ns_min' : 'ns_median';
+  const pinned = S.pins.filter((p) => S.precs.includes(p.precision));
+  const vals = S.fixed ? [...R.flatMap((r) => keys.map((k) => r[k])), ...pinned.flatMap((p) => [pinY(p, 'ns_min'), pinY(p, 'ns_median')])].filter((v) => v > 0)
+    : [...shown.map((r) => r.y), ...Object.values(fastest).map((r) => r.y), ...pinned.map((p) => pinY(p, statK)).filter((v) => v > 0)];
   const lo = Math.min(...vals, 1) / 1.06, hi = Math.max(...vals, 1) * 1.06;
   // one chart per precision, or a single chart where each compiler's column holds single precision, then double
   const precsShown = S.precs.filter((p) => shown.some((r) => r.precision === p));
@@ -347,7 +448,7 @@ function drawChart(R) {
     svg.append('g').selectAll('text').data(progs).join('text')
       .attr('transform', (p) => 'translate(' + (x(p) + x.bandwidth() / 2) + ',' + (H - m.b + 10) + ') rotate(-30)').attr('text-anchor', 'end').text((p) => p);
     svg.append('text').attr('x', m.l).attr('y', 15).style('font-weight', '600')
-      .text(name + (S.combined ? ' — time / centre in single precision, logarithmic scale' : ' — time / centre, logarithmic scale')
+      .text(name + ' — time / centre' + (S.combined ? ' in single precision' : '') + ', logarithmic scale; ' + centreText()
         + (precs.length > 1 ? '; in each compiler\'s column, single precision on the left, double on the grey band' : ''));
     const g = svg.append('g');
     const show = (ev, r, what) => {
@@ -364,7 +465,9 @@ function drawChart(R) {
       tip.style.top = Math.max(ev.clientY - box.top - 10, 0) + 'px';
     };
     const hide = () => { tip.hidden = true; };
-    const hover = (sel, r, what) => sel.on('pointerenter', (ev) => show(ev, r, what)).on('pointermove', (ev) => show(ev, r, what)).on('pointerleave', hide);
+    // a click on a mark pins it, a click on a pin removes it
+    const hover = (sel, r, what) => sel.style('cursor', 'pointer').on('pointerenter', (ev) => show(ev, r, what)).on('pointermove', (ev) => show(ev, r, what))
+      .on('pointerleave', hide).on('click', () => { hide(); togglePin(r); });
     const fastestLine = (fr, x1, x2) => {
       g.append('line').attr('x1', x1).attr('x2', x2).attr('y1', y(fr.y)).attr('y2', y(fr.y)).style('stroke', 'var(--muted)').style('stroke-width', 0.8);
       hover(g.append('line').attr('x1', x1).attr('x2', x2).attr('y1', y(fr.y)).attr('y2', y(fr.y)).style('stroke', 'transparent').style('stroke-width', 6), fr, 'fastest of the campaign');
@@ -397,6 +500,18 @@ function drawChart(R) {
         });
       });
     }
+    // the pins : a hollow diamond and its number, in the column of their compiler, or in the middle of the
+    // program when their compiler is not in this campaign and every column shares the centre
+    S.pins.forEach((p, i) => {
+      const py = pinY(p, statK), ci = cxxs.indexOf(p.cx), pi = precs.indexOf(p.precision);
+      if (py == null || pi < 0 || !progs.includes(p.program) || (ci < 0 && S.centre !== 'one')) return;
+      const x0 = x(p.program), bw = x.bandwidth(), slotW = bw / Math.max(1, cxxs.length), cw = slotW / precs.length;
+      const px = ci >= 0 ? x0 + ci * slotW + pi * cw + cw / 2 : x0 + bw * (pi + 0.5) / precs.length;
+      const col = ci >= 0 ? colorOf(p.cx) : 'var(--fg)';
+      hover(g.append('path').attr('d', d3.symbol(d3.symbolDiamond, 150)()).attr('transform', 'translate(' + px + ',' + y(py) + ')')
+        .style('fill', 'transparent').style('stroke', col).style('stroke-width', 1.6), { ...p, y: py, vsref: null, vsreff: null }, 'pin ' + (i + 1) + ', from ' + p.campaign);
+      g.append('text').attr('x', px + 8).attr('y', y(py) - 6).style('font-size', '11px').style('font-weight', '700').style('fill', 'var(--fg)').style('pointer-events', 'none').text(String(i + 1));
+    });
     wrap.append(svg.node());
   }
   wrap.append(tip);
@@ -463,6 +578,14 @@ for (const el of document.querySelectorAll('input[name="stat"]')) el.addEventLis
 for (const el of document.querySelectorAll('input.prec')) el.addEventListener('change', () => { S.precs = [...document.querySelectorAll('input.prec')].filter((c) => c.checked).map((c) => c.value); draw(); });
 document.getElementById('fixed').addEventListener('change', (e) => { S.fixed = e.target.checked; draw(); });
 document.getElementById('combined').addEventListener('change', (e) => { S.combined = e.target.checked; draw(); });
+document.getElementById('centreCx').addEventListener('change', (e) => { S.centreCx = e.target.value; draw(); });
+document.getElementById('lock').addEventListener('change', (e) => {
+  const camp = CAMPAIGNS.find((c) => c.id === S.campaign);
+  S.lock = e.target.checked ? { cx: S.centreCx, ref: S.reference, commit: commitOf(S.reference), campaign: camp ? camp.label.slice(0, 10) : '',
+    centres: centresOf(inCampaign(), S.centreCx, S.reference) } : null;
+  save(); draw();
+});
+load();
 let lastW = 0, lastH = window.innerHeight;
 new ResizeObserver(() => { const w = document.getElementById('chart').clientWidth; if (ROWS.length && Math.abs(w - lastW) > 4) { lastW = w; draw(); } }).observe(document.getElementById('chart'));
 window.addEventListener('resize', () => { if (ROWS.length && Math.abs(window.innerHeight - lastH) > 4) { lastH = window.innerHeight; draw(); } });

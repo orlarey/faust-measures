@@ -143,4 +143,5 @@ cd docs && python3 -m http.server 8000    # then http://localhost:8000
 ```
 
 `SPEC.md` says what a measure is and what compares : two series of one session always, two sessions
-of one machine through their reference, two machines never in absolute time.
+of one machine through their reference, two machines in gain over their own reference or, divided by
+the same reference, in absolute time.
