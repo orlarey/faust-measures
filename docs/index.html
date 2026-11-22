@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faust basket</title>
+<style>
+  /* the page : one column, the controls in a panel, the chart, the table of means */
+  :root {
+    --bg: #fbfbfa; --fg: #1d2125; --muted: #5d6670; --panel: #f1f2f0; --line: #d9dcd8; --grid: #e6e8e5;
+    --ref: #8a9098; --ok: #1f7a4d; --bad: #b3332a; --tip: #ffffff;
+    --c1: #2b6cb0; --c2: #c2410c; --c3: #2f855a; --c4: #6b46c1; --c5: #b7791f; --c6: #0e7490;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #15181b; --fg: #e6e8ea; --muted: #9aa3ad; --panel: #1d2125; --line: #333a40; --grid: #262c31;
+      --ref: #7d858e; --ok: #5fc08e; --bad: #f0766c; --tip: #23282d;
+      --c1: #6aa6ec; --c2: #f08a4b; --c3: #5fc08e; --c4: #a98ff0; --c5: #e8b453; --c6: #4cc3d9; color-scheme: dark; }
+  }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .page { max-width: 1280px; margin: 0 auto; padding-block: 24px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-direction: column; gap: 20px; }
+  h1 { margin: 0; font: 400 30px/1.2 Georgia, "Times New Roman", serif; }
+  h2 { margin: 0; font-size: 18px; font-weight: 600; }
+  p { margin: 0; max-width: 80ch; }
+  .muted { color: var(--muted); font-size: 13px; }
+  .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+  .group { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .group h3 { margin: 6px 0 0; font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+  .group h3:first-child { margin-top: 0; }
+  label { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 14px; }
+  select { width: 100%; font: inherit; padding: 4px 6px; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 6px; }
+  .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; flex: none; }
+  .sha { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--muted); }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 13px; color: var(--muted); align-items: center; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .chartwrap { position: relative; overflow-x: auto; min-height: 320px; }
+  .chartwrap svg { display: block; }
+  .chartwrap text { fill: var(--muted); font-size: 12px; }
+  .tip { position: absolute; pointer-events: none; background: var(--tip); border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 4px 16px rgba(0,0,0,.18); padding: 8px 10px; font-size: 12px; white-space: nowrap; z-index: 2; font-variant-numeric: tabular-nums; }
+  .tablewrap { overflow-x: auto; }
+  table { border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; min-width: 620px; }
+  th, td { padding: 4px 10px; border-bottom: 1px solid var(--line); text-align: right; }
+  th:nth-child(-n+5), td:nth-child(-n+5) { text-align: left; }
+  th { color: var(--muted); font-weight: 600; }
+  .good { color: var(--ok); } .bad { color: var(--bad); }
+  a { color: var(--c1); }
+  :focus-visible { outline: 2px solid var(--c1); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>Faust basket</h1>
+    <p id="lead" class="lead">Loading the measures…</p>
+  </header>
+  <p class="muted">Every time, in nanoseconds per frame, is divided by the centre of its program: the geometric mean of the reference in cpp and in ocpp, on a logarithmic axis; below 1, faster than the centre. The reference is a level line, solid for cpp, dashed for ocpp; a compared version is a filled square for cpp, a filled circle for ocpp; several versions follow each other in a column, each a little lighter. The colour says the C++ compiler. A thin grey line marks, in each column, the fastest value of the campaign, every series and compiler included, shown or not. Data: <a href="https://github.com/orlarey/faust-measures">faust-measures</a>, <code>table/measures.csv</code>.</p>
+
+  <section class="controls" aria-label="What is shown">
+    <div class="group">
+      <h3>Campaign</h3>
+      <select id="campaign" aria-label="Campaign"></select>
+      <h3>Reference (the centre)</h3>
+      <select id="reference" aria-label="Reference"></select>
+    </div>
+    <div class="group">
+      <h3>C++ compilers</h3>
+      <div id="compilers"></div>
+    </div>
+    <div class="group">
+      <h3>Series</h3>
+      <div id="series"></div>
+    </div>
+    <div class="group">
+      <h3>Centre of a program</h3>
+      <label><input type="radio" name="centre" value="own" checked> reference of the same compiler</label>
+      <label><input type="radio" name="centre" value="machine"> reference of every compiler of the machine</label>
+      <h3>Statistic of the rounds</h3>
+      <label><input type="radio" name="stat" value="min" checked> minimum</label>
+      <label><input type="radio" name="stat" value="median"> median</label>
+      <h3>Precision</h3>
+      <label><input type="checkbox" class="prec" value="float" checked> single (float)</label>
+      <label><input type="checkbox" class="prec" value="double" checked> double</label>
+      <h3>Vertical axis</h3>
+      <label><input type="checkbox" id="fixed" checked> fixed: every measure of the campaign</label>
+    </div>
+  </section>
+
+  <div class="legend" id="legend"></div>
+
+  <section>
+    <h2>Times relative to the centre of each program</h2>
+    <div class="chartwrap" id="chart"></div>
+  </section>
+
+  <section>
+    <h2>Geometric means over the programs</h2>
+    <p class="muted">For every series shown: the geometric mean of its ratios to the centre, and of its ratios to the reference in cpp of the same compiler, over the programs it measured.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Compiler</th><th>Version</th><th>Commit</th><th>Generator</th><th>Precision</th><th>/ centre</th><th>/ reference cpp</th><th>programs</th></tr></thead>
+        <tbody id="summary"></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script>
+"use strict";
+const COLORS = ['--c1', '--c2', '--c3', '--c4', '--c5', '--c6'].map((v) => 'var(' + v + ')');
+const gmean = (xs) => {
+  const v = xs.filter((x) => x > 0 && Number.isFinite(x));
+  return v.length ? Math.exp(v.reduce((s, x) => s + Math.log(x), 0) / v.length) : null;
+};
+const fmt = (x) => (x == null ? '—' : x.toFixed(3));
+const S = { campaign: null, reference: 'master-dev', cxx: null, series: null, centre: 'own', stat: 'min', precs: ['float', 'double'], fixed: true };
+let ROWS = [], CAMPAIGNS = [];
+
+// a campaign : the sessions of one master-dev commit and one set of compared versions, one per C++ compiler
+function prepare(rows) {
+  const versionsOf = {}, md = {};
+  for (const r of rows) {
+    (versionsOf[r.session] ??= new Set()).add(r.version);
+    if (r.version === 'master-dev') md[r.session] = r.commit;
+  }
+  const campaignOf = {};
+  for (const s of Object.keys(versionsOf)) {
+    campaignOf[s] = (md[s] || '?') + '|' + [...versionsOf[s]].filter((v) => v !== 'master-dev').sort().join(',');
+  }
+  const by = {};
+  for (const r of rows) {
+    r.campaign = campaignOf[r.session];
+    r.cx = r.machine + ' · ' + r.cxx;
+    const c = (by[r.campaign] ??= { id: r.campaign, date: r.date, cxx: new Set() });
+    c.cxx.add(r.cx);
+    if (r.date < c.date) c.date = r.date;
+  }
+  CAMPAIGNS = Object.values(by).map((c) => {
+    const [mdc, vs] = c.id.split('|');
+    return { ...c, label: c.date.slice(0, 10) + ' · ' + (vs || '—').replaceAll(',', ', ') + ' · master-dev ' + mdc + ' · ' + c.cxx.size + ' compiler' + (c.cxx.size > 1 ? 's' : '') };
+  }).sort((a, b) => b.date.localeCompare(a.date) || b.cxx.size - a.cxx.size);
+  ROWS = rows;
+}
+
+const inCampaign = () => ROWS.filter((r) => r.campaign === S.campaign);
+const cxxList = () => [...new Set(inCampaign().map((r) => r.cx))].sort();
+const colorOf = (cx) => COLORS[Math.max(0, cxxList().indexOf(cx)) % COLORS.length];
+const versions = () => [...new Set(inCampaign().map((r) => r.version))].sort((a, b) => (a === 'master-dev' ? -1 : b === 'master-dev' ? 1 : a.localeCompare(b)));
+const compared = () => versions().filter((v) => v !== S.reference);
+const shade = (v) => [1, 0.62, 0.4, 0.26][Math.max(0, compared().indexOf(v)) % 4];
+const symbolOf = (gen) => (gen === 'cpp' ? d3.symbolSquare : d3.symbolCircle);
+const commitOf = (v) => { const r = inCampaign().find((q) => q.version === v); return r ? r.commit : ''; };
+
+// the ratios of the campaign to the centre (own : the reference of the same session ; machine :
+// the reference of every session of the machine) and to the reference in cpp of the same session
+function ratios() {
+  const rows = inCampaign(), stat = S.stat === 'min' ? 'ns_min' : 'ns_median';
+  const own = {}, mach = {};
+  for (const r of rows) {
+    if (r.version !== S.reference) continue;
+    const k1 = [r.session, r.precision, r.program].join('|'), k2 = [r.machine, r.precision, r.program].join('|');
+    for (const s of ['ns_min', 'ns_median']) {
+      ((own[k1] ??= {})[s] ??= []).push(r[s]);
+      ((mach[k2] ??= {})[s] ??= []).push(r[s]);
+      if (r.generator === 'cpp') (own[k1].cpp ??= {})[s] = r[s];
+    }
+  }
+  return rows.map((r) => {
+    const o = own[[r.session, r.precision, r.program].join('|')] || {}, m = mach[[r.machine, r.precision, r.program].join('|')] || {};
+    const val = {};
+    for (const s of ['ns_min', 'ns_median']) {
+      const co = gmean(o[s] || []), cm = gmean(m[s] || []);
+      val['own_' + s] = co ? r[s] / co : null;
+      val['machine_' + s] = cm ? r[s] / cm : null;
+      val['ref_' + s] = o.cpp && o.cpp[s] ? r[s] / o.cpp[s] : null;
+    }
+    return { ...r, ...val, y: val[S.centre + '_' + stat], vsref: val['ref_' + stat] };
+  });
+}
+
+function ensure() {
+  if (!S.campaign || !CAMPAIGNS.some((c) => c.id === S.campaign)) {
+    S.campaign = [...CAMPAIGNS].sort((a, b) => b.cxx.size - a.cxx.size || b.date.localeCompare(a.date))[0].id;
+    S.cxx = null; S.series = null; S.reference = 'master-dev';
+  }
+  if (!versions().includes(S.reference)) S.reference = versions()[0];
+  if (!S.cxx) S.cxx = cxxList();
+  if (!S.series) S.series = [...new Set(inCampaign().map((r) => r.version + ' ' + r.generator))];
+}
+
+function checkbox(text, checked, onchange, swatch, sha) {
+  const lab = document.createElement('label');
+  const cb = document.createElement('input');
+  cb.type = 'checkbox'; cb.checked = checked; cb.onchange = () => onchange(cb.checked);
+  lab.append(cb);
+  if (swatch) { const s = document.createElement('span'); s.className = 'swatch'; s.style.background = swatch; lab.append(s); }
+  const t = document.createElement('span'); t.textContent = text; lab.append(t);
+  if (sha) { const h = document.createElement('span'); h.className = 'sha'; h.textContent = sha; lab.append(h); }
+  return lab;
+}
+
+function drawControls() {
+  const sel = document.getElementById('campaign');
+  sel.replaceChildren(...CAMPAIGNS.map((c) => new Option(c.label, c.id)));
+  sel.value = S.campaign;
+  const ref = document.getElementById('reference');
+  ref.replaceChildren(...versions().map((v) => new Option(v + ' (' + commitOf(v) + ')', v)));
+  ref.value = S.reference;
+  document.getElementById('compilers').replaceChildren(...cxxList().map((cx) => checkbox(cx, S.cxx.includes(cx), (on) => {
+    S.cxx = on ? [...S.cxx, cx] : S.cxx.filter((x) => x !== cx); draw();
+  }, colorOf(cx))));
+  const present = new Set(inCampaign().map((r) => r.version + ' ' + r.generator));
+  const all = [S.reference, ...compared()].flatMap((v) => [v + ' cpp', v + ' ocpp']).filter((s) => present.has(s));
+  document.getElementById('series').replaceChildren(...all.map((s) => checkbox(s, S.series.includes(s), (on) => {
+    S.series = on ? [...S.series, s] : S.series.filter((x) => x !== s); draw();
+  }, null, commitOf(s.slice(0, s.lastIndexOf(' '))))));
+}
+
+function legendItem(svgInner, text, sha) {
+  const s = document.createElement('span');
+  s.innerHTML = '<svg width="24" height="14" aria-hidden="true">' + svgInner + '</svg>';
+  const t = document.createElement('span'); t.textContent = text; s.append(t);
+  if (sha) { const h = document.createElement('span'); h.className = 'sha'; h.textContent = sha; s.append(h); }
+  return s;
+}
+
+function drawLegend() {
+  const items = [
+    legendItem('<line x1="2" x2="22" y1="7" y2="7" stroke="currentColor" stroke-width="2"/>', S.reference + ' cpp (reference)', commitOf(S.reference)),
+    legendItem('<line x1="2" x2="22" y1="7" y2="7" stroke="currentColor" stroke-width="2" stroke-dasharray="3 2"/>', S.reference + ' ocpp (reference)'),
+  ];
+  for (const v of compared()) {
+    const o = shade(v);
+    items.push(legendItem('<path transform="translate(6,7)" d="' + d3.symbol(symbolOf('cpp'), 50)() + '" fill="currentColor" fill-opacity="' + o + '"/><path transform="translate(17,7)" d="' + d3.symbol(symbolOf('ocpp'), 50)() + '" fill="currentColor" fill-opacity="' + o + '"/>', v + ' cpp (square), ocpp (circle)', commitOf(v)));
+  }
+  items.push(legendItem('<line x1="1" x2="23" y1="7" y2="7" stroke="currentColor" stroke-width="0.8"/>', 'fastest of the campaign'));
+  document.getElementById('legend').replaceChildren(...items);
+}
+
+function drawChart(R) {
+  const wrap = document.getElementById('chart');
+  wrap.replaceChildren();
+  const shown = R.filter((r) => S.cxx.includes(r.cx) && S.series.includes(r.version + ' ' + r.generator) && S.precs.includes(r.precision) && r.y != null);
+  if (!shown.length) { wrap.textContent = 'Nothing to show: tick at least one compiler, one series and one precision.'; return; }
+  const progs = []; for (const r of R) if (!progs.includes(r.program) && shown.some((q) => q.program === r.program)) progs.push(r.program);
+  const cxxs = S.cxx.filter((c) => shown.some((r) => r.cx === c));
+  const branch = compared().flatMap((v) => ['cpp', 'ocpp'].map((g) => v + ' ' + g)).filter((s) => S.series.includes(s));
+  const fastest = {};
+  for (const r of R) {
+    if (r.y == null || !S.precs.includes(r.precision)) continue;
+    const k = r.precision + '|' + r.program;
+    if (!fastest[k] || r.y < fastest[k].y) fastest[k] = r;
+  }
+  const keys = ['own_ns_min', 'own_ns_median', 'machine_ns_min', 'machine_ns_median'];
+  const vals = S.fixed ? R.flatMap((r) => keys.map((k) => r[k])).filter((v) => v > 0)
+    : [...shown.map((r) => r.y), ...Object.values(fastest).map((r) => r.y)];
+  const lo = Math.min(...vals, 1) / 1.06, hi = Math.max(...vals, 1) * 1.06;
+  const W = Math.max(wrap.clientWidth || 800, 120 + progs.length * Math.max(48, cxxs.length * Math.max(1, branch.length) * 9));
+  const tip = document.createElement('div'); tip.className = 'tip'; tip.hidden = true;
+  const TICKS = [0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.25, 1.5, 1.75, 2, 2.5, 3, 4, 5, 7, 10];
+  for (const prec of S.precs) {
+    const pr = shown.filter((r) => r.precision === prec);
+    if (!pr.length) continue;
+    // the left margin leaves room for the first label, rotated to the left
+    const H = 300, m = { l: Math.max(46, Math.round(progs[0].length * 6.2 * 0.87 - 20)), r: 12, t: 24, b: 66 };
+    const svg = d3.create('svg').attr('width', W).attr('height', H).attr('role', 'img')
+      .attr('aria-label', 'Times relative to the centre, ' + (prec === 'float' ? 'single' : 'double') + ' precision, ' + progs.length + ' programs');
+    const x = d3.scaleBand().domain(progs).range([m.l, W - m.r]).paddingInner(0.12);
+    const y = d3.scaleLog().domain([lo, hi]).range([H - m.b, m.t]);
+    const ticks = [];
+    for (const t of [1, ...TICKS.filter((t) => t >= lo && t <= hi && t !== 1).sort((a, b) => Math.abs(Math.log(a)) - Math.abs(Math.log(b)))]) {
+      if (ticks.every((u) => Math.abs(y(u) - y(t)) >= 14)) ticks.push(t);
+    }
+    svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', m.l).attr('x2', W - m.r)
+      .attr('y1', (t) => y(t)).attr('y2', (t) => y(t)).style('stroke', (t) => (t === 1 ? 'var(--ref)' : 'var(--grid)')).style('stroke-width', (t) => (t === 1 ? 1.2 : 0.7));
+    svg.append('g').selectAll('text').data(ticks).join('text').attr('x', m.l - 6).attr('y', (t) => y(t) + 4).attr('text-anchor', 'end').text((t) => String(t));
+    svg.append('g').selectAll('line').data(progs).join('line')
+      .attr('x1', (p) => x(p) - x.step() * x.paddingInner() / 2).attr('x2', (p) => x(p) - x.step() * x.paddingInner() / 2)
+      .attr('y1', m.t).attr('y2', H - m.b).style('stroke', 'var(--grid)').style('stroke-width', 0.7);
+    svg.append('g').selectAll('text').data(progs).join('text')
+      .attr('transform', (p) => 'translate(' + (x(p) + x.bandwidth() / 2) + ',' + (H - m.b + 10) + ') rotate(-30)').attr('text-anchor', 'end').text((p) => p);
+    svg.append('text').attr('x', m.l).attr('y', 15).style('font-weight', '600')
+      .text((prec === 'float' ? 'Single precision (float)' : 'Double precision') + ' — time / centre, logarithmic scale');
+    const g = svg.append('g');
+    const show = (ev, r, what) => {
+      const box = wrap.getBoundingClientRect();
+      tip.replaceChildren();
+      [r.program + ' · ' + (r.precision === 'float' ? 'single' : 'double') + (what ? ' · ' + what : ''), r.cx,
+        r.version + ' ' + r.generator + ' (' + r.commit + ')' + (r.options ? ' ' + r.options : ''), 'session ' + r.session,
+        'time: ' + fmt(S.stat === 'min' ? r.ns_min : r.ns_median) + ' ns/frame (' + S.stat + ' of ' + r.rounds + ' rounds)',
+        '/ centre: ' + fmt(r.y), '/ reference cpp: ' + fmt(r.vsref)]
+        .forEach((t, i) => { const d = document.createElement('div'); d.textContent = t; if (i === 0) d.style.fontWeight = '600'; tip.append(d); });
+      tip.hidden = false;
+      tip.style.left = Math.min(ev.clientX - box.left + wrap.scrollLeft + 12, W - 260) + 'px';
+      tip.style.top = Math.max(ev.clientY - box.top - 10, 0) + 'px';
+    };
+    const hide = () => { tip.hidden = true; };
+    const hover = (sel, r, what) => sel.on('pointerenter', (ev) => show(ev, r, what)).on('pointermove', (ev) => show(ev, r, what)).on('pointerleave', hide);
+    for (const p of progs) {
+      const x0 = x(p), bw = x.bandwidth(), slotW = bw / Math.max(1, cxxs.length);
+      const fr = fastest[prec + '|' + p];
+      if (fr) {
+        g.append('line').attr('x1', x0).attr('x2', x0 + bw).attr('y1', y(fr.y)).attr('y2', y(fr.y)).style('stroke', 'var(--muted)').style('stroke-width', 0.8);
+        hover(g.append('line').attr('x1', x0).attr('x2', x0 + bw).attr('y1', y(fr.y)).attr('y2', y(fr.y)).style('stroke', 'transparent').style('stroke-width', 6), fr, 'fastest of the campaign');
+      }
+      cxxs.forEach((cx, ci) => {
+        const col = colorOf(cx), sx = x0 + ci * slotW;
+        for (const gen of ['cpp', 'ocpp']) {
+          const r = pr.find((q) => q.program === p && q.cx === cx && q.version === S.reference && q.generator === gen);
+          if (!r) continue;
+          g.append('line').attr('x1', sx + 1).attr('x2', sx + slotW - 1).attr('y1', y(r.y)).attr('y2', y(r.y))
+            .style('stroke', col).style('stroke-width', 2.2).style('stroke-dasharray', gen === 'ocpp' ? '4 3' : null);
+          hover(g.append('line').attr('x1', sx).attr('x2', sx + slotW).attr('y1', y(r.y)).attr('y2', y(r.y)).style('stroke', 'transparent').style('stroke-width', 10), r);
+        }
+        branch.forEach((s, bi) => {
+          const v = s.slice(0, s.lastIndexOf(' ')), gen = s.slice(s.lastIndexOf(' ') + 1);
+          const r = pr.find((q) => q.program === p && q.cx === cx && q.version === v && q.generator === gen);
+          if (!r) return;
+          hover(g.append('path').attr('d', d3.symbol(symbolOf(gen), 46)()).attr('transform', 'translate(' + (sx + slotW * (bi + 0.5) / branch.length) + ',' + y(r.y) + ')')
+            .style('fill', col).style('fill-opacity', shade(v)).style('stroke', col).style('stroke-width', 1), r);
+        });
+      });
+    }
+    wrap.append(svg.node());
+  }
+  wrap.append(tip);
+}
+
+function drawSummary(R) {
+  const groups = {};
+  for (const r of R) {
+    if (!S.cxx.includes(r.cx) || !S.series.includes(r.version + ' ' + r.generator) || !S.precs.includes(r.precision)) continue;
+    const k = [r.cx, r.version, r.generator, r.precision].join('|');
+    (groups[k] ??= { r, y: [], v: [] });
+    groups[k].y.push(r.y); groups[k].v.push(r.vsref);
+  }
+  const rows = Object.values(groups).sort((a, b) => a.r.precision.localeCompare(b.r.precision) || a.r.cx.localeCompare(b.r.cx)
+    || (a.r.version === S.reference ? -1 : b.r.version === S.reference ? 1 : a.r.version.localeCompare(b.r.version)) || a.r.generator.localeCompare(b.r.generator));
+  document.getElementById('summary').replaceChildren(...rows.map(({ r, y, v }) => {
+    const tr = document.createElement('tr');
+    const gy = gmean(y.filter((z) => z != null)), gv = gmean(v.filter((z) => z != null));
+    [r.cx, r.version, r.commit, r.generator, r.precision === 'float' ? 'single' : 'double', fmt(gy), fmt(gv), String(y.filter((z) => z != null).length)].forEach((t, i) => {
+      const td = document.createElement('td'); td.textContent = t;
+      if (i === 0) { const s = document.createElement('span'); s.className = 'swatch'; s.style.background = colorOf(r.cx); s.style.marginRight = '6px'; td.prepend(s); }
+      if (i === 2) td.className = 'sha';
+      if (i === 6 && gv != null && r.version !== S.reference) td.className = gv < 0.995 ? 'good' : gv > 1.005 ? 'bad' : '';
+      tr.append(td);
+    });
+    return tr;
+  }));
+}
+
+function drawLead(R) {
+  const camp = CAMPAIGNS.find((c) => c.id === S.campaign);
+  const g = {};
+  for (const r of R) {
+    if (r.version === S.reference || !S.cxx.includes(r.cx) || !S.series.includes(r.version + ' ' + r.generator) || !S.precs.includes(r.precision) || r.vsref == null) continue;
+    const k = [r.cx, r.version, r.generator, r.precision].join('|');
+    (g[k] ??= { r, v: [] }).v.push(r.vsref);
+  }
+  const means = Object.values(g).map((e) => ({ r: e.r, m: gmean(e.v) }));
+  const lead = document.getElementById('lead');
+  if (!means.length) { lead.textContent = 'Campaign ' + camp.label + ': no compared version is ticked.'; return; }
+  const best = means.reduce((a, b) => (b.m < a.m ? b : a)), worst = means.reduce((a, b) => (b.m > a.m ? b : a));
+  const who = (e) => e.r.version + ' ' + e.r.generator + ' (' + e.r.cxx + ', ' + (e.r.precision === 'float' ? 'single' : 'double') + ')';
+  lead.textContent = 'Campaign ' + camp.label + ': in geometric mean over the programs, the fastest compared series is ' + who(best) + ', at ' + fmt(best.m)
+    + ' times the reference in cpp of its compiler; the slowest, ' + who(worst) + ', at ' + fmt(worst.m) + '.';
+}
+
+function draw() {
+  ensure();
+  drawControls();
+  drawLegend();
+  const R = ratios();
+  drawChart(R);
+  drawSummary(R);
+  drawLead(R);
+}
+
+document.getElementById('campaign').addEventListener('change', (e) => { S.campaign = e.target.value; S.cxx = null; S.series = null; S.reference = 'master-dev'; draw(); });
+document.getElementById('reference').addEventListener('change', (e) => { S.reference = e.target.value; S.series = null; draw(); });
+for (const el of document.querySelectorAll('input[name="centre"]')) el.addEventListener('change', () => { S.centre = el.value; draw(); });
+for (const el of document.querySelectorAll('input[name="stat"]')) el.addEventListener('change', () => { S.stat = el.value; draw(); });
+for (const el of document.querySelectorAll('input.prec')) el.addEventListener('change', () => { S.precs = [...document.querySelectorAll('input.prec')].filter((c) => c.checked).map((c) => c.value); draw(); });
+document.getElementById('fixed').addEventListener('change', (e) => { S.fixed = e.target.checked; draw(); });
+let lastW = 0;
+new ResizeObserver(() => { const w = document.getElementById('chart').clientWidth; if (ROWS.length && Math.abs(w - lastW) > 4) { lastW = w; draw(); } }).observe(document.getElementById('chart'));
+
+fetch('measures.json').then((r) => { if (!r.ok) throw new Error('measures.json: HTTP ' + r.status); return r.json(); })
+  .then((d) => { prepare(d.rows); draw(); })
+  .catch((e) => { document.getElementById('lead').textContent = 'The measures could not be read (' + e.message + ').'; });
+</script>
+</body>
+</html>

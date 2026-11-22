@@ -14,6 +14,7 @@ compared.
 | `tools/table.py` | builds the flat table of every session |
 | `sessions/` | one directory per session, never rewritten, and `INDEX.tsv`, one line per version measured |
 | `table/` | the flat table, `measures.json` and `measures.csv`, rebuilt from `sessions/` |
+| `docs/` | the site (GitHub Pages) and its copy of the table, `measures.json` |
 | `SPEC.md` | what a session is, what makes two measures comparable |
 
 ## Measuring
@@ -42,11 +43,17 @@ are measured in alternated rounds so that their ratio is taken under the same co
 ## Contributing
 
 One session per pull request : the session directory, its lines in `sessions/INDEX.tsv`, and the
-table rebuilt by `tools/table.py`. Say in the description which machine, which C++ compiler, and
+table and the site's copy rebuilt by `tools/table.py`. Say in the description which machine, which C++ compiler, and
 what the versions are.
 
 ## Reading
 
-`table/measures.json` is read by an interactive dashboard (one panel per precision, every time
-divided by the centre of its program, the geometric mean of master-dev in cpp and ocpp ; the series,
-compilers and sessions chosen on the page). The dashboard is private for now.
+The site of the repository (GitHub Pages, `docs/`) shows every campaign : one panel per precision,
+every time divided by the centre of its program, the geometric mean of the chosen reference in cpp
+and ocpp, on a logarithmic axis ; the reference, the C++ compilers and the series are chosen on the
+page, with the commit of every series. It reads `docs/measures.json`, which `tools/table.py` writes
+beside `table/measures.json` and `table/measures.csv`. To look at it locally :
+
+```sh
+cd docs && python3 -m http.server 8000    # then http://localhost:8000
+```

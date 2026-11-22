@@ -5,7 +5,8 @@ its commit), its generator (cpp, ocpp) and its Faust options.
 
     table.py [SESSIONS_DIR] [--out table/measures]
 
-writes table/measures.json ({rows, meta}, the form the dashboard reads) and table/measures.csv.
+writes table/measures.json ({rows, meta}), table/measures.csv, and docs/measures.json, the
+copy the site reads.
 A session without results.json (an older protocol, see its NOTICE.md) has no rows.
 """
 import argparse
@@ -85,6 +86,9 @@ def main():
         {"label": "table.py", "value": open(__file__).read(), "type": "code", "lang": "python"},
         {"label": "Input", "value": "faust-measures/sessions/*/results.json"},
     ]}, open(a.out + ".json", "w"), separators=(",", ":"))
+    # the copy the site reads (GitHub Pages serves docs/)
+    site = os.path.join(ROOT, "docs", "measures.json")
+    json.dump({"rows": rows}, open(site, "w"), separators=(",", ":"))
     with open(a.out + ".csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=COLUMNS)
         w.writeheader()
