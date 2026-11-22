@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Faust basket</title>
 <style>
-  /* the page : one column, the controls in a panel, the chart, the table of means */
+  /* the page : one column ; what is compared (the campaign, its versions) ; a bar of what is shown, kept at the top
+     of the window while scrolling ; the charts, sized to the window under that bar ; the table of means */
   :root {
     --bg: #fbfbfa; --fg: #1d2125; --muted: #5d6670; --panel: #f1f2f0; --line: #d9dcd8; --grid: #e6e8e5;
     --ref: #8a9098; --ok: #1f7a4d; --bad: #b3332a; --tip: #ffffff;
@@ -18,22 +19,34 @@
       --c1: #6aa6ec; --c2: #f08a4b; --c3: #5fc08e; --c4: #a98ff0; --c5: #e8b453; --c6: #4cc3d9; color-scheme: dark; }
   }
   body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
-  .page { max-width: 1280px; margin: 0 auto; padding-block: 24px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-direction: column; gap: 20px; }
+  .page { max-width: 1600px; margin: 0 auto; padding-block: 24px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-direction: column; gap: 20px; }
   h1 { margin: 0; font: 400 30px/1.2 Georgia, "Times New Roman", serif; }
   h2 { margin: 0; font-size: 18px; font-weight: 600; }
   p { margin: 0; max-width: 80ch; }
   .muted { color: var(--muted); font-size: 13px; }
-  .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
-  .group { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-  .group h3 { margin: 6px 0 0; font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
-  .group h3:first-child { margin-top: 0; }
-  label { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 14px; }
+  .tag { font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+  .compare { display: flex; flex-direction: column; gap: 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+  .choose { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 8px 16px; }
+  @media (max-width: 600px) { .choose { grid-template-columns: minmax(0, 1fr); } }
+  .choose label { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
   select { width: 100%; font: inherit; padding: 4px 6px; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 6px; }
   .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; flex: none; }
   .sha { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--muted); }
-  .legend { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 13px; color: var(--muted); align-items: center; }
-  .legend span { display: inline-flex; align-items: center; gap: 6px; }
-  .chartwrap { position: relative; overflow-x: auto; min-height: 320px; }
+  /* the bar of what is shown : groups of toggles, wrapped on as few lines as the width allows */
+  .bar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; z-index: 5; }
+  @media (min-width: 720px) { .bar { position: sticky; top: 0; box-shadow: 0 2px 8px rgba(0,0,0,.06); } }
+  .grp { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+  .grp .tag { margin-right: 4px; }
+  .chip { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px; border: 1px solid var(--line); border-radius: 999px; cursor: pointer; font-size: 13px; color: var(--muted); user-select: none; }
+  .chip input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+  .chip .swatch, .chip svg { opacity: 0.3; }
+  .chip:has(input:checked) { color: var(--fg); background: var(--bg); border-color: var(--ref); box-shadow: inset 0 0 0 1px var(--ref); }
+  .chip:has(input:checked) .swatch, .chip:has(input:checked) svg { opacity: 1; }
+  .chip:has(input:focus-visible) { outline: 2px solid var(--c1); outline-offset: 2px; }
+  .key { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+  .chartwrap { position: relative; overflow-x: auto; }
+  details summary { cursor: pointer; font-weight: 600; }
+  details p { margin-top: 8px; }
   .chartwrap svg { display: block; }
   .chartwrap text { fill: var(--muted); font-size: 12px; }
   .tip { position: absolute; pointer-events: none; background: var(--tip); border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 4px 16px rgba(0,0,0,.18); padding: 8px 10px; font-size: 12px; white-space: nowrap; z-index: 2; font-variant-numeric: tabular-nums; }
@@ -59,61 +72,52 @@
     <h1>Faust basket</h1>
     <p id="lead" class="lead">Loading the measures…</p>
   </header>
-  <p class="muted">Every time, in nanoseconds per frame, is divided by the centre of its program: the geometric mean of the reference in cpp and in ocpp, on a logarithmic axis; below 1, faster than the centre. The reference is a level line, solid for cpp, dashed for ocpp; a compared version is a filled square for cpp, a filled circle for ocpp; several versions follow each other in a column, each a little lighter. The colour says the C++ compiler. A thin grey line marks, in each column, the fastest value of the campaign, every series and compiler included, shown or not. Data: <a href="https://github.com/orlarey/faust-measures">faust-measures</a>, <code>table/measures.csv</code>.</p>
-
-  <section class="controls" aria-label="What is shown">
-    <div class="group">
-      <h3>Campaign</h3>
-      <select id="campaign" aria-label="Campaign"></select>
-      <h3>Reference (the centre)</h3>
-      <select id="reference" aria-label="Reference"></select>
+  <section class="compare" aria-label="What is compared">
+    <div class="choose">
+      <label><span class="tag">Campaign</span><select id="campaign"></select></label>
+      <label><span class="tag">Reference (the centre)</span><select id="reference"></select></label>
     </div>
-    <div class="group">
-      <h3>C++ compilers</h3>
-      <div id="compilers"></div>
-    </div>
-    <div class="group">
-      <h3>Series</h3>
-      <div id="series"></div>
-    </div>
-    <div class="group">
-      <h3>Centre of a program</h3>
-      <label><input type="radio" name="centre" value="own" checked> reference of the same compiler</label>
-      <label><input type="radio" name="centre" value="machine"> reference of every compiler of the machine</label>
-      <h3>Statistic of the rounds</h3>
-      <label><input type="radio" name="stat" value="min" checked> minimum</label>
-      <label><input type="radio" name="stat" value="median"> median</label>
-      <h3>Precision</h3>
-      <label><input type="checkbox" class="prec" value="float" checked> single (float)</label>
-      <label><input type="checkbox" class="prec" value="double" checked> double</label>
-      <h3>Vertical axis</h3>
-      <label><input type="checkbox" id="fixed" checked> fixed: every measure of the campaign</label>
-    </div>
-  </section>
-
-  <div class="legend" id="legend"></div>
-
-  <section>
-    <h2>Versions</h2>
     <div class="versions" id="versions"></div>
     <p class="muted" id="libraries"></p>
   </section>
 
-  <section>
-    <h2>Times relative to the centre of each program</h2>
+  <section class="bar" id="bar" aria-label="What is shown">
+    <div class="grp"><span class="tag">Compilers</span><span id="compilers" class="grp"></span></div>
+    <div class="grp"><span class="tag">Series</span><span id="series" class="grp"></span></div>
+    <div class="grp"><span class="tag">Precision</span>
+      <label class="chip"><input type="checkbox" class="prec" value="float" checked>single</label>
+      <label class="chip"><input type="checkbox" class="prec" value="double" checked>double</label>
+      <label class="chip" title="one chart, both precisions centred on the reference in single precision"><input type="checkbox" id="combined">combined</label></div>
+    <div class="grp"><span class="tag">Rounds</span>
+      <label class="chip"><input type="radio" name="stat" value="min" checked>minimum</label>
+      <label class="chip"><input type="radio" name="stat" value="median">median</label></div>
+    <div class="grp"><span class="tag">Centre</span>
+      <label class="chip" title="the reference of the same compiler"><input type="radio" name="centre" value="own" checked>same compiler</label>
+      <label class="chip" title="the reference of every compiler of the machine"><input type="radio" name="centre" value="machine">whole machine</label></div>
+    <div class="grp"><span class="tag">Axis</span>
+      <label class="chip" title="the vertical axis covers every measure of the campaign"><input type="checkbox" id="fixed" checked>fixed</label></div>
+    <span class="key"><svg width="24" height="14" aria-hidden="true"><line x1="1" x2="23" y1="7" y2="7" stroke="currentColor" stroke-width="0.8"/></svg>fastest of the campaign</span>
+  </section>
+
+  <section aria-label="Times relative to the centre of each program">
     <div class="chartwrap" id="chart"></div>
   </section>
 
   <section>
     <h2>Geometric means over the programs</h2>
-    <p class="muted">For every series shown: the geometric mean of its ratios to the centre, and of its ratios to the reference in cpp of the same compiler, over the programs it measured.</p>
+    <p class="muted">For every series shown: the geometric mean of its ratios to the centre, to the reference in cpp of the same compiler and the same precision, and to the reference in cpp of the same compiler in single precision (for a series in double precision, what double costs), over the programs it measured.</p>
     <div class="tablewrap">
       <table>
-        <thead><tr><th>Compiler</th><th>Version</th><th>Commit</th><th>Generator</th><th>Precision</th><th>/ centre</th><th>/ reference cpp</th><th>programs</th></tr></thead>
+        <thead><tr><th>Compiler</th><th>Version</th><th>Commit</th><th>Generator</th><th>Precision</th><th>/ centre</th><th>/ reference cpp</th><th>/ reference cpp single</th><th>programs</th></tr></thead>
         <tbody id="summary"></tbody>
       </table>
     </div>
   </section>
+
+  <details>
+    <summary>How to read the charts</summary>
+    <p class="muted">Every time, in nanoseconds per frame, is divided by the centre of its program: the geometric mean of the reference in cpp and in ocpp, on a logarithmic axis; below 1, faster than the centre. The reference is a level line, solid for cpp, dashed for ocpp; a compared version is a filled square for cpp, a filled circle for ocpp; several versions follow each other in a column, each a little lighter. The colour says the C++ compiler. A thin grey line marks, in each column, the fastest value of the campaign, every series and compiler included, shown or not. Data: <a href="https://github.com/orlarey/faust-measures">faust-measures</a>, <code>table/measures.csv</code>.</p>
+  </details>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
@@ -125,7 +129,7 @@ const gmean = (xs) => {
   return v.length ? Math.exp(v.reduce((s, x) => s + Math.log(x), 0) / v.length) : null;
 };
 const fmt = (x) => (x == null ? '—' : x.toFixed(3));
-const S = { campaign: null, reference: null, cxx: null, series: null, centre: 'own', stat: 'min', precs: ['float', 'double'], fixed: true };
+const S = { campaign: null, reference: null, cxx: null, series: null, centre: 'own', stat: 'min', precs: ['float', 'double'], combined: false, fixed: true };
 let ROWS = [], CAMPAIGNS = [], VERSIONS = {}, LIBS = {};
 
 // a campaign : the sessions of one reference (its name and commit), one commit of the libraries and one set of
@@ -170,7 +174,8 @@ const commitOf = (v) => { const r = inCampaign().find((q) => q.version === v); r
 const infoOf = (v) => VERSIONS[v + '|' + commitOf(v)] || { version: v, commit: commitOf(v) };
 
 // the ratios of the campaign to the centre (own : the reference of the same session ; machine :
-// the reference of every session of the machine) and to the reference in cpp of the same session
+// the reference of every session of the machine) and to the reference in cpp of the same session,
+// each in the same precision, or in single precision (the f keys) so that both precisions share a centre
 function ratios() {
   const rows = inCampaign(), stat = S.stat === 'min' ? 'ns_min' : 'ns_median';
   const own = {}, mach = {};
@@ -185,14 +190,18 @@ function ratios() {
   }
   return rows.map((r) => {
     const o = own[[r.session, r.precision, r.program].join('|')] || {}, m = mach[[r.machine, r.precision, r.program].join('|')] || {};
+    const of = own[[r.session, 'float', r.program].join('|')] || {}, mf = mach[[r.machine, 'float', r.program].join('|')] || {};
     const val = {};
     for (const s of ['ns_min', 'ns_median']) {
-      const co = gmean(o[s] || []), cm = gmean(m[s] || []);
+      const co = gmean(o[s] || []), cm = gmean(m[s] || []), cof = gmean(of[s] || []), cmf = gmean(mf[s] || []);
       val['own_' + s] = co ? r[s] / co : null;
       val['machine_' + s] = cm ? r[s] / cm : null;
       val['ref_' + s] = o.cpp && o.cpp[s] ? r[s] / o.cpp[s] : null;
+      val['ownf_' + s] = cof ? r[s] / cof : null;
+      val['machinef_' + s] = cmf ? r[s] / cmf : null;
+      val['reff_' + s] = of.cpp && of.cpp[s] ? r[s] / of.cpp[s] : null;
     }
-    return { ...r, ...val, y: val[S.centre + '_' + stat], vsref: val['ref_' + stat] };
+    return { ...r, ...val, y: val[S.centre + (S.combined ? 'f_' : '_') + stat], vsref: val['ref_' + stat], vsreff: val['reff_' + stat] };
   });
 }
 
@@ -206,15 +215,32 @@ function ensure() {
   if (!S.series) S.series = [...new Set(inCampaign().map((r) => r.version + ' ' + r.generator))];
 }
 
-function checkbox(text, checked, onchange, swatch, sha) {
+// a toggle of the bar : its mark (a swatch or the glyph of a series), its text, its title
+function chip(text, checked, onchange, mark, title) {
   const lab = document.createElement('label');
+  lab.className = 'chip';
+  if (title) lab.title = title;
   const cb = document.createElement('input');
   cb.type = 'checkbox'; cb.checked = checked; cb.onchange = () => onchange(cb.checked);
   lab.append(cb);
-  if (swatch) { const s = document.createElement('span'); s.className = 'swatch'; s.style.background = swatch; lab.append(s); }
-  const t = document.createElement('span'); t.textContent = text; lab.append(t);
-  if (sha) { const h = document.createElement('span'); h.className = 'sha'; h.textContent = sha; lab.append(h); }
+  if (mark) lab.append(mark);
+  lab.append(text);
   return lab;
+}
+
+function swatchOf(color) {
+  const s = document.createElement('span'); s.className = 'swatch'; s.style.background = color; return s;
+}
+
+// the glyph of a series, as on the chart : a level line for the reference, solid for cpp and dashed for ocpp ;
+// a square for a compared version in cpp, a circle in ocpp, lighter for each further version
+function glyphOf(v, gen) {
+  const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  s.setAttribute('width', '22'); s.setAttribute('height', '12'); s.setAttribute('aria-hidden', 'true');
+  s.innerHTML = v === S.reference
+    ? '<line x1="2" x2="20" y1="6" y2="6" stroke="currentColor" stroke-width="2"' + (gen === 'ocpp' ? ' stroke-dasharray="3 2"' : '') + '/>'
+    : '<path transform="translate(11,6)" d="' + d3.symbol(symbolOf(gen), 50)() + '" fill="currentColor" fill-opacity="' + shade(v) + '" stroke="currentColor"/>';
+  return s;
 }
 
 function drawControls() {
@@ -224,35 +250,17 @@ function drawControls() {
   const ref = document.getElementById('reference');
   ref.replaceChildren(...versions().map((v) => new Option(v + ' (' + commitOf(v) + ')', v)));
   ref.value = S.reference;
-  document.getElementById('compilers').replaceChildren(...cxxList().map((cx) => checkbox(cx, S.cxx.includes(cx), (on) => {
+  document.getElementById('compilers').replaceChildren(...cxxList().map((cx) => chip(cx, S.cxx.includes(cx), (on) => {
     S.cxx = on ? [...S.cxx, cx] : S.cxx.filter((x) => x !== cx); draw();
-  }, colorOf(cx))));
+  }, swatchOf(colorOf(cx)))));
   const present = new Set(inCampaign().map((r) => r.version + ' ' + r.generator));
   const all = [S.reference, ...compared()].flatMap((v) => [v + ' cpp', v + ' ocpp']).filter((s) => present.has(s));
-  document.getElementById('series').replaceChildren(...all.map((s) => checkbox(s, S.series.includes(s), (on) => {
-    S.series = on ? [...S.series, s] : S.series.filter((x) => x !== s); draw();
-  }, null, commitOf(s.slice(0, s.lastIndexOf(' '))))));
-}
-
-function legendItem(svgInner, text, sha) {
-  const s = document.createElement('span');
-  s.innerHTML = '<svg width="24" height="14" aria-hidden="true">' + svgInner + '</svg>';
-  const t = document.createElement('span'); t.textContent = text; s.append(t);
-  if (sha) { const h = document.createElement('span'); h.className = 'sha'; h.textContent = sha; s.append(h); }
-  return s;
-}
-
-function drawLegend() {
-  const items = [
-    legendItem('<line x1="2" x2="22" y1="7" y2="7" stroke="currentColor" stroke-width="2"/>', S.reference + ' cpp (reference)', commitOf(S.reference)),
-    legendItem('<line x1="2" x2="22" y1="7" y2="7" stroke="currentColor" stroke-width="2" stroke-dasharray="3 2"/>', S.reference + ' ocpp (reference)'),
-  ];
-  for (const v of compared()) {
-    const o = shade(v);
-    items.push(legendItem('<path transform="translate(6,7)" d="' + d3.symbol(symbolOf('cpp'), 50)() + '" fill="currentColor" fill-opacity="' + o + '"/><path transform="translate(17,7)" d="' + d3.symbol(symbolOf('ocpp'), 50)() + '" fill="currentColor" fill-opacity="' + o + '"/>', v + ' cpp (square), ocpp (circle)', commitOf(v)));
-  }
-  items.push(legendItem('<line x1="1" x2="23" y1="7" y2="7" stroke="currentColor" stroke-width="0.8"/>', 'fastest of the campaign'));
-  document.getElementById('legend').replaceChildren(...items);
+  document.getElementById('series').replaceChildren(...all.map((s) => {
+    const v = s.slice(0, s.lastIndexOf(' ')), gen = s.slice(s.lastIndexOf(' ') + 1);
+    return chip(s, S.series.includes(s), (on) => {
+      S.series = on ? [...S.series, s] : S.series.filter((x) => x !== s); draw();
+    }, glyphOf(v, gen), commitOf(v) + (v === S.reference ? ' (reference)' : ''));
+  }));
 }
 
 function drawVersions() {
@@ -301,22 +309,31 @@ function drawChart(R) {
     const k = r.precision + '|' + r.program;
     if (!fastest[k] || r.y < fastest[k].y) fastest[k] = r;
   }
-  const keys = ['own_ns_min', 'own_ns_median', 'machine_ns_min', 'machine_ns_median'];
+  const keys = (S.combined ? ['ownf_ns_min', 'ownf_ns_median', 'machinef_ns_min', 'machinef_ns_median']
+    : ['own_ns_min', 'own_ns_median', 'machine_ns_min', 'machine_ns_median']);
   const vals = S.fixed ? R.flatMap((r) => keys.map((k) => r[k])).filter((v) => v > 0)
     : [...shown.map((r) => r.y), ...Object.values(fastest).map((r) => r.y)];
   const lo = Math.min(...vals, 1) / 1.06, hi = Math.max(...vals, 1) * 1.06;
-  const W = Math.max(wrap.clientWidth || 800, 120 + progs.length * Math.max(48, cxxs.length * Math.max(1, branch.length) * 9));
+  // one chart per precision, or a single chart where each compiler's column holds single precision, then double
+  const precsShown = S.precs.filter((p) => shown.some((r) => r.precision === p));
+  const panels = S.combined ? [precsShown] : precsShown.map((p) => [p]);
+  const nP = S.combined ? precsShown.length : 1;
+  const W = Math.max(wrap.clientWidth || 800, 120 + progs.length * Math.max(48, cxxs.length * nP * Math.max(1, branch.length) * 7));
   const tip = document.createElement('div'); tip.className = 'tip'; tip.hidden = true;
   const TICKS = [0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.25, 1.5, 1.75, 2, 2.5, 3, 4, 5, 7, 10];
-  for (const prec of S.precs) {
-    const pr = shown.filter((r) => r.precision === prec);
-    if (!pr.length) continue;
+  // the charts share the height of the window left under the bar, once the bar is at the top
+  const barH = window.matchMedia('(min-width: 720px)').matches ? document.getElementById('bar').getBoundingClientRect().height : 0;
+  const H = Math.max(260, Math.floor((window.innerHeight - barH - 28) / panels.length));
+  for (const precs of panels) {
+    const pr = shown.filter((r) => precs.includes(r.precision));
+    const name = precs.length > 1 ? 'Single and double precision' : precs[0] === 'float' ? 'Single precision (float)' : 'Double precision';
     // the left margin leaves room for the first label, rotated to the left
-    const H = 300, m = { l: Math.max(46, Math.round(progs[0].length * 6.2 * 0.87 - 20)), r: 12, t: 24, b: 66 };
+    const m = { l: Math.max(46, Math.round(progs[0].length * 7 * 0.87 - 20)), r: 12, t: 24, b: 66 };
     const svg = d3.create('svg').attr('width', W).attr('height', H).attr('role', 'img')
-      .attr('aria-label', 'Times relative to the centre, ' + (prec === 'float' ? 'single' : 'double') + ' precision, ' + progs.length + ' programs');
+      .attr('aria-label', 'Times relative to the centre, ' + name.toLowerCase() + ', ' + progs.length + ' programs');
     const x = d3.scaleBand().domain(progs).range([m.l, W - m.r]).paddingInner(0.12);
     const y = d3.scaleLog().domain([lo, hi]).range([H - m.b, m.t]);
+    const bands = svg.append('g');
     const ticks = [];
     for (const t of [1, ...TICKS.filter((t) => t >= lo && t <= hi && t !== 1).sort((a, b) => Math.abs(Math.log(a)) - Math.abs(Math.log(b)))]) {
       if (ticks.every((u) => Math.abs(y(u) - y(t)) >= 14)) ticks.push(t);
@@ -330,7 +347,8 @@ function drawChart(R) {
     svg.append('g').selectAll('text').data(progs).join('text')
       .attr('transform', (p) => 'translate(' + (x(p) + x.bandwidth() / 2) + ',' + (H - m.b + 10) + ') rotate(-30)').attr('text-anchor', 'end').text((p) => p);
     svg.append('text').attr('x', m.l).attr('y', 15).style('font-weight', '600')
-      .text((prec === 'float' ? 'Single precision (float)' : 'Double precision') + ' — time / centre, logarithmic scale');
+      .text(name + (S.combined ? ' — time / centre in single precision, logarithmic scale' : ' — time / centre, logarithmic scale')
+        + (precs.length > 1 ? '; in each compiler\'s column, single precision on the left, double on the grey band' : ''));
     const g = svg.append('g');
     const show = (ev, r, what) => {
       const box = wrap.getBoundingClientRect();
@@ -338,7 +356,8 @@ function drawChart(R) {
       [r.program + ' · ' + (r.precision === 'float' ? 'single' : 'double') + (what ? ' · ' + what : ''), r.cx,
         r.version + ' ' + r.generator + ' (' + r.commit + ')' + (r.options ? ' ' + r.options : '') + (infoOf(r.version).branch ? ' · ' + infoOf(r.version).branch : ''), 'session ' + r.session + (r.libraries ? ' · libraries ' + r.libraries : ''),
         'time: ' + fmt(S.stat === 'min' ? r.ns_min : r.ns_median) + ' ns/frame (' + S.stat + ' of ' + r.rounds + ' rounds)',
-        '/ centre: ' + fmt(r.y), '/ reference cpp: ' + fmt(r.vsref)]
+        '/ centre' + (S.combined ? ' in single precision' : '') + ': ' + fmt(r.y), '/ reference cpp: ' + fmt(r.vsref),
+        '/ reference cpp in single precision: ' + fmt(r.vsreff)]
         .forEach((t, i) => { const d = document.createElement('div'); d.textContent = t; if (i === 0) d.style.fontWeight = '600'; tip.append(d); });
       tip.hidden = false;
       tip.style.left = Math.min(ev.clientX - box.left + wrap.scrollLeft + 12, W - 260) + 'px';
@@ -346,28 +365,35 @@ function drawChart(R) {
     };
     const hide = () => { tip.hidden = true; };
     const hover = (sel, r, what) => sel.on('pointerenter', (ev) => show(ev, r, what)).on('pointermove', (ev) => show(ev, r, what)).on('pointerleave', hide);
+    const fastestLine = (fr, x1, x2) => {
+      g.append('line').attr('x1', x1).attr('x2', x2).attr('y1', y(fr.y)).attr('y2', y(fr.y)).style('stroke', 'var(--muted)').style('stroke-width', 0.8);
+      hover(g.append('line').attr('x1', x1).attr('x2', x2).attr('y1', y(fr.y)).attr('y2', y(fr.y)).style('stroke', 'transparent').style('stroke-width', 6), fr, 'fastest of the campaign');
+    };
     for (const p of progs) {
-      const x0 = x(p), bw = x.bandwidth(), slotW = bw / Math.max(1, cxxs.length);
-      const fr = fastest[prec + '|' + p];
-      if (fr) {
-        g.append('line').attr('x1', x0).attr('x2', x0 + bw).attr('y1', y(fr.y)).attr('y2', y(fr.y)).style('stroke', 'var(--muted)').style('stroke-width', 0.8);
-        hover(g.append('line').attr('x1', x0).attr('x2', x0 + bw).attr('y1', y(fr.y)).attr('y2', y(fr.y)).style('stroke', 'transparent').style('stroke-width', 6), fr, 'fastest of the campaign');
-      }
+      const x0 = x(p), bw = x.bandwidth(), slotW = bw / Math.max(1, cxxs.length), cw = slotW / precs.length;
+      if (precs.length === 1 && fastest[precs[0] + '|' + p]) fastestLine(fastest[precs[0] + '|' + p], x0, x0 + bw);
       cxxs.forEach((cx, ci) => {
-        const col = colorOf(cx), sx = x0 + ci * slotW;
-        for (const gen of ['cpp', 'ocpp']) {
-          const r = pr.find((q) => q.program === p && q.cx === cx && q.version === S.reference && q.generator === gen);
-          if (!r) continue;
-          g.append('line').attr('x1', sx + 1).attr('x2', sx + slotW - 1).attr('y1', y(r.y)).attr('y2', y(r.y))
-            .style('stroke', col).style('stroke-width', 2.2).style('stroke-dasharray', gen === 'ocpp' ? '4 3' : null);
-          hover(g.append('line').attr('x1', sx).attr('x2', sx + slotW).attr('y1', y(r.y)).attr('y2', y(r.y)).style('stroke', 'transparent').style('stroke-width', 10), r);
-        }
-        branch.forEach((s, bi) => {
-          const v = s.slice(0, s.lastIndexOf(' ')), gen = s.slice(s.lastIndexOf(' ') + 1);
-          const r = pr.find((q) => q.program === p && q.cx === cx && q.version === v && q.generator === gen);
-          if (!r) return;
-          hover(g.append('path').attr('d', d3.symbol(symbolOf(gen), 46)()).attr('transform', 'translate(' + (sx + slotW * (bi + 0.5) / branch.length) + ',' + y(r.y) + ')')
-            .style('fill', col).style('fill-opacity', shade(v)).style('stroke', col).style('stroke-width', 1), r);
+        const col = colorOf(cx);
+        precs.forEach((prec, pi) => {
+          const sx = x0 + ci * slotW + pi * cw;
+          if (precs.length > 1) {
+            if (prec === 'double') bands.append('rect').attr('x', sx).attr('y', m.t).attr('width', cw).attr('height', H - m.b - m.t).style('fill', 'var(--panel)');
+            if (fastest[prec + '|' + p]) fastestLine(fastest[prec + '|' + p], sx, sx + cw);
+          }
+          for (const gen of ['cpp', 'ocpp']) {
+            const r = pr.find((q) => q.program === p && q.cx === cx && q.precision === prec && q.version === S.reference && q.generator === gen);
+            if (!r) continue;
+            g.append('line').attr('x1', sx + 1).attr('x2', sx + cw - 1).attr('y1', y(r.y)).attr('y2', y(r.y))
+              .style('stroke', col).style('stroke-width', 2.2).style('stroke-dasharray', gen === 'ocpp' ? '4 3' : null);
+            hover(g.append('line').attr('x1', sx).attr('x2', sx + cw).attr('y1', y(r.y)).attr('y2', y(r.y)).style('stroke', 'transparent').style('stroke-width', 10), r);
+          }
+          branch.forEach((s, bi) => {
+            const v = s.slice(0, s.lastIndexOf(' ')), gen = s.slice(s.lastIndexOf(' ') + 1);
+            const r = pr.find((q) => q.program === p && q.cx === cx && q.precision === prec && q.version === v && q.generator === gen);
+            if (!r) return;
+            hover(g.append('path').attr('d', d3.symbol(symbolOf(gen), 46)()).attr('transform', 'translate(' + (sx + cw * (bi + 0.5) / branch.length) + ',' + y(r.y) + ')')
+              .style('fill', col).style('fill-opacity', shade(v)).style('stroke', col).style('stroke-width', 1), r);
+          });
         });
       });
     }
@@ -381,15 +407,15 @@ function drawSummary(R) {
   for (const r of R) {
     if (!S.cxx.includes(r.cx) || !S.series.includes(r.version + ' ' + r.generator) || !S.precs.includes(r.precision)) continue;
     const k = [r.cx, r.version, r.generator, r.precision].join('|');
-    (groups[k] ??= { r, y: [], v: [] });
-    groups[k].y.push(r.y); groups[k].v.push(r.vsref);
+    (groups[k] ??= { r, y: [], v: [], f: [] });
+    groups[k].y.push(r.y); groups[k].v.push(r.vsref); groups[k].f.push(r.vsreff);
   }
   const rows = Object.values(groups).sort((a, b) => a.r.precision.localeCompare(b.r.precision) || a.r.cx.localeCompare(b.r.cx)
     || (a.r.version === S.reference ? -1 : b.r.version === S.reference ? 1 : a.r.version.localeCompare(b.r.version)) || a.r.generator.localeCompare(b.r.generator));
-  document.getElementById('summary').replaceChildren(...rows.map(({ r, y, v }) => {
+  document.getElementById('summary').replaceChildren(...rows.map(({ r, y, v, f }) => {
     const tr = document.createElement('tr');
-    const gy = gmean(y.filter((z) => z != null)), gv = gmean(v.filter((z) => z != null));
-    [r.cx, r.version, r.commit, r.generator, r.precision === 'float' ? 'single' : 'double', fmt(gy), fmt(gv), String(y.filter((z) => z != null).length)].forEach((t, i) => {
+    const gy = gmean(y.filter((z) => z != null)), gv = gmean(v.filter((z) => z != null)), gf = gmean(f.filter((z) => z != null));
+    [r.cx, r.version, r.commit, r.generator, r.precision === 'float' ? 'single' : 'double', fmt(gy), fmt(gv), fmt(gf), String(y.filter((z) => z != null).length)].forEach((t, i) => {
       const td = document.createElement('td'); td.textContent = t;
       if (i === 0) { const s = document.createElement('span'); s.className = 'swatch'; s.style.background = colorOf(r.cx); s.style.marginRight = '6px'; td.prepend(s); }
       if (i === 2) td.className = 'sha';
@@ -420,7 +446,6 @@ function drawLead(R) {
 function draw() {
   ensure();
   drawControls();
-  drawLegend();
   drawVersions();
   const R = ratios();
   drawChart(R);
@@ -434,8 +459,10 @@ for (const el of document.querySelectorAll('input[name="centre"]')) el.addEventL
 for (const el of document.querySelectorAll('input[name="stat"]')) el.addEventListener('change', () => { S.stat = el.value; draw(); });
 for (const el of document.querySelectorAll('input.prec')) el.addEventListener('change', () => { S.precs = [...document.querySelectorAll('input.prec')].filter((c) => c.checked).map((c) => c.value); draw(); });
 document.getElementById('fixed').addEventListener('change', (e) => { S.fixed = e.target.checked; draw(); });
-let lastW = 0;
+document.getElementById('combined').addEventListener('change', (e) => { S.combined = e.target.checked; draw(); });
+let lastW = 0, lastH = window.innerHeight;
 new ResizeObserver(() => { const w = document.getElementById('chart').clientWidth; if (ROWS.length && Math.abs(w - lastW) > 4) { lastW = w; draw(); } }).observe(document.getElementById('chart'));
+window.addEventListener('resize', () => { if (ROWS.length && Math.abs(window.innerHeight - lastH) > 4) { lastH = window.innerHeight; draw(); } });
 
 // Revalidated on every load : a new campaign must show as soon as it is published.
 fetch('measures.json', { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error('measures.json: HTTP ' + r.status); return r.json(); })
