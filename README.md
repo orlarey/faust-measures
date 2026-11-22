@@ -25,7 +25,10 @@ compared.
 ### What you need
 
 - Python 3 (matplotlib is optional: it draws a graph beside the report of a session);
-- a C++ compiler: `clang++` by default, any other with `--cxx` (`--cxx g++`);
+- a C++ compiler: `clang++` by default, any other with `--cxx` (`--cxx g++`). A name is looked up
+  in the `PATH`: on macOS, `clang++` is Apple's compiler (`/usr/bin/clang++`) unless another one,
+  from MacPorts or Homebrew, comes first. Give a full path when in doubt; the session records
+  the version of the compiler it used;
 - a Faust source tree with its `libraries` submodule. It gives the sources of the basket
   (`examples/…`, `tests/impulse-tests/dsp/…`) and the harness `libraries/arch/cpu_arch.cpp`.
   Every series of a session is compiled with the libraries of this tree: choose its commit
@@ -46,14 +49,15 @@ cd faust && git submodule update --init libraries && cd ..
 
 ### Building the binaries
 
-One worktree per commit, built with `make` at its root. A worktree takes a branch, a tag or a
-commit; a campaign usually aims at a commit (`git worktree add ../faust-ref e3665b800`). Two
-binaries take about three minutes to build:
+One worktree per commit, built with `make` at its root. A worktree takes a remote branch, a tag
+or a commit; a campaign usually aims at a commit (`git worktree add ../faust-ref e3665b800`). The
+clone has `master-dev` checked out already, and git refuses a second worktree on the same branch:
+name it `origin/master-dev`. Two binaries take about three minutes to build:
 
 ```sh
 cd faust
-git worktree add ../faust-ref master-dev          # the reference
-git worktree add ../faust-mine my-branch          # a version to compare
+git worktree add ../faust-ref origin/master-dev   # the reference
+git worktree add ../faust-mine origin/my-branch   # a version to compare
 for d in ../faust-ref ../faust-mine; do (cd $d && git submodule update --init libraries && make); done
 cd ..
 faust-ref/build/bin/faust --version               # its second line: Source commit: <sha>
@@ -76,6 +80,11 @@ python3 faust-measures/tools/mesure.py run --faust-root faust \
 
 It prints a report: every time of `mine` divided by the time of the reference, program by
 program, and their geometric mean.
+
+`--faust-root` names the Faust tree that gives the sources of the basket and the libraries every
+series compiles with, the reference and the versions alike: the plain clone `faust` (the default
+is a `faust` directory beside `faust-measures`). The worktrees only give their binaries. Check out,
+in that tree, the commit of the libraries you mean to measure with: it is recorded.
 
 ### A session
 
@@ -152,7 +161,10 @@ measured in alternated rounds so that they share the conditions; the machine mus
    `FAUST_LIBRARIES_REPO` is optional: it names a clone of the libraries, from which the site
    shows the date of their commit.
 4. If a version is new, say what it tries to do: `--describe` at step 2, or an entry of
-   `versions.json` (its name, the start of its commit, a sentence).
+   `versions.json`, a reference included: `version` (its name in the sessions), `commit` (the start
+   of its hash), `branch`, `date` (the date of the commit, `YYYY-MM-DD`) and `description` (one
+   sentence). A `--describe` replaces the description already given for the same name and commit:
+   for a version measured before, reuse its text.
 5. Commit on a branch, push it to your fork, and open a pull request: the machines, the C++
    compilers, the versions and what they try to do.
 
@@ -167,7 +179,8 @@ The site shows every campaign: the sessions of one reference, one commit of the 
 set of compared versions, one session per C++ compiler. The campaign and the reference are chosen
 at the top of the page, with the commit, the branch and the description of every version; below,
 a bar chooses what the charts show: the C++ compilers, the series, the precisions, the statistic
-and the centre.
+and the centre. The page opens on the campaign with the most C++ compilers, the latest among
+equals.
 
 Every time is divided by the centre of its program, the geometric mean of a reference in cpp and
 ocpp, on a logarithmic axis. The centre is chosen among three: *same compiler*, each column on its

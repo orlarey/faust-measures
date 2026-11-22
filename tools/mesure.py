@@ -87,6 +87,8 @@ from concurrent.futures import ThreadPoolExecutor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 MESURES = os.path.join(os.path.dirname(HERE), "sessions")
+# the Faust tree next to this repository, as the README lays out the working directory
+FAUST_ROOT = os.path.join(os.path.dirname(os.path.dirname(HERE)), "faust")
 
 REF_FLAGS = "-O3 -ffast-math -march=native"
 BRANCH_FLAGS = "-O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno"
@@ -382,6 +384,7 @@ def code_body(path):
 
 
 def cmd_run(args):
+    start = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
     args.versions = parse_versions(args.version)
     unknown = [l for l in (args.levers.split(",") if args.levers else []) if l not in LEVERS]
     if unknown:
@@ -457,7 +460,7 @@ def cmd_run(args):
             print(f"{short(e)} : C++ compile times done", file=sys.stderr, flush=True)
 
     meta = {
-        "date": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
+        "date": start,
         "machine": machine(),
         "cxx": cxx_version(args.cxx),
         "ref_name": args.ref_name,
@@ -1127,7 +1130,7 @@ def main():
     r.add_argument("--version", action="append", default=[], required=True)
     r.add_argument("--out", required=True)
     r.add_argument("--entries", default=os.path.join(here, "..", "basket", "entries.txt"))
-    r.add_argument("--faust-root", default="/home/user/faust")
+    r.add_argument("--faust-root", default=FAUST_ROOT)
     r.add_argument("--arch", help="the harness (default <faust-root>/libraries/arch/cpu_arch.cpp)")
     r.add_argument("--cxx", default="clang++")
     r.add_argument("--rounds", type=int, default=9)
@@ -1161,7 +1164,7 @@ def main():
     f.add_argument("--ref", required=True)
     f.add_argument("--version", action="append", default=[])
     f.add_argument("--out", required=True)
-    f.add_argument("--faust-root", default="/home/user/faust")
+    f.add_argument("--faust-root", default=FAUST_ROOT)
     f.add_argument("--corpus")
     f.add_argument("--runs", type=int, default=3)
     f.add_argument("--jobs", type=int, default=1)
