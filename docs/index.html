@@ -259,6 +259,7 @@ function drawVersions() {
     const n = document.createElement('span'); n.className = 'name'; n.textContent = v + (v === S.reference ? ' (reference)' : '');
     const h = document.createElement('span'); h.className = 'sha'; h.textContent = e.commit;
     head.append(n, h);
+    if (e.date) { const dt = document.createElement('span'); dt.className = 'muted'; dt.textContent = e.date; head.append(dt); }
     if (e.branch) { const b = document.createElement('span'); b.className = 'muted'; b.textContent = e.branch; head.append(b); }
     if (e.options) { const o = document.createElement('code'); o.textContent = e.options; head.append(o); }
     const what = document.createElement('p'); what.className = 'what';
