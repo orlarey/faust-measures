@@ -443,7 +443,9 @@ function drawLead(R) {
     + ' times the reference in cpp of its compiler; the slowest, ' + who(worst) + ', at ' + fmt(worst.m) + '.';
 }
 
+// redrawing empties the chart for a moment, which shortens the page and moves its scroll : the scroll is kept
 function draw() {
+  const sy = window.scrollY;
   ensure();
   drawControls();
   drawVersions();
@@ -451,6 +453,7 @@ function draw() {
   drawChart(R);
   drawSummary(R);
   drawLead(R);
+  window.scrollTo(0, sy);
 }
 
 document.getElementById('campaign').addEventListener('change', (e) => { S.campaign = e.target.value; S.cxx = null; S.series = null; S.reference = null; draw(); });
