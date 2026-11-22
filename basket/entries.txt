@@ -1,0 +1,12 @@
+prog:examples/physicalModeling/fds/2dKirchhoffThinPlate.dsp
+prog:examples/physicalModeling/fds/StiffString.dsp
+prog:examples/generator/dx7.dsp
+prog:examples/analysis/FFT.dsp
+prog:examples/physicalModeling/englishBell.dsp
+prog:examples/filtering/vocoder.dsp
+prog:examples/ambisonics/oneSourceToStereo.dsp
+prog:examples/physicalModeling/old/karplus32.dsp
+prog:examples/reverb/zitaRev.dsp
+prog:examples/generator/virtualAnalog.dsp
+prog:tests/impulse-tests/dsp/multibandfilter.dsp
+prog:tests/impulse-tests/dsp/parametric_eq.dsp

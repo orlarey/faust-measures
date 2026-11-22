@@ -1,0 +1,20 @@
+{
+ "faust": "/home/orlarey/cert3/faust-new/build/bin/faust",
+ "option": "",
+ "cxx": "/home/orlarey/opt/llvm-22/bin/clang++",
+ "cxxopts": "-O3",
+ "base_cxxopts": "-O3 -ffast-math",
+ "rounds": 9,
+ "copies": 3,
+ "rows": [
+  {
+   "entry": "prog:examples/physicalModeling/fds/2dKirchhoffThinPlate.dsp",
+   "same_code": false,
+   "A": 993.623,
+   "B": 570.978,
+   "ratio": 0.5746424951918383,
+   "spreadA": 0.17499274854366584,
+   "spreadB": 0.2877179329431706
+  }
+ ]
+}

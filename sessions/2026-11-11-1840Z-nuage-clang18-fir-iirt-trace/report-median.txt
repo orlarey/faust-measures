@@ -1,0 +1,56 @@
+2026-11-11T18:40:47+00:00 - Intel(R) Xeon(R) Processor @ 2.10GHz, 4 cpus - Ubuntu clang version 18.1.3 (1ubuntu1)
+reference R : FAUST Version 2.92.3 ; Source commit: d8a62f5bf - cpp - -O3 -ffast-math -march=native
+def : FAUST Version 2.92.4 ; Source commit: 049a8a2a5 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+fir : FAUST Version 2.92.4 ; Source commit: 049a8a2a5 - faust -fir - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+iirt : FAUST Version 2.92.4 ; Source commit: 049a8a2a5 - faust -iirt - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+firiirt : FAUST Version 2.92.4 ; Source commit: 049a8a2a5 - faust -fir -iirt - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the median ; every time / R of its precision
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp          def          fir         iirt      firiirt
+2dKirchhoffThinPlate           1.24         0.70         0.69         0.71         0.69
+StiffString                    0.56         0.50         0.46         0.51         0.46
+dx7                            0.81         0.89         0.89         0.88         0.89
+FFT                            0.88         0.75         0.74         0.75         0.74
+englishBell                    0.41         0.49         0.49         0.49         0.49
+vocoder                        0.53         0.55         0.55         0.54         0.54
+oneSourceToStereo              1.12         0.90         0.67         0.90         0.66
+karplus32                      1.13         1.16         1.13         1.17         1.13
+zitaRev                        0.93         0.79         0.77         0.76         0.78
+virtualAnalog                  0.85         0.86         0.87         0.87         0.87
+multibandfilter                0.53         0.49     0.49 (=)     0.49 (=)     0.49 (=)
+parametric_eq                  0.76         0.57         0.57         0.57         0.57
+tester                         0.62         0.45         0.45         0.45         0.46
+tester2                        0.53         0.22         0.22         0.23         0.22
+piano                          0.89         0.68         0.69         0.76         0.78
+piano1                         0.92         0.73         0.74         0.82         0.86
+windchimes                     0.54         0.99         0.96         0.98         0.97
+harmonicOscillator             0.25         0.23     0.23 (=)         0.35     0.35 (=)
+paramOsc                       0.25         0.24     0.24 (=)         0.35     0.35 (=)
+geometric mean                 0.66         0.58         0.57         0.61         0.60
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp          def          fir         iirt      firiirt
+2dKirchhoffThinPlate           1.04         0.67         0.69         0.68         0.69
+StiffString                    0.64         0.65         0.61         0.65         0.63
+dx7                            0.83         0.99         0.99         0.98         0.99
+FFT                            0.79         0.72         0.70         0.72         0.70
+englishBell                    0.52         0.51         0.51         0.51         0.50
+vocoder                        0.58         0.60         0.60         0.59         0.59
+oneSourceToStereo              0.97         0.75         0.52         0.75         0.52
+karplus32                      1.21         1.18         1.18         1.18         1.19
+zitaRev                        1.30         0.90         0.88         0.90         0.90
+virtualAnalog                  0.79         0.89         0.90         0.90         0.91
+multibandfilter                1.09         0.80     0.80 (=)     0.80 (=)     0.80 (=)
+parametric_eq                  0.64         0.51         0.52         0.51         0.51
+tester                         1.03         1.10         1.08         1.10         1.12
+tester2                        1.43         1.03         1.00         1.00         1.00
+piano                          0.68         0.58         0.58         0.58         0.60
+piano1                         0.64         0.59         0.59         0.59         0.62
+windchimes                     1.09         1.18         1.17         1.20         1.21
+harmonicOscillator             1.00         0.93     0.93 (=)         1.36     1.36 (=)
+paramOsc                       0.96         0.91     0.91 (=)         1.32     1.32 (=)
+geometric mean                 0.87         0.79         0.77         0.82         0.81
+
+above 1.05 : harmonicOscillator firiirt-ocpp-d 1.36, harmonicOscillator iirt-ocpp-d 1.36, karplus32 def-ocpp-d 1.18, karplus32 def-ocpp-f 1.16, karplus32 fir-ocpp-d 1.18, karplus32 fir-ocpp-f 1.13, karplus32 firiirt-ocpp-d 1.19, karplus32 firiirt-ocpp-f 1.13, karplus32 iirt-ocpp-d 1.18, karplus32 iirt-ocpp-f 1.17, paramOsc firiirt-ocpp-d 1.32, paramOsc iirt-ocpp-d 1.32, tester def-ocpp-d 1.10, tester fir-ocpp-d 1.08, tester firiirt-ocpp-d 1.12, tester iirt-ocpp-d 1.10, windchimes def-ocpp-d 1.18, windchimes fir-ocpp-d 1.17, windchimes firiirt-ocpp-d 1.21, windchimes iirt-ocpp-d 1.20
+noise, the gap between the two best rounds : median 1.4 %, 90th percentile 5.6 %

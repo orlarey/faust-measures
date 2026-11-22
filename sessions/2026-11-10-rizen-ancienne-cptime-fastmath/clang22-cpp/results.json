@@ -1,0 +1,101 @@
+{
+ "faust": "/home/orlarey/cert3/faust-new/build/bin/faust",
+ "option": "",
+ "cxx": "/home/orlarey/opt/llvm-22/bin/clang++",
+ "cxxopts": "-O3",
+ "base_cxxopts": "-O3 -ffast-math",
+ "rounds": 7,
+ "copies": 1,
+ "rows": [
+  {
+   "entry": "prog:examples/physicalModeling/fds/2dKirchhoffThinPlate.dsp",
+   "same_code": false,
+   "A": 1160.798,
+   "B": 571.313,
+   "ratio": 0.49217262607275336,
+   "spreadA": 0.4523140053615882,
+   "spreadB": 0.0008508448048571509
+  },
+  {
+   "entry": "prog:examples/physicalModeling/fds/StiffString.dsp",
+   "same_code": false,
+   "A": 189.051,
+   "B": 135.071,
+   "ratio": 0.7144685825517982,
+   "spreadA": 0.006097075209653327,
+   "spreadB": 0.005861169566377377
+  },
+  {
+   "entry": "prog:examples/generator/dx7.dsp",
+   "same_code": false,
+   "A": 120.621,
+   "B": 134.653,
+   "ratio": 1.1163313187587567,
+   "spreadA": 0.014604610931834062,
+   "spreadB": 0.02750152373307161
+  },
+  {
+   "entry": "prog:examples/analysis/FFT.dsp",
+   "same_code": false,
+   "A": 96.384,
+   "B": 82.483,
+   "ratio": 0.8557748173970784,
+   "spreadA": 0.011945499311438425,
+   "spreadB": 0.03442721717426316
+  },
+  {
+   "entry": "prog:examples/physicalModeling/englishBell.dsp",
+   "same_code": false,
+   "A": 48.363,
+   "B": 99.757,
+   "ratio": 2.062671877261543,
+   "spreadA": 0.0038269791688215443,
+   "spreadB": 0.0013639417917781958
+  },
+  {
+   "entry": "prog:examples/filtering/vocoder.dsp",
+   "same_code": false,
+   "A": 103.944,
+   "B": 102.105,
+   "ratio": 0.982307781112907,
+   "spreadA": 0.004534184859681439,
+   "spreadB": 0.01789410691336464
+  },
+  {
+   "entry": "prog:examples/ambisonics/oneSourceToStereo.dsp",
+   "same_code": false,
+   "A": 25.066,
+   "B": 27.641,
+   "ratio": 1.1027287959786165,
+   "spreadA": 0.009571869117705844,
+   "spreadB": 0.05924839596700274
+  },
+  {
+   "entry": "prog:examples/physicalModeling/old/karplus32.dsp",
+   "same_code": false,
+   "A": 22.959,
+   "B": 22.917,
+   "ratio": 0.998170652031883,
+   "spreadA": 0.03596236700958417,
+   "spreadB": 0.02467572171026778
+  },
+  {
+   "entry": "prog:examples/reverb/zitaRev.dsp",
+   "same_code": false,
+   "A": 30.048,
+   "B": 31.987,
+   "ratio": 1.064530085197018,
+   "spreadA": 0.007172165326750504,
+   "spreadB": 0.007482394366197169
+  },
+  {
+   "entry": "prog:examples/generator/virtualAnalog.dsp",
+   "same_code": false,
+   "A": 65.478,
+   "B": 61.4,
+   "ratio": 0.9377195393872751,
+   "spreadA": 0.01536825230446712,
+   "spreadB": 0.009471024533376853
+  }
+ ]
+}

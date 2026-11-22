@@ -1,0 +1,53 @@
+2026-11-11T13:17:12+00:00 - Intel(R) Xeon(R) Processor @ 2.10GHz, 4 cpus - g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+reference R : FAUST Version 2.92.3 ; Source commit: d8a62f5bf - cpp - -O3 -ffast-math -march=native
+cert3 : FAUST Version 2.92.4 ; Source commit: 4ca9b5278 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+fam : FAUST Version 2.92.4 ; Source commit: d40c6000f - faust -fam - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the minimum ; every time / R of its precision
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3          fam
+2dKirchhoffThinPlate           1.00         0.64     0.64 (=)
+StiffString                    0.75         0.76         0.19
+dx7                            0.96         1.26     1.26 (=)
+FFT                            1.05         0.26     0.26 (=)
+englishBell                    0.82         0.80         0.53
+vocoder                        0.46         0.49         0.11
+oneSourceToStereo              0.92         0.79     0.79 (=)
+karplus32                      0.50         0.53     0.53 (=)
+zitaRev                        0.75         0.60     0.60 (=)
+virtualAnalog                  0.97         0.99     0.99 (=)
+multibandfilter                0.93         0.88     0.88 (=)
+parametric_eq                  0.56         0.44     0.44 (=)
+insects                        0.94         0.89         0.90
+fire                           0.94         1.00         1.04
+AdditiveSynth                  0.48         1.14         0.72
+oteyPianoV2                    1.08         1.39     1.39 (=)
+statespace                     1.02         1.01     1.01 (=)
+modalBar                       0.76         0.80     0.80 (=)
+geometric mean                 0.80         0.76         0.62
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3          fam
+2dKirchhoffThinPlate           1.02         0.66     0.66 (=)
+StiffString                    0.96         1.00         0.39
+dx7                            0.96         1.68     1.68 (=)
+FFT                            0.97         0.21     0.21 (=)
+englishBell                    1.29         1.56         0.54
+vocoder                        1.17         1.10         0.32
+oneSourceToStereo              0.86         0.63     0.63 (=)
+karplus32                      0.78         0.90     0.90 (=)
+zitaRev                        0.94         0.71     0.71 (=)
+virtualAnalog                  0.98         1.10     1.10 (=)
+multibandfilter                0.98         0.97     0.97 (=)
+parametric_eq                  0.58         0.53     0.53 (=)
+insects                        0.87         0.87         0.87
+fire                           0.67         0.78     0.78 (=)
+AdditiveSynth                  1.03         1.39         1.42
+oteyPianoV2                    1.08         1.56     1.56 (=)
+statespace                     0.98         1.00     1.00 (=)
+modalBar                       0.91         0.91     0.91 (=)
+geometric mean                 0.93         0.89         0.74
+
+above 1.05 : AdditiveSynth cert3-ocpp-d 1.39, AdditiveSynth cert3-ocpp-f 1.14, AdditiveSynth fam-ocpp-d 1.42, dx7 cert3-ocpp-d 1.68, dx7 cert3-ocpp-f 1.26, dx7 fam-ocpp-d 1.68, dx7 fam-ocpp-f 1.26, englishBell cert3-ocpp-d 1.56, oteyPianoV2 cert3-ocpp-d 1.56, oteyPianoV2 cert3-ocpp-f 1.39, oteyPianoV2 fam-ocpp-d 1.56, oteyPianoV2 fam-ocpp-f 1.39, virtualAnalog cert3-ocpp-d 1.10, virtualAnalog fam-ocpp-d 1.10, vocoder cert3-ocpp-d 1.10
+noise, the gap between the two best rounds : median 0.9 %, 90th percentile 2.8 %
+non-finite outputs : statespace R-d, statespace R-f, statespace cert3-ocpp-d, statespace cert3-ocpp-f, statespace fam-ocpp-d, statespace fam-ocpp-f, statespace md-ocpp-d, statespace md-ocpp-f

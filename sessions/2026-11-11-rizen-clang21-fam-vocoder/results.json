@@ -1,0 +1,447 @@
+{
+ "meta": {
+  "date": "2026-11-11T02:54:14+00:00",
+  "machine": "AMD Ryzen AI 9 HX 370 w/ Radeon 890M, 24 cpus",
+  "cxx": "Ubuntu clang version 21.1.8 (6ubuntu1)",
+  "flags": {
+   "ref": "-O3 -ffast-math -march=native",
+   "branch": "-O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h"
+  },
+  "levers": [],
+  "faust_options": {
+   "fam": "-fam"
+  },
+  "arch": [
+   "/home/orlarey/cert3/faust-r/libraries/arch/cpu_arch.cpp",
+   "1751aa6765af91e47f701c62588f39cf874f97833204ebe4e201fced701c9576"
+  ],
+  "rounds": 9,
+  "configs": [
+   "ocpp-f",
+   "ocpp-d"
+  ],
+  "versions": [
+   "cert3",
+   "fam"
+  ],
+  "binaries": {
+   "ref": [
+    "/home/orlarey/cert3/faust-r/build/bin/faust",
+    "FAUST Version 2.92.3 ; Source commit: d8a62f5bf"
+   ],
+   "cert3": [
+    "/home/orlarey/cert3/faust-new/build/bin/faust",
+    "FAUST Version 2.92.4 ; Source commit: 4ca9b5278"
+   ],
+   "fam": [
+    "/home/orlarey/cert3/faust-fam/build/bin/faust",
+    "FAUST Version 2.92.4 ; Source commit: 4ca9b5278-modified"
+   ]
+  },
+  "entries": [
+   "vocoder",
+   "englishBell"
+  ],
+  "failed": {},
+  "provenance": {
+   "binaries": {
+    "ref": {
+     "path": "/home/orlarey/cert3/faust-r/build/bin/faust",
+     "version": "FAUST Version 2.92.3 ; Source commit: d8a62f5bf",
+     "sha256": "81d36ef685696d140d8a209a436d4eac29586b4defbba97d648f1f3c9812d129",
+     "commit": "d8a62f5bf",
+     "modified": false,
+     "repo": "/home/orlarey/cert3/faust-r",
+     "commit_full": "d8a62f5bfe40ccf8d0d3146deb0adc4e1a87d0c8",
+     "tree": "74d186222bf6d4683852910fe1aeab355b067ba7",
+     "subject": "lv2.cpp: omit epp:rangeSteps when a port has no step-wise control",
+     "committed": "2026-11-06T17:04:47+01:00",
+     "head_branch": "HEAD",
+     "branches": [
+      "grame/master-dev",
+      "grame/master-dev-certification-3"
+     ]
+    },
+    "cert3": {
+     "path": "/home/orlarey/cert3/faust-new/build/bin/faust",
+     "version": "FAUST Version 2.92.4 ; Source commit: 4ca9b5278",
+     "sha256": "cfdc0ad07c38352c76ac526063ebb3b9c8757a8e45e3e2a77552224367d2ce75",
+     "commit": "4ca9b5278",
+     "modified": false,
+     "repo": "/home/orlarey/cert3/faust-new",
+     "commit_full": "4ca9b5278fba51501ada8c0fc6196d1d69eccf41",
+     "tree": "3b1fcbdcc32c61ea6d68961e6973acafa7e68bcd",
+     "subject": "ocpp : an IIR and the FIR input it takes in are one node of the dependency graph",
+     "committed": "2026-11-10T10:07:21Z",
+     "head_branch": "HEAD",
+     "branches": [
+      "grame/master-dev-certification-3"
+     ]
+    },
+    "fam": {
+     "path": "/home/orlarey/cert3/faust-fam/build/bin/faust",
+     "version": "FAUST Version 2.92.4 ; Source commit: 4ca9b5278-modified",
+     "sha256": "12cfa492167af1af9ea6eb75ad81748e5c7c6ddd51f3ed7a46e1987592269d4e",
+     "commit": "4ca9b5278",
+     "modified": true,
+     "repo": "/home/orlarey/cert3/faust-fam",
+     "commit_full": "4ca9b5278fba51501ada8c0fc6196d1d69eccf41",
+     "tree": "3b1fcbdcc32c61ea6d68961e6973acafa7e68bcd",
+     "subject": "ocpp : an IIR and the FIR input it takes in are one node of the dependency graph",
+     "committed": "2026-11-10T10:07:21Z",
+     "head_branch": "HEAD",
+     "branches": [
+      "grame/master-dev-certification-3"
+     ]
+    }
+   },
+   "sources": {
+    "path": "/home/orlarey/cert3/faust-new",
+    "commit": "4ca9b5278fba51501ada8c0fc6196d1d69eccf41",
+    "tree": "3b1fcbdcc32c61ea6d68961e6973acafa7e68bcd",
+    "subject": "ocpp : an IIR and the FIR input it takes in are one node of the dependency graph",
+    "branch": "HEAD",
+    "changes": [],
+    "changed": 0
+   },
+   "libraries": {
+    "path": "/home/orlarey/cert3/faust-new/libraries",
+    "commit": "42fab480c778df7bad5c6b620ca4fd005b2bfe9b",
+    "tree": "0daa892573dfe85e24754f84111bf2e585feda35",
+    "subject": "filters.lib: declare the author and license of _tanhalf and _tpt_df",
+    "branch": "HEAD",
+    "changes": [],
+    "changed": 0
+   },
+   "tool": {
+    "path": "/home/orlarey/cert3/fm/tools",
+    "commit": "f29ce379a7e9d854ac797d8ccb8046befb87880b",
+    "tree": "f811916eaeaed8916136bc95a1e3b820bfc55f20",
+    "subject": "Familles de la forme de calcul : la sp\u00e9cification suit le portage ; la mesure de l'\u00e9tape 1",
+    "branch": "HEAD",
+    "changes": [],
+    "changed": 0
+   },
+   "host": {
+    "hostname": "orlarey-AI-Series",
+    "system": "Linux-7.0.0-30-generic-x86_64-inconnu-with-glibc2.43",
+    "cpu": "AMD Ryzen AI 9 HX 370 w/ Radeon 890M, 24 cpus",
+    "load": [
+     3.37744140625,
+     1.140625,
+     0.3935546875
+    ],
+    "affinity": [
+     0,
+     1,
+     2,
+     3,
+     12,
+     13,
+     14,
+     15
+    ],
+    "governor": "powersave",
+    "load_end": [
+     2.298828125,
+     1.255859375,
+     0.48095703125
+    ]
+   },
+   "command": [
+    "/home/orlarey/cert3/fm/tools/mesure.py",
+    "run",
+    "--ref",
+    "/home/orlarey/cert3/faust-r/build/bin/faust",
+    "--version",
+    "cert3=/home/orlarey/cert3/faust-new/build/bin/faust",
+    "--version",
+    "fam=/home/orlarey/cert3/faust-fam/build/bin/faust",
+    "--faust-options",
+    "fam=-fam",
+    "--out",
+    "/home/orlarey/cert3/fam2-run",
+    "--faust-root",
+    "/home/orlarey/cert3/faust-new",
+    "--arch",
+    "/home/orlarey/cert3/faust-r/libraries/arch/cpu_arch.cpp",
+    "--cxx",
+    "/usr/bin/clang++",
+    "--configs",
+    "ocpp-f,ocpp-d",
+    "--jobs",
+    "8",
+    "--entries",
+    "/home/orlarey/cert3/entries-voc.txt",
+    "--allow-modified"
+   ],
+   "basket": {
+    "file": "/home/orlarey/cert3/entries-voc.txt",
+    "sha256": "d6d4db08fe7b71d424e015dae5066ebe88eabe7e3896d2f8b1511aeefa686ee5",
+    "programs": {
+     "vocoder": "68b36b4d37ab96a7e793498c434f62e0a904cdbfa38897195c1d72be23c88a60",
+     "englishBell": "607ac4df2b1fac03d1c9fce2ad544a41d86beb7b4f44401bcce2a3987598306e"
+    }
+   },
+   "allow_modified": true,
+   "code": {
+    "vocoder R-d": "9dc3cc99365ee966b7f6e1926d03b39e8d751cca5954385bb17686bf8df9f469",
+    "vocoder md-ocpp-d": "ee39af8817a7947187ca6e5d63e1ff898fc870a921f4682cb2fd093658299bfc",
+    "vocoder R-f": "c10cb6f5077a73b35d07719f8ade63fc689eccc13b16b83ada23cd2db10dbae8",
+    "vocoder md-ocpp-f": "c1290204b4107b98a1c57de6e9ade8fe24aeb7d7ef5cdb2d84031f7309245e44",
+    "vocoder cert3-ocpp-f": "36e3634bba85734b33c56154a741012db7d4258061417212ba870ba25b1e3e37",
+    "vocoder cert3-ocpp-d": "4938ff02c2f0196ce3ae784e1a3bd5aad8bdd12678271ebf9956295f7d4b56a9",
+    "vocoder fam-ocpp-f": "bfbc1961be3c2dc1f94b53e1bf3d8b49e260bbc8f904574e042284500b742171",
+    "vocoder fam-ocpp-d": "2bf5dc1d9e389f3918f07676d4117754fbeed88c139d122fa971cd3be51567a5",
+    "englishBell R-d": "c8b170129a929d1480e1ce89644e64232b66f89efdf4301a7a2dae2c1862359e",
+    "englishBell md-ocpp-d": "4fdaa82db77da594635aae0f8ad5010bc0eb88889c4fe5df4ed1ef58e02e8d4c",
+    "englishBell R-f": "dff51066094252c19827def81fffb3f64d8baeef8bf7f18e70f7d3da3a48a042",
+    "englishBell md-ocpp-f": "e8d1483e192bc226875aa7857f5e73a0093fdc2e5bc88510d3e1218017894fe8",
+    "englishBell cert3-ocpp-f": "8da0f53a391e97a92d86492f27c1de85bc81dec5d1c756ba103e32f1b59abe38",
+    "englishBell cert3-ocpp-d": "ad7b4257430d7284b7963df9b62d3a2c132eb7d568a58d3eebde34f1597d69e3",
+    "englishBell fam-ocpp-f": "ea2c155d66766a5e7b16267553598508987a71b0c531d260bdc838a334f9269f",
+    "englishBell fam-ocpp-d": "68487fe4cc205bd01a582e409d70402965321600b61deca955acf82f3c02a32e"
+   }
+  }
+ },
+ "variants": {
+  "R-d": [
+   "/home/orlarey/cert3/faust-r/build/bin/faust",
+   "cpp",
+   "d",
+   "ref"
+  ],
+  "md-ocpp-d": [
+   "/home/orlarey/cert3/faust-r/build/bin/faust",
+   "ocpp",
+   "d",
+   "ref"
+  ],
+  "R-f": [
+   "/home/orlarey/cert3/faust-r/build/bin/faust",
+   "cpp",
+   "f",
+   "ref"
+  ],
+  "md-ocpp-f": [
+   "/home/orlarey/cert3/faust-r/build/bin/faust",
+   "ocpp",
+   "f",
+   "ref"
+  ],
+  "cert3-ocpp-f": [
+   "/home/orlarey/cert3/faust-new/build/bin/faust",
+   "ocpp",
+   "f",
+   "branch"
+  ],
+  "cert3-ocpp-d": [
+   "/home/orlarey/cert3/faust-new/build/bin/faust",
+   "ocpp",
+   "d",
+   "branch"
+  ],
+  "fam-ocpp-f": [
+   "/home/orlarey/cert3/faust-fam/build/bin/faust",
+   "ocpp",
+   "f",
+   "branch"
+  ],
+  "fam-ocpp-d": [
+   "/home/orlarey/cert3/faust-fam/build/bin/faust",
+   "ocpp",
+   "d",
+   "branch"
+  ]
+ },
+ "same": {
+  "vocoder fam-ocpp-f": false,
+  "vocoder fam-ocpp-d": false,
+  "englishBell fam-ocpp-f": false,
+  "englishBell fam-ocpp-d": false
+ },
+ "times": {
+  "vocoder": {
+   "R-d": [
+    85.621,
+    85.601,
+    85.462,
+    85.559,
+    85.635,
+    85.711,
+    85.616,
+    85.531,
+    85.492
+   ],
+   "md-ocpp-d": [
+    51.676,
+    51.259,
+    56.759,
+    54.901,
+    59.006,
+    50.295,
+    61.411,
+    52.047,
+    54.704
+   ],
+   "R-f": [
+    86.048,
+    86.507,
+    86.2,
+    86.095,
+    85.969,
+    85.742,
+    86.152,
+    85.739,
+    86.132
+   ],
+   "md-ocpp-f": [
+    50.784,
+    54.595,
+    52.693,
+    55.878,
+    49.723,
+    55.795,
+    51.124,
+    51.523,
+    50.841
+   ],
+   "cert3-ocpp-f": [
+    51.724,
+    49.654,
+    51.739,
+    51.618,
+    51.714,
+    48.92,
+    57.393,
+    52.851,
+    51.581
+   ],
+   "cert3-ocpp-d": [
+    64.071,
+    61.509,
+    61.565,
+    62.552,
+    66.178,
+    68.528,
+    59.417,
+    55.662,
+    55.615
+   ],
+   "fam-ocpp-f": [
+    14.153,
+    14.142,
+    14.143,
+    14.153,
+    14.169,
+    14.148,
+    14.148,
+    14.145,
+    14.145
+   ],
+   "fam-ocpp-d": [
+    15.399,
+    15.333,
+    15.421,
+    15.341,
+    15.416,
+    15.394,
+    15.37,
+    15.424,
+    15.38
+   ]
+  },
+  "englishBell": {
+   "R-d": [
+    45.219,
+    45.314,
+    45.445,
+    45.479,
+    45.305,
+    45.387,
+    45.249,
+    45.436,
+    45.036
+   ],
+   "md-ocpp-d": [
+    11.992,
+    11.997,
+    11.994,
+    11.935,
+    12.006,
+    11.999,
+    11.989,
+    12.001,
+    11.991
+   ],
+   "R-f": [
+    44.162,
+    44.16,
+    44.209,
+    44.228,
+    44.17,
+    44.376,
+    44.176,
+    44.173,
+    44.198
+   ],
+   "md-ocpp-f": [
+    17.834,
+    17.961,
+    17.809,
+    17.796,
+    17.888,
+    17.848,
+    18.01,
+    17.865,
+    17.544
+   ],
+   "cert3-ocpp-f": [
+    20.547,
+    20.545,
+    20.546,
+    20.489,
+    20.637,
+    20.808,
+    20.723,
+    20.588,
+    20.516
+   ],
+   "cert3-ocpp-d": [
+    16.119,
+    16.127,
+    16.115,
+    16.136,
+    16.137,
+    16.12,
+    16.133,
+    16.1,
+    16.125
+   ],
+   "fam-ocpp-f": [
+    11.573,
+    11.57,
+    11.551,
+    11.574,
+    11.567,
+    11.564,
+    11.552,
+    11.576,
+    11.558
+   ],
+   "fam-ocpp-d": [
+    11.837,
+    11.838,
+    11.845,
+    11.725,
+    11.722,
+    11.727,
+    11.847,
+    11.715,
+    11.71
+   ]
+  }
+ },
+ "nonfinite": {},
+ "cxx_times": {}
+}

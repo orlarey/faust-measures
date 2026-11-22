@@ -1,0 +1,72 @@
+2026-11-12T01:11:44+00:00 - AMD Ryzen AI 9 HX 370 w/ Radeon 890M, 24 cpus - g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+reference R : FAUST Version 2.92.3 ; Source commit: d8a62f5bf - cpp - -O3 -ffast-math -march=native
+base : FAUST Version 2.92.4 ; Source commit: 217579045 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+gather : FAUST Version 2.92.4 ; Source commit: 175d29b74 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the minimum ; every time / R of its precision
+
+== cpp-f
+program                        base       gather
+2dKirchhoffThinPlate           0.64     0.64 (=)
+StiffString                    1.09     1.09 (=)
+dx7                            1.18     1.18 (=)
+FFT                            0.80     0.80 (=)
+englishBell                    0.92     0.92 (=)
+vocoder                        0.95     0.95 (=)
+oneSourceToStereo              0.86         0.45
+karplus32                      1.00     1.00 (=)
+zitaRev                        0.93     0.93 (=)
+virtualAnalog                  1.09     1.09 (=)
+multibandfilter                0.86     0.86 (=)
+parametric_eq                  0.83     0.83 (=)
+geometric mean                 0.92         0.87
+
+== cpp-d
+program                        base       gather
+2dKirchhoffThinPlate           0.63     0.63 (=)
+StiffString                    1.14     1.14 (=)
+dx7                            1.57     1.57 (=)
+FFT                            0.79     0.79 (=)
+englishBell                    0.74     0.74 (=)
+vocoder                        1.00     1.00 (=)
+oneSourceToStereo              0.98         0.70
+karplus32                      0.98     0.98 (=)
+zitaRev                        0.87     0.87 (=)
+virtualAnalog                  1.29     1.29 (=)
+multibandfilter                0.71     0.71 (=)
+parametric_eq                  0.81     0.81 (=)
+geometric mean                 0.93         0.90
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp         base       gather
+2dKirchhoffThinPlate           1.09         0.41     0.41 (=)
+StiffString                    0.90         0.25     0.25 (=)
+dx7                            0.94         1.17     1.17 (=)
+FFT                            0.43         0.78     0.78 (=)
+englishBell                    0.61         0.37     0.37 (=)
+vocoder                        0.61         0.12     0.12 (=)
+oneSourceToStereo              0.96         0.77         0.44
+karplus32                      0.63         0.75     0.75 (=)
+zitaRev                        0.78         0.63     0.63 (=)
+virtualAnalog                  0.95         1.02     1.02 (=)
+multibandfilter                0.87         0.61     0.61 (=)
+parametric_eq                  0.82         0.56     0.56 (=)
+geometric mean                 0.77         0.53         0.51
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp         base       gather
+2dKirchhoffThinPlate           1.04         0.72     0.72 (=)
+StiffString                    0.99         0.38     0.38 (=)
+dx7                            0.97         1.56     1.56 (=)
+FFT                            0.46         0.82     0.82 (=)
+englishBell                    0.68         0.45     0.45 (=)
+vocoder                        1.03         0.30     0.30 (=)
+oneSourceToStereo              1.02         0.69         0.63
+karplus32                      0.91         0.91     0.91 (=)
+zitaRev                        1.00         0.80     0.80 (=)
+virtualAnalog                  1.00         1.29     1.29 (=)
+multibandfilter                0.99         0.71     0.71 (=)
+parametric_eq                  0.61         0.53     0.53 (=)
+geometric mean                 0.87         0.69         0.68
+
+above 1.05 : StiffString base-cpp-d 1.14, StiffString base-cpp-f 1.09, StiffString gather-cpp-d 1.14, StiffString gather-cpp-f 1.09, dx7 base-cpp-d 1.57, dx7 base-cpp-f 1.18, dx7 base-ocpp-d 1.56, dx7 base-ocpp-f 1.17, dx7 gather-cpp-d 1.57, dx7 gather-cpp-f 1.18, dx7 gather-ocpp-d 1.56, dx7 gather-ocpp-f 1.17, virtualAnalog base-cpp-d 1.29, virtualAnalog base-cpp-f 1.09, virtualAnalog base-ocpp-d 1.29, virtualAnalog gather-cpp-d 1.29, virtualAnalog gather-cpp-f 1.09, virtualAnalog gather-ocpp-d 1.29
+noise, the gap between the two best rounds : median 0.0 %, 90th percentile 0.2 %

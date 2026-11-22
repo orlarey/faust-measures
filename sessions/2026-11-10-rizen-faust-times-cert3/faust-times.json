@@ -1,0 +1,3469 @@
+{
+ "meta": {
+  "date": "2026-11-10T12:35:36+00:00",
+  "machine": "AMD Ryzen AI 9 HX 370 w/ Radeon 890M, 24 cpus",
+  "runs": 3,
+  "jobs": 1,
+  "binaries": {
+   "ref": [
+    "/home/orlarey/cert3/faust-r/build/bin/faust",
+    "FAUST Version 2.92.3 ; Source commit: d8a62f5bf"
+   ],
+   "cert3": [
+    "/home/orlarey/cert3/faust-new/build/bin/faust",
+    "FAUST Version 2.92.4 ; Source commit: 4ca9b5278"
+   ]
+  },
+  "provenance": {
+   "binaries": {
+    "ref": {
+     "path": "/home/orlarey/cert3/faust-r/build/bin/faust",
+     "version": "FAUST Version 2.92.3 ; Source commit: d8a62f5bf",
+     "sha256": "81d36ef685696d140d8a209a436d4eac29586b4defbba97d648f1f3c9812d129",
+     "commit": "d8a62f5bf",
+     "modified": false,
+     "repo": "/home/orlarey/cert3/faust-r",
+     "commit_full": "d8a62f5bfe40ccf8d0d3146deb0adc4e1a87d0c8",
+     "tree": "74d186222bf6d4683852910fe1aeab355b067ba7",
+     "subject": "lv2.cpp: omit epp:rangeSteps when a port has no step-wise control",
+     "committed": "2026-11-06T17:04:47+01:00",
+     "head_branch": "HEAD",
+     "branches": [
+      "grame/master-dev",
+      "grame/master-dev-certification-3"
+     ]
+    },
+    "cert3": {
+     "path": "/home/orlarey/cert3/faust-new/build/bin/faust",
+     "version": "FAUST Version 2.92.4 ; Source commit: 4ca9b5278",
+     "sha256": "cfdc0ad07c38352c76ac526063ebb3b9c8757a8e45e3e2a77552224367d2ce75",
+     "commit": "4ca9b5278",
+     "modified": false,
+     "repo": "/home/orlarey/cert3/faust-new",
+     "commit_full": "4ca9b5278fba51501ada8c0fc6196d1d69eccf41",
+     "tree": "3b1fcbdcc32c61ea6d68961e6973acafa7e68bcd",
+     "subject": "ocpp : an IIR and the FIR input it takes in are one node of the dependency graph",
+     "committed": "2026-11-10T10:07:21Z",
+     "head_branch": "HEAD",
+     "branches": [
+      "grame/master-dev-certification-3"
+     ]
+    }
+   },
+   "sources": {
+    "path": "/home/orlarey/cert3/faust-r",
+    "commit": "d8a62f5bfe40ccf8d0d3146deb0adc4e1a87d0c8",
+    "tree": "74d186222bf6d4683852910fe1aeab355b067ba7",
+    "subject": "lv2.cpp: omit epp:rangeSteps when a port has no step-wise control",
+    "branch": "HEAD",
+    "changes": [],
+    "changed": 0
+   },
+   "libraries": {
+    "path": "/home/orlarey/cert3/faust-r/libraries",
+    "commit": "42fab480c778df7bad5c6b620ca4fd005b2bfe9b",
+    "tree": "0daa892573dfe85e24754f84111bf2e585feda35",
+    "subject": "filters.lib: declare the author and license of _tanhalf and _tpt_df",
+    "branch": "HEAD",
+    "changes": [],
+    "changed": 0
+   },
+   "tool": {
+    "path": "/home/orlarey/cert3/tools"
+   },
+   "host": {
+    "hostname": "orlarey-AI-Series",
+    "system": "Linux-7.0.0-30-generic-x86_64-inconnu-with-glibc2.43",
+    "cpu": "AMD Ryzen AI 9 HX 370 w/ Radeon 890M, 24 cpus",
+    "load": [
+     0.1435546875,
+     0.05029296875,
+     0.009765625
+    ],
+    "affinity": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23
+    ],
+    "governor": "powersave",
+    "note": "the host at the reconstruction : affinity and load are not those of the measure"
+   },
+   "command": [
+    "tools/mesure-archive.py",
+    "provenance",
+    "prov/ftimes",
+    "--ref",
+    "faust-r/build/bin/faust",
+    "--version",
+    "cert3=faust-new/build/bin/faust",
+    "--faust-root",
+    "faust-r"
+   ],
+   "reconstructed": "2026-11-10T14:41:29+00:00",
+   "corpus": {
+    "examples/SAM/16_channel_volume/16_channel_volume.dsp": "1e126af528bfa0237c49bdb137d9ae6b5b8496f68c1c277cd497a221789af30d",
+    "examples/SAM/16_channel_volume/layout.dsp": "4b03c5609597e819fea7c62c4e2115fabf5317c44ffe2d0a13a13915b49bc06a",
+    "examples/SAM/chorus/chorus.dsp": "dc47e3e87673f353d6a02ba6804a37240e0b1d8f39d79a2f8195274e6c7108f0",
+    "examples/SAM/chorus/chorusForBrowser.dsp": "6771130fd573c9f42d35bc72ccb749398ac367fec7837e71d701fe126d801fe6",
+    "examples/SAM/chorus/layout2.dsp": "c6a327e29263dd464b394ad7a9bbc99ee1690e20c8a3994b0df153802a6bb9c0",
+    "examples/SAM/echo/echo.dsp": "19cbb9ce942bad4ba4dec13246e038c1e2da7eef2f51a1901de0b9332dedc8f4",
+    "examples/SAM/echo/echoForBrowser.dsp": "901909c9e5e6af87da78cae1349d6645e01f15acc9ec8e8bf8e75e8536b0ec2e",
+    "examples/SAM/echo/layout2.dsp": "c6a327e29263dd464b394ad7a9bbc99ee1690e20c8a3994b0df153802a6bb9c0",
+    "examples/SAM/effects/chorus.dsp": "e6040662a0e3908543acf9a8c01f600570e43e1f049659ce8fbe6b3ac908a37a",
+    "examples/SAM/effects/echo.dsp": "b363d9c35c6d937bcbce13f506f8e76c088d0e9abd7fd2b5d04333c977c47288",
+    "examples/SAM/effects/effects.dsp": "96bbb71864ccf3f70c18689ade9d5099f548ffb96d8188e7ee42f8cd884ee2e7",
+    "examples/SAM/effects/effectsForBrowser.dsp": "6126fdd2575d7660f1c7f383641340a16da891dc190a0e0ed485b3d614432cb4",
+    "examples/SAM/effects/flanger.dsp": "7f341f261d32643b17a478ba5ba0268266bbad03fd5b920924231f897b9e1b8c",
+    "examples/SAM/effects/freeverb.dsp": "b26b68e3f9cfe35f516fa0751e0822b94e343f306fb4111a27960a5500f9a1a8",
+    "examples/SAM/effects/layout2.dsp": "c6a327e29263dd464b394ad7a9bbc99ee1690e20c8a3994b0df153802a6bb9c0",
+    "examples/SAM/flanger/flanger.dsp": "7d3a2d935a0b06c055fe85cd7b2aa2e398520a0c2f344c4f0b5b48990325b71c",
+    "examples/SAM/flanger/flangerForBrowser.dsp": "d76e848a4c6616ad73bebda90a2b87d730d4076416e586367788e26988ea4ce1",
+    "examples/SAM/flanger/layout2.dsp": "c6a327e29263dd464b394ad7a9bbc99ee1690e20c8a3994b0df153802a6bb9c0",
+    "examples/SAM/freeverb/freeverb.dsp": "30d0efa314c43294e83cefd7c961b31000e1a4df4f15ed1d347dd1aed07df856",
+    "examples/SAM/freeverb/freeverbForBrowser.dsp": "0e87fb69bbe2b6c08effb431a7ead75e7465426c866ff68cc6ef8963bcc32f17",
+    "examples/SAM/freeverb/layout2.dsp": "c6a327e29263dd464b394ad7a9bbc99ee1690e20c8a3994b0df153802a6bb9c0",
+    "examples/SAM/sawtooth_synth/sawtooth_synth.dsp": "cb8b250c18d8f26b2c93588302651f34d1657c047ea78626e335e96e40dafd63",
+    "examples/SAM/sine_synth/sine_synth.dsp": "953d55308d968f760fde5f6fbbe7606253c7bcdc0d36847ab1ee9b25d06f3224",
+    "examples/SAM/virtualAnalog/layout2.dsp": "c6a327e29263dd464b394ad7a9bbc99ee1690e20c8a3994b0df153802a6bb9c0",
+    "examples/SAM/virtualAnalog/virtualAnalog.dsp": "115a6869a23967bafebde0a985963f870b52631187f216c902c608cf72184747",
+    "examples/SAM/virtualAnalog/virtualAnalogForBrowser.dsp": "dad61062d6c0962fb6517b3faa0cfebe51be74c3d09ad49cada4f65c3037e800",
+    "examples/SAM/virtualAnalog/virtualAnalogWithEffectsForBrowser.dsp": "0f9feb4dbf364f28ef0deb358e56e5b4876ada595c24b46b7ba404b63f2f602c",
+    "examples/SAM/volume/volume.dsp": "1d288b91290e16f56840ca2f40b120d23e6f1cf27aa7e4aea97a29e72b4eb9d5",
+    "examples/ambisonics/fourSourcesToOcto.dsp": "99d0779de027edd2325d7cf2672cacba8c5e5235e9e2f25907782ebc93cb8107",
+    "examples/ambisonics/oneSourceToStereo.dsp": "4295ac9ea07befeba5152a82653d79230a578c1bc7f02433e231f025ebe636cc",
+    "examples/analysis/FFT.dsp": "5c577d49d2f384b15b2b7393262309bc5515b992dae97037f96fa0ab9b95521a",
+    "examples/analysis/dbmeter.dsp": "8a68488cbf54ab0046299007d29f655cfe924cad758657fd4ac34b79812e9481",
+    "examples/analysis/spectralLevel.dsp": "11bb3eac9c4ac146c722b2e4aeefc00f01214d71026383f71e857c66fdff9770",
+    "examples/analysis/spectralTiltLab.dsp": "3a11961c32003ae87cd999b1d813a56ffa4be86cac29e67e4fcffd68f48fbc6e",
+    "examples/analysis/vumeter.dsp": "bb70fd30bc7192f1ce97e51d2c1729c5bb69f66ea91a18ea7f4ee1ac74569f6e",
+    "examples/bela/AdditiveSynth.dsp": "469bb3e78b9e58ecf0b25c7e57162788b99ea47ee2a370be33c49a1398791ae5",
+    "examples/bela/AdditiveSynth_Analog.dsp": "54091479190693fa0c1bf9cd5fa03f6efebdbdca58d557847a21632c036aa8d6",
+    "examples/bela/FMSynth2.dsp": "7589c1fc9d51881561a324fbdaaa9441715a3ab57b763e9feafa913beaf07f44",
+    "examples/bela/FMSynth2_Analog.dsp": "1987133228d8ff8b58d02cdd25efddeabe6dcc7eb37fc181ea160b2f2ccbbdf6",
+    "examples/bela/FMSynth2_FX.dsp": "49822fde23ee8c381043655a55b721b5b59862863a9e1a0996381c0527b046af",
+    "examples/bela/FMSynth2_FX_Analog.dsp": "fcddb4104e1c899b502efa9bfe548aacc97adb1f62c1c299489c27bd01d42fbd",
+    "examples/bela/FXChaine2.dsp": "ff25fac369837554d9c8af482b72c31b01ae95f2b1346320a3016b35b0aae8dd",
+    "examples/bela/GrainGenerator.dsp": "4347be7e7a116294aba1d2eeb38e7c75a6790d650d3e296dab1960518adababe",
+    "examples/bela/WaveSynth.dsp": "a1a697767a2e37132e418335611d178afa1d565d8f97315f932e8d355d1073f3",
+    "examples/bela/WaveSynth_Analog.dsp": "aefa940c0a591d56f6607b67ae13406fdfbfbad6e3fa8acf5db6f98bc24dd38d",
+    "examples/bela/WaveSynth_FX.dsp": "4df7e77b8cbef2fa6d0cb50f56bc614fc2ae20c98dbbbac64074fca687b41773",
+    "examples/bela/WaveSynth_FX_Analog.dsp": "07f6995c2abd19c8c40e8b3da708de7b789dba35a4db558466dfd975c1f3ada7",
+    "examples/bela/crossDelay2.dsp": "5179e17ee1facd93dd4b12d647c7dd0847435a7431c95b08e6843dc64a7c0a3f",
+    "examples/bela/granulator.dsp": "53efd7dee6d797f9cfd0d143af9f2b4bcff7378103bea0508b4da3821d5e93ca",
+    "examples/bela/repeater.dsp": "c3703bb7fd5830a405695098cc0b98f7cd666d4e2b3b23e952d32dead3a3a5a3",
+    "examples/bela/simpleFX.dsp": "0d48785ec8808befff2b8cf1b0dd868d9603127b193e92fe3fac281edce8f3dd",
+    "examples/bela/simpleFX_Analog.dsp": "9b51b57147b9d7f6b465d5bd4a79e617670ab2ef4db604d7551ed9c077ed3e7c",
+    "examples/bela/simpleSynth.dsp": "de01dc4535c6fb0d27b353d303a84bc338ac9c6479e1f18e38d87015c890cd5c",
+    "examples/bela/simpleSynth_Analog.dsp": "e9d661d2571cf6734e7e60e4ec28e3746fc9e37af9d7f936126a096dec6b01ea",
+    "examples/bela/simpleSynth_FX.dsp": "84732ee4266b0b08a207fa06ab99183adb1ff1c79787e5e325b0c3aa3eed7b5f",
+    "examples/bela/simpleSynth_FX_Analog.dsp": "3588fa4e28d0faa58ad2a5fa453908a2ae5c33c5edb9fe7197673610d0c96551",
+    "examples/bela/trill_simple_monophonic_keyboard.dsp": "ccbba03756acf36a699e2a0c4d0e9472a9c636d1dcbf2e27022253fa30dec34a",
+    "examples/bela/trill_simple_polyphonic_keyboard.dsp": "a14b6d80ec47002d6acc8c6b57cf9d4052a78f8eb6629b5010ca3e93166fde1d",
+    "examples/delayEcho/echo.dsp": "676f7bcf058ab6792bc7738e941065be4650301638b2481003205b6e99315a95",
+    "examples/delayEcho/quadEcho.dsp": "7c9bef63c434cec23e1bf6b46c0667411cb3e4fe4a32d76b2afb508b392b4eef",
+    "examples/delayEcho/smoothDelay.dsp": "992fb8b458411a007a6bc22e6fc24ed0f18f536a7724478f5fbf5cec83ca5c0c",
+    "examples/delayEcho/stereoEcho.dsp": "bf7f8ee0b930c1e25c0a7bb4452d332e53c7d530f03e941abeae14cd6fc27031",
+    "examples/delayEcho/tapiir.dsp": "e2eb65131b9184fbe519824898158f3342b657980f073ddc1de318367e4552ce",
+    "examples/dynamic/compressor.dsp": "04c9b91f0de388d6b4a71fb40edab8b572c11e6e4c93bdcfdb812841f1243690",
+    "examples/dynamic/distortion.dsp": "a88ee3f850cffafc6a16ee12bd801ad7266fb101560886b13f9c7ead0f157b24",
+    "examples/dynamic/gateCompressor.dsp": "81c21876e065af107019585266cb939ff617beedc96e7fdfdcd3a681af175692",
+    "examples/dynamic/noiseGate.dsp": "57144e1b6788109f6f16580278f9c482bb09e6a892806ddeaf230c2d8a697c56",
+    "examples/dynamic/volume.dsp": "052181f380be453c8e72a2ad8a92485ef0a454850efc8f21ea38ecc575dc2559",
+    "examples/filtering/APF.dsp": "0ccc5aa92e1458cb09c50104369842167a98dd3988d022e0c7425d87021daf36",
+    "examples/filtering/BPF.dsp": "fe630a3cc3d5902ff3b189f287787493b83842c9f58aaf5bc522cef7836c3792",
+    "examples/filtering/DNN.dsp": "ba68c0b7d1b8a2e1965f212d51d2085f0054e6fc1123a15412cb6257771439b5",
+    "examples/filtering/HPF.dsp": "8b2bae6ad5b0aa89696e12104c8f2e719618e9e4bc3ddd21e2cadb0fe7b9c974",
+    "examples/filtering/LPF.dsp": "25417719563ed3ecc5e63c1ffa69547423deaa13f59644362563683ee5985530",
+    "examples/filtering/bandFilter.dsp": "f8cfc8b88e6cc0fce24973290f7d4ef799c2b3b77c1060f16e3bdc112c137780",
+    "examples/filtering/cryBaby.dsp": "c4ff6f577bfc05093d7a4de848871f38f03086cfebc1f349a54d5e639fdd149c",
+    "examples/filtering/diodeLadder.dsp": "b28599949e032352afe84e6195724d333ff1858d1a22e380462bccb92867f1d3",
+    "examples/filtering/filterBank.dsp": "00492b9697017118c2edd8dfd20b50619398ae6d38e51e752a959518fc129089",
+    "examples/filtering/graphicEqLab.dsp": "99919c4892c40822eab0d34aa8d84301919a7add798a159a7dceacac51dae5d8",
+    "examples/filtering/highShelf.dsp": "3b9a20e6fa0c9cc0b15ef6ba548a284b8395c617ae24db0f4ad6767cd17856b8",
+    "examples/filtering/korg35HPF.dsp": "bbb13e52a8ebb7668ddd96eaab46d24190c1a1992b246e8def30758fcad1af0b",
+    "examples/filtering/korg35LPF.dsp": "f10ee43d618b366b73668a2e04b84a29edc3dba1762bf1cddba95712cd3fc613",
+    "examples/filtering/lfBoost.dsp": "93078e4d14b07ead7174e2d9883fb7b0815b6fc84e45db89f00cce706b753e29",
+    "examples/filtering/lowBoost.dsp": "5f85dd48af091b8c0a20bcbaca541d060f099b0f36abe41a49f91ff837a8bbd5",
+    "examples/filtering/lowCut.dsp": "fc951f955baf2f5aedd24e669b85457080235a382c423a99eea30142ea1ff999",
+    "examples/filtering/lowShelf.dsp": "52b6fe47da56ec1af74bd79317f07da2fa25ebdc73d4a15fec984c2cc6186516",
+    "examples/filtering/moogHalfLadder.dsp": "2bde7751b6a9a3b4cffa232eef7c9dd838da1bfddcf4ece708cda2aa07aebfaa",
+    "examples/filtering/moogLadder.dsp": "6dbc49b60b9be120ffff90db7145b5f79a5722881e518f5501c3b5f52591b9f4",
+    "examples/filtering/moogVCF.dsp": "887e6b75990f3e8e331f4aa04b1d1ff39cc2c968de5ff0691706a2ce2754561c",
+    "examples/filtering/multibandFilter.dsp": "151fbaee51adf9494d6d5aac33697effa731af40c65388e6034167af5efdfb85",
+    "examples/filtering/notch.dsp": "7b0e1affc528dbe0987bd03b3ecc091810fbedad7929ef17d6269e3d986653db",
+    "examples/filtering/oberheim.dsp": "4446531a28f5c11aa53b5bce539dcabf94a6fa7d4a96780761711e67a95b6f72",
+    "examples/filtering/oberheimBPF.dsp": "90b9fbfa7b285b0185bcaa7bef73d48d8b8071c7f287d46fd49ac27dcbfae0be",
+    "examples/filtering/oberheimBSF.dsp": "755c091cc712d13154a690e54cc47e7a7c9374861bcd4a7d08460f2272d8fa8a",
+    "examples/filtering/oberheimHPF.dsp": "7b33fb2db66ceac4e3a6aa8e23d4d442aab4baf87e8aea0577f34d2aaab252ee",
+    "examples/filtering/oberheimLPF.dsp": "0d1e8120a5009f0fa04af9334551baee3a80341c1a094c1fb3e23d4729a67bf0",
+    "examples/filtering/parametricEqLab.dsp": "49c04f2bb9c00ea7a81437231fba8dd77dd6c0a08513a27cb583b8a14bc906df",
+    "examples/filtering/parametricEqualizer.dsp": "7b2210fdaa6c5c322265070cbb1f2eac0f74f5b990fdad6f78479cf5317e785c",
+    "examples/filtering/peakNotch.dsp": "5e8b6e54e845aecf68dfb6fccd9c37b46612a9c1b7fe84019ff7863af0cdabbc",
+    "examples/filtering/peakingEQ.dsp": "24cf9fa0fb2a4549bdd16f06a706e1923e1e9324e27c786a39218bd93f82b5f8",
+    "examples/filtering/sallenKey2ndOrder.dsp": "a1fe0cb02bc2b21d673ad0bf012865bdd1c48d68510160afde96657008a04001",
+    "examples/filtering/sallenKey2ndOrderBPF.dsp": "6eb2466058e3f75d29e9b7ae62a0676817077362f8944985ef8d2caaa8dcac54",
+    "examples/filtering/sallenKey2ndOrderHPF.dsp": "6e51cc330854b0e0ba18d10e06995f34870299f5ee8a601691c9f1a163ff5db2",
+    "examples/filtering/sallenKey2ndOrderLPF.dsp": "830dbf2e7a4f567dc35ea2e76119441913b91652ab2111450a09040c307d389d",
+    "examples/filtering/sallenKeyOnePole.dsp": "af10261ed8813245eef2b3ee059d6de61d2cb915ef572de251cc57bac53447da",
+    "examples/filtering/sallenKeyOnePoleHPF.dsp": "ba5e755f74a98be2ab56111456dfbf5734c66f5e15f5224ddc502e6f7ca254b1",
+    "examples/filtering/sallenKeyOnePoleLPF.dsp": "ec149cc78012263c1d747ed83bae8dcf4b96c369a44a70a1bd5b01e4f9072cbc",
+    "examples/filtering/spectralTilt.dsp": "d3bc336acddb3b5102705e5574f90ac1b63bca8b4f0db3d81aa0e5a662ffe0c3",
+    "examples/filtering/vcfWahLab.dsp": "efda4a9491aa8dc401f090b765e019b497e01c50767b1650e48b24b16c180206",
+    "examples/filtering/vocoder.dsp": "68b36b4d37ab96a7e793498c434f62e0a904cdbfa38897195c1d72be23c88a60",
+    "examples/filtering/wahPedal.dsp": "008139be97257f7bd5e555d5a4896eb1bf8e017bc1a33ec25550c91a6358ac0c",
+    "examples/gameaudio/bubble.dsp": "16b71f5974cd7acdb84723ea26dbe9af392a54cf80ef618f549520728f8daafb",
+    "examples/gameaudio/complex_rain.dsp": "2b53deff9a65421e6aa454b239d670dd5dfbb066c4346d0a1d5c99702c0b91d4",
+    "examples/gameaudio/door.dsp": "42d33378eaa7348553329acb8c17bfe056ac677e3535bd29e31e1f3dd1f92418",
+    "examples/gameaudio/fire.dsp": "93d8c7f5ae65746a27e9d97b6ef73d95530fe8c2147f3089b2b5abcea8be568d",
+    "examples/gameaudio/insects.dsp": "4f737341b1a1ad1a0e91702bb9d4a05df7d51eed1a117965c5383beae56c4b27",
+    "examples/gameaudio/rain.dsp": "cf36a65c631376effd81c35812dcaa626ffba1dc6436b2b1430aa232aa074292",
+    "examples/gameaudio/thunder.dsp": "c12919129471a4bc03da820cf0c82de9fd8a742f104c7c01bb48804bf9c75dc0",
+    "examples/gameaudio/wind.dsp": "e71ecb6cd1cb8e7007ca32788b0938bc43e917011495b5d83e74af6377bcb24e",
+    "examples/gameaudio/windchimes.dsp": "1dc2de831074ad92aa48043ce0dabcd1c5d8f0053e34d903557ed5f1af574902",
+    "examples/generator/brightOrgan.dsp": "b9624a6ea88c5a0991e956a04fb32e20e8786f79793aefa137dded9b8b8de72f",
+    "examples/generator/churchOrgan.dsp": "580e6c4fdb267bb009afe34d6268cf3d3fcdadd1f8951e95142b53eeaa2a97f2",
+    "examples/generator/dx7.dsp": "61cf04b203c2298e57ac10e429fa6a56b620917af01fec7abe4f5de496f550b8",
+    "examples/generator/filterOsc.dsp": "6ad65d28d787f08a3fa66eb4de7d4091be8d2267ad1e9edc200618effbbe588c",
+    "examples/generator/noise.dsp": "45938a931f94b3ac2fd19af27c3f0a27b51160d98279c14eb20ffe35e1ba373c",
+    "examples/generator/noiseMetadata.dsp": "9126d83768c6407637aa4714902b8aa70d8381f83b06b6cc2c302e0e5dcb52ed",
+    "examples/generator/osc.dsp": "11d1a80afbcb3371882eaa2bf0f3ed21bc09cd8811ec9962b780b9ffd3846551",
+    "examples/generator/osci.dsp": "48c14803b1806eabd55fb86c904eefdda8fe70582361f3d9965f15582e2f4420",
+    "examples/generator/oteyPianoV1.dsp": "fa096e68e6b212a1b50b3a268766408ab92d424f456abbdec185f817eb5dae30",
+    "examples/generator/oteyPianoV2.dsp": "cbe100fd4bc1305fb115f306df6adfb39e16e55407953f31945b95df64d1e707",
+    "examples/generator/sawtoothLab.dsp": "54cab038a1617ff3b4f19d116db5e01c735199c5d21fcf63506137e5ba0a7e16",
+    "examples/generator/virtualAnalog.dsp": "6fac24fbf917d3c43317ac5f181a05bf28fe14fb958605a22e956a3d346d978d",
+    "examples/generator/virtualAnalogLab.dsp": "320596395c8d05ae686c259095d5d9124c93196279f5477a2a0cb2f26e33cfd4",
+    "examples/misc/UITester.dsp": "48d78c39baf3e086c8d7ca792865f1c608a071f8892ce7c76943e44ae645a606",
+    "examples/misc/autopan.dsp": "0a30bba8ab238282dd1496916915eea7632bbe4f84bc5bfcac75248ea0de22a1",
+    "examples/misc/capture.dsp": "d102ebd89e5921416532799cb87a0a6bb9bdaa19090f628db2d637c90b3ab067",
+    "examples/misc/drumkit.dsp": "e58af04e26fc6f04b6d8afd76aee4a7197994872ca3b2cdfa1a6e9f8374fe3e9",
+    "examples/misc/guitarix.dsp": "ce1649e91e809579469434416ebad29ad0e56f1c1320079e55a6144373c0a872",
+    "examples/misc/inlooper.dsp": "6f7d0ae172c5ecb2d062998f211ee34331fe347dcd750c7bdd9cae95f2762723",
+    "examples/misc/matrix.dsp": "8b92e68cb2983c2cefa4b2e2a0567c431f0dd2c0f796a461034361890f310609",
+    "examples/misc/midiTester.dsp": "f37cfe9b6c0ca82e037f6d54b458916c6c70a270ffb2dc192b415518c0556444",
+    "examples/misc/mixer.dsp": "9a09a8e54af61019bcf61a409dda8e70f528ae2cd0ca7765285aabdec87f5a36",
+    "examples/misc/paradigma.dsp": "d5b9c99a3faeb4a5312373966e49feeb65c3489b3cbc2de4581fe8ea494e748e",
+    "examples/misc/sflooper.dsp": "2ad93a951c0e36253cbb5753857215e7d91720912a7ef8e1dbbc22dda54f1f28",
+    "examples/misc/statespace.dsp": "5cbf46a7caa36011ad9c83167996b38ba179d0b56a7893bff15692394a6ec5c3",
+    "examples/misc/switcher.dsp": "d7b04e6406a532769a201f29365d32b625f59e13fa6ab1eec63113fa6eb0081c",
+    "examples/misc/tester.dsp": "2e811b0c6dd9f87318608c419e483b0ed996e26c4c35334300902e8429cfd64b",
+    "examples/misc/tester2.dsp": "edb3af142ec5446e7b356d61c79581e2c6267f9f06dc300baddfb54bdf81bdb5",
+    "examples/old/freeverb.dsp": "29effd7b8d0e58e2d6458057c5ac245d4bc87ff7ea381d861076e622513be96d",
+    "examples/old/rewriting/fact.dsp": "daba7f3b7f641d5c8552a9eefc029abe66de9bfbe75f286ff4883b36149da09d",
+    "examples/old/rewriting/fold.dsp": "7aacf0e6df1b7e3acc374ade603984e0040adeb5a19c4c28610f983877d002ad",
+    "examples/old/rewriting/mesh.dsp": "fccffd4dc95b791825f292e5e7ce0287bc171373849b62e741c51160df47d818",
+    "examples/old/rewriting/serial.dsp": "e7a8ff000eac18f07289626ba5abb65840fe2569ce99ed90ad74791e8cfbcac2",
+    "examples/old/rewriting/sum.dsp": "057180efab202d4fa98ab20b34b85b668beca402f1a82ceb5d2b5125c808d768",
+    "examples/phasing/flanger.dsp": "96fe9dffb4ef52036938ee508ba8d12476524855504238dee0d2c0f8f4814076",
+    "examples/phasing/phaser.dsp": "83a1c421ad4a295f4f0066f57a0c9b5a369e6aebf32dace241b63af14988c21b",
+    "examples/phasing/phaserFlangerLab.dsp": "a50fa2d1f3fcd11931fc6c39275dcf6248480a084b70a042182bdc5b7921d234",
+    "examples/physicalModeling/brass.dsp": "b3ef9dfa1d1c2a958fd88ef230f13ad0c03767bf55948a09436a85248be1c822",
+    "examples/physicalModeling/brassMIDI.dsp": "ef64598fe55aeb228dc573cf5ad7a25ad0a2d530f49524ddf4ba530c61f88d52",
+    "examples/physicalModeling/churchBell.dsp": "fa1d33b18fe09dbfe3c09e5a1993c1d1c8776426670d91869aaf56a16abb06e0",
+    "examples/physicalModeling/clarinet.dsp": "34eb8e05ed0d04ab772d59e3df838fd5e8d882dbc6a10813105293d4932fd0ac",
+    "examples/physicalModeling/clarinetMIDI.dsp": "15a900c589fa1faa7e11cc144a85198baafd6b904ebd6f64c515d457c51bdb3f",
+    "examples/physicalModeling/djembeMIDI.dsp": "c8673eb42aae746c5deee0441139a37ccac788ab54675e5b4f5d81c4a89905d2",
+    "examples/physicalModeling/elecGuitarMIDI.dsp": "7daa3933c1030e103ecc1240937a8ac54b97114829b640f6dc770cb294662b6d",
+    "examples/physicalModeling/englishBell.dsp": "607ac4df2b1fac03d1c9fce2ad544a41d86beb7b4f44401bcce2a3987598306e",
+    "examples/physicalModeling/faust-stk/NLFeks.dsp": "f890a2295c3e1e6fb855e852ac85bb9c3576fe21c573fa4ae80b73941ab59251",
+    "examples/physicalModeling/faust-stk/NLFfm.dsp": "eca88a4489ecad1810a08d9073c0637c4a7db604e0030b4b6aa32635cfabcf10",
+    "examples/physicalModeling/faust-stk/bass.dsp": "da11d4df24d7f355e55f7bd4b75baf6836320edd8877a9b182d486d8347e0116",
+    "examples/physicalModeling/faust-stk/blowBottle.dsp": "fe67498d6be004f55c54636935b05eab7ef9392c576d4a068a81826dfa936747",
+    "examples/physicalModeling/faust-stk/bowed.dsp": "1e1d130c550b671fd3821d975b466f2afff519972f3a0724150c6ebd483e9eda",
+    "examples/physicalModeling/faust-stk/brass.dsp": "27b9ee69bffde30557fe61b6292a9cb92f41a3ae6f592d6b3f90e03eab40ebfe",
+    "examples/physicalModeling/faust-stk/clarinet.dsp": "0e15da6998aa0bff80a902b88babb383a300cd4f67a111ff0fa6b6c218a8f54c",
+    "examples/physicalModeling/faust-stk/flute.dsp": "b5db04cbe88f100464df31a8525ba5ef2e241ff19dbee933c7388b7f49b04e5b",
+    "examples/physicalModeling/faust-stk/fluteStk.dsp": "82d16aa324a360eba7c1617871ebf8a16d4cf693edfc9fec646735f9bebf6603",
+    "examples/physicalModeling/faust-stk/glassHarmonica.dsp": "9f7cae696f037fcf1f3ea8e8bf97b18a0d996712c712a1a60c12334eda1499bf",
+    "examples/physicalModeling/faust-stk/harpsi.dsp": "63b273a9bcef31c0e28213d3aa3e0eafdab41d207fd20b765c003048bc866389",
+    "examples/physicalModeling/faust-stk/modalBar.dsp": "6bc8fb79512caf5bcdce03f7ad8b9a77b0251edfea4f899386e30fac72eaa657",
+    "examples/physicalModeling/faust-stk/piano.dsp": "df6c8274b4f35a1e64343ecd8c170fa762464f3c51f5aad2c0736d52bc75085f",
+    "examples/physicalModeling/faust-stk/piano1.dsp": "7bf1d893c784237138a229ad22c2b193054b838bb3465d07f54a67029ac5e2a7",
+    "examples/physicalModeling/faust-stk/saxophony.dsp": "49061d7a8f62dc54e30c8dd73d49ecdc873f7f8dd030b68a647a6205b72ff277",
+    "examples/physicalModeling/faust-stk/sitar.dsp": "9fb578a8c230c02062bcabbb8f06ff63f0010486a0729ea18c9fb23f768a1b37",
+    "examples/physicalModeling/faust-stk/tibetanBowl.dsp": "8bcf10a518175c87cd29daef0a6d4ec41e25fbb53094114319757f5877f78320",
+    "examples/physicalModeling/faust-stk/tunedBar.dsp": "c0329cc54cd34f959d0f8b7c45fbf0fc9c40e2dcd49512251ef12086409e29f2",
+    "examples/physicalModeling/faust-stk/uniBar.dsp": "281c5235e712a8a5a84a06891bb22a8c839dc4dd75e9906e4de4497ec5d63db3",
+    "examples/physicalModeling/faust-stk/voiceForm.dsp": "53bd165589203332b38db3bfc4c78b4e019f0ed4a401c30d1c6c9dcd547e8e16",
+    "examples/physicalModeling/fds/1dDampedWaveEquation.dsp": "434fd2d8bccecf4d80aaba3167093a3d2c739464a38be737521900cfe93af9cd",
+    "examples/physicalModeling/fds/2dKirchhoffThinPlate.dsp": "5a96a4ca227257efb1add52c14d0b4aa723d79fa9cc76a8ebbb362d43dc28be6",
+    "examples/physicalModeling/fds/BowedString.dsp": "63d941b7584c7c50c7a39a6fef32709ef8ec1882f229a77e40a9f4e3f8b36596",
+    "examples/physicalModeling/fds/ControllableNonPhysicalString.dsp": "1f17efc3351a673859492c3e213d0ba323a8d9e81e0e723341f70d0d8fa5771d",
+    "examples/physicalModeling/fds/HammeredString.dsp": "312ffc51bcc1a060bec4ff3623073cfe2fcc257d32f2fc9d8d66e0e3af897b76",
+    "examples/physicalModeling/fds/PianoHammeredString.dsp": "3611ef34b0728f95d44b23323d3c949a506d51838daea1d8647b9fcbe8a284cd",
+    "examples/physicalModeling/fds/StiffString.dsp": "48d9b03911445284bad62118bc4869dae775184e93aade3f56158e0f44398cf0",
+    "examples/physicalModeling/flute.dsp": "e313d893950692b9ba9187985acc6fdc2516020aad74800915bb5ab75ea63f4e",
+    "examples/physicalModeling/fluteMIDI.dsp": "abe0525fc068c3c95220c7a634fdd1895cec0abf968ed053f8a1095fd6f840af",
+    "examples/physicalModeling/frenchBell.dsp": "c32e824a05d1af1c1094168c933a9b155e93385d736a6a70b20569b93014fc96",
+    "examples/physicalModeling/germanBell.dsp": "eb978876d289d533c44478afa7bdabc66855797ecdef854b1c48091ee25554a2",
+    "examples/physicalModeling/guitarMIDI.dsp": "cd439e2bbc16b6fe5eba9aa44983d2a081d055c671f38da6831d9c58a6afcc5f",
+    "examples/physicalModeling/karplus.dsp": "9dca741527121a145ea0e89368abbbbe4fd70667624319bc2c9a3e16c6577895",
+    "examples/physicalModeling/marimbaMIDI.dsp": "602dea3deea8851e40dcf0400582bbec8557af7286022eb32c08df0a8732f34e",
+    "examples/physicalModeling/mi-faust/00_BasicOscillator/harmonicOscillator.dsp": "70619bd9312039bc5c67ce6ae0a86bf09b6ef20e578c58139233da3d136c3408",
+    "examples/physicalModeling/mi-faust/00_BasicOscillator/harmonicOscillator2.dsp": "659fd0ea5b388c267ad387c3159fcabfdf2a02f0a0727ad1606c095579497c45",
+    "examples/physicalModeling/mi-faust/00_BasicOscillator/harmonicOscillator3.dsp": "57bcd5d71068d86c318c8ebea084f7ce35faef121079081d36a69ef8263a8cbe",
+    "examples/physicalModeling/mi-faust/01_ParamControl/paramOsc.dsp": "7b8c2014e3268f6e25306c0393f2e377f21f0d9ae221baebfc3df6ae0101105b",
+    "examples/physicalModeling/mi-faust/02_AudioParamControl/audioParamOsc.dsp": "be4009272cbca2cf1435725267f60188f0142d71a9b1e4d9b542b5e5aa952c35",
+    "examples/physicalModeling/mi-faust/03_HammerTime/hammerOsc.dsp": "73801ac55de6ab08a6a89f32349d070ef3004070e33401a5979da55ef135c69c",
+    "examples/physicalModeling/mi-faust/04_Gravity/bouncingOsc.dsp": "ae7ac4a14794e72d44f37ef3f4dae7b40702db20fcaf383c98a0a24ee5a77d1f",
+    "examples/physicalModeling/mi-faust/05_PluckedOscillator/pluckedOsc.dsp": "db79f5010896eca51ad7cb6e0f76dea487925fc3c77cb148e824dec4a0d474e4",
+    "examples/physicalModeling/mi-faust/06_BowedOscillator/bowedOsc.dsp": "752a3271e26b9242a644234be1f30795fda4c2e4a9fe04585d3955ef50a6ad32",
+    "examples/physicalModeling/mi-faust/07_NonLinearOscillator/nlOsc.dsp": "f02d8d7a57ea0dd38b65c01c306b476d36ca840c51acf508097c148a0bcb1354",
+    "examples/physicalModeling/mi-faust/08_TwoMassChain/2massChain.dsp": "2203deeda5305b6fce02279883c447eb4ae6e4b6b625225bac99ee70875c0f69",
+    "examples/physicalModeling/mi-faust/09_TinyString/tinyString.dsp": "897a1255d87ce04c584144eadd51bab691a7206f3e8585d284ac1584580a3cbf",
+    "examples/physicalModeling/mi-faust/10_PluckedString/pluckedString.dsp": "51959d547974664bc014f387bb4d8052ed2afbac6233cf361f35468c3352f65b",
+    "examples/physicalModeling/mi-faust/11_BowedString/bowedString.dsp": "05d49b484fb5547c0519c15998b4130254d7f79fe6251665dc48bcb6472c7d80",
+    "examples/physicalModeling/mi-faust/12_TriangleMesh/triangleMesh.dsp": "51ba387e3e4c7300ab54fc5c6e7aa268ba600e3244bf624ea84b7c3bb036efac",
+    "examples/physicalModeling/mi-faust/13_Construction/construction.dsp": "9b429cec243a1fd42facd87b2bbd1e80c3c422a3a236fe44ab444c26c229dafb",
+    "examples/physicalModeling/mi-faust/14_Polyphonic/polyTriangle.dsp": "f3af4a6ab9897c165443b5c7707febb1ee9c53042893fb3204c878f5f7853ce7",
+    "examples/physicalModeling/mi-faust/15_PhysicalLFO/physicalLFO.dsp": "fb8fa175ca2903a341fd56a6d7b2b7a2c8ef73c23a966034b728b26115aedd16",
+    "examples/physicalModeling/modularInterpInstrMIDI.dsp": "5155375b6418df04e20a3d945670653080d41b8130bb90e7bee6d0eb9c44a8d2",
+    "examples/physicalModeling/nylonGuitarMIDI.dsp": "c0733f17d25c2a086fa9e337b9f5f56fc0b174f8bd13c6b78318ca6b914c6368",
+    "examples/physicalModeling/old/harpe.dsp": "2aac49bb43aa6161ef30004e9ad4fc3bee6bb7f9def007046185618ff35ba478",
+    "examples/physicalModeling/old/karplus.dsp": "d197531bad5283f93a6f4089e0f794476b8d7af52176b8d7c201a69cfeed1f96",
+    "examples/physicalModeling/old/karplus32.dsp": "521feb3a8b73990d958885fb2eb0f071b0ff86fdb4d8ffef618452752b095489",
+    "examples/physicalModeling/russianBell.dsp": "8efbe1c22315cf19de35599631dc524223e173d907078d6fa4a2dea89ccf8a6c",
+    "examples/physicalModeling/standardBell.dsp": "93a658a365070a5852a3620717deaf06f3ef07b7bd639bcbc6a563bb56a1c7bb",
+    "examples/physicalModeling/violin.dsp": "40ca17577d66ae02d89c8af2562c3c326a28974c165c28e208de673480f4e11c",
+    "examples/physicalModeling/violinMIDI.dsp": "0333aceb8685d4f8be051217970721a8d2febd518c9b310d3f0e1bbafc742655",
+    "examples/physicalModeling/vocalBP.dsp": "9c380cc43d1687adf08a2c1e6cd6a8aa577ad33d5e31f81520f0f25c03ac2efc",
+    "examples/physicalModeling/vocalBPMIDI.dsp": "8259332000436f139e296eb98065c234ab1102555c19e40f566493d17366811e",
+    "examples/physicalModeling/vocalFOF.dsp": "be2e341739332edf2c2eb38ba8e5eb6458151ef542462e301e954eb5e2b7afc1",
+    "examples/physicalModeling/vocalFOFMIDI.dsp": "1c90ef9b0e780370571e0158902ac4ed78f17a1e95cc56781f00f960a18b2ecd",
+    "examples/pitchShifting/pitchShifter.dsp": "7c195ec084c0a4ff36c8ab489473eab3fd02a01f8d8ea316373495948002ab1f",
+    "examples/psychoacoustic/harmonicExciter.dsp": "b654d871d39f91958f7a57cb8d77062fb9d389483ab9fc667195089f39dd520a",
+    "examples/quantizing/quantizedChords.dsp": "f2a86cc35322e3397621292d1d9d40bf90cf3bd1a4450918c2c58d7ca8d06fbe",
+    "examples/reverb/dattorro.dsp": "6e7328e0ccca204146d53aa81d008172d04f0ac1ae7dfb50029501a50246cd37",
+    "examples/reverb/fdnRev.dsp": "159d386e4f0f91396fa4d80f0f7715d3abfc36d65b9675d4eea4f85e946dd603",
+    "examples/reverb/freeverb.dsp": "11473aa9108fcfbbb892149f3e7f12e7cd5d11cb7e2b9ac0ed5b625229fe34d7",
+    "examples/reverb/greyhole.dsp": "ac73cd4500337c573c65fc5cf40c84f9881a01fb83eb42a239d3b7e203e8fb89",
+    "examples/reverb/jprev.dsp": "4b01970fc68c136014e3ce935cdcbf38449710ed539bcfa11994e5f851c8ff89",
+    "examples/reverb/kb_rom_rev1.dsp": "dbaf72b63a3e8bd64305bedec655f52072bea318fc61b2ee365884eb113982f8",
+    "examples/reverb/reverbDesigner.dsp": "c647cdae86e3f38acd0243efc0a5734347b077b52001cd331a8b8125196a01ba",
+    "examples/reverb/reverbTank.dsp": "2cf00d591cf00053161ac4789f1fdae9153b7368de5d90171ea05241507dbdd2",
+    "examples/reverb/reverbTester.dsp": "118b43a9da12ff722fa962d2c889b492988e3302aaba559d665984455999300b",
+    "examples/reverb/springreverb.dsp": "3c44192b795830fd9bbc7c177abc1824e9c34431ecf5f03f179a61079c02d257",
+    "examples/reverb/vital_rev.dsp": "222b35482fab441c558f1f4399746a08bc6e0ac9ca789c6059c7f24ebd0614fe",
+    "examples/reverb/zitaRev.dsp": "a2b975c9c616c546d47b745853f730d6c1ebb61fb988415be05285604cbe4e9b",
+    "examples/reverb/zitaRevFDN.dsp": "be6b16ef1ac57bb32894c202bcf673b6d74fad36ef4ffd8553a3e1d7af362297",
+    "examples/smartKeyboard/acGuitar.dsp": "faadea01958c46de333271865b4bf06f8a92d98f5a7c6d81727e8e13a813aa39",
+    "examples/smartKeyboard/associatedEffects/elecGuitarEffect.dsp": "a2c566a8ef56507a86f4771e16bc368bf545957683db9ff57ce8779f3bbf8e39",
+    "examples/smartKeyboard/associatedEffects/myEffect.dsp": "a560e8961473ffd59b137c74b4d5024aefc9407a6415d3c0a27430712768b360",
+    "examples/smartKeyboard/associatedEffects/reverb.dsp": "a560e8961473ffd59b137c74b4d5024aefc9407a6415d3c0a27430712768b360",
+    "examples/smartKeyboard/bells.dsp": "6a89d69554461f0d930704372ca49a9eba258205e0a9e339abb8a35de56a8f2c",
+    "examples/smartKeyboard/bowed.dsp": "6b790ea16fe0597a8f6e2e1be5e5dc5836c31dee32fe564d103e746a1d538846",
+    "examples/smartKeyboard/brass.dsp": "f5e6c2fa38bfc4a66151b4afd283ddee334196dc942dfa50ed1d6070c125a969",
+    "examples/smartKeyboard/clarinet.dsp": "9283d7f3422b1ff60a352cc2c19f258c548768505eef3ae9ebad18d891f8634d",
+    "examples/smartKeyboard/crazyGuiro.dsp": "a0d5bec29cf4a476ade12317b2b62fb385573eeb133cad3ad17be90867243070",
+    "examples/smartKeyboard/drums.dsp": "779ecb424cb7ed3553a5fac8d1f8cef76ed6efc5b702b5ba904597727fd69eae",
+    "examples/smartKeyboard/dubDub.dsp": "f9c14066f004e44a81d424c0facb252c97c6968f7fb7720793fd6854d5fd90e7",
+    "examples/smartKeyboard/elecGuitar.dsp": "3bfa2a961b4f07bc977d55a99444dd63338fd321c1d7c058a7af6528ea780d68",
+    "examples/smartKeyboard/fm.dsp": "6e5b00ae2b93d15077c73caced818c11f4e156298c40035181a9013026f039ec",
+    "examples/smartKeyboard/frog.dsp": "83d7d24dc62128a09f8ff6653e2a06129adb1bb5d398d153324f1a35b8ae3ff1",
+    "examples/smartKeyboard/harp.dsp": "3fb39b561376f80bda071ce597585b9fec4efa8a59861db0b0c41cd295151579",
+    "examples/smartKeyboard/midiOnly.dsp": "0d011a4110b2522524ab0ea598acef3c7b64cc5a6d2cd9764943330a796b6115",
+    "examples/smartKeyboard/multiSynth.dsp": "7f869c19ce41fec70500c6d447b2f1e73f1a063d20019b9ee110f0bb18297c4b",
+    "examples/smartKeyboard/toy.dsp": "6217583a917326f377374cb5a5b82d1eab06e88628c637d5d246b2c946d3836b",
+    "examples/smartKeyboard/trumpet.dsp": "9be864162d911129ac2357854af2c661e0272e11791cec3c5040ebc6efb116f2",
+    "examples/smartKeyboard/turenas.dsp": "1529f15d487e2f1d56fff1e3ddf0e2f79cd7feb90bccd2c3bc08555fdab70167",
+    "examples/smartKeyboard/violin.dsp": "1b199c2b4e755cb51df4e7ec37c75d1588d722aeb17dfa41b94237cc6f7ad818",
+    "examples/smartKeyboard/violin2.dsp": "1d3b217945835f63c1c882940f746f2ab2bfd6b40cacaf25a0f7d4d6568d80a6",
+    "examples/smartKeyboard/vocal.dsp": "6f430022eb2ec20727968dddd9129fed0441125fde8998406b3a6eca40ff5103",
+    "examples/spat/panpot.dsp": "e8e7210af38f3e7415efad99c732f0b114dde425c4c8b3fd64ae37e0ca4004a5",
+    "examples/spat/spat.dsp": "3edfce6668abb7eabacdec07b9c666ad0a0fd9af2fd41453576e3ae93d629255",
+    "examples/spat/spcap.dsp": "481fcbe5d0070d5254b5d15c2b2155ffa664dd6a0fe7fe8157fbf1dca4cc8a53",
+    "examples/spat/wfs.dsp": "d4c4be770e48bf255b3b37384d259ce83119ccaf98945fe4f7574d2bc5fc8c03",
+    "tests/impulse-tests/dsp/APF.dsp": "cd912008d30664039a8327e5a48d4a123c2505b65a6f9faff4db5318f2fdced6",
+    "tests/impulse-tests/dsp/BPF.dsp": "c91b26ce496c4e5cca04835f0648a90bc11bd0bafdbedfd1574a9905c9fc031b",
+    "tests/impulse-tests/dsp/HPF.dsp": "375d484fec2fc39fd33e3c25fdee7729e94cc75803cfb0217bba256027373f3f",
+    "tests/impulse-tests/dsp/LPF.dsp": "5d8a1b8d21b1df6fd6f6237d7c5f2832f883b07f0f014f955f76318a0e7a4583",
+    "tests/impulse-tests/dsp/UITester.dsp": "117a306bc9b0e6aef82b426b335ccfa766636d8dabe34ced6035c5aa507de5a6",
+    "tests/impulse-tests/dsp/bandfilter.dsp": "425bb6604ddb67bbd676e0777a2c14659d2f7a16b1f7b83538df6aff9df1b6e0",
+    "tests/impulse-tests/dsp/bargraph.dsp": "83a7ff89bef1fdee5fedb4e6373e5fe6f4a1d79dfcf4ad97b0402019747903af",
+    "tests/impulse-tests/dsp/bells.dsp": "29a3eb165dac51b02a9f1616c605579700ee1927a6a6cf2f8a4960f94fcc08ab",
+    "tests/impulse-tests/dsp/bs.dsp": "442ef14821dc0be189d92b22c364c093715b1a2181a4864efebcd20067b8f64a",
+    "tests/impulse-tests/dsp/capture.dsp": "9c1e483e916967fbb6afc762d132f45d0e15f997e0d2696d03cbd5022271ddc4",
+    "tests/impulse-tests/dsp/carre_volterra.dsp": "50a2ffb87579442fb18dc3b6212491fb232e99b0eb7fad0044724aaa9d89a93b",
+    "tests/impulse-tests/dsp/comb_bug_exp.dsp": "c11e4bf54feaa4d706f155eed3339fb34476340b2027cebd889cc7c11399ee95",
+    "tests/impulse-tests/dsp/comb_delay1.dsp": "dc13818a321be2d5cfeb34fc29aff5e7bb0a7e2f45dfce8bd968ff92d39aa3fb",
+    "tests/impulse-tests/dsp/comb_delay2.dsp": "34d2cba81bc0ee095052d0d2129471a5fb6089571c2dd112044d5ec956dc9e11",
+    "tests/impulse-tests/dsp/constant.dsp": "c80ed19871bd93388c147ecbf36282db8d92315741dcc2861fa0f73147d11a7f",
+    "tests/impulse-tests/dsp/cubic_distortion.dsp": "189f34ac8da4febc96826b3fa446503db6b474e555ed44a2a054c9b3ff7a89cc",
+    "tests/impulse-tests/dsp/dbmeter.dsp": "9b148f54eac5f7284fef313ce00b7aa8b367474374eaf4d205a41eb9756e1060",
+    "tests/impulse-tests/dsp/delays.dsp": "eb7fbb998278fadaa078448b259740889bb43f9dc15a76ea1117231a9eab0dec",
+    "tests/impulse-tests/dsp/echo.dsp": "22e7729ddf8ed8778e237899fe91c8c8a74563824e8a7880fe14ccf0723f7fbd",
+    "tests/impulse-tests/dsp/echo_bug.dsp": "c56cf3a8a1a2d25a125bfb6bdb4ae9049bd0ddcf855aa8ee0e128c2c8786ff20",
+    "tests/impulse-tests/dsp/freeverb.dsp": "ab7a055766852eda891f4ec45b1f2fcb5cc376c16cc33b6bbf29cd9553e5d01a",
+    "tests/impulse-tests/dsp/ftz_bounded_rec.dsp": "281291f7c24f9c7f8fb5b778f14ed7f3352da17873714611198ef4487a9c40a3",
+    "tests/impulse-tests/dsp/gate_compressor.dsp": "1e98abc841576c8dcea2ea4d32e3763012b17fef6801eb30b64ab48660eba9c2",
+    "tests/impulse-tests/dsp/grain3.dsp": "d7e68b0fc27b2082b84f57d042f354563aad64c5e228033abaef3b04e2aadf61",
+    "tests/impulse-tests/dsp/harpe.dsp": "6a80955c73b5595aeaaebd6a41c6c2f5c96621e2c7e881ad18fdd1c5c8e353b1",
+    "tests/impulse-tests/dsp/highShelf.dsp": "39c158f86395d7fb928c35fbbfd8c0376e8142ef5f6139bbc86249f860b9c4b9",
+    "tests/impulse-tests/dsp/karplus.dsp": "be7243a6cbb6101cf7e35c31f5ac174f86063f04f82cf66a10caa71365eb3fcd",
+    "tests/impulse-tests/dsp/karplus32.dsp": "1b3c6165c67638f4d632a1074fbb563bf12e482d03362c35c603ec150970c751",
+    "tests/impulse-tests/dsp/lfboost.dsp": "d18146e3d353fb9c5284b9908c0fe25b0d2a534f49d00bdbcedcb379235d833d",
+    "tests/impulse-tests/dsp/logical.dsp": "7cba4f07abe6e781fca308f366548722e1c5027d50d24ca6add9ebc5151275b7",
+    "tests/impulse-tests/dsp/long_convolution.dsp": "750bb57853d8aed62186e4645e3ce67f4104dbca615594747b1f7a6fbffe4838",
+    "tests/impulse-tests/dsp/lowShelf.dsp": "2ede4deab19b3fa378e184e7a81f73e6bab5b2c5532784b985f7d35642569192",
+    "tests/impulse-tests/dsp/lowboost.dsp": "681e6f5c51effd57e8ced7a5f78e79e37108e504135617da763d1068d26a60c3",
+    "tests/impulse-tests/dsp/lowcut.dsp": "92116320ee8bc1bc1adf1d795a79a91d0a340f489ab541622ba7b9d86ed8689a",
+    "tests/impulse-tests/dsp/math.dsp": "ca0f3cb136231850041cec3369edd658be94c5b609de6ea78e7e9897b26cde7e",
+    "tests/impulse-tests/dsp/math_simp.dsp": "cd892a0cdf524f71e1e82be35adf5203b4826593ac8b86ab2be3c67c75c5fa0c",
+    "tests/impulse-tests/dsp/matrix.dsp": "4acc550d55b8233b312716e1e3530f3e51c471c90b804b7fac0ff6e40b0fa071",
+    "tests/impulse-tests/dsp/midi_tester.dsp": "01da2bbb8ebf99d9da409543a084bd528c98fbab6ca696c58be11afde8c4baea",
+    "tests/impulse-tests/dsp/mixer.dsp": "22876a496a81e58c7fb15866a5c90cdf3d65d005a1f1daa42a62fd0850975ac4",
+    "tests/impulse-tests/dsp/modulations.dsp": "6e7d25916c0c022e9b6213571931baa4509afd34793a8aaf1a431337bebc7831",
+    "tests/impulse-tests/dsp/multibandfilter.dsp": "e87df5c15bb669229ebe7dbdd3fcc746f820140e7854fa8414db6fec2beee46a",
+    "tests/impulse-tests/dsp/noise.dsp": "6d53780207d077f6a0f09a59e0375455f35200859d4a3effe849205e69a51a89",
+    "tests/impulse-tests/dsp/noiseabs.dsp": "750a08c1b64d15ab88877c86e49360cbdd6bdc6f434c4554a47f03b3c4426c23",
+    "tests/impulse-tests/dsp/noisemetadata.dsp": "2816602540783f3dfea6a5ccf5edc7043a9a718fdabd1d7ac9d9264771f56d7c",
+    "tests/impulse-tests/dsp/norm1.dsp": "327c10f025f6d768349b78225f9bcc1e4129e3a27678b002c397de01c6592d36",
+    "tests/impulse-tests/dsp/norm2.dsp": "a77be3dae3cabe4a6fe99e0e8144c9ddfa9308b34885e65e9f3fd476b05eba59",
+    "tests/impulse-tests/dsp/norm3.dsp": "5fbed37348701de5b88d1adeab0ff6d64c6ea70dcdbb136319b02a4c2d332112",
+    "tests/impulse-tests/dsp/notch.dsp": "501db5c8a023477273a5a23b802fc4a6d724e715793188c1e670fbdc03fe9960",
+    "tests/impulse-tests/dsp/osc.dsp": "126169b19932545288378e5ca76e2729874e6d6703b8106e1acb3a08b6837a12",
+    "tests/impulse-tests/dsp/osc_enable.dsp": "8388619e496def696002a006a8200b95debdb85834a8d0df297c5e9aa0c0b578",
+    "tests/impulse-tests/dsp/osci.dsp": "da34e539d00b44a46f0572e6cbe4dcecfea18385231fa2de165059521133b99a",
+    "tests/impulse-tests/dsp/panpot.dsp": "2ea8d9605039461164a47458df80aedd98e12d9185822d2da645166bb51919d9",
+    "tests/impulse-tests/dsp/par_fir_32.dsp": "0dad5fc88b197d68be63de9ff9a1244562fbd6dce15ace2bcc977c58f2afde76",
+    "tests/impulse-tests/dsp/parametric_eq.dsp": "f0bc3d2a1e04edb0f1897dbe80384e8e3a8d42ded618092d122d8b1ace90d9ba",
+    "tests/impulse-tests/dsp/parseint.dsp": "0df8796698de793ad5bc905aad8a2072075b69f5b8200870200664da37363ed1",
+    "tests/impulse-tests/dsp/peakNotch.dsp": "92771d21a8c6330881fa780ab9577fe60dc4202f304ec0ffae5756eba6631f61",
+    "tests/impulse-tests/dsp/peakingEQ.dsp": "546559deca2a31621175b937cd240560e01d95c2469958c05c3ee4ee9865dcb2",
+    "tests/impulse-tests/dsp/phaser_flanger.dsp": "89ae147972d2d53f0fce7139e5b880fd3a4a5edfb6c0f62e6e47ff028529300c",
+    "tests/impulse-tests/dsp/phasor.dsp": "1ed5b838dbaecd62793cdd44295c65d6e377b7ca711f50f25a910687d4595b39",
+    "tests/impulse-tests/dsp/pitch_shifter.dsp": "8c45b50b3fab0432a68c57575e9b483b5bae373622e3a38a270b0dca5668ae62",
+    "tests/impulse-tests/dsp/pow.dsp": "10ca46d5d4ecf5f5d0dca989d9e14d4adfd97084d6764380f1869b66e263ed3c",
+    "tests/impulse-tests/dsp/pow_float_int.dsp": "cac7a1a86a8ce65b6ec3e1e5f86c375fc64c4bc0909cadb6c754b721f17afa2a",
+    "tests/impulse-tests/dsp/pow_int_float.dsp": "c84a554979a548d0deb9aaaa8d0df06a000c32b243a2e3f23e1a6951632084ca",
+    "tests/impulse-tests/dsp/precision.dsp": "4b269f0b89d8e2ddb600f0e8690e50c7b4c12b97de313cf1a9f53bc2cbe74b22",
+    "tests/impulse-tests/dsp/prefix.dsp": "60053448e6b09b54a456025c99dc9b3d5706027f7d033f9f9748604d83fc2135",
+    "tests/impulse-tests/dsp/priority.dsp": "f060bc87396d7ded249641e0466337aaf73cdf7b62cce58100299344e0e24d58",
+    "tests/impulse-tests/dsp/priority1.dsp": "1cd6edc6b6f994e09bc474824dc52318b25ba3d9548fafcae97ff966987deda3",
+    "tests/impulse-tests/dsp/quadecho.dsp": "c1530a99ddccd4f1dced0f042e58ce04e55523af2347bb73bd60744d35d57a53",
+    "tests/impulse-tests/dsp/reverb_designer.dsp": "1b2fc897ec3258da34003d0ffbbb4c9acdb6eb1367b19b28eef24094b7e22eb9",
+    "tests/impulse-tests/dsp/reverb_tester.dsp": "1e45103935f66b34d0c381abc1bd8c02d4bd560e056315914d0eb58c2c05e0a9",
+    "tests/impulse-tests/dsp/select2.dsp": "02ed6bbf840f5f855896bdae8c50836428da44d1b9350a81a743939a23d23a60",
+    "tests/impulse-tests/dsp/smoothdelay.dsp": "a4f6cfe75e116f3498bf7acb75cde9f337222e33fc86ee517ec4317715e172bd",
+    "tests/impulse-tests/dsp/sound.dsp": "fc54b08e69077804554f9991dba78988f7ab70578c8e4bf1f9f556ffe78e2b2c",
+    "tests/impulse-tests/dsp/spat.dsp": "ec484f386e7f8cb541f32d91d9fb148e6a8f254e7774466a3f67b027caac5c98",
+    "tests/impulse-tests/dsp/spectral_level.dsp": "c9c54437f826fe0174c2f14d919b6452baaa8b2d7fe0c000ea49687beae8df49",
+    "tests/impulse-tests/dsp/spectral_tilt.dsp": "3a268fa15450a8c54377cbb465081094f4eb3c8c3bf647993bb7aeada4e7dcc3",
+    "tests/impulse-tests/dsp/stereoecho.dsp": "443b9b40c37aa9f95d918022ac2f29a67e14ec59615013e91cade1e50b0983a3",
+    "tests/impulse-tests/dsp/subcontainer1.dsp": "fe0b5cf733d6c9f1dcbffb086791f0ca6c6af066997a71142a90f7a6ea698d05",
+    "tests/impulse-tests/dsp/switcher.dsp": "072f83b0cccfa64313d7a425939a5a5b0820846957dbadb58c6c92bc88b8ca07",
+    "tests/impulse-tests/dsp/table.dsp": "86b03ff4a8d7b858ba55c890c5ebe2bc974c8de7854afbf42935d6ec50b81f56",
+    "tests/impulse-tests/dsp/table1.dsp": "c5c34739aca17b8b0c64f6f91c2cc7537536cddf1122688feebb482d608b7840",
+    "tests/impulse-tests/dsp/table2.dsp": "056f27a786a35c62ed5807dfbd7fdc356f45523567d048d29a3f2b1856a1dfa9",
+    "tests/impulse-tests/dsp/tapiir.dsp": "38c92937afa735a99aa7748cf4c33d9593df734566836249bc77968babe141f7",
+    "tests/impulse-tests/dsp/tester.dsp": "84e364df9e72ccdd5e5b289e6d44aa52ee3468715989402edcb39a3f36a03056",
+    "tests/impulse-tests/dsp/tester2.dsp": "02876fed56ca428ceb97f6d4b6ea6e989606bfefc653f0ce8ffb08ff3264297a",
+    "tests/impulse-tests/dsp/tf_exp.dsp": "4e21b0f3dde0b236954d8922f1dd26c1f59f17f7fc811fb9b24659e3de439ff1",
+    "tests/impulse-tests/dsp/thru_zero_flanger.dsp": "034ba01736da1d143cd32c7a904ea933eda889c024c8a63489f1223251fc35a3",
+    "tests/impulse-tests/dsp/vcf_wah_pedals.dsp": "4e8d9260b8aecb5f96cd06fabbb3d8772177e9665d29d744067889a6301664e8",
+    "tests/impulse-tests/dsp/virtual_analog_oscillators.dsp": "1fb524511bca3268028b41eab32b0f5b7fa2abb3c08ed4377195bd8a70c84edd",
+    "tests/impulse-tests/dsp/vocal_impulse_train.dsp": "0f658f6836c2cf472be3202c8b855d8fd2bdbef86d4b6cd9e65abf0dddd02c3f",
+    "tests/impulse-tests/dsp/volume.dsp": "1608463b63a05a037825e2f1893696a98acf33ac478c3515abe58ebe6b8ce136",
+    "tests/impulse-tests/dsp/vumeter.dsp": "441494c277ed8b55bf7a4f3aa3666627fc2089cac09064bbf6f49a8b4a25f0d2",
+    "tests/impulse-tests/dsp/waveform1.dsp": "773ab9427f934c85f5fc1d824dbdcd0e87cf61bb19321c722de878718bb0e83f",
+    "tests/impulse-tests/dsp/waveform2.dsp": "7bd302f0a4b83a6bcbcf138a6da808dd217e2feca7517004d829c9f586b997cc",
+    "tests/impulse-tests/dsp/waveform3.dsp": "c009be90a2ad3e691c7254492a5a352817ba852543f5e7d4dcd4255d00fefe8a",
+    "tests/impulse-tests/dsp/waveform4.dsp": "cac94e82caa197e1e27760511b555d38e6d0548734a56949aa54a22c04c09c83",
+    "tests/impulse-tests/dsp/waveform5.dsp": "102b47bcc55201de33376bc7a0227c55f75702d2d4cfbab5c962fe773b97ea5f",
+    "tests/impulse-tests/dsp/waveform6.dsp": "bf2c300ba90db81ddc8dcf441259b57576ab9085789d2aa7eb6d6cbe68269fe2",
+    "tests/impulse-tests/dsp/zita_rev1.dsp": "223f4c29400985efd528477dc786d3bd00e1daf842a600fc1772937821a6e264"
+   }
+  }
+ },
+ "times": {
+  "examples/SAM/16_channel_volume/16_channel_volume.dsp": {
+   "R-f": 0.011616999999999999,
+   "R-d": 0.011720999999999999,
+   "cert3-cpp-f": 0.013067000000000006,
+   "cert3-cpp-d": 0.013166999999999998,
+   "cert3-ocpp-f": 0.013620000000000018,
+   "cert3-ocpp-d": 0.014046000000000003
+  },
+  "examples/SAM/16_channel_volume/layout.dsp": {
+   "R-f": null,
+   "R-d": null,
+   "cert3-cpp-f": null,
+   "cert3-cpp-d": null,
+   "cert3-ocpp-f": null,
+   "cert3-ocpp-d": null
+  },
+  "examples/SAM/chorus/chorus.dsp": {
+   "R-f": 0.059293999999999986,
+   "R-d": 0.03586399999999999,
+   "cert3-cpp-f": 0.06730700000000005,
+   "cert3-cpp-d": 0.04042299999999996,
+   "cert3-ocpp-f": 0.07115200000000005,
+   "cert3-ocpp-d": 0.04258200000000012
+  },
+  "examples/SAM/chorus/chorusForBrowser.dsp": {
+   "R-f": 0.055102999999999985,
+   "R-d": 0.034052000000000054,
+   "cert3-cpp-f": 0.06645699999999999,
+   "cert3-cpp-d": 0.03944199999999998,
+   "cert3-ocpp-f": 0.06848200000000015,
+   "cert3-ocpp-d": 0.041747000000000034
+  },
+  "examples/SAM/chorus/layout2.dsp": {
+   "R-f": null,
+   "R-d": null,
+   "cert3-cpp-f": null,
+   "cert3-cpp-d": null,
+   "cert3-ocpp-f": null,
+   "cert3-ocpp-d": null
+  },
+  "examples/SAM/echo/echo.dsp": {
+   "R-f": 0.012441000000000146,
+   "R-d": 0.012741000000000002,
+   "cert3-cpp-f": 0.01445300000000005,
+   "cert3-cpp-d": 0.014769999999999839,
+   "cert3-ocpp-f": 0.014971000000000123,
+   "cert3-ocpp-d": 0.015743999999999814
+  },
+  "examples/SAM/echo/echoForBrowser.dsp": {
+   "R-f": 0.012548000000000226,
+   "R-d": 0.012611999999999957,
+   "cert3-cpp-f": 0.014644000000000212,
+   "cert3-cpp-d": 0.014663000000000037,
+   "cert3-ocpp-f": 0.015518999999999838,
+   "cert3-ocpp-d": 0.015243999999999924
+  },
+  "examples/SAM/echo/layout2.dsp": {
+   "R-f": null,
+   "R-d": null,
+   "cert3-cpp-f": null,
+   "cert3-cpp-d": null,
+   "cert3-ocpp-f": null,
+   "cert3-ocpp-d": null
+  },
+  "examples/SAM/effects/chorus.dsp": {
+   "R-f": 0.053913999999999795,
+   "R-d": 0.032418999999999976,
+   "cert3-cpp-f": 0.06439299999999987,
+   "cert3-cpp-d": 0.0385419999999998,
+   "cert3-ocpp-f": 0.06674700000000039,
+   "cert3-ocpp-d": 0.04167400000000032
+  },
+  "examples/SAM/effects/echo.dsp": {
+   "R-f": 0.013084999999999902,
+   "R-d": 0.012638999999999845,
+   "cert3-cpp-f": 0.013392999999999988,
+   "cert3-cpp-d": 0.013562999999999992,
+   "cert3-ocpp-f": 0.014850999999999948,
+   "cert3-ocpp-d": 0.01527899999999982
+  },
+  "examples/SAM/effects/effects.dsp": {
+   "R-f": 0.09242099999999986,
+   "R-d": 0.0669240000000001,
+   "cert3-cpp-f": 0.11193500000000023,
+   "cert3-cpp-d": 0.08083800000000008,
+   "cert3-ocpp-f": 0.12203300000000061,
+   "cert3-ocpp-d": 0.09184400000000004
+  },
+  "examples/SAM/effects/effectsForBrowser.dsp": {
+   "R-f": 0.09251800000000021,
+   "R-d": 0.06562899999999972,
+   "cert3-cpp-f": 0.10838500000000084,
+   "cert3-cpp-d": 0.07899900000000015,
+   "cert3-ocpp-f": 0.12183999999999984,
+   "cert3-ocpp-d": 0.08914500000000036
+  },
+  "examples/SAM/effects/flanger.dsp": {
+   "R-f": 0.02563400000000038,
+   "R-d": 0.022141999999999995,
+   "cert3-cpp-f": 0.028110999999999997,
+   "cert3-cpp-d": 0.02481900000000037,
+   "cert3-ocpp-f": 0.02996899999999969,
+   "cert3-ocpp-d": 0.02727000000000035
+  },
+  "examples/SAM/effects/freeverb.dsp": {
+   "R-f": 0.012003000000000208,
+   "R-d": 0.012160000000000615,
+   "cert3-cpp-f": 0.01703499999999991,
+   "cert3-cpp-d": 0.0164029999999995,
+   "cert3-ocpp-f": 0.017677999999999416,
+   "cert3-ocpp-d": 0.01750300000000027
+  },
+  "examples/SAM/effects/layout2.dsp": {
+   "R-f": null,
+   "R-d": null,
+   "cert3-cpp-f": null,
+   "cert3-cpp-d": null,
+   "cert3-ocpp-f": null,
+   "cert3-ocpp-d": null
+  },
+  "examples/SAM/flanger/flanger.dsp": {
+   "R-f": 0.024714000000000347,
+   "R-d": 0.021891000000000327,
+   "cert3-cpp-f": 0.0280809999999998,
+   "cert3-cpp-d": 0.02403000000000044,
+   "cert3-ocpp-f": 0.029678000000000315,
+   "cert3-ocpp-d": 0.026332000000000022
+  },
+  "examples/SAM/flanger/flangerForBrowser.dsp": {
+   "R-f": 0.02512099999999995,
+   "R-d": 0.022006999999999888,
+   "cert3-cpp-f": 0.028063999999999423,
+   "cert3-cpp-d": 0.024601000000000317,
+   "cert3-ocpp-f": 0.03015900000000027,
+   "cert3-ocpp-d": 0.027133000000000074
+  },
+  "examples/SAM/flanger/layout2.dsp": {
+   "R-f": null,
+   "R-d": null,
+   "cert3-cpp-f": null,
+   "cert3-cpp-d": null,
+   "cert3-ocpp-f": null,
+   "cert3-ocpp-d": null
+  },
+  "examples/SAM/freeverb/freeverb.dsp": {
+   "R-f": 0.01183800000000046,
+   "R-d": 0.010981000000000352,
+   "cert3-cpp-f": 0.016251000000000015,
+   "cert3-cpp-d": 0.01560999999999968,
+   "cert3-ocpp-f": 0.018438000000000176,
+   "cert3-ocpp-d": 0.017689000000000288
+  },
+  "examples/SAM/freeverb/freeverbForBrowser.dsp": {
+   "R-f": 0.011712999999999862,
+   "R-d": 0.01189199999999957,
+   "cert3-cpp-f": 0.015775999999999568,
+   "cert3-cpp-d": 0.016037000000000523,
+   "cert3-ocpp-f": 0.01821700000000015,
+   "cert3-ocpp-d": 0.018142000000000325
+  },
+  "examples/SAM/freeverb/layout2.dsp": {
+   "R-f": null,
+   "R-d": null,
+   "cert3-cpp-f": null,
+   "cert3-cpp-d": null,
+   "cert3-ocpp-f": null,
+   "cert3-ocpp-d": null
+  },
+  "examples/SAM/sawtooth_synth/sawtooth_synth.dsp": {
+   "R-f": 0.007847000000000381,
+   "R-d": 0.00805900000000137,
+   "cert3-cpp-f": 0.009084999999999122,
+   "cert3-cpp-d": 0.00832499999999925,
+   "cert3-ocpp-f": 0.010414000000000145,
+   "cert3-ocpp-d": 0.009061999999999237
+  },
+  "examples/SAM/sine_synth/sine_synth.dsp": {
+   "R-f": 0.013568000000000247,
+   "R-d": 0.013872999999999358,
+   "cert3-cpp-f": 0.014635999999999205,
+   "cert3-cpp-d": 0.014976000000001433,
+   "cert3-ocpp-f": 0.014417000000001012,
+   "cert3-ocpp-d": 0.01568800000000148
+  },
+  "examples/SAM/virtualAnalog/layout2.dsp": {
+   "R-f": null,
+   "R-d": null,
+   "cert3-cpp-f": null,
+   "cert3-cpp-d": null,
+   "cert3-ocpp-f": null,
+   "cert3-ocpp-d": null
+  },
+  "examples/SAM/virtualAnalog/virtualAnalog.dsp": {
+   "R-f": 1.835341999999999,
+   "R-d": 1.1535059999999984,
+   "cert3-cpp-f": null,
+   "cert3-cpp-d": null,
+   "cert3-ocpp-f": null,
+   "cert3-ocpp-d": null
+  },
+  "examples/SAM/virtualAnalog/virtualAnalogForBrowser.dsp": {
+   "R-f": 1.8252770000000025,
+   "R-d": 1.150827000000001,
+   "cert3-cpp-f": null,
+   "cert3-cpp-d": null,
+   "cert3-ocpp-f": null,
+   "cert3-ocpp-d": null
+  },
+  "examples/SAM/virtualAnalog/virtualAnalogWithEffectsForBrowser.dsp": {
+   "R-f": 1.8299360000000062,
+   "R-d": 1.1585929999999962,
+   "cert3-cpp-f": null,
+   "cert3-cpp-d": null,
+   "cert3-ocpp-f": null,
+   "cert3-ocpp-d": null
+  },
+  "examples/SAM/volume/volume.dsp": {
+   "R-f": 0.007872000000006096,
+   "R-d": 0.006615000000002702,
+   "cert3-cpp-f": 0.006420999999996013,
+   "cert3-cpp-d": 0.006395000000003037,
+   "cert3-ocpp-f": 0.0065220000000039136,
+   "cert3-ocpp-d": 0.006413999999996811
+  },
+  "examples/ambisonics/fourSourcesToOcto.dsp": {
+   "R-f": 0.023734000000001032,
+   "R-d": 0.023669999999996527,
+   "cert3-cpp-f": 0.030737999999995047,
+   "cert3-cpp-d": 0.03149000000000335,
+   "cert3-ocpp-f": 0.034172000000001646,
+   "cert3-ocpp-d": 0.03540299999999874
+  },
+  "examples/ambisonics/oneSourceToStereo.dsp": {
+   "R-f": 0.03138599999999858,
+   "R-d": 0.031652000000000236,
+   "cert3-cpp-f": 0.036359999999997505,
+   "cert3-cpp-d": 0.03647299999999909,
+   "cert3-ocpp-f": 0.04084400000000166,
+   "cert3-ocpp-d": 0.03972599999999993
+  },
+  "examples/analysis/FFT.dsp": {
+   "R-f": 0.0532599999999972,
+   "R-d": 0.054627999999998345,
+   "cert3-cpp-f": 0.06219399999999897,
+   "cert3-cpp-d": 0.06223199999999807,
+   "cert3-ocpp-f": 0.06787099999999668,
+   "cert3-ocpp-d": 0.06898999999999855
+  },
+  "examples/analysis/dbmeter.dsp": {
+   "R-f": 0.008923000000000236,
+   "R-d": 0.00887100000000185,
+   "cert3-cpp-f": 0.009769000000004802,
+   "cert3-cpp-d": 0.009700999999999738,
+   "cert3-ocpp-f": 0.011023999999999035,
+   "cert3-ocpp-d": 0.011398999999995496
+  },
+  "examples/analysis/spectralLevel.dsp": {
+   "R-f": 0.20575200000000038,
+   "R-d": 0.2595610000000006,
+   "cert3-cpp-f": 0.2744590000000038,
+   "cert3-cpp-d": 0.2903490000000035,
+   "cert3-ocpp-f": 0.31323400000000046,
+   "cert3-ocpp-d": 0.3009629999999994
+  },
+  "examples/analysis/spectralTiltLab.dsp": {
+   "R-f": 0.3400909999999948,
+   "R-d": 0.34864299999999826,
+   "cert3-cpp-f": 0.4772320000000043,
+   "cert3-cpp-d": 0.40460500000000277,
+   "cert3-ocpp-f": 0.5398690000000066,
+   "cert3-ocpp-d": 0.4438130000000031
+  },
+  "examples/analysis/vumeter.dsp": {
+   "R-f": 0.006352000000001468,
+   "R-d": 0.007196999999994347,
+   "cert3-cpp-f": 0.007284999999994213,
+   "cert3-cpp-d": 0.006571999999995803,
+   "cert3-ocpp-f": 0.0067269999999997054,
+   "cert3-ocpp-d": 0.006952000000003622
+  },
+  "examples/bela/AdditiveSynth.dsp": {
+   "R-f": 0.02355500000000088,
+   "R-d": 0.024491999999997738,
+   "cert3-cpp-f": 0.03248699999999882,
+   "cert3-cpp-d": 0.03153600000000445,
+   "cert3-ocpp-f": 0.036909999999998,
+   "cert3-ocpp-d": 0.0373909999999924
+  },
+  "examples/bela/AdditiveSynth_Analog.dsp": {
+   "R-f": 0.02611399999999442,
+   "R-d": 0.025296000000008867,
+   "cert3-cpp-f": 0.031814000000005116,
+   "cert3-cpp-d": 0.03175299999999215,
+   "cert3-ocpp-f": 0.03757099999999891,
+   "cert3-ocpp-d": 0.03829600000000344
+  },
+  "examples/bela/FMSynth2.dsp": {
+   "R-f": 0.07342999999999922,
+   "R-d": 0.06322599999999223,
+   "cert3-cpp-f": 0.07801500000000328,
+   "cert3-cpp-d": 0.0652609999999969,
+   "cert3-ocpp-f": 0.07797999999999661,
+   "cert3-ocpp-d": 0.06582399999998945
+  },
+  "examples/bela/FMSynth2_Analog.dsp": {
+   "R-f": 0.07394300000000964,
+   "R-d": 0.06298600000000754,
+   "cert3-cpp-f": 0.07604599999999895,
+   "cert3-cpp-d": 0.06612799999999286,
+   "cert3-ocpp-f": 0.07818899999999651,
+   "cert3-ocpp-d": 0.06538300000000508
+  },
+  "examples/bela/FMSynth2_FX.dsp": {
+   "R-f": 0.0724990000000112,
+   "R-d": 0.06300000000000683,
+   "cert3-cpp-f": 0.07658700000000884,
+   "cert3-cpp-d": 0.06496700000001088,
+   "cert3-ocpp-f": 0.07855400000000223,
+   "cert3-ocpp-d": 0.06642700000000445
+  },
+  "examples/bela/FMSynth2_FX_Analog.dsp": {
+   "R-f": 0.07278300000000293,
+   "R-d": 0.0630420000000056,
+   "cert3-cpp-f": 0.07686700000000801,
+   "cert3-cpp-d": 0.06541899999999945,
+   "cert3-ocpp-f": 0.07796399999999792,
+   "cert3-ocpp-d": 0.06682799999999123
+  },
+  "examples/bela/FXChaine2.dsp": {
+   "R-f": 0.10541999999999696,
+   "R-d": 0.08176800000001005,
+   "cert3-cpp-f": 0.15038299999999793,
+   "cert3-cpp-d": 0.12044100000000313,
+   "cert3-ocpp-f": 0.17107899999999976,
+   "cert3-ocpp-d": 0.13906200000000268
+  },
+  "examples/bela/GrainGenerator.dsp": {
+   "R-f": 0.06425100000001027,
+   "R-d": 0.06356200000001255,
+   "cert3-cpp-f": 0.07185300000000439,
+   "cert3-cpp-d": 0.0720549999999971,
+   "cert3-ocpp-f": 0.07616800000000357,
+   "cert3-ocpp-d": 0.07440899999999662
+  },
+  "examples/bela/WaveSynth.dsp": {
+   "R-f": 0.01731199999999511,
+   "R-d": 0.014777999999995295,
+   "cert3-cpp-f": 0.018827999999992073,
+   "cert3-cpp-d": 0.01672400000000085,
+   "cert3-ocpp-f": 0.020525000000010785,
+   "cert3-ocpp-d": 0.018634999999989077
+  },
+  "examples/bela/WaveSynth_Analog.dsp": {
+   "R-f": 0.01625999999999639,
+   "R-d": 0.01567599999999647,
+   "cert3-cpp-f": 0.01939600000000219,
+   "cert3-cpp-d": 0.017487000000003583,
+   "cert3-ocpp-f": 0.021258000000005772,
+   "cert3-ocpp-d": 0.018069999999987374
+  },
+  "examples/bela/WaveSynth_FX.dsp": {
+   "R-f": 0.017000000000006565,
+   "R-d": 0.015166999999991049,
+   "cert3-cpp-f": 0.01930399999999821,
+   "cert3-cpp-d": 0.01669099999999979,
+   "cert3-ocpp-f": 0.019810000000003214,
+   "cert3-ocpp-d": 0.018376999999992094
+  },
+  "examples/bela/WaveSynth_FX_Analog.dsp": {
+   "R-f": 0.016922000000004545,
+   "R-d": 0.015640999999998684,
+   "cert3-cpp-f": 0.019607000000009478,
+   "cert3-cpp-d": 0.016891999999993246,
+   "cert3-ocpp-f": 0.02100799999999836,
+   "cert3-ocpp-d": 0.018297000000007557
+  },
+  "examples/bela/crossDelay2.dsp": {
+   "R-f": 0.038500999999996566,
+   "R-d": 0.038199000000002314,
+   "cert3-cpp-f": 0.05554399999999937,
+   "cert3-cpp-d": 0.055051999999996326,
+   "cert3-ocpp-f": 0.06340699999999266,
+   "cert3-ocpp-d": 0.0643540000000069
+  },
+  "examples/bela/granulator.dsp": {
+   "R-f": 0.01924199999998777,
+   "R-d": 0.019781000000012483,
+   "cert3-cpp-f": 0.02190599999999776,
+   "cert3-cpp-d": 0.021236000000003585,
+   "cert3-ocpp-f": 0.023194999999992305,
+   "cert3-ocpp-d": 0.022961000000009335
+  },
+  "examples/bela/repeater.dsp": {
+   "R-f": 0.008631000000004718,
+   "R-d": 0.00840500000000155,
+   "cert3-cpp-f": 0.010373999999996997,
+   "cert3-cpp-d": 0.010260000000004155,
+   "cert3-ocpp-f": 0.011146999999994023,
+   "cert3-ocpp-d": 0.011065000000009206
+  },
+  "examples/bela/simpleFX.dsp": {
+   "R-f": 0.03647100000001302,
+   "R-d": 0.03389499999999401,
+   "cert3-cpp-f": 0.05120600000000408,
+   "cert3-cpp-d": 0.04798400000001202,
+   "cert3-ocpp-f": 0.058058999999998306,
+   "cert3-ocpp-d": 0.054054000000004265
+  },
+  "examples/bela/simpleFX_Analog.dsp": {
+   "R-f": 0.036920000000005615,
+   "R-d": 0.032954999999997625,
+   "cert3-cpp-f": 0.05142000000000202,
+   "cert3-cpp-d": 0.048063999999996554,
+   "cert3-ocpp-f": 0.05884999999999785,
+   "cert3-ocpp-d": 0.05360899999999802
+  },
+  "examples/bela/simpleSynth.dsp": {
+   "R-f": 0.042325000000005275,
+   "R-d": 0.03303099999999759,
+   "cert3-cpp-f": 0.04698099999999528,
+   "cert3-cpp-d": 0.035239000000000686,
+   "cert3-ocpp-f": 0.04976999999999521,
+   "cert3-ocpp-d": 0.037596999999992775
+  },
+  "examples/bela/simpleSynth_Analog.dsp": {
+   "R-f": 0.042472000000005394,
+   "R-d": 0.03247300000000308,
+   "cert3-cpp-f": 0.04717299999999369,
+   "cert3-cpp-d": 0.03580899999999332,
+   "cert3-ocpp-f": 0.049913000000005425,
+   "cert3-ocpp-d": 0.03793399999999458
+  },
+  "examples/bela/simpleSynth_FX.dsp": {
+   "R-f": 0.04263200000000289,
+   "R-d": 0.03209500000001064,
+   "cert3-cpp-f": 0.04681700000000255,
+   "cert3-cpp-d": 0.03565600000000302,
+   "cert3-ocpp-f": 0.049680999999988984,
+   "cert3-ocpp-d": 0.037527999999991124
+  },
+  "examples/bela/simpleSynth_FX_Analog.dsp": {
+   "R-f": 0.04291400000000323,
+   "R-d": 0.0324800000000014,
+   "cert3-cpp-f": 0.047170999999991636,
+   "cert3-cpp-d": 0.03544500000000639,
+   "cert3-ocpp-f": 0.050086000000005626,
+   "cert3-ocpp-d": 0.037718000000001695
+  },
+  "examples/bela/trill_simple_monophonic_keyboard.dsp": {
+   "R-f": 0.019870999999994865,
+   "R-d": 0.02044399999999591,
+   "cert3-cpp-f": 0.02295900000000195,
+   "cert3-cpp-d": 0.022150999999999144,
+   "cert3-ocpp-f": 0.024599999999994182,
+   "cert3-ocpp-d": 0.023616000000009407
+  },
+  "examples/bela/trill_simple_polyphonic_keyboard.dsp": {
+   "R-f": 0.020640000000003766,
+   "R-d": 0.020179000000004166,
+   "cert3-cpp-f": 0.023456000000004806,
+   "cert3-cpp-d": 0.022123999999998034,
+   "cert3-ocpp-f": 0.024194000000004934,
+   "cert3-ocpp-d": 0.02294500000000177
+  },
+  "examples/delayEcho/echo.dsp": {
+   "R-f": 0.008922999999999348,
+   "R-d": 0.008223999999989573,
+   "cert3-cpp-f": 0.008549999999999613,
+   "cert3-cpp-d": 0.008339999999995129,
+   "cert3-ocpp-f": 0.009075999999996753,
+   "cert3-ocpp-d": 0.008569999999995304
+  },
+  "examples/delayEcho/quadEcho.dsp": {
+   "R-f": 0.008689000000003944,
+   "R-d": 0.009093000000005347,
+   "cert3-cpp-f": 0.009752000000005978,
+   "cert3-cpp-d": 0.009626999999994723,
+   "cert3-ocpp-f": 0.010243000000004443,
+   "cert3-ocpp-d": 0.00999900000001297
+  },
+  "examples/delayEcho/smoothDelay.dsp": {
+   "R-f": 0.009211000000000524,
+   "R-d": 0.009861000000006115,
+   "cert3-cpp-f": 0.011276999999996207,
+   "cert3-cpp-d": 0.011212000000000444,
+   "cert3-ocpp-f": 0.012323000000009188,
+   "cert3-ocpp-d": 0.012970000000001036
+  },
+  "examples/delayEcho/stereoEcho.dsp": {
+   "R-f": 0.008220000000008554,
+   "R-d": 0.008014999999998551,
+   "cert3-cpp-f": 0.008701000000002068,
+   "cert3-cpp-d": 0.009083000000011054,
+   "cert3-ocpp-f": 0.00916399999999662,
+   "cert3-ocpp-d": 0.009138999999988684
+  },
+  "examples/delayEcho/tapiir.dsp": {
+   "R-f": 0.010685999999994422,
+   "R-d": 0.010585000000004285,
+   "cert3-cpp-f": 0.017368000000002937,
+   "cert3-cpp-d": 0.017914000000011754,
+   "cert3-ocpp-f": 0.022636000000000323,
+   "cert3-ocpp-d": 0.022703000000001694
+  },
+  "examples/dynamic/compressor.dsp": {
+   "R-f": 0.01931500000000419,
+   "R-d": 0.019508999999999332,
+   "cert3-cpp-f": 0.021729999999994476,
+   "cert3-cpp-d": 0.020514000000005694,
+   "cert3-ocpp-f": 0.022243000000001345,
+   "cert3-ocpp-d": 0.021398999999993507
+  },
+  "examples/dynamic/distortion.dsp": {
+   "R-f": 0.019199000000002187,
+   "R-d": 0.018161999999994904,
+   "cert3-cpp-f": 0.020077000000002343,
+   "cert3-cpp-d": 0.019712999999988767,
+   "cert3-ocpp-f": 0.020776000000012118,
+   "cert3-ocpp-d": 0.020811000000000135
+  },
+  "examples/dynamic/gateCompressor.dsp": {
+   "R-f": 0.27937599999999563,
+   "R-d": 0.3190029999999986,
+   "cert3-cpp-f": 0.40007499999998863,
+   "cert3-cpp-d": 0.3630190000000102,
+   "cert3-ocpp-f": 0.45963899999999747,
+   "cert3-ocpp-d": 0.39375599999999444
+  },
+  "examples/dynamic/noiseGate.dsp": {
+   "R-f": 0.01972800000000774,
+   "R-d": 0.01936900000000108,
+   "cert3-cpp-f": 0.021326999999986995,
+   "cert3-cpp-d": 0.021765000000007362,
+   "cert3-ocpp-f": 0.023566999999999894,
+   "cert3-ocpp-d": 0.022689999999997212
+  },
+  "examples/dynamic/volume.dsp": {
+   "R-f": 0.006065000000010201,
+   "R-d": 0.006348000000002685,
+   "cert3-cpp-f": 0.006292000000001963,
+   "cert3-cpp-d": 0.006331999999991567,
+   "cert3-ocpp-f": 0.006302999999999059,
+   "cert3-ocpp-d": 0.006578999999998558
+  },
+  "examples/filtering/APF.dsp": {
+   "R-f": 0.004354000000002856,
+   "R-d": 0.004165000000000418,
+   "cert3-cpp-f": 0.004805000000004611,
+   "cert3-cpp-d": 0.0046290000000013265,
+   "cert3-ocpp-f": 0.0049129999999966145,
+   "cert3-ocpp-d": 0.004897999999997182
+  },
+  "examples/filtering/BPF.dsp": {
+   "R-f": 0.004413999999995255,
+   "R-d": 0.004296999999994,
+   "cert3-cpp-f": 0.004910999999998111,
+   "cert3-cpp-d": 0.004805999999993205,
+   "cert3-ocpp-f": 0.005246999999997115,
+   "cert3-ocpp-d": 0.005081999999990927
+  },
+  "examples/filtering/DNN.dsp": {
+   "R-f": 0.009344000000004016,
+   "R-d": 0.009857999999997702,
+   "cert3-cpp-f": 0.010971000000006725,
+   "cert3-cpp-d": 0.011570999999992893,
+   "cert3-ocpp-f": 0.012901000000013596,
+   "cert3-ocpp-d": 0.012471000000005006
+  },
+  "examples/filtering/HPF.dsp": {
+   "R-f": 0.0052669999999857,
+   "R-d": 0.00452300000000605,
+   "cert3-cpp-f": 0.004953000000000429,
+   "cert3-cpp-d": 0.004968999999999113,
+   "cert3-ocpp-f": 0.005157999999994445,
+   "cert3-ocpp-d": 0.005111000000001198
+  },
+  "examples/filtering/LPF.dsp": {
+   "R-f": 0.004381000000009294,
+   "R-d": 0.004364000000004253,
+   "cert3-cpp-f": 0.0049680000000051905,
+   "cert3-cpp-d": 0.004843999999993187,
+   "cert3-ocpp-f": 0.004995999999998446,
+   "cert3-ocpp-d": 0.00503900000001245
+  },
+  "examples/filtering/bandFilter.dsp": {
+   "R-f": 0.012404999999999333,
+   "R-d": 0.012523999999997315,
+   "cert3-cpp-f": 0.013763999999996557,
+   "cert3-cpp-d": 0.013593000000005517,
+   "cert3-ocpp-f": 0.013713000000000974,
+   "cert3-ocpp-d": 0.013676000000003796
+  },
+  "examples/filtering/cryBaby.dsp": {
+   "R-f": 0.015679000000003995,
+   "R-d": 0.015783000000011427,
+   "cert3-cpp-f": 0.01889300000000027,
+   "cert3-cpp-d": 0.018292999999989235,
+   "cert3-ocpp-f": 0.01923499999999656,
+   "cert3-ocpp-d": 0.02012099999999606
+  },
+  "examples/filtering/diodeLadder.dsp": {
+   "R-f": 0.018363000000006124,
+   "R-d": 0.017313999999997165,
+   "cert3-cpp-f": 0.022611999999998744,
+   "cert3-cpp-d": 0.021429999999998728,
+   "cert3-ocpp-f": 0.024465999999998544,
+   "cert3-ocpp-d": 0.022719000000002154
+  },
+  "examples/filtering/filterBank.dsp": {
+   "R-f": 0.17459000000000557,
+   "R-d": 0.19933600000000595,
+   "cert3-cpp-f": 0.2385270000000066,
+   "cert3-cpp-d": 0.21947000000000472,
+   "cert3-ocpp-f": 0.26511799999999575,
+   "cert3-ocpp-d": 0.2250839999999954
+  },
+  "examples/filtering/graphicEqLab.dsp": {
+   "R-f": 0.5492520000000063,
+   "R-d": 0.5952820000000063,
+   "cert3-cpp-f": 0.9210670000000007,
+   "cert3-cpp-d": 0.7580189999999973,
+   "cert3-ocpp-f": 1.0525750000000027,
+   "cert3-ocpp-d": 0.8067250000000019
+  },
+  "examples/filtering/highShelf.dsp": {
+   "R-f": 0.006090000000005702,
+   "R-d": 0.006813999999991438,
+   "cert3-cpp-f": 0.007741999999993254,
+   "cert3-cpp-d": 0.006642000000008252,
+   "cert3-ocpp-f": 0.006016999999999939,
+   "cert3-ocpp-d": 0.00596600000000258
+  },
+  "examples/filtering/korg35HPF.dsp": {
+   "R-f": 0.012898999999990224,
+   "R-d": 0.012755999999999545,
+   "cert3-cpp-f": 0.016084000000008203,
+   "cert3-cpp-d": 0.015827000000003366,
+   "cert3-ocpp-f": 0.018105999999994182,
+   "cert3-ocpp-d": 0.016711000000006138
+  },
+  "examples/filtering/korg35LPF.dsp": {
+   "R-f": 0.0139109999999949,
+   "R-d": 0.012981000000003462,
+   "cert3-cpp-f": 0.014746000000009474,
+   "cert3-cpp-d": 0.014963999999991984,
+   "cert3-ocpp-f": 0.01648700000000325,
+   "cert3-ocpp-d": 0.016590999999998246
+  },
+  "examples/filtering/lfBoost.dsp": {
+   "R-f": 0.013135999999995818,
+   "R-d": 0.013677999999995194,
+   "cert3-cpp-f": 0.013977999999990942,
+   "cert3-cpp-d": 0.013814000000008875,
+   "cert3-ocpp-f": 0.013024000000003255,
+   "cert3-ocpp-d": 0.015092999999989587
+  },
+  "examples/filtering/lowBoost.dsp": {
+   "R-f": 0.011161999999998784,
+   "R-d": 0.011305999999994043,
+   "cert3-cpp-f": 0.012172000000001404,
+   "cert3-cpp-d": 0.011571999999995697,
+   "cert3-ocpp-f": 0.0115949999999998,
+   "cert3-ocpp-d": 0.011932000000003384
+  },
+  "examples/filtering/lowCut.dsp": {
+   "R-f": 0.01116300000001047,
+   "R-d": 0.011340999999992718,
+   "cert3-cpp-f": 0.01155399999999318,
+   "cert3-cpp-d": 0.011510000000003018,
+   "cert3-ocpp-f": 0.01079699999998951,
+   "cert3-ocpp-d": 0.011404999999991006
+  },
+  "examples/filtering/lowShelf.dsp": {
+   "R-f": 0.005518999999992502,
+   "R-d": 0.005287000000006259,
+   "cert3-cpp-f": 0.0057699999999982765,
+   "cert3-cpp-d": 0.006022999999999001,
+   "cert3-ocpp-f": 0.005931000000000353,
+   "cert3-ocpp-d": 0.006012999999995827
+  },
+  "examples/filtering/moogHalfLadder.dsp": {
+   "R-f": 0.013669999999995852,
+   "R-d": 0.014428000000000551,
+   "cert3-cpp-f": 0.016771000000000313,
+   "cert3-cpp-d": 0.01569299999999707,
+   "cert3-ocpp-f": 0.017573000000009387,
+   "cert3-ocpp-d": 0.01667800000000419
+  },
+  "examples/filtering/moogLadder.dsp": {
+   "R-f": 0.014867000000005959,
+   "R-d": 0.013530000000002929,
+   "cert3-cpp-f": 0.016623999999998418,
+   "cert3-cpp-d": 0.01577799999999918,
+   "cert3-ocpp-f": 0.01824499999999496,
+   "cert3-ocpp-d": 0.016949000000005654
+  },
+  "examples/filtering/moogVCF.dsp": {
+   "R-f": 0.03539099999998818,
+   "R-d": 0.036173999999991935,
+   "cert3-cpp-f": 0.04176699999999123,
+   "cert3-cpp-d": 0.041428999999997274,
+   "cert3-ocpp-f": 0.04469100000000026,
+   "cert3-ocpp-d": 0.044581999999993016
+  },
+  "examples/filtering/multibandFilter.dsp": {
+   "R-f": 0.028169999999994033,
+   "R-d": 0.02817400000000525,
+   "cert3-cpp-f": 0.03228100000001355,
+   "cert3-cpp-d": 0.03283599999999787,
+   "cert3-ocpp-f": 0.034373000000003984,
+   "cert3-ocpp-d": 0.03505200000000208
+  },
+  "examples/filtering/notch.dsp": {
+   "R-f": 0.006032999999987965,
+   "R-d": 0.004870999999999626,
+   "cert3-cpp-f": 0.005504999999999427,
+   "cert3-cpp-d": 0.004864999999995234,
+   "cert3-ocpp-f": 0.0050080000000019,
+   "cert3-ocpp-d": 0.00491600000000858
+  },
+  "examples/filtering/oberheim.dsp": {
+   "R-f": 0.01509299999998781,
+   "R-d": 0.01408800000000987,
+   "cert3-cpp-f": 0.01738900000000143,
+   "cert3-cpp-d": 0.016988999999991705,
+   "cert3-ocpp-f": 0.018934000000003337,
+   "cert3-ocpp-d": 0.018908999999997178
+  },
+  "examples/filtering/oberheimBPF.dsp": {
+   "R-f": 0.01634500000000827,
+   "R-d": 0.014358999999991795,
+   "cert3-cpp-f": 0.01782400000000095,
+   "cert3-cpp-d": 0.017244999999999067,
+   "cert3-ocpp-f": 0.01846599999999121,
+   "cert3-ocpp-d": 0.017806999999992357
+  },
+  "examples/filtering/oberheimBSF.dsp": {
+   "R-f": 0.01574600000000359,
+   "R-d": 0.014426999999997747,
+   "cert3-cpp-f": 0.018300999999993905,
+   "cert3-cpp-d": 0.016802000000000206,
+   "cert3-ocpp-f": 0.01934299999999567,
+   "cert3-ocpp-d": 0.0190239999999946
+  },
+  "examples/filtering/oberheimHPF.dsp": {
+   "R-f": 0.015843000000000274,
+   "R-d": 0.015426999999991864,
+   "cert3-cpp-f": 0.017675999999989145,
+   "cert3-cpp-d": 0.017853000000000563,
+   "cert3-ocpp-f": 0.0195860000000021,
+   "cert3-ocpp-d": 0.01799200000000667
+  },
+  "examples/filtering/oberheimLPF.dsp": {
+   "R-f": 0.014870999999999412,
+   "R-d": 0.014505000000005097,
+   "cert3-cpp-f": 0.017650999999991868,
+   "cert3-cpp-d": 0.016888999999991938,
+   "cert3-ocpp-f": 0.019055999999997297,
+   "cert3-ocpp-d": 0.01737900000000181
+  },
+  "examples/filtering/parametricEqLab.dsp": {
+   "R-f": 0.414061000000002,
+   "R-d": 0.46232099999999754,
+   "cert3-cpp-f": 0.6139739999999954,
+   "cert3-cpp-d": 0.5418580000000102,
+   "cert3-ocpp-f": 0.68644999999999,
+   "cert3-ocpp-d": 0.5850710000000046
+  },
+  "examples/filtering/parametricEqualizer.dsp": {
+   "R-f": 0.037544000000005795,
+   "R-d": 0.039718999999996285,
+   "cert3-cpp-f": 0.04498900000000994,
+   "cert3-cpp-d": 0.0475109999999912,
+   "cert3-ocpp-f": 0.04759700000000677,
+   "cert3-ocpp-d": 0.05084499999999714
+  },
+  "examples/filtering/peakNotch.dsp": {
+   "R-f": 0.005830000000004887,
+   "R-d": 0.005246000000004969,
+   "cert3-cpp-f": 0.005612999999993207,
+   "cert3-cpp-d": 0.005110000000010828,
+   "cert3-ocpp-f": 0.005445999999999174,
+   "cert3-ocpp-d": 0.0052400000000005775
+  },
+  "examples/filtering/peakingEQ.dsp": {
+   "R-f": 0.0045809999999963935,
+   "R-d": 0.004521000000000441,
+   "cert3-cpp-f": 0.005393999999991905,
+   "cert3-cpp-d": 0.005317000000003347,
+   "cert3-ocpp-f": 0.005590000000006867,
+   "cert3-ocpp-d": 0.00550100000000775
+  },
+  "examples/filtering/sallenKey2ndOrder.dsp": {
+   "R-f": 0.013058999999996601,
+   "R-d": 0.012554999999995431,
+   "cert3-cpp-f": 0.015630999999993733,
+   "cert3-cpp-d": 0.013882000000004169,
+   "cert3-ocpp-f": 0.015940000000002286,
+   "cert3-ocpp-d": 0.015071999999996422
+  },
+  "examples/filtering/sallenKey2ndOrderBPF.dsp": {
+   "R-f": 0.01329500000000472,
+   "R-d": 0.01345099999999455,
+   "cert3-cpp-f": 0.01563900000000551,
+   "cert3-cpp-d": 0.015631000000002615,
+   "cert3-ocpp-f": 0.01766500000000626,
+   "cert3-ocpp-d": 0.015808999999997297
+  },
+  "examples/filtering/sallenKey2ndOrderHPF.dsp": {
+   "R-f": 0.013891000000008091,
+   "R-d": 0.013217999999994845,
+   "cert3-cpp-f": 0.01682699999999926,
+   "cert3-cpp-d": 0.014815999999997942,
+   "cert3-ocpp-f": 0.016969999999991714,
+   "cert3-ocpp-d": 0.015405000000006552
+  },
+  "examples/filtering/sallenKey2ndOrderLPF.dsp": {
+   "R-f": 0.013025000000002507,
+   "R-d": 0.012812999999988861,
+   "cert3-cpp-f": 0.01571599999999762,
+   "cert3-cpp-d": 0.014341000000001713,
+   "cert3-ocpp-f": 0.017296999999995677,
+   "cert3-ocpp-d": 0.015411999999992432
+  },
+  "examples/filtering/sallenKeyOnePole.dsp": {
+   "R-f": 0.012774000000000285,
+   "R-d": 0.013192999999999344,
+   "cert3-cpp-f": 0.013262999999994918,
+   "cert3-cpp-d": 0.013239999999994367,
+   "cert3-ocpp-f": 0.014454000000005962,
+   "cert3-ocpp-d": 0.013329999999992737
+  },
+  "examples/filtering/sallenKeyOnePoleHPF.dsp": {
+   "R-f": 0.012026000000011194,
+   "R-d": 0.011731000000002823,
+   "cert3-cpp-f": 0.013724000000001624,
+   "cert3-cpp-d": 0.013103999999993121,
+   "cert3-ocpp-f": 0.014649999999994279,
+   "cert3-ocpp-d": 0.01393799999999601
+  },
+  "examples/filtering/sallenKeyOnePoleLPF.dsp": {
+   "R-f": 0.0123060000000077,
+   "R-d": 0.011301000000003114,
+   "cert3-cpp-f": 0.013627999999993534,
+   "cert3-cpp-d": 0.01386099999999324,
+   "cert3-ocpp-f": 0.014919000000004345,
+   "cert3-ocpp-d": 0.01480299999999879
+  },
+  "examples/filtering/spectralTilt.dsp": {
+   "R-f": 0.01671200000000006,
+   "R-d": 0.01586400000000232,
+   "cert3-cpp-f": 0.018540000000001555,
+   "cert3-cpp-d": 0.018547000000001646,
+   "cert3-ocpp-f": 0.018964000000000425,
+   "cert3-ocpp-d": 0.0189280000000025
+  },
+  "examples/filtering/vcfWahLab.dsp": {
+   "R-f": 0.32033600000000106,
+   "R-d": 0.35718799999999185,
+   "cert3-cpp-f": 0.4674199999999953,
+   "cert3-cpp-d": 0.41255600000000037,
+   "cert3-ocpp-f": 0.5400709999999975,
+   "cert3-ocpp-d": 0.4532079999999965
+  },
+  "examples/filtering/vocoder.dsp": {
+   "R-f": 0.11055400000001647,
+   "R-d": 0.11053200000000274,
+   "cert3-cpp-f": 0.18136200000000002,
+   "cert3-cpp-d": 0.18023100000000092,
+   "cert3-ocpp-f": 0.2164420000000078,
+   "cert3-ocpp-d": 0.21864800000001772
+  },
+  "examples/filtering/wahPedal.dsp": {
+   "R-f": 0.021898999999985236,
+   "R-d": 0.022205000000013797,
+   "cert3-cpp-f": 0.024373000000014855,
+   "cert3-cpp-d": 0.024849999999984718,
+   "cert3-ocpp-f": 0.025533999999984403,
+   "cert3-ocpp-d": 0.025699000000003025
+  },
+  "examples/gameaudio/bubble.dsp": {
+   "R-f": 0.03867399999999499,
+   "R-d": 0.03770100000000021,
+   "cert3-cpp-f": 0.05312700000000525,
+   "cert3-cpp-d": 0.051622000000010715,
+   "cert3-ocpp-f": 0.058791999999993294,
+   "cert3-ocpp-d": 0.05748700000001428
+  },
+  "examples/gameaudio/complex_rain.dsp": {
+   "R-f": 0.0375979999999867,
+   "R-d": 0.03439599999999565,
+   "cert3-cpp-f": 0.07410099999999531,
+   "cert3-cpp-d": 0.06838900000000514,
+   "cert3-ocpp-f": 0.08159800000001205,
+   "cert3-ocpp-d": 0.07365800000001244
+  },
+  "examples/gameaudio/door.dsp": {
+   "R-f": 0.029583999999983845,
+   "R-d": 0.029400999999984023,
+   "cert3-cpp-f": 0.04109800000001229,
+   "cert3-cpp-d": 0.041008999999988305,
+   "cert3-ocpp-f": 0.04549999999997745,
+   "cert3-ocpp-d": 0.04647500000000804
+  },
+  "examples/gameaudio/fire.dsp": {
+   "R-f": 0.09832099999999855,
+   "R-d": 0.06011300000000119,
+   "cert3-cpp-f": 0.11345299999999447,
+   "cert3-cpp-d": 0.0761629999999851,
+   "cert3-ocpp-f": 0.12114299999999822,
+   "cert3-ocpp-d": 0.08109900000001069
+  },
+  "examples/gameaudio/insects.dsp": {
+   "R-f": 0.10631299999998589,
+   "R-d": 0.08739699999998152,
+   "cert3-cpp-f": 0.1819120000000236,
+   "cert3-cpp-d": 0.15021700000000848,
+   "cert3-ocpp-f": 0.21957600000002486,
+   "cert3-ocpp-d": 0.179638999999991
+  },
+  "examples/gameaudio/rain.dsp": {
+   "R-f": 0.004574999999976015,
+   "R-d": 0.0035540000000082728,
+   "cert3-cpp-f": 0.004466000000007853,
+   "cert3-cpp-d": 0.004863999999997759,
+   "cert3-ocpp-f": 0.004577999999980875,
+   "cert3-ocpp-d": 0.004684000000002797
+  },
+  "examples/gameaudio/thunder.dsp": {
+   "R-f": 0.048257999999991696,
+   "R-d": 0.05053100000000832,
+   "cert3-cpp-f": 0.07298900000000508,
+   "cert3-cpp-d": 0.07234899999999733,
+   "cert3-ocpp-f": 0.08305300000000493,
+   "cert3-ocpp-d": 0.0814999999999948
+  },
+  "examples/gameaudio/wind.dsp": {
+   "R-f": 0.025742999999998517,
+   "R-d": 0.02548499999999443,
+   "cert3-cpp-f": 0.03034899999999574,
+   "cert3-cpp-d": 0.031038000000014776,
+   "cert3-ocpp-f": 0.03334599999999632,
+   "cert3-ocpp-d": 0.03327199999998243
+  },
+  "examples/gameaudio/windchimes.dsp": {
+   "R-f": 0.04783399999998039,
+   "R-d": 0.046952999999986034,
+   "cert3-cpp-f": 0.10567099999999563,
+   "cert3-cpp-d": 0.10529700000001796,
+   "cert3-ocpp-f": 0.11439399999999011,
+   "cert3-ocpp-d": 0.11492200000001063
+  },
+  "examples/generator/brightOrgan.dsp": {
+   "R-f": 0.0765260000000012,
+   "R-d": 0.06067299999999598,
+   "cert3-cpp-f": 0.10018099999999919,
+   "cert3-cpp-d": 0.07869700000001423,
+   "cert3-ocpp-f": 0.1103759999999756,
+   "cert3-ocpp-d": 0.08916100000001848
+  },
+  "examples/generator/churchOrgan.dsp": {
+   "R-f": 0.07756500000001232,
+   "R-d": 0.06676800000000505,
+   "cert3-cpp-f": 0.10409799999998626,
+   "cert3-cpp-d": 0.0847279999999877,
+   "cert3-ocpp-f": 0.12308300000001537,
+   "cert3-ocpp-d": 0.10109800000001101
+  },
+  "examples/generator/dx7.dsp": {
+   "R-f": 0.6720329999999741,
+   "R-d": 0.6648619999999887,
+   "cert3-cpp-f": 0.8099089999999869,
+   "cert3-cpp-d": 0.8088779999999893,
+   "cert3-ocpp-f": 0.8902890000000205,
+   "cert3-ocpp-d": 0.8895330000000001
+  },
+  "examples/generator/filterOsc.dsp": {
+   "R-f": 0.022035000000009575,
+   "R-d": 0.02106799999999609,
+   "cert3-cpp-f": 0.02153900000002551,
+   "cert3-cpp-d": 0.020885999999993743,
+   "cert3-ocpp-f": 0.02178199999999464,
+   "cert3-ocpp-d": 0.022901999999998424
+  },
+  "examples/generator/noise.dsp": {
+   "R-f": 0.003388000000001057,
+   "R-d": 0.002653999999978396,
+   "cert3-cpp-f": 0.003011000000014974,
+   "cert3-cpp-d": 0.0024339999999973827,
+   "cert3-ocpp-f": 0.002367999999997039,
+   "cert3-ocpp-d": 0.0023750000000077875
+  },
+  "examples/generator/noiseMetadata.dsp": {
+   "R-f": 0.002117999999999398,
+   "R-d": 0.002082999999998947,
+   "cert3-cpp-f": 0.002459999999995688,
+   "cert3-cpp-d": 0.0024380000000121527,
+   "cert3-ocpp-f": 0.0023300000000006094,
+   "cert3-ocpp-d": 0.0023299999999863985
+  },
+  "examples/generator/osc.dsp": {
+   "R-f": 0.009447000000015748,
+   "R-d": 0.008900000000000574,
+   "cert3-cpp-f": 0.011444999999998373,
+   "cert3-cpp-d": 0.010204999999999131,
+   "cert3-ocpp-f": 0.011484000000002936,
+   "cert3-ocpp-d": 0.010328000000001225
+  },
+  "examples/generator/osci.dsp": {
+   "R-f": 0.010589000000010174,
+   "R-d": 0.00938400000000783,
+   "cert3-cpp-f": 0.011919999999992825,
+   "cert3-cpp-d": 0.010232999999988834,
+   "cert3-ocpp-f": 0.012248000000017356,
+   "cert3-ocpp-d": 0.0105759999999826
+  },
+  "examples/generator/oteyPianoV1.dsp": {
+   "R-f": 0.06020000000000536,
+   "R-d": 0.06145399999999768,
+   "cert3-cpp-f": 0.07707899999998347,
+   "cert3-cpp-d": 0.07755499999998605,
+   "cert3-ocpp-f": 0.08593099999999865,
+   "cert3-ocpp-d": 0.08675800000000322
+  },
+  "examples/generator/oteyPianoV2.dsp": {
+   "R-f": 0.14230399999999932,
+   "R-d": 0.14917400000000214,
+   "cert3-cpp-f": 0.16386799999998303,
+   "cert3-cpp-d": 0.170516000000017,
+   "cert3-ocpp-f": 0.17900600000002242,
+   "cert3-ocpp-d": 0.18434999999999846
+  },
+  "examples/generator/sawtoothLab.dsp": {
+   "R-f": 0.04487800000000419,
+   "R-d": 0.02749700000000388,
+   "cert3-cpp-f": 0.05741400000000141,
+   "cert3-cpp-d": 0.03235900000000669,
+   "cert3-ocpp-f": 0.0680259999999997,
+   "cert3-ocpp-d": 0.035127999999993165
+  },
+  "examples/generator/virtualAnalog.dsp": {
+   "R-f": 0.12841200000000086,
+   "R-d": 0.060453999999996455,
+   "cert3-cpp-f": 0.15027800000000724,
+   "cert3-cpp-d": 0.06795500000000487,
+   "cert3-ocpp-f": 0.1718089999999819,
+   "cert3-ocpp-d": 0.07521299999999442
+  },
+  "examples/generator/virtualAnalogLab.dsp": {
+   "R-f": 0.4253709999999984,
+   "R-d": 0.39447099999999935,
+   "cert3-cpp-f": 0.5891329999999968,
+   "cert3-cpp-d": 0.4579859999999911,
+   "cert3-ocpp-f": 0.672731000000006,
+   "cert3-ocpp-d": 0.49916199999999833
+  },
+  "examples/misc/UITester.dsp": {
+   "R-f": 0.004807000000006667,
+   "R-d": 0.0042010000000161085,
+   "cert3-cpp-f": 0.005180999999993219,
+   "cert3-cpp-d": 0.004697000000000173,
+   "cert3-ocpp-f": 0.005449000000023574,
+   "cert3-ocpp-d": 0.0054980000000171
+  },
+  "examples/misc/autopan.dsp": {
+   "R-f": 0.012505999999987694,
+   "R-d": 0.012529999999998154,
+   "cert3-cpp-f": 0.016184999999996563,
+   "cert3-cpp-d": 0.013988000000015433,
+   "cert3-ocpp-f": 0.01671699999999987,
+   "cert3-ocpp-d": 0.014718999999978166
+  },
+  "examples/misc/capture.dsp": {
+   "R-f": 0.0074080000000016355,
+   "R-d": 0.007626999999981621,
+   "cert3-cpp-f": 0.009447000000015748,
+   "cert3-cpp-d": 0.009405000000000996,
+   "cert3-ocpp-f": 0.008585000000000065,
+   "cert3-ocpp-d": 0.008978999999996518
+  },
+  "examples/misc/drumkit.dsp": {
+   "R-f": 0.043863999999995684,
+   "R-d": 0.04349600000001175,
+   "cert3-cpp-f": 0.05306499999997527,
+   "cert3-cpp-d": 0.051891000000004794,
+   "cert3-ocpp-f": 0.060615999999996006,
+   "cert3-ocpp-d": 0.059091999999992595
+  },
+  "examples/misc/guitarix.dsp": {
+   "R-f": 0.12039199999999539,
+   "R-d": 0.14647799999997702,
+   "cert3-cpp-f": 0.14890499999999918,
+   "cert3-cpp-d": 0.16840600000000805,
+   "cert3-ocpp-f": 0.17206900000001113,
+   "cert3-ocpp-d": 0.19723500000000627
+  },
+  "examples/misc/inlooper.dsp": {
+   "R-f": 0.009070000000011902,
+   "R-d": 0.008619000000013699,
+   "cert3-cpp-f": 0.009055999999986852,
+   "cert3-cpp-d": 0.010836000000011836,
+   "cert3-ocpp-f": 0.01149499999998227,
+   "cert3-ocpp-d": 0.01096700000000439
+  },
+  "examples/misc/matrix.dsp": {
+   "R-f": 0.009532000000007201,
+   "R-d": 0.009048999999993868,
+   "cert3-cpp-f": 0.01453499999999508,
+   "cert3-cpp-d": 0.016546999999992096,
+   "cert3-ocpp-f": 0.016774999999999096,
+   "cert3-ocpp-d": 0.01804700000000281
+  },
+  "examples/misc/midiTester.dsp": {
+   "R-f": 0.0067740000000036105,
+   "R-d": 0.005606000000000222,
+   "cert3-cpp-f": 0.006879999999995334,
+   "cert3-cpp-d": 0.006926999999986805,
+   "cert3-ocpp-f": 0.007431999999994332,
+   "cert3-ocpp-d": 0.007495000000012908
+  },
+  "examples/misc/mixer.dsp": {
+   "R-f": 0.01449099999998893,
+   "R-d": 0.015063999999988198,
+   "cert3-cpp-f": 0.020140000000004932,
+   "cert3-cpp-d": 0.01938000000000173,
+   "cert3-ocpp-f": 0.025597999999998677,
+   "cert3-ocpp-d": 0.024887999999986476
+  },
+  "examples/misc/paradigma.dsp": {
+   "R-f": 0.06359299999997958,
+   "R-d": 0.06328800000001067,
+   "cert3-cpp-f": 0.09376799999997587,
+   "cert3-cpp-d": 0.09250499999997785,
+   "cert3-ocpp-f": 0.10842000000002017,
+   "cert3-ocpp-d": 0.10757700000001691
+  },
+  "examples/misc/sflooper.dsp": {
+   "R-f": 0.009606000000008663,
+   "R-d": 0.008032999999997514,
+   "cert3-cpp-f": 0.008348000000005129,
+   "cert3-cpp-d": 0.00902099999999706,
+   "cert3-ocpp-f": 0.009083999999997872,
+   "cert3-ocpp-d": 0.009140000000012805
+  },
+  "examples/misc/statespace.dsp": {
+   "R-f": 0.01154300000000319,
+   "R-d": 0.012167000000005146,
+   "cert3-cpp-f": 0.01849100000000803,
+   "cert3-cpp-d": 0.01865499999998832,
+   "cert3-ocpp-f": 0.023093999999993287,
+   "cert3-ocpp-d": 0.023619999999986874
+  },
+  "examples/misc/switcher.dsp": {
+   "R-f": 0.003140000000001919,
+   "R-d": 0.0027359999999987394,
+   "cert3-cpp-f": 0.002758000000000038,
+   "cert3-cpp-d": 0.0024449999999944794,
+   "cert3-ocpp-f": 0.002337999999994622,
+   "cert3-ocpp-d": 0.0022369999999902745
+  },
+  "examples/misc/tester.dsp": {
+   "R-f": 0.012944000000004507,
+   "R-d": 0.011646000000016699,
+   "cert3-cpp-f": 0.015820999999998975,
+   "cert3-cpp-d": 0.01385899999999296,
+   "cert3-ocpp-f": 0.017143000000007902,
+   "cert3-ocpp-d": 0.015413999999982053
+  },
+  "examples/misc/tester2.dsp": {
+   "R-f": 0.013568000000017122,
+   "R-d": 0.012032999999981087,
+   "cert3-cpp-f": 0.017756999999992473,
+   "cert3-cpp-d": 0.01557699999999329,
+   "cert3-ocpp-f": 0.017377000000010412,
+   "cert3-ocpp-d": 0.015372999999989645
+  },
+  "examples/old/freeverb.dsp": {
+   "R-f": 0.012091000000012286,
+   "R-d": 0.012558000000012726,
+   "cert3-cpp-f": 0.020419000000003962,
+   "cert3-cpp-d": 0.019598000000005555,
+   "cert3-ocpp-f": 0.0225070000000116,
+   "cert3-ocpp-d": 0.021945000000002324
+  },
+  "examples/old/rewriting/fact.dsp": {
+   "R-f": 0.0026349999999979445,
+   "R-d": 0.0018420000000105574,
+   "cert3-cpp-f": 0.001988000000022083,
+   "cert3-cpp-d": 0.0019780000000046982,
+   "cert3-ocpp-f": 0.001859000000010269,
+   "cert3-ocpp-d": 0.00185900000002448
+  },
+  "examples/old/rewriting/fold.dsp": {
+   "R-f": 0.003107999999997446,
+   "R-d": 0.003066000000018221,
+   "cert3-cpp-f": 0.0034049999999865577,
+   "cert3-cpp-d": 0.0032460000000220646,
+   "cert3-ocpp-f": 0.0032199999999988904,
+   "cert3-ocpp-d": 0.003242000000000189
+  },
+  "examples/old/rewriting/mesh.dsp": {
+   "R-f": 0.0020999999999986585,
+   "R-d": 0.0021150000000034197,
+   "cert3-cpp-f": 0.0025200000000040745,
+   "cert3-cpp-d": 0.0023759999999981574,
+   "cert3-ocpp-f": 0.0024779999999999802,
+   "cert3-ocpp-d": 0.0024579999999900792
+  },
+  "examples/old/rewriting/serial.dsp": {
+   "R-f": 0.0018919999999980064,
+   "R-d": 0.0018099999999776628,
+   "cert3-cpp-f": 0.0020169999999950505,
+   "cert3-cpp-d": 0.0018679999999982044,
+   "cert3-ocpp-f": 0.0018390000000074735,
+   "cert3-ocpp-d": 0.0018810000000151206
+  },
+  "examples/old/rewriting/sum.dsp": {
+   "R-f": 0.004704000000003816,
+   "R-d": 0.004566999999994437,
+   "cert3-cpp-f": 0.005585999999997426,
+   "cert3-cpp-d": 0.005290000000002237,
+   "cert3-ocpp-f": 0.005889000000003364,
+   "cert3-ocpp-d": 0.005838000000004229
+  },
+  "examples/phasing/flanger.dsp": {
+   "R-f": 0.024444000000016786,
+   "R-d": 0.025154999999987382,
+   "cert3-cpp-f": 0.027823000000001485,
+   "cert3-cpp-d": 0.028469000000001188,
+   "cert3-ocpp-f": 0.030744999999985367,
+   "cert3-ocpp-d": 0.030035999999999063
+  },
+  "examples/phasing/phaser.dsp": {
+   "R-f": 0.032797000000016396,
+   "R-d": 0.030574000000001433,
+   "cert3-cpp-f": 0.044975000000015086,
+   "cert3-cpp-d": 0.041581999999991126,
+   "cert3-ocpp-f": 0.05239100000001429,
+   "cert3-ocpp-d": 0.049481999999997583
+  },
+  "examples/phasing/phaserFlangerLab.dsp": {
+   "R-f": 0.30160699999999707,
+   "R-d": 0.333947000000002,
+   "cert3-cpp-f": 0.4449229999999993,
+   "cert3-cpp-d": 0.3946170000000109,
+   "cert3-ocpp-f": 0.5262759999999922,
+   "cert3-ocpp-d": 0.43996200000002617
+  },
+  "examples/physicalModeling/brass.dsp": {
+   "R-f": 0.044191000000001424,
+   "R-d": 0.04362099999998392,
+   "cert3-cpp-f": 0.051256999999999664,
+   "cert3-cpp-d": 0.051259999999999195,
+   "cert3-ocpp-f": 0.055914999999995274,
+   "cert3-ocpp-d": 0.055023000000005595
+  },
+  "examples/physicalModeling/brassMIDI.dsp": {
+   "R-f": 0.04880900000000565,
+   "R-d": 0.04347999999998464,
+   "cert3-cpp-f": 0.0567380000000135,
+   "cert3-cpp-d": 0.05120000000000857,
+   "cert3-ocpp-f": 0.06056800000001772,
+   "cert3-ocpp-d": 0.05498600000000664
+  },
+  "examples/physicalModeling/churchBell.dsp": {
+   "R-f": 0.10152600000001044,
+   "R-d": 0.10378400000000099,
+   "cert3-cpp-f": 0.13898800000001188,
+   "cert3-cpp-d": 0.13826499999998987,
+   "cert3-ocpp-f": 0.16605699999997725,
+   "cert3-ocpp-d": 0.1656730000000195
+  },
+  "examples/physicalModeling/clarinet.dsp": {
+   "R-f": 0.038472999999996205,
+   "R-d": 0.03743500000001987,
+   "cert3-cpp-f": 0.0437929999999902,
+   "cert3-cpp-d": 0.04288000000000736,
+   "cert3-ocpp-f": 0.04666199999999421,
+   "cert3-ocpp-d": 0.04563999999998103
+  },
+  "examples/physicalModeling/clarinetMIDI.dsp": {
+   "R-f": 0.06146500000001609,
+   "R-d": 0.050055000000000405,
+   "cert3-cpp-f": 0.0686499999999981,
+   "cert3-cpp-d": 0.05661100000000374,
+   "cert3-ocpp-f": 0.07131100000001567,
+   "cert3-ocpp-d": 0.06032599999999633
+  },
+  "examples/physicalModeling/djembeMIDI.dsp": {
+   "R-f": 0.03940300000000008,
+   "R-d": 0.039525000000004695,
+   "cert3-cpp-f": 0.05498700000000056,
+   "cert3-cpp-d": 0.05537100000000805,
+   "cert3-ocpp-f": 0.06447499999999451,
+   "cert3-ocpp-d": 0.06450700000000253
+  },
+  "examples/physicalModeling/elecGuitarMIDI.dsp": {
+   "R-f": 0.057618999999995424,
+   "R-d": 0.058781000000021066,
+   "cert3-cpp-f": 0.06691500000000161,
+   "cert3-cpp-d": 0.06635100000000804,
+   "cert3-ocpp-f": 0.07069099999999295,
+   "cert3-ocpp-d": 0.06925999999998922
+  },
+  "examples/physicalModeling/englishBell.dsp": {
+   "R-f": 0.10190499999999503,
+   "R-d": 0.10265300000001076,
+   "cert3-cpp-f": 0.13813800000000498,
+   "cert3-cpp-d": 0.13855200000000423,
+   "cert3-ocpp-f": 0.16425500000001136,
+   "cert3-ocpp-d": 0.16636200000000656
+  },
+  "examples/physicalModeling/faust-stk/NLFeks.dsp": {
+   "R-f": 0.06417000000000073,
+   "R-d": 0.061382000000001824,
+   "cert3-cpp-f": 0.08828699999999401,
+   "cert3-cpp-d": 0.08780699999999442,
+   "cert3-ocpp-f": 0.10896200000000178,
+   "cert3-ocpp-d": 0.10837699999999018
+  },
+  "examples/physicalModeling/faust-stk/NLFfm.dsp": {
+   "R-f": 0.06002000000000862,
+   "R-d": 0.05730799999999192,
+   "cert3-cpp-f": 0.08394599999999386,
+   "cert3-cpp-d": 0.07713200000000242,
+   "cert3-ocpp-f": 0.10176599999999425,
+   "cert3-ocpp-d": 0.09466799999998798
+  },
+  "examples/physicalModeling/faust-stk/bass.dsp": {
+   "R-f": 0.066828000000001,
+   "R-d": 0.06281399999999948,
+   "cert3-cpp-f": 0.08872000000000568,
+   "cert3-cpp-d": 0.08986500000000319,
+   "cert3-ocpp-f": 0.10959399999999064,
+   "cert3-ocpp-d": 0.10881800000001718
+  },
+  "examples/physicalModeling/faust-stk/blowBottle.dsp": {
+   "R-f": 0.06890600000000191,
+   "R-d": 0.0681560000000232,
+   "cert3-cpp-f": 0.09470599999997376,
+   "cert3-cpp-d": 0.09345400000000481,
+   "cert3-ocpp-f": 0.11691499999999522,
+   "cert3-ocpp-d": 0.11463099999999216
+  },
+  "examples/physicalModeling/faust-stk/bowed.dsp": {
+   "R-f": null,
+   "R-d": null,
+   "cert3-cpp-f": null,
+   "cert3-cpp-d": null,
+   "cert3-ocpp-f": null,
+   "cert3-ocpp-d": null
+  },
+  "examples/physicalModeling/faust-stk/brass.dsp": {
+   "R-f": 0.0714540000000099,
+   "R-d": 0.06965700000001007,
+   "cert3-cpp-f": 0.09674500000001984,
+   "cert3-cpp-d": 0.09330399999998562,
+   "cert3-ocpp-f": 0.11793399999998755,
+   "cert3-ocpp-d": 0.11494499999999874
+  },
+  "examples/physicalModeling/faust-stk/clarinet.dsp": {
+   "R-f": 0.06657899999997952,
+   "R-d": 0.0664399999999965,
+   "cert3-cpp-f": 0.09249199999999291,
+   "cert3-cpp-d": 0.09178100000001521,
+   "cert3-ocpp-f": 0.11435000000000173,
+   "cert3-ocpp-d": 0.1113309999999963
+  },
+  "examples/physicalModeling/faust-stk/flute.dsp": {
+   "R-f": 0.07081999999999766,
+   "R-d": 0.06921799999998868,
+   "cert3-cpp-f": 0.09480899999999082,
+   "cert3-cpp-d": 0.09302399999999977,
+   "cert3-ocpp-f": 0.11686700000000982,
+   "cert3-ocpp-d": 0.11342000000001562
+  },
+  "examples/physicalModeling/faust-stk/fluteStk.dsp": {
+   "R-f": 0.06893600000001143,
+   "R-d": 0.06663399999998632,
+   "cert3-cpp-f": 0.0928570000000164,
+   "cert3-cpp-d": 0.09204099999999471,
+   "cert3-ocpp-f": 0.11410800000000165,
+   "cert3-ocpp-d": 0.11210699999999818
+  },
+  "examples/physicalModeling/faust-stk/glassHarmonica.dsp": {
+   "R-f": 0.07993300000001824,
+   "R-d": 0.0786490000000093,
+   "cert3-cpp-f": 0.10932299999999273,
+   "cert3-cpp-d": 0.10846700000000808,
+   "cert3-ocpp-f": 0.13661000000001522,
+   "cert3-ocpp-d": 0.13452399999998121
+  },
+  "examples/physicalModeling/faust-stk/harpsi.dsp": {
+   "R-f": 0.05897399999998143,
+   "R-d": 0.05834800000000229,
+   "cert3-cpp-f": 0.08366699999998772,
+   "cert3-cpp-d": 0.08156500000001188,
+   "cert3-ocpp-f": 0.10310300000001149,
+   "cert3-ocpp-d": 0.10059900000000965
+  },
+  "examples/physicalModeling/faust-stk/modalBar.dsp": {
+   "R-f": 0.0756990000000215,
+   "R-d": 0.07477600000001061,
+   "cert3-cpp-f": 0.1016829999999942,
+   "cert3-cpp-d": 0.09939799999998655,
+   "cert3-ocpp-f": 0.1255449999999776,
+   "cert3-ocpp-d": 0.12224599999998986
+  },
+  "examples/physicalModeling/faust-stk/piano.dsp": {
+   "R-f": 0.06826100000000679,
+   "R-d": 0.07141800000000842,
+   "cert3-cpp-f": null,
+   "cert3-cpp-d": null,
+   "cert3-ocpp-f": null,
+   "cert3-ocpp-d": null
+  },
+  "examples/physicalModeling/faust-stk/piano1.dsp": {
+   "R-f": 1.088589000000006,
+   "R-d": 1.0836830000000148,
+   "cert3-cpp-f": 0.9152620000000056,
+   "cert3-cpp-d": 0.9222130000000064,
+   "cert3-ocpp-f": 0.944790999999995,
+   "cert3-ocpp-d": 0.9426929999999913
+  },
+  "examples/physicalModeling/faust-stk/saxophony.dsp": {
+   "R-f": 0.0660380000000167,
+   "R-d": 0.06192000000000064,
+   "cert3-cpp-f": 0.09027700000000394,
+   "cert3-cpp-d": 0.08889599999999476,
+   "cert3-ocpp-f": 0.10993900000000778,
+   "cert3-ocpp-d": 0.10666800000000976
+  },
+  "examples/physicalModeling/faust-stk/sitar.dsp": {
+   "R-f": 0.04608499999999438,
+   "R-d": 0.0467700000000022,
+   "cert3-cpp-f": 0.06465000000000387,
+   "cert3-cpp-d": 0.0645640000000256,
+   "cert3-ocpp-f": 0.07838100000001802,
+   "cert3-ocpp-d": 0.07692999999998307
+  },
+  "examples/physicalModeling/faust-stk/tibetanBowl.dsp": {
+   "R-f": 0.09609399999999368,
+   "R-d": 0.09420000000000428,
+   "cert3-cpp-f": 0.13309700000000646,
+   "cert3-cpp-d": 0.13148200000001253,
+   "cert3-ocpp-f": 0.17717000000000027,
+   "cert3-ocpp-d": 0.1744809999999788
+  },
+  "examples/physicalModeling/faust-stk/tunedBar.dsp": {
+   "R-f": 0.07362199999998609,
+   "R-d": 0.07410899999999643,
+   "cert3-cpp-f": 0.10091799999999651,
+   "cert3-cpp-d": 0.09901600000000599,
+   "cert3-ocpp-f": 0.12543499999998176,
+   "cert3-ocpp-d": 0.12316099999999963
+  },
+  "examples/physicalModeling/faust-stk/uniBar.dsp": {
+   "R-f": 0.06021900000000002,
+   "R-d": 0.06038500000000013,
+   "cert3-cpp-f": 0.08071699999998572,
+   "cert3-cpp-d": 0.0810300000000268,
+   "cert3-ocpp-f": 0.10280999999999096,
+   "cert3-ocpp-d": 0.102277999999977
+  },
+  "examples/physicalModeling/faust-stk/voiceForm.dsp": {
+   "R-f": 0.0808469999999879,
+   "R-d": 0.07559700000002323,
+   "cert3-cpp-f": 0.10717599999997418,
+   "cert3-cpp-d": 0.10077500000001294,
+   "cert3-ocpp-f": 0.12930399999997633,
+   "cert3-ocpp-d": 0.12104600000002819
+  },
+  "examples/physicalModeling/fds/1dDampedWaveEquation.dsp": {
+   "R-f": 0.12145500000001164,
+   "R-d": 0.12035799999998886,
+   "cert3-cpp-f": 0.16142800000002566,
+   "cert3-cpp-d": 0.1610420000000019,
+   "cert3-ocpp-f": 0.20830100000000584,
+   "cert3-ocpp-d": 0.205093999999999
+  },
+  "examples/physicalModeling/fds/2dKirchhoffThinPlate.dsp": {
+   "R-f": 2.003197999999994,
+   "R-d": 1.9815460000000193,
+   "cert3-cpp-f": 2.1410559999999847,
+   "cert3-cpp-d": 2.159494000000006,
+   "cert3-ocpp-f": 2.70983200000002,
+   "cert3-ocpp-d": 2.7522160000000255
+  },
+  "examples/physicalModeling/fds/BowedString.dsp": {
+   "R-f": 0.2390490000000085,
+   "R-d": 0.23804299999999046,
+   "cert3-cpp-f": 0.29839599999996835,
+   "cert3-cpp-d": 0.308365000000002,
+   "cert3-ocpp-f": 0.44408100000002904,
+   "cert3-ocpp-d": 0.45370999999998674
+  },
+  "examples/physicalModeling/fds/ControllableNonPhysicalString.dsp": {
+   "R-f": 0.19996400000002268,
+   "R-d": 0.1989820000000364,
+   "cert3-cpp-f": 0.23495600000003236,
+   "cert3-cpp-d": 0.24175800000001857,
+   "cert3-ocpp-f": 0.30427999999999855,
+   "cert3-ocpp-d": 0.3136820000000142
+  },
+  "examples/physicalModeling/fds/HammeredString.dsp": {
+   "R-f": 0.22614999999998275,
+   "R-d": 0.23199999999995669,
+   "cert3-cpp-f": 0.2872900000000449,
+   "cert3-cpp-d": 0.28654100000000327,
+   "cert3-ocpp-f": 0.4076769999999996,
+   "cert3-ocpp-d": 0.41241400000004447
+  },
+  "examples/physicalModeling/fds/PianoHammeredString.dsp": {
+   "R-f": 0.16878500000000685,
+   "R-d": 0.1730380000000089,
+   "cert3-cpp-f": 0.21887499999998283,
+   "cert3-cpp-d": 0.22214199999999096,
+   "cert3-ocpp-f": 0.2973379999999963,
+   "cert3-ocpp-d": 0.3004999999999889
+  },
+  "examples/physicalModeling/fds/StiffString.dsp": {
+   "R-f": 0.1967490000000005,
+   "R-d": 0.1945729999999699,
+   "cert3-cpp-f": 0.23425099999998267,
+   "cert3-cpp-d": 0.24311100000000252,
+   "cert3-ocpp-f": 0.3042119999999642,
+   "cert3-ocpp-d": 0.310934999999958
+  },
+  "examples/physicalModeling/flute.dsp": {
+   "R-f": 0.05774700000000621,
+   "R-d": 0.05667799999994472,
+   "cert3-cpp-f": 0.06390000000001805,
+   "cert3-cpp-d": 0.061391000000011076,
+   "cert3-ocpp-f": 0.06937799999998617,
+   "cert3-ocpp-d": 0.06872599999997675
+  },
+  "examples/physicalModeling/fluteMIDI.dsp": {
+   "R-f": 0.06323499999998816,
+   "R-d": 0.059399000000002644,
+   "cert3-cpp-f": 0.0700249999999798,
+   "cert3-cpp-d": 0.06736699999998663,
+   "cert3-ocpp-f": 0.07522799999997076,
+   "cert3-ocpp-d": 0.07260899999999992
+  },
+  "examples/physicalModeling/frenchBell.dsp": {
+   "R-f": 0.10263600000003592,
+   "R-d": 0.10226800000002356,
+   "cert3-cpp-f": 0.13998599999999328,
+   "cert3-cpp-d": 0.1392359999999755,
+   "cert3-ocpp-f": 0.16445200000001847,
+   "cert3-ocpp-d": 0.1641910000000486
+  },
+  "examples/physicalModeling/germanBell.dsp": {
+   "R-f": 0.1012569999999613,
+   "R-d": 0.10195200000002558,
+   "cert3-cpp-f": 0.13882399999999606,
+   "cert3-cpp-d": 0.1380949999999892,
+   "cert3-ocpp-f": 0.16520299999999466,
+   "cert3-ocpp-d": 0.16544699999998613
+  },
+  "examples/physicalModeling/guitarMIDI.dsp": {
+   "R-f": 0.057268999999983805,
+   "R-d": 0.05840599999996243,
+   "cert3-cpp-f": 0.06532500000003338,
+   "cert3-cpp-d": 0.06574800000002057,
+   "cert3-ocpp-f": 0.06939999999995905,
+   "cert3-ocpp-d": 0.06931800000002752
+  },
+  "examples/physicalModeling/karplus.dsp": {
+   "R-f": 0.031618999999984965,
+   "R-d": 0.029836000000010188,
+   "cert3-cpp-f": 0.03739400000002746,
+   "cert3-cpp-d": 0.0677249999999745,
+   "cert3-ocpp-f": 0.03924700000001735,
+   "cert3-ocpp-d": 0.06721599999999839
+  },
+  "examples/physicalModeling/marimbaMIDI.dsp": {
+   "R-f": 0.1300979999999683,
+   "R-d": 0.13047900000004375,
+   "cert3-cpp-f": 0.1784239999999926,
+   "cert3-cpp-d": 0.18104499999999746,
+   "cert3-ocpp-f": 0.2114869999999911,
+   "cert3-ocpp-d": 0.2092609999999553
+  },
+  "examples/physicalModeling/mi-faust/00_BasicOscillator/harmonicOscillator.dsp": {
+   "R-f": 0.0060370000000418145,
+   "R-d": 0.00535300000004213,
+   "cert3-cpp-f": 0.02803800000003065,
+   "cert3-cpp-d": 0.02889200000001324,
+   "cert3-ocpp-f": 0.029509999999980607,
+   "cert3-ocpp-d": 0.03018900000000002
+  },
+  "examples/physicalModeling/mi-faust/00_BasicOscillator/harmonicOscillator2.dsp": {
+   "R-f": 0.007903999999989253,
+   "R-d": 0.00659500000004698,
+   "cert3-cpp-f": 0.0071849999999926695,
+   "cert3-cpp-d": 0.007038000000001432,
+   "cert3-ocpp-f": 0.007312000000020191,
+   "cert3-ocpp-d": 0.007422999999981528
+  },
+  "examples/physicalModeling/mi-faust/00_BasicOscillator/harmonicOscillator3.dsp": {
+   "R-f": 0.006102999999995973,
+   "R-d": 0.006053999999984683,
+   "cert3-cpp-f": 0.007130000000046266,
+   "cert3-cpp-d": 0.007349000000033357,
+   "cert3-ocpp-f": 0.007325000000008686,
+   "cert3-ocpp-d": 0.0075649999999996
+  },
+  "examples/physicalModeling/mi-faust/01_ParamControl/paramOsc.dsp": {
+   "R-f": 0.005630999999993946,
+   "R-d": 0.005377999999979011,
+   "cert3-cpp-f": 0.027471999999995944,
+   "cert3-cpp-d": 0.029682000000008202,
+   "cert3-ocpp-f": 0.029709000000003982,
+   "cert3-ocpp-d": 0.029320999999960407
+  },
+  "examples/physicalModeling/mi-faust/02_AudioParamControl/audioParamOsc.dsp": {
+   "R-f": 0.009597999999996887,
+   "R-d": 0.008347000000000548,
+   "cert3-cpp-f": 0.009699000000026103,
+   "cert3-cpp-d": 0.00866699999999554,
+   "cert3-ocpp-f": 0.009351000000037857,
+   "cert3-ocpp-d": 0.00950699999997795
+  },
+  "examples/physicalModeling/mi-faust/03_HammerTime/hammerOsc.dsp": {
+   "R-f": 0.008051999999999282,
+   "R-d": 0.007582999999968365,
+   "cert3-cpp-f": 0.010715000000033115,
+   "cert3-cpp-d": 0.010075999999955343,
+   "cert3-ocpp-f": 0.011827000000010912,
+   "cert3-ocpp-d": 0.011757999999986168
+  },
+  "examples/physicalModeling/mi-faust/04_Gravity/bouncingOsc.dsp": {
+   "R-f": 0.008735999999970545,
+   "R-d": 0.00828700000000282,
+   "cert3-cpp-f": 0.010389999999965482,
+   "cert3-cpp-d": 0.010042000000012763,
+   "cert3-ocpp-f": 0.011805000000038035,
+   "cert3-ocpp-d": 0.011988999999985595
+  },
+  "examples/physicalModeling/mi-faust/05_PluckedOscillator/pluckedOsc.dsp": {
+   "R-f": 0.010062000000012006,
+   "R-d": 0.009212999999974159,
+   "cert3-cpp-f": 0.012346000000036383,
+   "cert3-cpp-d": 0.011100999999953842,
+   "cert3-ocpp-f": 0.012362999999986357,
+   "cert3-ocpp-d": 0.010930000000008988
+  },
+  "examples/physicalModeling/mi-faust/06_BowedOscillator/bowedOsc.dsp": {
+   "R-f": 0.009283999999972536,
+   "R-d": 0.009769999999960532,
+   "cert3-cpp-f": 0.012676999999989391,
+   "cert3-cpp-d": 0.011957000000016649,
+   "cert3-ocpp-f": 0.012487999999997612,
+   "cert3-ocpp-d": 0.01317200000005414
+  },
+  "examples/physicalModeling/mi-faust/07_NonLinearOscillator/nlOsc.dsp": {
+   "R-f": 0.010065000000018642,
+   "R-d": 0.010008999999996604,
+   "cert3-cpp-f": 0.014658999999994649,
+   "cert3-cpp-d": 0.0150889999999535,
+   "cert3-ocpp-f": 0.01602400000003712,
+   "cert3-ocpp-d": 0.01559700000002806
+  },
+  "examples/physicalModeling/mi-faust/08_TwoMassChain/2massChain.dsp": {
+   "R-f": 0.007706999999975039,
+   "R-d": 0.007017000000018925,
+   "cert3-cpp-f": 0.008575000000007549,
+   "cert3-cpp-d": 0.00887199999998245,
+   "cert3-ocpp-f": 0.008858999999993955,
+   "cert3-ocpp-d": 0.00887399999999161
+  },
+  "examples/physicalModeling/mi-faust/09_TinyString/tinyString.dsp": {
+   "R-f": 0.011904000000022563,
+   "R-d": 0.011792999999990172,
+   "cert3-cpp-f": 0.016577999999960014,
+   "cert3-cpp-d": 0.016402000000006467,
+   "cert3-ocpp-f": 0.01884400000000852,
+   "cert3-ocpp-d": 0.01895299999995359
+  },
+  "examples/physicalModeling/mi-faust/10_PluckedString/pluckedString.dsp": {
+   "R-f": 1.0444890000000413,
+   "R-d": 1.0496909999999957,
+   "cert3-cpp-f": 1.9211240000000345,
+   "cert3-cpp-d": 1.912653000000006,
+   "cert3-ocpp-f": 2.426583000000022,
+   "cert3-ocpp-d": 2.4073440000000303
+  },
+  "examples/physicalModeling/mi-faust/11_BowedString/bowedString.dsp": {
+   "R-f": 1.0347889999999964,
+   "R-d": 1.04007500000003,
+   "cert3-cpp-f": 1.6489949999999638,
+   "cert3-cpp-d": 1.659283000000002,
+   "cert3-ocpp-f": 1.9925209999999893,
+   "cert3-ocpp-d": 1.994968
+  },
+  "examples/physicalModeling/mi-faust/12_TriangleMesh/triangleMesh.dsp": {
+   "R-f": 0.10008399999998119,
+   "R-d": 0.0999090000000038,
+   "cert3-cpp-f": 0.1870439999999789,
+   "cert3-cpp-d": 0.1862029999999848,
+   "cert3-ocpp-f": 0.3050349999999895,
+   "cert3-ocpp-d": 0.3003659999999826
+  },
+  "examples/physicalModeling/mi-faust/13_Construction/construction.dsp": {
+   "R-f": 0.3824530000000337,
+   "R-d": 0.3810649999999569,
+   "cert3-cpp-f": 0.751525000000008,
+   "cert3-cpp-d": 0.7583619999999698,
+   "cert3-ocpp-f": 1.4871059999999972,
+   "cert3-ocpp-d": 1.4944769999999465
+  },
+  "examples/physicalModeling/mi-faust/14_Polyphonic/polyTriangle.dsp": {
+   "R-f": 0.008551000000004194,
+   "R-d": 0.008426000000028466,
+   "cert3-cpp-f": 0.012778999999987661,
+   "cert3-cpp-d": 0.013351000000014324,
+   "cert3-ocpp-f": 0.014113000000037346,
+   "cert3-ocpp-d": 0.015151999999979182
+  },
+  "examples/physicalModeling/mi-faust/15_PhysicalLFO/physicalLFO.dsp": {
+   "R-f": 0.01676499999999237,
+   "R-d": 0.01627800000002111,
+   "cert3-cpp-f": 0.02781699999999887,
+   "cert3-cpp-d": 0.029368000000026484,
+   "cert3-ocpp-f": 0.03323499999999768,
+   "cert3-ocpp-d": 0.032826999999954865
+  },
+  "examples/physicalModeling/modularInterpInstrMIDI.dsp": {
+   "R-f": 0.6109900000000081,
+   "R-d": 0.6139989999999713,
+   "cert3-cpp-f": 0.6552649999999645,
+   "cert3-cpp-d": 0.6624489999999952,
+   "cert3-ocpp-f": 0.7274789999999953,
+   "cert3-ocpp-d": 0.7392000000000323
+  },
+  "examples/physicalModeling/nylonGuitarMIDI.dsp": {
+   "R-f": 0.058522999999979675,
+   "R-d": 0.058168999999992366,
+   "cert3-cpp-f": 0.064713000000026,
+   "cert3-cpp-d": 0.06542000000003156,
+   "cert3-ocpp-f": 0.06783400000002615,
+   "cert3-ocpp-d": 0.06855399999997758
+  },
+  "examples/physicalModeling/old/harpe.dsp": {
+   "R-f": 0.015351999999978716,
+   "R-d": 0.01618500000004275,
+   "cert3-cpp-f": 0.02531600000003209,
+   "cert3-cpp-d": 0.026277999999983592,
+   "cert3-ocpp-f": 0.029431000000009533,
+   "cert3-ocpp-d": 0.02976799999999713
+  },
+  "examples/physicalModeling/old/karplus.dsp": {
+   "R-f": 0.005563999999971259,
+   "R-d": 0.004717999999954259,
+   "cert3-cpp-f": 0.00634900000000016,
+   "cert3-cpp-d": 0.006457000000011703,
+   "cert3-ocpp-f": 0.006908000000002801,
+   "cert3-ocpp-d": 0.006981999999972288
+  },
+  "examples/physicalModeling/old/karplus32.dsp": {
+   "R-f": 0.018557000000015478,
+   "R-d": 0.018782000000030052,
+   "cert3-cpp-f": 0.033359999999966305,
+   "cert3-cpp-d": 0.03509100000004395,
+   "cert3-ocpp-f": 0.03966199999995723,
+   "cert3-ocpp-d": 0.04025599999997098
+  },
+  "examples/physicalModeling/russianBell.dsp": {
+   "R-f": 0.10166299999998074,
+   "R-d": 0.10209299999996801,
+   "cert3-cpp-f": 0.13910900000001902,
+   "cert3-cpp-d": 0.13909100000000052,
+   "cert3-ocpp-f": 0.16603699999998867,
+   "cert3-ocpp-d": 0.1652339999999839
+  },
+  "examples/physicalModeling/standardBell.dsp": {
+   "R-f": 0.10003500000003385,
+   "R-d": 0.10289899999998653,
+   "cert3-cpp-f": 0.13817600000005825,
+   "cert3-cpp-d": 0.1384620000000254,
+   "cert3-ocpp-f": 0.16638799999997644,
+   "cert3-ocpp-d": 0.16734199999999788
+  },
+  "examples/physicalModeling/violin.dsp": {
+   "R-f": 0.04446000000000083,
+   "R-d": 0.04444300000001533,
+   "cert3-cpp-f": 0.06257700000001165,
+   "cert3-cpp-d": 0.12171699999997543,
+   "cert3-ocpp-f": 0.06509700000000151,
+   "cert3-ocpp-d": 0.12621300000000701
+  },
+  "examples/physicalModeling/violinMIDI.dsp": {
+   "R-f": 0.08959200000003875,
+   "R-d": 0.07213600000000042,
+   "cert3-cpp-f": 0.10713699999998028,
+   "cert3-cpp-d": 0.1496700000000004,
+   "cert3-ocpp-f": 0.11260199999998832,
+   "cert3-ocpp-d": 0.15366299999998745
+  },
+  "examples/physicalModeling/vocalBP.dsp": {
+   "R-f": 0.6456199999999797,
+   "R-d": 0.6087360000000146,
+   "cert3-cpp-f": 0.678611000000032,
+   "cert3-cpp-d": 0.6517790000000261,
+   "cert3-ocpp-f": 0.6888029999999858,
+   "cert3-ocpp-d": 0.6548790000000153
+  },
+  "examples/physicalModeling/vocalBPMIDI.dsp": {
+   "R-f": 0.6544370000000157,
+   "R-d": 0.6173900000000216,
+   "cert3-cpp-f": 0.6864789999999772,
+   "cert3-cpp-d": 0.6531430000000142,
+   "cert3-ocpp-f": 0.6962690000000009,
+   "cert3-ocpp-d": 0.6648619999999923
+  },
+  "examples/physicalModeling/vocalFOF.dsp": {
+   "R-f": 0.8840249999999585,
+   "R-d": 0.7864580000000103,
+   "cert3-cpp-f": 0.9370590000000121,
+   "cert3-cpp-d": 0.8222750000000048,
+   "cert3-ocpp-f": 0.9489210000000341,
+   "cert3-ocpp-d": 0.8392570000000461
+  },
+  "examples/physicalModeling/vocalFOFMIDI.dsp": {
+   "R-f": 0.8972909999999956,
+   "R-d": 0.793365000000037,
+   "cert3-cpp-f": 0.9482150000000189,
+   "cert3-cpp-d": 0.8309610000000092,
+   "cert3-ocpp-f": 0.9697660000000283,
+   "cert3-ocpp-d": 0.8546020000000141
+  },
+  "examples/pitchShifting/pitchShifter.dsp": {
+   "R-f": 0.007413999999982934,
+   "R-d": 0.007471000000023764,
+   "cert3-cpp-f": 0.008126000000018507,
+   "cert3-cpp-d": 0.00784000000002294,
+   "cert3-ocpp-f": 0.008298000000038996,
+   "cert3-ocpp-d": 0.008294000000049095
+  },
+  "examples/psychoacoustic/harmonicExciter.dsp": {
+   "R-f": 0.027899999999959846,
+   "R-d": 0.026706999999987602,
+   "cert3-cpp-f": 0.030507000000000062,
+   "cert3-cpp-d": 0.030394999999955985,
+   "cert3-ocpp-f": 0.03459199999998219,
+   "cert3-ocpp-d": 0.03465399999999619
+  },
+  "examples/quantizing/quantizedChords.dsp": {
+   "R-f": 0.05153000000003516,
+   "R-d": 0.04790599999995493,
+   "cert3-cpp-f": 0.07267500000003224,
+   "cert3-cpp-d": 0.06719699999998596,
+   "cert3-ocpp-f": 0.08789600000000064,
+   "cert3-ocpp-d": 0.07846499999999423
+  },
+  "examples/reverb/dattorro.dsp": {
+   "R-f": 0.02143299999997339,
+   "R-d": 0.02226699999998516,
+   "cert3-cpp-f": 0.02483899999996453,
+   "cert3-cpp-d": 0.02450999999999226,
+   "cert3-ocpp-f": 0.025963000000011505,
+   "cert3-ocpp-d": 0.026338000000009743
+  },
+  "examples/reverb/fdnRev.dsp": {
+   "R-f": 1.0883920000000415,
+   "R-d": 1.085335999999998,
+   "cert3-cpp-f": 2.7676130000000256,
+   "cert3-cpp-d": 2.7396160000000265,
+   "cert3-ocpp-f": 5.483932999999993,
+   "cert3-ocpp-d": 5.503163000000008
+  },
+  "examples/reverb/freeverb.dsp": {
+   "R-f": 0.030793999999950472,
+   "R-d": 0.029285000000022876,
+   "cert3-cpp-f": 0.043032999999987,
+   "cert3-cpp-d": 0.042712000000022954,
+   "cert3-ocpp-f": 0.046784999999999854,
+   "cert3-ocpp-d": 0.046974999999903844
+  },
+  "examples/reverb/greyhole.dsp": {
+   "R-f": 0.12936599999989795,
+   "R-d": 0.12862400000010865,
+   "cert3-cpp-f": 0.1901920000000601,
+   "cert3-cpp-d": 0.19021799999998734,
+   "cert3-ocpp-f": 0.2169079999999397,
+   "cert3-ocpp-d": 0.20813899999991747
+  },
+  "examples/reverb/jprev.dsp": {
+   "R-f": 0.2314309999999864,
+   "R-d": 0.23273200000001282,
+   "cert3-cpp-f": 0.35970300000005295,
+   "cert3-cpp-d": 0.3682509999999155,
+   "cert3-ocpp-f": 0.4751179999999522,
+   "cert3-ocpp-d": 0.4873640000000634
+  },
+  "examples/reverb/kb_rom_rev1.dsp": {
+   "R-f": 0.03668999999992195,
+   "R-d": 0.03370700000002813,
+   "cert3-cpp-f": 0.04993399999990089,
+   "cert3-cpp-d": 0.04530799999995594,
+   "cert3-ocpp-f": 0.05623600000004103,
+   "cert3-ocpp-d": 0.05156700000004122
+  },
+  "examples/reverb/reverbDesigner.dsp": {
+   "R-f": 1.0872339999999525,
+   "R-d": 1.0925380000000402,
+   "cert3-cpp-f": 2.755172999999999,
+   "cert3-cpp-d": 2.734672999999958,
+   "cert3-ocpp-f": 5.48571699999998,
+   "cert3-ocpp-d": 5.476612000000081
+  },
+  "examples/reverb/reverbTank.dsp": {
+   "R-f": 1.51822999999996,
+   "R-d": 1.2915159999999233,
+   "cert3-cpp-f": 1.5592970000000221,
+   "cert3-cpp-d": 1.3176709999999332,
+   "cert3-ocpp-f": 1.5725490000000093,
+   "cert3-ocpp-d": 1.3469329999999715
+  },
+  "examples/reverb/reverbTester.dsp": {
+   "R-f": 0.01812599999995257,
+   "R-d": 0.018009000000077435,
+   "cert3-cpp-f": 0.01958200000007082,
+   "cert3-cpp-d": 0.01926299999997383,
+   "cert3-ocpp-f": 0.01971800000008983,
+   "cert3-ocpp-d": 0.019556000000044094
+  },
+  "examples/reverb/springreverb.dsp": {
+   "R-f": 0.04827600000002974,
+   "R-d": 0.04801000000004052,
+   "cert3-cpp-f": 0.06756000000000029,
+   "cert3-cpp-d": 0.06781299999992285,
+   "cert3-ocpp-f": 0.08784999999998888,
+   "cert3-ocpp-d": 0.0868860000000069
+  },
+  "examples/reverb/vital_rev.dsp": {
+   "R-f": 0.6049550000000536,
+   "R-d": 0.6082979999999623,
+   "cert3-cpp-f": 0.7090000000000032,
+   "cert3-cpp-d": 0.7209839999999872,
+   "cert3-ocpp-f": 0.8168939999999054,
+   "cert3-ocpp-d": 0.8163840000000278
+  },
+  "examples/reverb/zitaRev.dsp": {
+   "R-f": 0.05281700000001166,
+   "R-d": 0.053762999999960925,
+   "cert3-cpp-f": 0.07257000000002023,
+   "cert3-cpp-d": 0.07251599999998604,
+   "cert3-ocpp-f": 0.0885460000000009,
+   "cert3-ocpp-d": 0.08795199999999426
+  },
+  "examples/reverb/zitaRevFDN.dsp": {
+   "R-f": 0.04486700000010302,
+   "R-d": 0.04473799999999528,
+   "cert3-cpp-f": 0.05745300000000242,
+   "cert3-cpp-d": 0.05736899999999423,
+   "cert3-ocpp-f": 0.06994199999996198,
+   "cert3-ocpp-d": 0.06987999999989825
+  },
+  "examples/smartKeyboard/acGuitar.dsp": {
+   "R-f": 0.19769599999998633,
+   "R-d": 0.19999200000001593,
+   "cert3-cpp-f": 0.2343609999999572,
+   "cert3-cpp-d": 0.23473199999997263,
+   "cert3-ocpp-f": 0.255010999999989,
+   "cert3-ocpp-d": 0.25180999999994214
+  },
+  "examples/smartKeyboard/associatedEffects/elecGuitarEffect.dsp": {
+   "R-f": 0.05611399999995115,
+   "R-d": 0.05595000000001704,
+   "cert3-cpp-f": 0.07680300000006213,
+   "cert3-cpp-d": 0.07775299999997287,
+   "cert3-ocpp-f": 0.09519100000000691,
+   "cert3-ocpp-d": 0.0934740000000076
+  },
+  "examples/smartKeyboard/associatedEffects/myEffect.dsp": {
+   "R-f": 0.05294399999994681,
+   "R-d": 0.053569000000038614,
+   "cert3-cpp-f": 0.07154699999998826,
+   "cert3-cpp-d": 0.07163399999996756,
+   "cert3-ocpp-f": 0.08851299999989948,
+   "cert3-ocpp-d": 0.08783700000007855
+  },
+  "examples/smartKeyboard/associatedEffects/reverb.dsp": {
+   "R-f": 0.05452299999991794,
+   "R-d": 0.05427099999999996,
+   "cert3-cpp-f": 0.07206300000004262,
+   "cert3-cpp-d": 0.07184399999998448,
+   "cert3-ocpp-f": 0.08714299999994068,
+   "cert3-ocpp-d": 0.0876660000000129
+  },
+  "examples/smartKeyboard/bells.dsp": {
+   "R-f": 0.08896100000001894,
+   "R-d": 0.0889269999999982,
+   "cert3-cpp-f": 0.12173700000003151,
+   "cert3-cpp-d": 0.12172700000001413,
+   "cert3-ocpp-f": 0.14456700000001632,
+   "cert3-ocpp-d": 0.14451199999999886
+  },
+  "examples/smartKeyboard/bowed.dsp": {
+   "R-f": 0.02202700000000135,
+   "R-d": 0.019805999999988444,
+   "cert3-cpp-f": 0.02974899999993852,
+   "cert3-cpp-d": 0.02220100000000258,
+   "cert3-ocpp-f": 0.032867999999922404,
+   "cert3-ocpp-d": 0.024426000000055126
+  },
+  "examples/smartKeyboard/brass.dsp": {
+   "R-f": 0.052379999999971005,
+   "R-d": 0.05181099999998651,
+   "cert3-cpp-f": 0.06080999999996095,
+   "cert3-cpp-d": 0.05860400000002386,
+   "cert3-ocpp-f": 0.06310000000001281,
+   "cert3-ocpp-d": 0.06274599999995445
+  },
+  "examples/smartKeyboard/clarinet.dsp": {
+   "R-f": 0.05534500000000264,
+   "R-d": 0.0565289999999834,
+   "cert3-cpp-f": null,
+   "cert3-cpp-d": null,
+   "cert3-ocpp-f": null,
+   "cert3-ocpp-d": null
+  },
+  "examples/smartKeyboard/crazyGuiro.dsp": {
+   "R-f": 0.026895999999958065,
+   "R-d": 0.026568000000025904,
+   "cert3-cpp-f": 0.034759000000079254,
+   "cert3-cpp-d": 0.035386000000045215,
+   "cert3-ocpp-f": 0.038806999999948744,
+   "cert3-ocpp-d": 0.03861799999999249
+  },
+  "examples/smartKeyboard/drums.dsp": {
+   "R-f": 0.03988900000008755,
+   "R-d": 0.03923200000001259,
+   "cert3-cpp-f": 0.05514400000002695,
+   "cert3-cpp-d": 0.05557799999998281,
+   "cert3-ocpp-f": 0.06516800000007095,
+   "cert3-ocpp-d": 0.06593000000005844
+  },
+  "examples/smartKeyboard/dubDub.dsp": {
+   "R-f": 0.023528000000041516,
+   "R-d": 0.020297999999982608,
+   "cert3-cpp-f": 0.026067000000047358,
+   "cert3-cpp-d": 0.021142999999952394,
+   "cert3-ocpp-f": 0.027564000000033673,
+   "cert3-ocpp-d": 0.02408400000005173
+  },
+  "examples/smartKeyboard/elecGuitar.dsp": {
+   "R-f": 0.05247099999998284,
+   "R-d": 0.05259799999991088,
+   "cert3-cpp-f": 0.05947400000003711,
+   "cert3-cpp-d": 0.059288999999935754,
+   "cert3-ocpp-f": 0.06323900000007399,
+   "cert3-ocpp-d": 0.06380999999998949
+  },
+  "examples/smartKeyboard/fm.dsp": {
+   "R-f": 0.012976000000023191,
+   "R-d": 0.012657000000061203,
+   "cert3-cpp-f": 0.015746000000000038,
+   "cert3-cpp-d": 0.013961999999992258,
+   "cert3-ocpp-f": 0.016893000000024472,
+   "cert3-ocpp-d": 0.014737000000017986
+  },
+  "examples/smartKeyboard/frog.dsp": {
+   "R-f": 0.01983499999995786,
+   "R-d": 0.01978100000005867,
+   "cert3-cpp-f": 0.022696999999965328,
+   "cert3-cpp-d": 0.021179999999958454,
+   "cert3-ocpp-f": 0.023854999999940674,
+   "cert3-ocpp-d": 0.022532000000047958
+  },
+  "examples/smartKeyboard/harp.dsp": {
+   "R-f": 0.01662200000001235,
+   "R-d": 0.016794999999916627,
+   "cert3-cpp-f": 0.01775100000001828,
+   "cert3-cpp-d": 0.016942999999912445,
+   "cert3-ocpp-f": 0.01963200000004406,
+   "cert3-ocpp-d": 0.01865900000007059
+  },
+  "examples/smartKeyboard/midiOnly.dsp": {
+   "R-f": 0.013896000000045206,
+   "R-d": 0.012556999999944196,
+   "cert3-cpp-f": 0.016698000000026525,
+   "cert3-cpp-d": 0.014214999999929034,
+   "cert3-ocpp-f": 0.01741299999991952,
+   "cert3-ocpp-d": 0.014976000000068268
+  },
+  "examples/smartKeyboard/multiSynth.dsp": {
+   "R-f": 0.029773999999989087,
+   "R-d": 0.027458000000009974,
+   "cert3-cpp-f": 0.03430499999997494,
+   "cert3-cpp-d": 0.031086999999935472,
+   "cert3-ocpp-f": 0.037726000000070314,
+   "cert3-ocpp-d": 0.03235899999999248
+  },
+  "examples/smartKeyboard/toy.dsp": {
+   "R-f": 0.019253999999989446,
+   "R-d": 0.019329000000006147,
+   "cert3-cpp-f": 0.022648999999944408,
+   "cert3-cpp-d": 0.020712000000074227,
+   "cert3-ocpp-f": 0.02303399999996003,
+   "cert3-ocpp-d": 0.022463999999992268
+  },
+  "examples/smartKeyboard/trumpet.dsp": {
+   "R-f": 0.020493999999985135,
+   "R-d": 0.020370999999926198,
+   "cert3-cpp-f": 0.022995999999970707,
+   "cert3-cpp-d": 0.021779000000030635,
+   "cert3-ocpp-f": 0.023625999999929093,
+   "cert3-ocpp-d": 0.023349999999901172
+  },
+  "examples/smartKeyboard/turenas.dsp": {
+   "R-f": 0.02170699999999215,
+   "R-d": 0.017318000000031475,
+   "cert3-cpp-f": 0.02527099999999649,
+   "cert3-cpp-d": 0.019740999999932285,
+   "cert3-ocpp-f": 0.029297000000056528,
+   "cert3-ocpp-d": 0.02326300000002135
+  },
+  "examples/smartKeyboard/violin.dsp": {
+   "R-f": 0.13580399999998605,
+   "R-d": 0.1380069999999307,
+   "cert3-cpp-f": 0.19912900000002054,
+   "cert3-cpp-d": 0.4585090000000136,
+   "cert3-ocpp-f": 0.212470000000053,
+   "cert3-ocpp-d": 0.476470999999961
+  },
+  "examples/smartKeyboard/violin2.dsp": {
+   "R-f": 0.13549199999991401,
+   "R-d": 0.13776900000004844,
+   "cert3-cpp-f": 0.19872999999999763,
+   "cert3-cpp-d": 0.4675349999999696,
+   "cert3-ocpp-f": 0.2127219999999994,
+   "cert3-ocpp-d": 0.4818419999999577
+  },
+  "examples/smartKeyboard/vocal.dsp": {
+   "R-f": 0.643689999999971,
+   "R-d": 0.609859999999955,
+   "cert3-cpp-f": 0.6748069999999728,
+   "cert3-cpp-d": 0.6349630000000133,
+   "cert3-ocpp-f": 0.6858799999999405,
+   "cert3-ocpp-d": 0.6443289999999138
+  },
+  "examples/spat/panpot.dsp": {
+   "R-f": 0.002901999999949112,
+   "R-d": 0.0019620000000202253,
+   "cert3-cpp-f": 0.0024790000000365353,
+   "cert3-cpp-d": 0.002312999999958265,
+   "cert3-ocpp-f": 0.0023539999999826478,
+   "cert3-ocpp-d": 0.0023690000000442524
+  },
+  "examples/spat/spat.dsp": {
+   "R-f": 0.00608299999999673,
+   "R-d": 0.006071000000019922,
+   "cert3-cpp-f": 0.03061800000008219,
+   "cert3-cpp-d": 0.03162600000003124,
+   "cert3-ocpp-f": 0.03254699999997257,
+   "cert3-ocpp-d": 0.03255200000004521
+  },
+  "examples/spat/spcap.dsp": {
+   "R-f": 0.016138999999931514,
+   "R-d": 0.016775999999978808,
+   "cert3-cpp-f": 0.02129799999994475,
+   "cert3-cpp-d": 0.02167900000003442,
+   "cert3-ocpp-f": 0.025743000000034044,
+   "cert3-ocpp-d": 0.02681099999992398
+  },
+  "examples/spat/wfs.dsp": {
+   "R-f": 0.021392999999989115,
+   "R-d": 0.02144200000000751,
+   "cert3-cpp-f": 0.025047000000000708,
+   "cert3-cpp-d": 0.024878000000100542,
+   "cert3-ocpp-f": 0.031164000000025283,
+   "cert3-ocpp-d": 0.03131400000005158
+  },
+  "tests/impulse-tests/dsp/APF.dsp": {
+   "R-f": 0.005795000000020423,
+   "R-d": 0.005887999999892202,
+   "cert3-cpp-f": 0.005673000000051331,
+   "cert3-cpp-d": 0.004754000000048109,
+   "cert3-ocpp-f": 0.004948000000013053,
+   "cert3-ocpp-d": 0.004899999999992133
+  },
+  "tests/impulse-tests/dsp/BPF.dsp": {
+   "R-f": 0.004271000000009906,
+   "R-d": 0.004199999999968895,
+   "cert3-cpp-f": 0.004867000000103872,
+   "cert3-cpp-d": 0.004794999999944594,
+   "cert3-ocpp-f": 0.005160000000032028,
+   "cert3-ocpp-d": 0.005068000000051143
+  },
+  "tests/impulse-tests/dsp/HPF.dsp": {
+   "R-f": 0.004383999999951982,
+   "R-d": 0.004301000000054955,
+   "cert3-cpp-f": 0.004845000000102573,
+   "cert3-cpp-d": 0.004871999999977561,
+   "cert3-ocpp-f": 0.004992000000036967,
+   "cert3-ocpp-d": 0.004944000000023152
+  },
+  "tests/impulse-tests/dsp/LPF.dsp": {
+   "R-f": 0.004329999999981737,
+   "R-d": 0.004367000000058852,
+   "cert3-cpp-f": 0.005010000000083892,
+   "cert3-cpp-d": 0.004909999999973991,
+   "cert3-ocpp-f": 0.005159000000034553,
+   "cert3-ocpp-d": 0.00503799999994925
+  },
+  "tests/impulse-tests/dsp/UITester.dsp": {
+   "R-f": 0.0034739999999473525,
+   "R-d": 0.003319999999916945,
+   "cert3-cpp-f": 0.004907999999971935,
+   "cert3-cpp-d": 0.004700999999954547,
+   "cert3-ocpp-f": 0.005446999999911384,
+   "cert3-ocpp-d": 0.0054390000000239525
+  },
+  "tests/impulse-tests/dsp/bandfilter.dsp": {
+   "R-f": 0.004766000000074655,
+   "R-d": 0.004921999999950799,
+   "cert3-cpp-f": 0.005512999999893964,
+   "cert3-cpp-d": 0.005428000000051725,
+   "cert3-ocpp-f": 0.005767999999989115,
+   "cert3-ocpp-d": 0.005703999999951748
+  },
+  "tests/impulse-tests/dsp/bargraph.dsp": {
+   "R-f": 0.0021719999999874062,
+   "R-d": 0.002146000000038839,
+   "cert3-cpp-f": 0.0025239999999939755,
+   "cert3-cpp-d": 0.0024620000000368236,
+   "cert3-ocpp-f": 0.0025669999999990978,
+   "cert3-ocpp-d": 0.002538000000043894
+  },
+  "tests/impulse-tests/dsp/bells.dsp": {
+   "R-f": 0.1502640000000497,
+   "R-d": 0.14751800000004778,
+   "cert3-cpp-f": 0.2211739999999125,
+   "cert3-cpp-d": 0.22390399999999033,
+   "cert3-ocpp-f": 0.2698419999999615,
+   "cert3-ocpp-d": 0.27059900000000425
+  },
+  "tests/impulse-tests/dsp/bs.dsp": {
+   "R-f": 0.00234699999998611,
+   "R-d": 0.0021970000000237633,
+   "cert3-cpp-f": 0.0028060000000564855,
+   "cert3-cpp-d": 0.002743000000059226,
+   "cert3-ocpp-f": 0.0029520000000005098,
+   "cert3-ocpp-d": 0.0028609999999744673
+  },
+  "tests/impulse-tests/dsp/capture.dsp": {
+   "R-f": 0.004101000000055421,
+   "R-d": 0.0038409999999657884,
+   "cert3-cpp-f": 0.006572999999981732,
+   "cert3-cpp-d": 0.0063829999999995835,
+   "cert3-ocpp-f": 0.00679899999995115,
+   "cert3-ocpp-d": 0.006756000000045503
+  },
+  "tests/impulse-tests/dsp/carre_volterra.dsp": {
+   "R-f": 0.013545000000064533,
+   "R-d": 0.013143000000056304,
+   "cert3-cpp-f": 0.01566500000005533,
+   "cert3-cpp-d": 0.015386000000013667,
+   "cert3-ocpp-f": 0.018286999999965303,
+   "cert3-ocpp-d": 0.01796100000004941
+  },
+  "tests/impulse-tests/dsp/comb_bug_exp.dsp": {
+   "R-f": 0.007535000000039815,
+   "R-d": 0.006326999999956229,
+   "cert3-cpp-f": 0.009672000000023218,
+   "cert3-cpp-d": 0.00883599999998097,
+   "cert3-ocpp-f": 0.010761000000016452,
+   "cert3-ocpp-d": 0.010799999999953513
+  },
+  "tests/impulse-tests/dsp/comb_delay1.dsp": {
+   "R-f": 0.004153000000009399,
+   "R-d": 0.004261999999926047,
+   "cert3-cpp-f": 0.004889000000062538,
+   "cert3-cpp-d": 0.004771000000040715,
+   "cert3-ocpp-f": 0.005142000000070368,
+   "cert3-ocpp-d": 0.005100999999967826
+  },
+  "tests/impulse-tests/dsp/comb_delay2.dsp": {
+   "R-f": 0.004114999999956126,
+   "R-d": 0.0040760000000545915,
+   "cert3-cpp-f": 0.004698999999959597,
+   "cert3-cpp-d": 0.004772000000002663,
+   "cert3-ocpp-f": 0.005212000000092587,
+   "cert3-ocpp-d": 0.005072999999924832
+  },
+  "tests/impulse-tests/dsp/constant.dsp": {
+   "R-f": 0.0024189999999180145,
+   "R-d": 0.0024180000000271207,
+   "cert3-cpp-f": 0.0028050000000803266,
+   "cert3-cpp-d": 0.0028539999999566135,
+   "cert3-ocpp-f": 0.0031229999999737856,
+   "cert3-ocpp-d": 0.0031229999999595748
+  },
+  "tests/impulse-tests/dsp/cubic_distortion.dsp": {
+   "R-f": 0.13139599999997387,
+   "R-d": 0.14110500000000314,
+   "cert3-cpp-f": 0.14545699999997197,
+   "cert3-cpp-d": 0.1568340000000532,
+   "cert3-ocpp-f": 0.16726100000006028,
+   "cert3-ocpp-d": 0.17713299999994803
+  },
+  "tests/impulse-tests/dsp/dbmeter.dsp": {
+   "R-f": 0.0068040000000308964,
+   "R-d": 0.005595999999933099,
+   "cert3-cpp-f": 0.00771999999998485,
+   "cert3-cpp-d": 0.007107999999959702,
+   "cert3-ocpp-f": 0.008159999999932666,
+   "cert3-ocpp-d": 0.008098999999958778
+  },
+  "tests/impulse-tests/dsp/delays.dsp": {
+   "R-f": 0.0037389999999675183,
+   "R-d": 0.003707999999981837,
+   "cert3-cpp-f": 0.00416400000003847,
+   "cert3-cpp-d": 0.0041750000000533305,
+   "cert3-ocpp-f": 0.0044349999999440115,
+   "cert3-ocpp-d": 0.0044349999999440115
+  },
+  "tests/impulse-tests/dsp/echo.dsp": {
+   "R-f": 0.0036360000000286163,
+   "R-d": 0.0035009999999147112,
+   "cert3-cpp-f": 0.004329000000012684,
+   "cert3-cpp-d": 0.004272000000014486,
+   "cert3-ocpp-f": 0.0043850000000063005,
+   "cert3-ocpp-d": 0.00449800000000522
+  },
+  "tests/impulse-tests/dsp/echo_bug.dsp": {
+   "R-f": 0.002927999999997155,
+   "R-d": 0.0029199999999747206,
+   "cert3-cpp-f": 0.003788999999983389,
+   "cert3-cpp-d": 0.0037370000000009895,
+   "cert3-ocpp-f": 0.004168000000063898,
+   "cert3-ocpp-d": 0.004122999999921717
+  },
+  "tests/impulse-tests/dsp/freeverb.dsp": {
+   "R-f": 0.011284000000031824,
+   "R-d": 0.011544999999912875,
+   "cert3-cpp-f": 0.018803999999974508,
+   "cert3-cpp-d": 0.01859499999999059,
+   "cert3-ocpp-f": 0.022120999999962976,
+   "cert3-ocpp-d": 0.022032000000052676
+  },
+  "tests/impulse-tests/dsp/ftz_bounded_rec.dsp": {
+   "R-f": 0.002625999999963824,
+   "R-d": 0.002648000000021966,
+   "cert3-cpp-f": 0.0030340000000705913,
+   "cert3-cpp-d": 0.00311700000008841,
+   "cert3-ocpp-f": 0.0031999999999356987,
+   "cert3-ocpp-d": 0.0031469999999274023
+  },
+  "tests/impulse-tests/dsp/gate_compressor.dsp": {
+   "R-f": 0.15548500000001297,
+   "R-d": 0.16718100000000646,
+   "cert3-cpp-f": 0.1800010000000256,
+   "cert3-cpp-d": 0.19181699999996482,
+   "cert3-ocpp-f": 0.2102859999999538,
+   "cert3-ocpp-d": 0.22070400000006174
+  },
+  "tests/impulse-tests/dsp/grain3.dsp": {
+   "R-f": 0.005840999999939811,
+   "R-d": 0.0051839999999856445,
+   "cert3-cpp-f": 0.006032999999931121,
+   "cert3-cpp-d": 0.006140000000044665,
+   "cert3-ocpp-f": 0.006636000000078468,
+   "cert3-ocpp-d": 0.007791000000068493
+  },
+  "tests/impulse-tests/dsp/harpe.dsp": {
+   "R-f": 0.012616000000086558,
+   "R-d": 0.01362300000007366,
+   "cert3-cpp-f": 0.024213000000010254,
+   "cert3-cpp-d": 0.024887999999968713,
+   "cert3-ocpp-f": 0.029078000000055226,
+   "cert3-ocpp-d": 0.029684999999929573
+  },
+  "tests/impulse-tests/dsp/highShelf.dsp": {
+   "R-f": 0.005082000000037112,
+   "R-d": 0.005274999999983265,
+   "cert3-cpp-f": 0.005519000000028029,
+   "cert3-cpp-d": 0.005590999999952828,
+   "cert3-ocpp-f": 0.0060040000000753935,
+   "cert3-ocpp-d": 0.005897000000004482
+  },
+  "tests/impulse-tests/dsp/karplus.dsp": {
+   "R-f": 0.004347999999950503,
+   "R-d": 0.004405000000083703,
+   "cert3-cpp-f": 0.0060129999999674055,
+   "cert3-cpp-d": 0.005882999999990091,
+   "cert3-ocpp-f": 0.006481000000029269,
+   "cert3-ocpp-d": 0.006530999999995402
+  },
+  "tests/impulse-tests/dsp/karplus32.dsp": {
+   "R-f": 0.018023000000027878,
+   "R-d": 0.018188999999985356,
+   "cert3-cpp-f": 0.034055000000051905,
+   "cert3-cpp-d": 0.03477999999999781,
+   "cert3-ocpp-f": 0.03968500000005548,
+   "cert3-ocpp-d": 0.04045099999998314
+  },
+  "tests/impulse-tests/dsp/lfboost.dsp": {
+   "R-f": 0.0048799999999999955,
+   "R-d": 0.004862999999950546,
+   "cert3-cpp-f": 0.005445000000008804,
+   "cert3-cpp-d": 0.005448000000022546,
+   "cert3-ocpp-f": 0.00562600000000657,
+   "cert3-ocpp-d": 0.005668000000007112
+  },
+  "tests/impulse-tests/dsp/logical.dsp": {
+   "R-f": 0.0023900000000551813,
+   "R-d": 0.002363999999971611,
+   "cert3-cpp-f": 0.0030700000000578598,
+   "cert3-cpp-d": 0.0029670000000123764,
+   "cert3-ocpp-f": 0.003320999999978369,
+   "cert3-ocpp-d": 0.003314000000024464
+  },
+  "tests/impulse-tests/dsp/long_convolution.dsp": {
+   "R-f": 0.010587999999998488,
+   "R-d": 0.010854999999970971,
+   "cert3-cpp-f": 0.012045000000014738,
+   "cert3-cpp-d": 0.012052000000075225,
+   "cert3-ocpp-f": 0.014035999999947535,
+   "cert3-ocpp-d": 0.013867000000004737
+  },
+  "tests/impulse-tests/dsp/lowShelf.dsp": {
+   "R-f": 0.004932000000032133,
+   "R-d": 0.004865000000023656,
+   "cert3-cpp-f": 0.005806999999947493,
+   "cert3-cpp-d": 0.005584999999967977,
+   "cert3-ocpp-f": 0.005999999999993122,
+   "cert3-ocpp-d": 0.005948999999993987
+  },
+  "tests/impulse-tests/dsp/lowboost.dsp": {
+   "R-f": 0.004758999999936009,
+   "R-d": 0.004837999999949716,
+   "cert3-cpp-f": 0.0055539999999680845,
+   "cert3-cpp-d": 0.005493000000001302,
+   "cert3-ocpp-f": 0.005641000000089491,
+   "cert3-ocpp-d": 0.0055929999999762
+  },
+  "tests/impulse-tests/dsp/lowcut.dsp": {
+   "R-f": 0.005016999999952532,
+   "R-d": 0.004905000000029247,
+   "cert3-cpp-f": 0.005654999999975985,
+   "cert3-cpp-d": 0.005562000000011835,
+   "cert3-ocpp-f": 0.005691999999953623,
+   "cert3-ocpp-d": 0.005848000000014508
+  },
+  "tests/impulse-tests/dsp/math.dsp": {
+   "R-f": 0.007821999999919171,
+   "R-d": 0.007656000000054064,
+   "cert3-cpp-f": 0.012199999999978672,
+   "cert3-cpp-d": 0.012512000000015178,
+   "cert3-ocpp-f": 0.015883999999921627,
+   "cert3-ocpp-d": 0.015975999999945145
+  },
+  "tests/impulse-tests/dsp/math_simp.dsp": {
+   "R-f": 0.004100000000057946,
+   "R-d": 0.003258999999971479,
+   "cert3-cpp-f": 0.003433999999984394,
+   "cert3-cpp-d": 0.003375000000005457,
+   "cert3-ocpp-f": 0.003588000000021907,
+   "cert3-ocpp-d": 0.003598000000003765
+  },
+  "tests/impulse-tests/dsp/matrix.dsp": {
+   "R-f": 0.008166000000009888,
+   "R-d": 0.008139000000028318,
+   "cert3-cpp-f": 0.013088999999965267,
+   "cert3-cpp-d": 0.013346000000019842,
+   "cert3-ocpp-f": 0.015901999999996974,
+   "cert3-ocpp-d": 0.015994000000013386
+  },
+  "tests/impulse-tests/dsp/midi_tester.dsp": {
+   "R-f": 0.0035809999999116826,
+   "R-d": 0.003378000000083148,
+   "cert3-cpp-f": 0.0044360000000196464,
+   "cert3-cpp-d": 0.004425000000047419,
+   "cert3-ocpp-f": 0.004554999999896836,
+   "cert3-ocpp-d": 0.004575999999929081
+  },
+  "tests/impulse-tests/dsp/mixer.dsp": {
+   "R-f": 0.01075700000001234,
+   "R-d": 0.010592999999985864,
+   "cert3-cpp-f": 0.01801300000004602,
+   "cert3-cpp-d": 0.01905399999993307,
+   "cert3-ocpp-f": 0.023829000000020528,
+   "cert3-ocpp-d": 0.023606999999913114
+  },
+  "tests/impulse-tests/dsp/modulations.dsp": {
+   "R-f": 0.05162400000005363,
+   "R-d": 0.051859000000042954,
+   "cert3-cpp-f": 0.07976099999999064,
+   "cert3-cpp-d": 0.07901399999997238,
+   "cert3-ocpp-f": 0.10260700000002743,
+   "cert3-ocpp-d": 0.10272399999997361
+  },
+  "tests/impulse-tests/dsp/multibandfilter.dsp": {
+   "R-f": 0.01859200000006922,
+   "R-d": 0.01950099999999111,
+   "cert3-cpp-f": 0.02235500000008983,
+   "cert3-cpp-d": 0.022750999999963994,
+   "cert3-ocpp-f": 0.024607999999979313,
+   "cert3-ocpp-d": 0.024931000000087522
+  },
+  "tests/impulse-tests/dsp/noise.dsp": {
+   "R-f": 0.0030880000000834684,
+   "R-d": 0.0021360000000640866,
+   "cert3-cpp-f": 0.0024429999999924235,
+   "cert3-cpp-d": 0.002289000000011754,
+   "cert3-ocpp-f": 0.0024069999999483116,
+   "cert3-ocpp-d": 0.0023760000000478954
+  },
+  "tests/impulse-tests/dsp/noiseabs.dsp": {
+   "R-f": 0.002131999999960499,
+   "R-d": 0.001936000000000604,
+   "cert3-cpp-f": 0.0021580000000014365,
+   "cert3-cpp-d": 0.0021219999999857464,
+   "cert3-ocpp-f": 0.0021350000000666114,
+   "cert3-ocpp-d": 0.002141000000051463
+  },
+  "tests/impulse-tests/dsp/noisemetadata.dsp": {
+   "R-f": 0.002180000000066684,
+   "R-d": 0.002133000000071661,
+   "cert3-cpp-f": 0.0023830000000089058,
+   "cert3-cpp-d": 0.002412999999933163,
+   "cert3-ocpp-f": 0.0023729999999844154,
+   "cert3-ocpp-d": 0.002374000000052945
+  },
+  "tests/impulse-tests/dsp/norm1.dsp": {
+   "R-f": 0.004781999999977415,
+   "R-d": 0.004801000000000499,
+   "cert3-cpp-f": 0.007140000000084967,
+   "cert3-cpp-d": 0.007079999999973552,
+   "cert3-ocpp-f": 0.00812600000006114,
+   "cert3-ocpp-d": 0.008230999999994992
+  },
+  "tests/impulse-tests/dsp/norm2.dsp": {
+   "R-f": 0.002916000000027452,
+   "R-d": 0.002829000000012627,
+   "cert3-cpp-f": 0.0034729999999854044,
+   "cert3-cpp-d": 0.003491999999987172,
+   "cert3-ocpp-f": 0.003701000000091881,
+   "cert3-ocpp-d": 0.0036900000000059663
+  },
+  "tests/impulse-tests/dsp/norm3.dsp": {
+   "R-f": 0.002825000000022726,
+   "R-d": 0.002797999999984313,
+   "cert3-cpp-f": 0.003539000000046144,
+   "cert3-cpp-d": 0.003537000000008561,
+   "cert3-ocpp-f": 0.0040989999999681,
+   "cert3-ocpp-d": 0.004007999999998901
+  },
+  "tests/impulse-tests/dsp/notch.dsp": {
+   "R-f": 0.00421900000008435,
+   "R-d": 0.0041130000000109135,
+   "cert3-cpp-f": 0.004872999999982142,
+   "cert3-cpp-d": 0.0048469999999340985,
+   "cert3-ocpp-f": 0.005122999999997546,
+   "cert3-ocpp-d": 0.004906000000005406
+  },
+  "tests/impulse-tests/dsp/osc.dsp": {
+   "R-f": 0.004211999999938598,
+   "R-d": 0.004167999999936001,
+   "cert3-cpp-f": 0.006399999999985084,
+   "cert3-cpp-d": 0.006371000000058302,
+   "cert3-ocpp-f": 0.006581000000025483,
+   "cert3-ocpp-d": 0.006672999999977947
+  },
+  "tests/impulse-tests/dsp/osc_enable.dsp": {
+   "R-f": 0.00409699999997315,
+   "R-d": 0.003979999999963013,
+   "cert3-cpp-f": 0.004546000000033246,
+   "cert3-cpp-d": 0.004509999999982028,
+   "cert3-ocpp-f": 0.004717000000020732,
+   "cert3-ocpp-d": 0.0046180000000575205
+  },
+  "tests/impulse-tests/dsp/osci.dsp": {
+   "R-f": 0.004513999999979035,
+   "R-d": 0.004473000000054128,
+   "cert3-cpp-f": 0.006963000000041575,
+   "cert3-cpp-d": 0.006649999999901013,
+   "cert3-ocpp-f": 0.0070200000000113505,
+   "cert3-ocpp-d": 0.006938999999988482
+  },
+  "tests/impulse-tests/dsp/panpot.dsp": {
+   "R-f": 0.0021510000000262153,
+   "R-d": 0.002003000000058819,
+   "cert3-cpp-f": 0.002301000000102249,
+   "cert3-cpp-d": 0.0023730000000341533,
+   "cert3-ocpp-f": 0.0023439999999936845,
+   "cert3-ocpp-d": 0.0023820000000611685
+  },
+  "tests/impulse-tests/dsp/par_fir_32.dsp": {
+   "R-f": 0.004899000000051501,
+   "R-d": 0.0049749999999590955,
+   "cert3-cpp-f": 0.004875000000076568,
+   "cert3-cpp-d": 0.004983000000038373,
+   "cert3-ocpp-f": 0.004861000000005333,
+   "cert3-ocpp-d": 0.004982999999953108
+  },
+  "tests/impulse-tests/dsp/parametric_eq.dsp": {
+   "R-f": 0.19326899999992975,
+   "R-d": 0.20964600000002065,
+   "cert3-cpp-f": 0.22210799999989206,
+   "cert3-cpp-d": 0.24016000000002435,
+   "cert3-ocpp-f": 0.2604199999999679,
+   "cert3-ocpp-d": 0.2776049999999941
+  },
+  "tests/impulse-tests/dsp/parseint.dsp": {
+   "R-f": 0.0025750000000925866,
+   "R-d": 0.00266399999998157,
+   "cert3-cpp-f": 0.002193999999974494,
+   "cert3-cpp-d": 0.0020610000000047535,
+   "cert3-ocpp-f": 0.0018869999999964193,
+   "cert3-ocpp-d": 0.001995999999977016
+  },
+  "tests/impulse-tests/dsp/peakNotch.dsp": {
+   "R-f": 0.0045659999999827505,
+   "R-d": 0.0045280000000644804,
+   "cert3-cpp-f": 0.0051959999999553474,
+   "cert3-cpp-d": 0.005155000000030441,
+   "cert3-ocpp-f": 0.005344000000008009,
+   "cert3-ocpp-d": 0.005361000000064564
+  },
+  "tests/impulse-tests/dsp/peakingEQ.dsp": {
+   "R-f": 0.004739999999976874,
+   "R-d": 0.0045020000000022264,
+   "cert3-cpp-f": 0.0052120000000499545,
+   "cert3-cpp-d": 0.005196000000019296,
+   "cert3-ocpp-f": 0.005456999999978507,
+   "cert3-ocpp-d": 0.0054839999999956035
+  },
+  "tests/impulse-tests/dsp/phaser_flanger.dsp": {
+   "R-f": 0.17140400000001677,
+   "R-d": 0.18442000000001713,
+   "cert3-cpp-f": 0.20136099999999857,
+   "cert3-cpp-d": 0.21003099999997232,
+   "cert3-ocpp-f": 0.2372140000000229,
+   "cert3-ocpp-d": 0.2467489999999657
+  },
+  "tests/impulse-tests/dsp/phasor.dsp": {
+   "R-f": 0.0038749999999438955,
+   "R-d": 0.00359600000001592,
+   "cert3-cpp-f": 0.003864000000071144,
+   "cert3-cpp-d": 0.003941000000068584,
+   "cert3-ocpp-f": 0.004086000000029344,
+   "cert3-ocpp-d": 0.003936000000045681
+  },
+  "tests/impulse-tests/dsp/pitch_shifter.dsp": {
+   "R-f": 0.004730999999992491,
+   "R-d": 0.004565999999954329,
+   "cert3-cpp-f": 0.005749999999956401,
+   "cert3-cpp-d": 0.005535000000008949,
+   "cert3-ocpp-f": 0.006108999999995035,
+   "cert3-ocpp-d": 0.005993999999944322
+  },
+  "tests/impulse-tests/dsp/pow.dsp": {
+   "R-f": 0.002409000000056949,
+   "R-d": 0.0023230000000182827,
+   "cert3-cpp-f": 0.002701000000001841,
+   "cert3-cpp-d": 0.002721999999984348,
+   "cert3-ocpp-f": 0.0028749999999391207,
+   "cert3-ocpp-d": 0.0028629999999338906
+  },
+  "tests/impulse-tests/dsp/pow_float_int.dsp": {
+   "R-f": 0.001991999999987115,
+   "R-d": 0.0019519999999602078,
+   "cert3-cpp-f": 0.0022899999999523857,
+   "cert3-cpp-d": 0.0022950000000037107,
+   "cert3-ocpp-f": 0.002282999999920321,
+   "cert3-ocpp-d": 0.0022030000000015093
+  },
+  "tests/impulse-tests/dsp/pow_int_float.dsp": {
+   "R-f": 0.0020519999999351057,
+   "R-d": 0.0019429999999829306,
+   "cert3-cpp-f": 0.002260000000035234,
+   "cert3-cpp-d": 0.0022639999999682914,
+   "cert3-ocpp-f": 0.002318000000059328,
+   "cert3-ocpp-d": 0.0022800000000273712
+  },
+  "tests/impulse-tests/dsp/precision.dsp": {
+   "R-f": 0.001909999999973877,
+   "R-d": 0.0019409999999879801,
+   "cert3-cpp-f": 0.0020850000000010027,
+   "cert3-cpp-d": 0.0021020000000717687,
+   "cert3-ocpp-f": 0.0021530000000211658,
+   "cert3-ocpp-d": 0.00223700000003646
+  },
+  "tests/impulse-tests/dsp/prefix.dsp": {
+   "R-f": 0.0019509999999627325,
+   "R-d": 0.001941000000051929,
+   "cert3-cpp-f": 0.0021899999999774877,
+   "cert3-cpp-d": 0.0021480000000337895,
+   "cert3-ocpp-f": 0.0021500000000003183,
+   "cert3-ocpp-d": 0.0020990000000011833
+  },
+  "tests/impulse-tests/dsp/priority.dsp": {
+   "R-f": 0.003939000000031001,
+   "R-d": 0.003916000000060649,
+   "cert3-cpp-f": 0.005231999999978143,
+   "cert3-cpp-d": 0.005467999999979156,
+   "cert3-ocpp-f": 0.005799000000003218,
+   "cert3-ocpp-d": 0.005897000000025798
+  },
+  "tests/impulse-tests/dsp/priority1.dsp": {
+   "R-f": 0.013277000000030625,
+   "R-d": 0.013744999999929064,
+   "cert3-cpp-f": 0.018409999999903448,
+   "cert3-cpp-d": 0.01888099999998616,
+   "cert3-ocpp-f": 0.023476999999942905,
+   "cert3-ocpp-d": 0.02321499999993648
+  },
+  "tests/impulse-tests/dsp/quadecho.dsp": {
+   "R-f": 0.005615000000027237,
+   "R-d": 0.0041629999999486245,
+   "cert3-cpp-f": 0.005878000000052452,
+   "cert3-cpp-d": 0.006125000000032799,
+   "cert3-ocpp-f": 0.005898000000001957,
+   "cert3-ocpp-d": 0.005825999999956366
+  },
+  "tests/impulse-tests/dsp/reverb_designer.dsp": {
+   "R-f": 0.25696799999992237,
+   "R-d": 0.2563949999999906,
+   "cert3-cpp-f": 0.5447129999999518,
+   "cert3-cpp-d": 0.5462879999999757,
+   "cert3-ocpp-f": 0.9457450000000946,
+   "cert3-ocpp-d": 0.9795110000000378
+  },
+  "tests/impulse-tests/dsp/reverb_tester.dsp": {
+   "R-f": 0.011867999999921608,
+   "R-d": 0.011829999999996232,
+   "cert3-cpp-f": 0.012311999999909062,
+   "cert3-cpp-d": 0.01293700000008613,
+   "cert3-ocpp-f": 0.013575999999915211,
+   "cert3-ocpp-d": 0.012949000000041622
+  },
+  "tests/impulse-tests/dsp/select2.dsp": {
+   "R-f": 0.00230600000000436,
+   "R-d": 0.002032999999997287,
+   "cert3-cpp-f": 0.0021600000000034925,
+   "cert3-cpp-d": 0.0021309999999630236,
+   "cert3-ocpp-f": 0.0021259999999756474,
+   "cert3-ocpp-d": 0.0020839999999680003
+  },
+  "tests/impulse-tests/dsp/smoothdelay.dsp": {
+   "R-f": 0.005793000000039683,
+   "R-d": 0.0057589999999621,
+   "cert3-cpp-f": 0.008188000000018292,
+   "cert3-cpp-d": 0.008196000000069148,
+   "cert3-ocpp-f": 0.009000000000014552,
+   "cert3-ocpp-d": 0.009181999999988477
+  },
+  "tests/impulse-tests/dsp/sound.dsp": {
+   "R-f": 0.0022389999999177235,
+   "R-d": 0.002114999999960787,
+   "cert3-cpp-f": 0.0023880000000531254,
+   "cert3-cpp-d": 0.0023370000000113578,
+   "cert3-ocpp-f": 0.0022109999999884167,
+   "cert3-ocpp-d": 0.0022940000000062355
+  },
+  "tests/impulse-tests/dsp/spat.dsp": {
+   "R-f": 0.004820000000037794,
+   "R-d": 0.004800000000003024,
+   "cert3-cpp-f": 0.028936999999977786,
+   "cert3-cpp-d": 0.029360999999987314,
+   "cert3-ocpp-f": 0.030689000000037936,
+   "cert3-ocpp-d": 0.030681999999970344
+  },
+  "tests/impulse-tests/dsp/spectral_level.dsp": {
+   "R-f": 0.2603239999999829,
+   "R-d": 0.28381299999992393,
+   "cert3-cpp-f": 0.2828579999999974,
+   "cert3-cpp-d": 0.30314200000000113,
+   "cert3-ocpp-f": 0.30475900000003264,
+   "cert3-ocpp-d": 0.32569199999989706
+  },
+  "tests/impulse-tests/dsp/spectral_tilt.dsp": {
+   "R-f": 0.17072900000007252,
+   "R-d": 0.18113200000009044,
+   "cert3-cpp-f": 0.19230799999990467,
+   "cert3-cpp-d": 0.20389199999996777,
+   "cert3-ocpp-f": 0.22540899999999908,
+   "cert3-ocpp-d": 0.23471199999989523
+  },
+  "tests/impulse-tests/dsp/stereoecho.dsp": {
+   "R-f": 0.003879999999988115,
+   "R-d": 0.0037639999999186102,
+   "cert3-cpp-f": 0.004569999999979757,
+   "cert3-cpp-d": 0.004702999999949498,
+   "cert3-ocpp-f": 0.004984999999933848,
+   "cert3-ocpp-d": 0.004786999999993213
+  },
+  "tests/impulse-tests/dsp/subcontainer1.dsp": {
+   "R-f": 0.0022860000000264336,
+   "R-d": 0.0022099999999909414,
+   "cert3-cpp-f": 0.0025000000000545697,
+   "cert3-cpp-d": 0.0024039999999345696,
+   "cert3-ocpp-f": 0.0023719999999229913,
+   "cert3-ocpp-d": 0.002354999999965912
+  },
+  "tests/impulse-tests/dsp/switcher.dsp": {
+   "R-f": 0.0020520000000274763,
+   "R-d": 0.001978000000008251,
+   "cert3-cpp-f": 0.002384000000056119,
+   "cert3-cpp-d": 0.002280000000041582,
+   "cert3-ocpp-f": 0.002362999999945714,
+   "cert3-ocpp-d": 0.0023029999999835127
+  },
+  "tests/impulse-tests/dsp/table.dsp": {
+   "R-f": 0.0033590000000174314,
+   "R-d": 0.0032009999999900174,
+   "cert3-cpp-f": 0.004960999999980231,
+   "cert3-cpp-d": 0.004948000000013053,
+   "cert3-ocpp-f": 0.00512699999995192,
+   "cert3-ocpp-d": 0.00515500000001623
+  },
+  "tests/impulse-tests/dsp/table1.dsp": {
+   "R-f": 0.002289000000011754,
+   "R-d": 0.0022450000000162618,
+   "cert3-cpp-f": 0.002498999999914986,
+   "cert3-cpp-d": 0.002439000000094893,
+   "cert3-ocpp-f": 0.0024389999999883116,
+   "cert3-ocpp-d": 0.0023519999999876973
+  },
+  "tests/impulse-tests/dsp/table2.dsp": {
+   "R-f": 0.00335700000000827,
+   "R-d": 0.0033690000000206055,
+   "cert3-cpp-f": 0.0038640000000143004,
+   "cert3-cpp-d": 0.003888000000031866,
+   "cert3-ocpp-f": 0.004040999999965322,
+   "cert3-ocpp-d": 0.004074000000059641
+  },
+  "tests/impulse-tests/dsp/tapiir.dsp": {
+   "R-f": 0.009469000000080996,
+   "R-d": 0.009483999999922332,
+   "cert3-cpp-f": 0.016131000000072504,
+   "cert3-cpp-d": 0.016089000000079068,
+   "cert3-ocpp-f": 0.02095400000001746,
+   "cert3-ocpp-d": 0.02094600000003055
+  },
+  "tests/impulse-tests/dsp/tester.dsp": {
+   "R-f": 0.00753200000004739,
+   "R-d": 0.005973999999987711,
+   "cert3-cpp-f": 0.008784999999953413,
+   "cert3-cpp-d": 0.008916000000034785,
+   "cert3-ocpp-f": 0.009651000000012289,
+   "cert3-ocpp-d": 0.009634000000005472
+  },
+  "tests/impulse-tests/dsp/tester2.dsp": {
+   "R-f": 0.0067329999999330425,
+   "R-d": 0.006035999999994601,
+   "cert3-cpp-f": 0.009267000000008352,
+   "cert3-cpp-d": 0.009213000000016791,
+   "cert3-ocpp-f": 0.01023900000000566,
+   "cert3-ocpp-d": 0.010356999999999061
+  },
+  "tests/impulse-tests/dsp/tf_exp.dsp": {
+   "R-f": 0.0057359999999562206,
+   "R-d": 0.006048999999961779,
+   "cert3-cpp-f": 0.006546000000071217,
+   "cert3-cpp-d": 0.006521999999975492,
+   "cert3-ocpp-f": 0.007297999999991589,
+   "cert3-ocpp-d": 0.007278000000056295
+  },
+  "tests/impulse-tests/dsp/thru_zero_flanger.dsp": {
+   "R-f": 0.014722000000027435,
+   "R-d": 0.015068999999911625,
+   "cert3-cpp-f": 0.017713999999990904,
+   "cert3-cpp-d": 0.017645000000051425,
+   "cert3-ocpp-f": 0.018365000000017062,
+   "cert3-ocpp-d": 0.01840500000004397
+  },
+  "tests/impulse-tests/dsp/vcf_wah_pedals.dsp": {
+   "R-f": 0.18043999999996885,
+   "R-d": 0.1930189999999783,
+   "cert3-cpp-f": 0.20802500000002055,
+   "cert3-cpp-d": 0.22175900000003423,
+   "cert3-ocpp-f": 0.24983799999996847,
+   "cert3-ocpp-d": 0.2578500000000403
+  },
+  "tests/impulse-tests/dsp/virtual_analog_oscillators.dsp": {
+   "R-f": 0.20338899999995874,
+   "R-d": 0.2163619999999682,
+   "cert3-cpp-f": 0.23639899999994185,
+   "cert3-cpp-d": 0.2506079999999997,
+   "cert3-ocpp-f": 0.27903300000004805,
+   "cert3-ocpp-d": 0.28969000000003575
+  },
+  "tests/impulse-tests/dsp/vocal_impulse_train.dsp": {
+   "R-f": 0.009634000000097842,
+   "R-d": 0.00887500000006014,
+   "cert3-cpp-f": 0.009626999999994723,
+   "cert3-cpp-d": 0.009611000000028014,
+   "cert3-ocpp-f": 0.010624000000007072,
+   "cert3-ocpp-d": 0.010708000000086315
+  },
+  "tests/impulse-tests/dsp/volume.dsp": {
+   "R-f": 0.003474000000018407,
+   "R-d": 0.0032850000000053114,
+   "cert3-cpp-f": 0.005290999999942869,
+   "cert3-cpp-d": 0.005167999999912354,
+   "cert3-ocpp-f": 0.0051799999999957436,
+   "cert3-ocpp-d": 0.005153000000063912
+  },
+  "tests/impulse-tests/dsp/vumeter.dsp": {
+   "R-f": 0.003689000000008491,
+   "R-d": 0.003722000000038861,
+   "cert3-cpp-f": 0.00443300000001301,
+   "cert3-cpp-d": 0.0042560000000548825,
+   "cert3-ocpp-f": 0.004581999999963671,
+   "cert3-ocpp-d": 0.004596999999932905
+  },
+  "tests/impulse-tests/dsp/waveform1.dsp": {
+   "R-f": 0.001782000000048356,
+   "R-d": 0.0017399999999270221,
+   "cert3-cpp-f": 0.0019490000000033092,
+   "cert3-cpp-d": 0.0018410000000059767,
+   "cert3-ocpp-f": 0.001852999999996996,
+   "cert3-ocpp-d": 0.0018719999999348147
+  },
+  "tests/impulse-tests/dsp/waveform2.dsp": {
+   "R-f": 0.0021679999999904,
+   "R-d": 0.0020850000000010027,
+   "cert3-cpp-f": 0.0025439999999079532,
+   "cert3-cpp-d": 0.0025080000000130553,
+   "cert3-ocpp-f": 0.0025399999999748957,
+   "cert3-ocpp-d": 0.002463000000069826
+  },
+  "tests/impulse-tests/dsp/waveform3.dsp": {
+   "R-f": 0.002185000000082482,
+   "R-d": 0.0020520000000487926,
+   "cert3-cpp-f": 0.0025729999999910547,
+   "cert3-cpp-d": 0.0024639999999180873,
+   "cert3-ocpp-f": 0.0024280000000089785,
+   "cert3-ocpp-d": 0.0025169999999690162
+  },
+  "tests/impulse-tests/dsp/waveform4.dsp": {
+   "R-f": 0.00229399999999913,
+   "R-d": 0.0022179999999707434,
+   "cert3-cpp-f": 0.002733999999918524,
+   "cert3-cpp-d": 0.0027069999999937977,
+   "cert3-ocpp-f": 0.002686000000039712,
+   "cert3-ocpp-d": 0.002664000000095257
+  },
+  "tests/impulse-tests/dsp/waveform5.dsp": {
+   "R-f": 0.0021999999999451347,
+   "R-d": 0.002082999999970525,
+   "cert3-cpp-f": 0.002420999999912965,
+   "cert3-cpp-d": 0.002403999999955886,
+   "cert3-ocpp-f": 0.0024329999999963547,
+   "cert3-ocpp-d": 0.002375999999955525
+  },
+  "tests/impulse-tests/dsp/waveform6.dsp": {
+   "R-f": 0.002097999999968181,
+   "R-d": 0.0020919999999478023,
+   "cert3-cpp-f": 0.0024979999999956704,
+   "cert3-cpp-d": 0.0023190000000212763,
+   "cert3-ocpp-f": 0.0024210000000195464,
+   "cert3-ocpp-d": 0.0023630000000522955
+  },
+  "tests/impulse-tests/dsp/zita_rev1.dsp": {
+   "R-f": 0.03882600000001446,
+   "R-d": 0.039243999999918344,
+   "cert3-cpp-f": 0.058099999999996044,
+   "cert3-cpp-d": 0.058193000000052564,
+   "cert3-ocpp-f": 0.07229399999996389,
+   "cert3-ocpp-d": 0.07214300000003959
+  }
+ }
+}

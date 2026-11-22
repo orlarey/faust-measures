@@ -1,0 +1,97 @@
+2026-11-11T13:03:09+00:00 - AMD Ryzen AI 9 HX 370 w/ Radeon 890M, 24 cpus - Ubuntu clang version 21.1.8 (6ubuntu1)
+reference R : FAUST Version 2.92.3 ; Source commit: d8a62f5bf - cpp - -O3 -ffast-math -march=native
+cert3 : FAUST Version 2.92.4 ; Source commit: 4ca9b5278 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+fam : FAUST Version 2.92.4 ; Source commit: 0aeb7a153 - faust -fam - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the median ; every time / R of its precision
+
+== cpp-f
+program                       cert3          fam
+2dKirchhoffThinPlate           0.27     0.27 (=)
+StiffString                    0.81     0.81 (=)
+dx7                            1.03     1.03 (=)
+FFT                            0.77     0.77 (=)
+englishBell                    1.04     1.04 (=)
+vocoder                        0.85     0.85 (=)
+oneSourceToStereo              0.89     0.89 (=)
+karplus32                      1.00     1.00 (=)
+zitaRev                        0.99     0.99 (=)
+virtualAnalog                  0.97     0.97 (=)
+multibandfilter                1.15     1.15 (=)
+parametric_eq                  0.80     0.80 (=)
+insects                        1.06     1.06 (=)
+fire                           1.29     1.29 (=)
+AdditiveSynth                  1.39     1.39 (=)
+oteyPianoV2                    1.09     1.09 (=)
+statespace                     1.13     1.13 (=)
+modalBar                       0.91     0.91 (=)
+geometric mean                 0.93         0.93
+
+== cpp-d
+program                       cert3          fam
+2dKirchhoffThinPlate           0.41     0.41 (=)
+StiffString                    0.82     0.82 (=)
+dx7                            1.05     1.05 (=)
+FFT                            0.80     0.80 (=)
+englishBell                    1.01     1.01 (=)
+vocoder                        0.86     0.86 (=)
+oneSourceToStereo              0.78     0.78 (=)
+karplus32                      1.01     1.01 (=)
+zitaRev                        0.95     0.95 (=)
+virtualAnalog                  0.78     0.78 (=)
+multibandfilter                0.86     0.86 (=)
+parametric_eq                  0.83     0.83 (=)
+insects                        1.06     1.06 (=)
+fire                           1.23     1.23 (=)
+AdditiveSynth                  4.12     4.12 (=)
+oteyPianoV2                    1.07     1.07 (=)
+statespace                     1.00     1.00 (=)
+modalBar                       1.06     1.06 (=)
+geometric mean                 0.97         0.97
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3          fam
+2dKirchhoffThinPlate           0.82         0.28     0.28 (=)
+StiffString                    0.50         0.73         0.18
+dx7                            0.87         0.92     0.92 (=)
+FFT                            0.91         0.67     0.67 (=)
+englishBell                    0.40         0.46         0.26
+vocoder                        0.59         0.60         0.12
+oneSourceToStereo              1.11         0.94     0.94 (=)
+karplus32                      0.90         0.94     0.94 (=)
+zitaRev                        0.94         0.81     0.81 (=)
+virtualAnalog                  0.81         0.85     0.85 (=)
+multibandfilter                0.58         0.45     0.45 (=)
+parametric_eq                  0.83         0.62     0.62 (=)
+insects                        0.84         0.83         0.81
+fire                           0.78         0.98         0.81
+AdditiveSynth                  0.21         1.29         0.46
+oteyPianoV2                    0.95         0.96     0.96 (=)
+statespace                     0.98         0.77     0.77 (=)
+modalBar                       0.70         0.84     0.84 (=)
+geometric mean                 0.72         0.73         0.56
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3          fam
+2dKirchhoffThinPlate           1.10         0.38     0.38 (=)
+StiffString                    0.68         0.72         0.30
+dx7                            0.80         0.93     0.93 (=)
+FFT                            1.03         0.75     0.75 (=)
+englishBell                    0.26         0.36         0.26
+vocoder                        0.62         0.73         0.17
+oneSourceToStereo              1.06         0.80     0.80 (=)
+karplus32                      1.00         1.08     1.08 (=)
+zitaRev                        1.04         0.81     0.81 (=)
+virtualAnalog                  0.59         0.71     0.71 (=)
+multibandfilter                1.11         0.85     0.85 (=)
+parametric_eq                  0.66         0.58     0.58 (=)
+insects                        0.88         0.94         0.97
+fire                           1.04         1.20     1.20 (=)
+AdditiveSynth                  0.98         4.34         2.02
+oteyPianoV2                    1.01         1.01     1.01 (=)
+statespace                     1.16         0.91     0.91 (=)
+modalBar                       0.74         1.00     1.00 (=)
+geometric mean                 0.83         0.85         0.71
+
+above 1.05 : AdditiveSynth cert3-cpp-d 4.12, AdditiveSynth cert3-cpp-f 1.39, AdditiveSynth cert3-ocpp-d 4.34, AdditiveSynth cert3-ocpp-f 1.29, AdditiveSynth fam-cpp-d 4.12, AdditiveSynth fam-cpp-f 1.39, AdditiveSynth fam-ocpp-d 2.02, fire cert3-cpp-d 1.23, fire cert3-cpp-f 1.29, fire cert3-ocpp-d 1.20, fire fam-cpp-d 1.23, fire fam-cpp-f 1.29, fire fam-ocpp-d 1.20, insects cert3-cpp-d 1.06, insects cert3-cpp-f 1.06, insects fam-cpp-d 1.06, insects fam-cpp-f 1.06, karplus32 cert3-ocpp-d 1.08, karplus32 fam-ocpp-d 1.08, modalBar cert3-cpp-d 1.06, modalBar fam-cpp-d 1.06, multibandfilter cert3-cpp-f 1.15, multibandfilter fam-cpp-f 1.15, oteyPianoV2 cert3-cpp-d 1.07, oteyPianoV2 cert3-cpp-f 1.09, oteyPianoV2 fam-cpp-d 1.07, oteyPianoV2 fam-cpp-f 1.09, statespace cert3-cpp-f 1.13, statespace fam-cpp-f 1.13
+noise, the gap between the two best rounds : median 0.0 %, 90th percentile 0.2 %
+non-finite outputs : statespace R-d, statespace R-f, statespace cert3-cpp-d, statespace cert3-cpp-f, statespace cert3-ocpp-d, statespace cert3-ocpp-f, statespace fam-cpp-d, statespace fam-cpp-f, statespace fam-ocpp-d, statespace fam-ocpp-f, statespace md-ocpp-d, statespace md-ocpp-f

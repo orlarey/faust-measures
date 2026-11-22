@@ -1,0 +1,20 @@
+2026-11-11T02:54:14+00:00 - AMD Ryzen AI 9 HX 370 w/ Radeon 890M, 24 cpus - Ubuntu clang version 21.1.8 (6ubuntu1)
+reference R : FAUST Version 2.92.3 ; Source commit: d8a62f5bf - cpp - -O3 -ffast-math -march=native
+cert3 : FAUST Version 2.92.4 ; Source commit: 4ca9b5278 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+fam : FAUST Version 2.92.4 ; Source commit: 4ca9b5278-modified - faust -fam - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the median ; every time / R of its precision
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3          fam
+vocoder                        0.60         0.60         0.16
+englishBell                    0.40         0.47         0.26
+geometric mean                 0.49         0.53         0.21
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3          fam
+vocoder                        0.64         0.72         0.18
+englishBell                    0.26         0.36         0.26
+geometric mean                 0.41         0.51         0.22
+
+above 1.05 : none
+noise, the gap between the two best rounds : median 0.1 %, 90th percentile 1.5 %

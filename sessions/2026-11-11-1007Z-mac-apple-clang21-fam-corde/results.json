@@ -1,0 +1,1159 @@
+{
+ "meta": {
+  "date": "2026-11-11T10:07:00+00:00",
+  "machine": "Apple M1, 8 cpus",
+  "cxx": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "flags": {
+   "ref": "-O3 -ffast-math -march=native",
+   "branch": "-O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h"
+  },
+  "levers": [],
+  "faust_options": {
+   "fam": "-fam"
+  },
+  "arch": [
+   "/Users/yannorlarey/Documents/Install/faust-r-d8a62f5bf/libraries/arch/cpu_arch.cpp",
+   "1751aa6765af91e47f701c62588f39cf874f97833204ebe4e201fced701c9576"
+  ],
+  "rounds": 9,
+  "configs": [
+   "ocpp-f",
+   "ocpp-d"
+  ],
+  "versions": [
+   "cert3",
+   "fam"
+  ],
+  "binaries": {
+   "ref": [
+    "/Users/yannorlarey/Documents/Install/faust-r-d8a62f5bf/build/bin/faust",
+    "FAUST Version 2.92.3 ; Source commit: d8a62f5bf"
+   ],
+   "cert3": [
+    "/Users/yannorlarey/Documents/Install/faust/build/bin/faust",
+    "FAUST Version 2.92.4 ; Source commit: 4ca9b5278"
+   ],
+   "fam": [
+    "/Users/yannorlarey/Documents/Install/wt-fam/build/bin/faust",
+    "FAUST Version 2.92.4 ; Source commit: 16bd41356"
+   ]
+  },
+  "entries": [
+   "corde6",
+   "corde8",
+   "corde12",
+   "corde16",
+   "corde24",
+   "corde32",
+   "corde48",
+   "corde64",
+   "corde100"
+  ],
+  "failed": {},
+  "provenance": {
+   "binaries": {
+    "ref": {
+     "path": "/Users/yannorlarey/Documents/Install/faust-r-d8a62f5bf/build/bin/faust",
+     "version": "FAUST Version 2.92.3 ; Source commit: d8a62f5bf",
+     "sha256": "d7ca92d5d3cdfd635841f3b195c11675e4b854b941b326c6b549cd08b5bdf81b",
+     "commit": "d8a62f5bf",
+     "modified": false,
+     "repo": "/Users/yannorlarey/Documents/Install/faust-r-d8a62f5bf",
+     "commit_full": "d8a62f5bfe40ccf8d0d3146deb0adc4e1a87d0c8",
+     "tree": "74d186222bf6d4683852910fe1aeab355b067ba7",
+     "subject": "lv2.cpp: omit epp:rangeSteps when a port has no step-wise control",
+     "committed": "2026-11-06T17:04:47+01:00",
+     "head_branch": "HEAD",
+     "branches": [
+      "fam-port",
+      "faust-string-literals",
+      "master-dev",
+      "master-dev-certification-3",
+      "origin",
+      "origin/master-dev",
+      "origin/master-dev-certification-3",
+      "origin/midi-channel-filter"
+     ]
+    },
+    "cert3": {
+     "path": "/Users/yannorlarey/Documents/Install/faust/build/bin/faust",
+     "version": "FAUST Version 2.92.4 ; Source commit: 4ca9b5278",
+     "sha256": "053db1a01ebcfba92bba443dfa3bb4ef54ea9c3b4a61e93cd7e1789dc9388b38",
+     "commit": "4ca9b5278",
+     "modified": false,
+     "repo": "/Users/yannorlarey/Documents/Install/faust",
+     "commit_full": "4ca9b5278fba51501ada8c0fc6196d1d69eccf41",
+     "tree": "3b1fcbdcc32c61ea6d68961e6973acafa7e68bcd",
+     "subject": "ocpp : an IIR and the FIR input it takes in are one node of the dependency graph",
+     "committed": "2026-11-10T10:07:21Z",
+     "head_branch": "master-dev-certification-3",
+     "branches": [
+      "fam-port",
+      "master-dev-certification-3",
+      "origin/master-dev-certification-3"
+     ]
+    },
+    "fam": {
+     "path": "/Users/yannorlarey/Documents/Install/wt-fam/build/bin/faust",
+     "version": "FAUST Version 2.92.4 ; Source commit: 16bd41356",
+     "sha256": "cc09e6b44784427a5d43d58051213466682664468c2e91c92cb73765dfe0b400",
+     "commit": "16bd41356",
+     "modified": false,
+     "repo": "/Users/yannorlarey/Documents/Install/wt-fam",
+     "commit_full": "16bd41356f215aa92e2569f9b78ef6ff60ba9ff6",
+     "tree": "bdce9b72af15da8dd893e5ca3a0fc5cb8814b6d5",
+     "subject": "-fam-split <n> : the nodes of a member from which its loop is split",
+     "committed": "2026-11-11T10:50:57+01:00",
+     "head_branch": "fam-port",
+     "branches": [
+      "fam-port"
+     ]
+    }
+   },
+   "sources": {
+    "path": "/Users/yannorlarey/Documents/Install/faust",
+    "commit": "4ca9b5278fba51501ada8c0fc6196d1d69eccf41",
+    "tree": "3b1fcbdcc32c61ea6d68961e6973acafa7e68bcd",
+    "subject": "ocpp : an IIR and the FIR input it takes in are one node of the dependency graph",
+    "branch": "master-dev-certification-3",
+    "changes": [],
+    "changed": 0
+   },
+   "libraries": {
+    "path": "/Users/yannorlarey/Documents/Install/faust/libraries",
+    "commit": "42fab480c778df7bad5c6b620ca4fd005b2bfe9b",
+    "tree": "0daa892573dfe85e24754f84111bf2e585feda35",
+    "subject": "filters.lib: declare the author and license of _tanhalf and _tpt_df",
+    "branch": "HEAD",
+    "changes": [],
+    "changed": 0
+   },
+   "tool": {
+    "path": "/Users/yannorlarey/Documents/Install/faust-migration/tools",
+    "commit": "5d5e441562485429c5ec6deb413ecd9bea5ff036",
+    "tree": "1292838c8a00a0e2223cf85d60ca5a8d299418d3",
+    "subject": "Transfert : fam-port 16bd41356 (-fam-split) et les programmes de la campagne du seuil",
+    "branch": "main",
+    "changes": [
+     "M tools/mesure.py"
+    ],
+    "changed": 1
+   },
+   "host": {
+    "hostname": "macbook-air-de-yann.home",
+    "system": "macOS-26.6.2-arm64-arm-64bit",
+    "cpu": "Apple M1, 8 cpus",
+    "load": [
+     2.1259765625,
+     2.98388671875,
+     4.12548828125
+    ],
+    "load_end": [
+     4.9580078125,
+     3.3662109375,
+     3.96875
+    ]
+   },
+   "command": [
+    "/Users/yannorlarey/Documents/Install/faust-migration/tools/mesure.py",
+    "run",
+    "--ref",
+    "/Users/yannorlarey/Documents/Install/faust-r-d8a62f5bf/build/bin/faust",
+    "--version",
+    "cert3=/Users/yannorlarey/Documents/Install/faust/build/bin/faust",
+    "--version",
+    "fam=/Users/yannorlarey/Documents/Install/wt-fam/build/bin/faust",
+    "--faust-options",
+    "fam=-fam",
+    "--entries",
+    "/private/tmp/claude-501/-Users-yannorlarey-Documents-Install-faust/7c80a0c8-8620-48ec-83b0-8edc6af94aed/scratchpad/corde-entries.txt",
+    "--out",
+    "/private/tmp/claude-501/-Users-yannorlarey-Documents-Install-faust/7c80a0c8-8620-48ec-83b0-8edc6af94aed/scratchpad/corde-mac-run",
+    "--faust-root",
+    "/Users/yannorlarey/Documents/Install/faust",
+    "--arch",
+    "/Users/yannorlarey/Documents/Install/faust-r-d8a62f5bf/libraries/arch/cpu_arch.cpp",
+    "--cxx",
+    "/usr/bin/clang++",
+    "--configs",
+    "ocpp-f,ocpp-d",
+    "--jobs",
+    "4"
+   ],
+   "basket": {
+    "file": "/private/tmp/claude-501/-Users-yannorlarey-Documents-Install-faust/7c80a0c8-8620-48ec-83b0-8edc6af94aed/scratchpad/corde-entries.txt",
+    "sha256": "4bc6b0244c5c57a4119de81d4b9f62730a0ffa1d3e2449b4f54818d27870dd6a",
+    "programs": {
+     "corde6": "21c3d3b2e7495ac5d2527c4d8f912b02dc8da373e3882145dbdb8e35a2b978ce",
+     "corde8": "4b710a0930d16fda8dd4ac6122ddd71c25930e9db07dfa9a63d9258124ee6c75",
+     "corde12": "a1d21659d2b1fb3af2c7d8e5316af17438b9fe90d9631d49320bdcf8e5ea92d9",
+     "corde16": "26c1cca7089dd5270cf285396a1a5bcc1268ad710b498a3b9417af8d0593d6fc",
+     "corde24": "2826b3c41b1f430e524c395823938b2058906402ad089465a80ac977c3eb8cbd",
+     "corde32": "fe1d228fa58029d18c7ccf1c420f1f5e1287c88762e8fe31fee755f27ec1a9c4",
+     "corde48": "7c2a89af83e0193748fd2a26c7f54475ed0d3ffef056e0f5918ad7f90e8543a6",
+     "corde64": "12885adaf14eda2a79844105fbc4d4306d3c459e87cd0125f9185f2a114b9236",
+     "corde100": "d4f1bae3439ef48e43462d3792cdd11db2805205df67ae3b20d465c4bd832fa8"
+    }
+   },
+   "allow_modified": false,
+   "code": {
+    "corde6 R-d": "75abb4f9ec035d9708c747f4c280ae3be56265a7a73cafc732a0a0434ff125e7",
+    "corde6 md-ocpp-d": "5a01e60592c6185a642fa65afa3e488fe9a7bfc806f24a75c85be581c5b8fe24",
+    "corde6 R-f": "9d9c21a0b65bbf3b91d6d2e1fd893c3e982d6887ee662bda980784acee19bcc2",
+    "corde6 md-ocpp-f": "5023a124abb4503e1c926e3c6812b6859c4157efe02d399b55976a8c3461b6fd",
+    "corde6 cert3-ocpp-f": "b667a49b445f3c9cacd424f63b2fc3635d0c528c5b199cb05b6986961b9f1a72",
+    "corde6 cert3-ocpp-d": "8d7a83b1ae081837c77bbba194e54f9bf58f354900359977772658f1f5cec0e5",
+    "corde6 fam-ocpp-f": "f0ead596e1832ca15707698fd54ef664881b0b2d45c0aa98c6b6b2bc72e99853",
+    "corde6 fam-ocpp-d": "4461753d98a8a4acb805d816d0997167df79ae57b5aa4d5b922c4c23e09d8fef",
+    "corde8 R-d": "3c5316fbfdfb0f30d610527ea70b29216c9cef38551b5d7c0c8c9ef6c1066e29",
+    "corde8 md-ocpp-d": "bbe11ce115390cba53295a5ed25df47f8afe40df31f127ba082925c042c0ba01",
+    "corde8 R-f": "67a3466c56de91927a92fc03884c998b5bdc67aea9a96140946d9b252a6f5599",
+    "corde8 md-ocpp-f": "2e39491840e995dbe6c1f95be18b333200a9219345c3cb974fa1362ce7dafe77",
+    "corde8 cert3-ocpp-f": "0051c0cdf8c2f55e347945fdb3e15d2de4ceca1098937e5902e544efe0412f8c",
+    "corde8 cert3-ocpp-d": "b13660f5ba00c5d7ffa47260f374ce3a69ec41d7e804233bd55388cdda8d23d1",
+    "corde8 fam-ocpp-f": "fbef39e114eb66fa23ef665ab6bd5712ed41a5c1e7742ef3c9ab2fdb4dc40f0f",
+    "corde8 fam-ocpp-d": "6d077950e0e7f384367c571bb92b9d5dc8d88d784c2fad6e943cf250c6a6e04f",
+    "corde12 R-d": "763d46d8aaab4d9ee04fdf50b69e1f141d66ef56bf024e98600324cbd559651b",
+    "corde12 md-ocpp-d": "5cbb20907a5d3f8456bce42578facda1415f78715279148dc591f7cd743e3074",
+    "corde12 R-f": "5799b2a92553b22edf4d949e0ff121ef9489a3c9ca2332f0e0f14bc7bdb470aa",
+    "corde12 md-ocpp-f": "2dbeb7f44a7f43e99ee2e4e358e8abc111f4193040b7bf882a827738ae2d55ee",
+    "corde12 cert3-ocpp-f": "f495b3f6bb593720ecf307e86cddcd97d516683bbdac0b25c523a5a5257becfd",
+    "corde12 cert3-ocpp-d": "2be4f62a9a0257bb41c8d6a5d23d8ed3c19ee0736bb4acdb3a830ba8e16fe4a1",
+    "corde12 fam-ocpp-f": "087c754e5462c3d01755e842c55ddd5f8e429998af8587531d2b1f2f512d6ded",
+    "corde12 fam-ocpp-d": "e8e7c1567a37ff069e55982dd03e0ec13622a938ed7950bae4c42d23daa0e4bc",
+    "corde16 R-d": "e8e64d151b12850015b99e02e76536a4856fb5456e4338191441ff5dd1773db2",
+    "corde16 md-ocpp-d": "53b14d7b82b8d13636a2195f2a44abd4e20a23b3170df2f140565a34c60dc9ac",
+    "corde16 R-f": "668dc2423bd4ed00afb4cd957b7d3ae4a36000753add1752c6b96f9384e25008",
+    "corde16 md-ocpp-f": "351cd257fdd41fe9f6956b3105904c32036a3f92b2f5d58d483546eaeb7371b8",
+    "corde16 cert3-ocpp-f": "e88596bfa6042faf356e0aeba42563b1dae2f70dabd86c82af445fbdcd52e798",
+    "corde16 cert3-ocpp-d": "a83ce216ddaa60c4136c7dfb5b942c0cf2bd06eb4615fadf8af9ab78830b0628",
+    "corde16 fam-ocpp-f": "2249dfb4f17d39480119583d91e58b5abdd0803393822fc1af079f6d8e7a10d6",
+    "corde16 fam-ocpp-d": "cca1347061c6e89c0c9af2671fc31c1bde94fd28ea5cfc6e097810e23fdc2ea1",
+    "corde24 R-d": "ac430efffc662bc4993c1dd0dfb178d674f856dd289a2662e9d72b515b6cfd82",
+    "corde24 md-ocpp-d": "adf0d7a8dc81faf27b399f3868ee33d9c6333caa48c633788ee5d8eb3b296804",
+    "corde24 R-f": "ddb8d6f5f585091ac2f522bf9fe6d3f229b787f11a4cf34363ba6705556ebc9e",
+    "corde24 md-ocpp-f": "d64f1179789970e3f3e0f19092f774ac11b5ef0948d2abb44fa2ae23ac17dfb1",
+    "corde24 cert3-ocpp-f": "39b31578bb171950e03bf0cdd476cc1990df1ed867dbefbb65138f0b9413ea4a",
+    "corde24 cert3-ocpp-d": "0c0b442a3d2ab6bd1a0cc65a1fbf5c61fe5de25eaec32ddbfbfed93937631482",
+    "corde24 fam-ocpp-f": "c3571824978ce605f113845df2cdee30ebe539547c4abc2cabead0539ecc918e",
+    "corde24 fam-ocpp-d": "14b29162e7ee6e8431fcfdb4390e553cdd181f178c29bee62161a7c34a3b46c5",
+    "corde32 R-d": "19ab9b6566f84030b108ccd545ac5f39addb991f86c9d20669030b11cded8b5a",
+    "corde32 md-ocpp-d": "df6ef994573d16af17d88ae8ca2e0cf1ae93a02a612f5bb1443da37a21ca6a84",
+    "corde32 R-f": "206880205f796dd71125c6f4684b218596eae78b253870f4dde7f96bd6d64a5e",
+    "corde32 md-ocpp-f": "03a2cf0f1d9e8e07c8024cf02af7ab4fe1aabb198c286b5d366115cf8af4b0b5",
+    "corde32 cert3-ocpp-f": "bbc3ae365f22e6ee8abeb26f224baff33051f5625a572314091e89352cae393b",
+    "corde32 cert3-ocpp-d": "87ff32625813381d6026f1251e602bb659c98629b474b0c0c3966217d71edab3",
+    "corde32 fam-ocpp-f": "8cfa142ced752f979a9b0e6b66d2adaa84a99600dd66fb1cfaaa2a52df6ac1dd",
+    "corde32 fam-ocpp-d": "57be142e2c8c3b517b20427033b706bc0c25fa55dd6a17986e1221c8d55d4d2c",
+    "corde48 R-d": "f5bdc1adb4c6666bdd7125752ffabd580f20d9f69e1a2705530b8f3fa9adb5b7",
+    "corde48 md-ocpp-d": "54caa5acf35d37114e1c9b168a6b2fb4175692fa2e03a049bb8edfd4d6662702",
+    "corde48 R-f": "8f6cb443311ead2d5fe7f3724ce341078b44185d095ea660cbea75d2a953c646",
+    "corde48 md-ocpp-f": "42f4c6b5476fe7baffc593ab4ab25a7f65ba478010c08b8eea84e03ab8859b3c",
+    "corde48 cert3-ocpp-f": "68dac9916247916036abe04aed22a86f68562964372eefdf2f2226f40590093e",
+    "corde48 cert3-ocpp-d": "f34ef78e7d66af52317593550b83ae8963d554a32e180e5439274f4843832096",
+    "corde48 fam-ocpp-f": "91e2d6de4d050a00f5065f7c7c21b47b2f6333b58ad1a0cf559ec909b8cdde0e",
+    "corde48 fam-ocpp-d": "d640a6488b9ad4c156fd98ba21ca44dbfa64fa1263a2edfd91ab09c59939ab86",
+    "corde64 R-d": "e1e2cafff5700f7929da34787ed0c4c3b84fe931d1b2bd12c73f3f60ef59ad11",
+    "corde64 md-ocpp-d": "c8f6a34bb725ea9f4cc96293d0c173962655932a1a05843a4861c89c9c05a7b9",
+    "corde64 R-f": "cdbd0c5961c59ef8a286593a8c9643dc6392825d8f963b3963d9594c01536b07",
+    "corde64 md-ocpp-f": "391c068c3a9be864cfe4331a0465b0546bcef13f3c6a6a4be9f8c18a57d9be87",
+    "corde64 cert3-ocpp-f": "3818e201e19fc6b8568e7a24f458781f6ca8671d5acf2f6f534cdd5dec8011e7",
+    "corde64 cert3-ocpp-d": "95140b1b77d0a8b2098d4857413c86372cd13bcc5f0072ce22a4862f46da2501",
+    "corde64 fam-ocpp-f": "8b6e10430a7d473e61962a1b6adc9235e808e9716948bdf1803bda05f550c9bf",
+    "corde64 fam-ocpp-d": "725710b03b9a03ea867af3713481806c0d072e2b003a452856ab18d680ddf752",
+    "corde100 R-d": "65900f808fba86fe65375a1b8dfe49003b09a886c7af88fc52959e63a8df2dcf",
+    "corde100 md-ocpp-d": "e97886a6bd77e026771cb58a85060af20ad0eafbc09a9e8350a01b256ca0a93a",
+    "corde100 R-f": "e121fc0b711978f72dc5e2c46e1adce0075a0dfd32d4e08dc46100fa965b4a6a",
+    "corde100 md-ocpp-f": "96ee1cc7e7019039537568cb3c16d8d5f9eb3920c1537d10b67c4daf4560faed",
+    "corde100 cert3-ocpp-f": "f65737ea469633ad38f068608b44b8b5c1d81688d058ebf601a9992a631f4ef8",
+    "corde100 cert3-ocpp-d": "ab5ac89d01972184347068b743fbdc7b22b67054978004fb9ac51210f8352702",
+    "corde100 fam-ocpp-f": "b99ea7bceb205adc3179141a17ab64e14d5114cc6ab220b727eee671f2642cfa",
+    "corde100 fam-ocpp-d": "4647c581fcc71aab2a6c5f48dcd7415f73cff754b868bfe24bf171b3b68296e4"
+   }
+  }
+ },
+ "variants": {
+  "R-d": [
+   "/Users/yannorlarey/Documents/Install/faust-r-d8a62f5bf/build/bin/faust",
+   "cpp",
+   "d",
+   "ref"
+  ],
+  "md-ocpp-d": [
+   "/Users/yannorlarey/Documents/Install/faust-r-d8a62f5bf/build/bin/faust",
+   "ocpp",
+   "d",
+   "ref"
+  ],
+  "R-f": [
+   "/Users/yannorlarey/Documents/Install/faust-r-d8a62f5bf/build/bin/faust",
+   "cpp",
+   "f",
+   "ref"
+  ],
+  "md-ocpp-f": [
+   "/Users/yannorlarey/Documents/Install/faust-r-d8a62f5bf/build/bin/faust",
+   "ocpp",
+   "f",
+   "ref"
+  ],
+  "cert3-ocpp-f": [
+   "/Users/yannorlarey/Documents/Install/faust/build/bin/faust",
+   "ocpp",
+   "f",
+   "branch"
+  ],
+  "cert3-ocpp-d": [
+   "/Users/yannorlarey/Documents/Install/faust/build/bin/faust",
+   "ocpp",
+   "d",
+   "branch"
+  ],
+  "fam-ocpp-f": [
+   "/Users/yannorlarey/Documents/Install/wt-fam/build/bin/faust",
+   "ocpp",
+   "f",
+   "branch"
+  ],
+  "fam-ocpp-d": [
+   "/Users/yannorlarey/Documents/Install/wt-fam/build/bin/faust",
+   "ocpp",
+   "d",
+   "branch"
+  ]
+ },
+ "same": {
+  "corde6 fam-ocpp-f": false,
+  "corde6 fam-ocpp-d": false,
+  "corde8 fam-ocpp-f": false,
+  "corde8 fam-ocpp-d": false,
+  "corde12 fam-ocpp-f": false,
+  "corde12 fam-ocpp-d": false,
+  "corde16 fam-ocpp-f": false,
+  "corde16 fam-ocpp-d": false,
+  "corde24 fam-ocpp-f": false,
+  "corde24 fam-ocpp-d": false,
+  "corde32 fam-ocpp-f": false,
+  "corde32 fam-ocpp-d": false,
+  "corde48 fam-ocpp-f": false,
+  "corde48 fam-ocpp-d": false,
+  "corde64 fam-ocpp-f": false,
+  "corde64 fam-ocpp-d": false,
+  "corde100 fam-ocpp-f": false,
+  "corde100 fam-ocpp-d": false
+ },
+ "times": {
+  "corde6": {
+   "R-d": [
+    4.366,
+    4.365,
+    4.365,
+    4.365,
+    4.366,
+    4.365,
+    4.364,
+    4.365,
+    4.365
+   ],
+   "md-ocpp-d": [
+    4.957,
+    4.955,
+    4.956,
+    4.956,
+    4.956,
+    4.956,
+    4.957,
+    4.956,
+    4.956
+   ],
+   "R-f": [
+    6.125,
+    6.113,
+    6.126,
+    6.128,
+    6.116,
+    6.124,
+    6.117,
+    6.118,
+    6.129
+   ],
+   "md-ocpp-f": [
+    5.946,
+    5.946,
+    5.947,
+    5.946,
+    5.945,
+    5.946,
+    5.947,
+    5.947,
+    5.946
+   ],
+   "cert3-ocpp-f": [
+    4.076,
+    4.076,
+    4.075,
+    4.076,
+    4.076,
+    4.076,
+    4.075,
+    4.076,
+    4.076
+   ],
+   "cert3-ocpp-d": [
+    4.304,
+    4.305,
+    4.302,
+    4.304,
+    4.304,
+    4.303,
+    4.304,
+    4.303,
+    4.303
+   ],
+   "fam-ocpp-f": [
+    7.025,
+    7.028,
+    7.021,
+    7.022,
+    7.013,
+    7.022,
+    7.019,
+    7.02,
+    7.03
+   ],
+   "fam-ocpp-d": [
+    6.894,
+    6.891,
+    6.886,
+    6.892,
+    6.884,
+    6.893,
+    6.893,
+    6.896,
+    6.893
+   ]
+  },
+  "corde8": {
+   "R-d": [
+    5.153,
+    5.153,
+    5.154,
+    5.154,
+    5.153,
+    5.154,
+    5.153,
+    5.153,
+    5.153
+   ],
+   "md-ocpp-d": [
+    5.669,
+    5.669,
+    5.669,
+    5.669,
+    5.67,
+    5.67,
+    5.67,
+    5.67,
+    5.669
+   ],
+   "R-f": [
+    6.819,
+    6.823,
+    6.824,
+    6.823,
+    6.825,
+    6.824,
+    6.818,
+    6.824,
+    6.824
+   ],
+   "md-ocpp-f": [
+    4.961,
+    4.961,
+    4.961,
+    4.963,
+    4.962,
+    4.961,
+    4.962,
+    4.961,
+    4.962
+   ],
+   "cert3-ocpp-f": [
+    5.222,
+    5.223,
+    5.223,
+    5.222,
+    5.223,
+    5.223,
+    5.223,
+    5.223,
+    5.223
+   ],
+   "cert3-ocpp-d": [
+    5.452,
+    5.452,
+    5.452,
+    5.452,
+    5.458,
+    5.451,
+    5.451,
+    5.452,
+    5.452
+   ],
+   "fam-ocpp-f": [
+    7.228,
+    7.227,
+    7.226,
+    7.223,
+    7.239,
+    7.221,
+    7.227,
+    7.228,
+    7.224
+   ],
+   "fam-ocpp-d": [
+    7.074,
+    7.072,
+    7.072,
+    7.072,
+    7.075,
+    7.074,
+    7.072,
+    7.072,
+    7.074
+   ]
+  },
+  "corde12": {
+   "R-d": [
+    6.813,
+    6.812,
+    6.812,
+    6.813,
+    6.813,
+    6.812,
+    6.814,
+    6.812,
+    6.813
+   ],
+   "md-ocpp-d": [
+    7.391,
+    7.391,
+    7.39,
+    7.39,
+    7.39,
+    7.391,
+    7.39,
+    7.398,
+    7.39
+   ],
+   "R-f": [
+    10.051,
+    10.051,
+    10.053,
+    10.052,
+    10.05,
+    10.051,
+    10.05,
+    10.053,
+    10.051
+   ],
+   "md-ocpp-f": [
+    7.107,
+    7.104,
+    7.105,
+    7.104,
+    7.106,
+    7.107,
+    7.105,
+    7.105,
+    7.104
+   ],
+   "cert3-ocpp-f": [
+    6.929,
+    6.929,
+    6.93,
+    6.93,
+    6.929,
+    6.928,
+    6.928,
+    6.929,
+    6.928
+   ],
+   "cert3-ocpp-d": [
+    7.959,
+    7.959,
+    7.959,
+    7.959,
+    7.959,
+    7.959,
+    7.959,
+    7.959,
+    7.959
+   ],
+   "fam-ocpp-f": [
+    9.229,
+    9.234,
+    9.234,
+    9.226,
+    9.235,
+    9.233,
+    9.229,
+    9.227,
+    9.227
+   ],
+   "fam-ocpp-d": [
+    9.946,
+    9.951,
+    9.951,
+    9.951,
+    9.95,
+    9.944,
+    9.95,
+    9.952,
+    9.95
+   ]
+  },
+  "corde16": {
+   "R-d": [
+    9.58,
+    9.568,
+    9.557,
+    9.569,
+    9.569,
+    9.569,
+    9.558,
+    9.569,
+    9.558
+   ],
+   "md-ocpp-d": [
+    8.619,
+    8.62,
+    8.619,
+    8.62,
+    8.619,
+    8.619,
+    8.619,
+    8.62,
+    8.62
+   ],
+   "R-f": [
+    13.575,
+    13.572,
+    13.575,
+    13.577,
+    13.577,
+    13.577,
+    13.575,
+    13.576,
+    13.575
+   ],
+   "md-ocpp-f": [
+    6.093,
+    6.093,
+    6.093,
+    6.091,
+    6.093,
+    6.097,
+    6.091,
+    6.093,
+    6.093
+   ],
+   "cert3-ocpp-f": [
+    10.28,
+    10.28,
+    10.28,
+    10.28,
+    10.28,
+    10.282,
+    10.28,
+    10.279,
+    10.279
+   ],
+   "cert3-ocpp-d": [
+    11.743,
+    11.742,
+    11.742,
+    11.742,
+    11.741,
+    11.742,
+    11.742,
+    11.742,
+    11.742
+   ],
+   "fam-ocpp-f": [
+    15.681,
+    15.682,
+    15.682,
+    15.682,
+    15.682,
+    15.682,
+    15.682,
+    15.682,
+    15.681
+   ],
+   "fam-ocpp-d": [
+    15.326,
+    15.327,
+    15.326,
+    15.326,
+    15.327,
+    15.327,
+    15.326,
+    15.326,
+    15.326
+   ]
+  },
+  "corde24": {
+   "R-d": [
+    17.294,
+    17.324,
+    17.323,
+    17.295,
+    17.295,
+    17.321,
+    17.321,
+    17.321,
+    17.322
+   ],
+   "md-ocpp-d": [
+    18.176,
+    18.178,
+    18.176,
+    18.176,
+    18.177,
+    18.177,
+    18.175,
+    18.175,
+    18.176
+   ],
+   "R-f": [
+    23.925,
+    23.904,
+    23.959,
+    23.961,
+    23.969,
+    23.927,
+    23.922,
+    23.958,
+    23.945
+   ],
+   "md-ocpp-f": [
+    10.878,
+    10.88,
+    10.879,
+    10.878,
+    10.878,
+    10.878,
+    10.88,
+    10.879,
+    10.879
+   ],
+   "cert3-ocpp-f": [
+    14.928,
+    14.933,
+    14.926,
+    14.931,
+    14.932,
+    14.934,
+    14.933,
+    14.934,
+    14.932
+   ],
+   "cert3-ocpp-d": [
+    15.959,
+    15.958,
+    15.959,
+    15.959,
+    15.959,
+    15.959,
+    15.959,
+    15.959,
+    15.958
+   ],
+   "fam-ocpp-f": [
+    14.743,
+    14.742,
+    14.743,
+    14.743,
+    14.743,
+    14.743,
+    14.744,
+    14.743,
+    14.743
+   ],
+   "fam-ocpp-d": [
+    18.184,
+    18.183,
+    18.183,
+    18.184,
+    18.184,
+    18.183,
+    18.185,
+    18.185,
+    18.184
+   ]
+  },
+  "corde32": {
+   "R-d": [
+    23.495,
+    23.53,
+    23.496,
+    23.553,
+    23.528,
+    23.527,
+    23.527,
+    23.518,
+    23.531
+   ],
+   "md-ocpp-d": [
+    17.033,
+    17.032,
+    17.034,
+    17.036,
+    17.036,
+    17.035,
+    17.035,
+    17.033,
+    17.034
+   ],
+   "R-f": [
+    35.561,
+    35.565,
+    35.593,
+    35.562,
+    35.579,
+    35.57,
+    35.571,
+    35.582,
+    35.564
+   ],
+   "md-ocpp-f": [
+    9.873,
+    9.873,
+    9.873,
+    9.873,
+    9.873,
+    9.873,
+    9.873,
+    9.873,
+    9.874
+   ],
+   "cert3-ocpp-f": [
+    16.273,
+    16.273,
+    16.273,
+    16.272,
+    16.273,
+    16.272,
+    16.273,
+    16.273,
+    16.272
+   ],
+   "cert3-ocpp-d": [
+    21.117,
+    21.116,
+    21.116,
+    21.117,
+    21.115,
+    21.118,
+    21.117,
+    21.142,
+    21.117
+   ],
+   "fam-ocpp-f": [
+    18.022,
+    18.025,
+    18.022,
+    18.022,
+    18.022,
+    18.022,
+    18.046,
+    18.021,
+    18.022
+   ],
+   "fam-ocpp-d": [
+    23.163,
+    23.164,
+    23.188,
+    23.164,
+    23.162,
+    23.16,
+    23.163,
+    23.187,
+    23.16
+   ]
+  },
+  "corde48": {
+   "R-d": [
+    77.732,
+    78.743,
+    77.735,
+    77.735,
+    77.738,
+    77.74,
+    77.711,
+    77.711,
+    77.74
+   ],
+   "md-ocpp-d": [
+    43.958,
+    44.004,
+    43.981,
+    43.954,
+    43.931,
+    43.94,
+    43.961,
+    43.918,
+    43.945
+   ],
+   "R-f": [
+    77.961,
+    77.914,
+    78.223,
+    77.893,
+    77.902,
+    77.909,
+    77.876,
+    77.871,
+    77.933
+   ],
+   "md-ocpp-f": [
+    44.623,
+    44.545,
+    45.045,
+    44.62,
+    44.55,
+    44.621,
+    44.622,
+    44.621,
+    44.644
+   ],
+   "cert3-ocpp-f": [
+    34.338,
+    34.341,
+    34.781,
+    34.342,
+    34.346,
+    34.344,
+    34.342,
+    34.344,
+    34.345
+   ],
+   "cert3-ocpp-d": [
+    46.44,
+    46.44,
+    46.441,
+    46.467,
+    46.444,
+    46.446,
+    46.462,
+    46.441,
+    46.464
+   ],
+   "fam-ocpp-f": [
+    26.984,
+    27.038,
+    27.0,
+    26.99,
+    27.019,
+    26.995,
+    27.001,
+    26.975,
+    26.998
+   ],
+   "fam-ocpp-d": [
+    33.075,
+    33.459,
+    33.075,
+    33.075,
+    33.1,
+    33.075,
+    33.101,
+    33.075,
+    33.075
+   ]
+  },
+  "corde64": {
+   "R-d": [
+    116.725,
+    116.773,
+    116.946,
+    116.722,
+    116.744,
+    116.79,
+    116.764,
+    116.711,
+    116.702
+   ],
+   "md-ocpp-d": [
+    39.081,
+    39.082,
+    39.092,
+    39.08,
+    39.087,
+    39.08,
+    39.085,
+    39.082,
+    39.079
+   ],
+   "R-f": [
+    111.952,
+    111.929,
+    111.93,
+    111.947,
+    111.948,
+    111.842,
+    111.833,
+    111.794,
+    111.822
+   ],
+   "md-ocpp-f": [
+    19.33,
+    19.336,
+    19.331,
+    19.329,
+    19.329,
+    19.328,
+    19.329,
+    19.328,
+    19.331
+   ],
+   "cert3-ocpp-f": [
+    29.474,
+    29.485,
+    29.478,
+    29.48,
+    29.479,
+    29.471,
+    29.479,
+    29.48,
+    29.471
+   ],
+   "cert3-ocpp-d": [
+    37.091,
+    37.09,
+    37.114,
+    37.107,
+    37.093,
+    37.093,
+    37.091,
+    37.092,
+    37.102
+   ],
+   "fam-ocpp-f": [
+    33.81,
+    33.821,
+    33.86,
+    33.837,
+    33.819,
+    33.82,
+    33.796,
+    33.785,
+    33.805
+   ],
+   "fam-ocpp-d": [
+    43.459,
+    43.363,
+    43.513,
+    43.47,
+    43.468,
+    43.47,
+    43.475,
+    43.45,
+    43.479
+   ]
+  },
+  "corde100": {
+   "R-d": [
+    197.775,
+    197.781,
+    197.736,
+    197.805,
+    197.714,
+    197.797,
+    197.786,
+    197.801,
+    197.788
+   ],
+   "md-ocpp-d": [
+    95.944,
+    95.927,
+    95.927,
+    95.927,
+    95.926,
+    95.918,
+    97.336,
+    95.928,
+    95.929
+   ],
+   "R-f": [
+    183.622,
+    183.566,
+    183.571,
+    183.578,
+    183.588,
+    183.571,
+    183.576,
+    183.574,
+    183.575
+   ],
+   "md-ocpp-f": [
+    82.079,
+    82.08,
+    82.044,
+    82.109,
+    82.048,
+    82.052,
+    82.067,
+    82.048,
+    82.032
+   ],
+   "cert3-ocpp-f": [
+    72.725,
+    72.663,
+    72.688,
+    72.707,
+    72.784,
+    72.71,
+    72.688,
+    73.072,
+    72.672
+   ],
+   "cert3-ocpp-d": [
+    103.802,
+    103.77,
+    103.767,
+    103.767,
+    103.77,
+    103.762,
+    103.764,
+    103.767,
+    103.767
+   ],
+   "fam-ocpp-f": [
+    45.901,
+    45.928,
+    45.931,
+    45.93,
+    45.939,
+    45.902,
+    45.928,
+    45.928,
+    45.933
+   ],
+   "fam-ocpp-d": [
+    78.822,
+    78.807,
+    78.82,
+    78.807,
+    78.82,
+    79.344,
+    78.822,
+    80.239,
+    80.311
+   ]
+  }
+ },
+ "nonfinite": {},
+ "cxx_times": {}
+}

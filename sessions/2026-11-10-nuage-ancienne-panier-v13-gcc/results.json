@@ -1,0 +1,420 @@
+{
+ "cxx": "g++",
+ "cxxopts": {
+  "md": "-O3 -ffast-math -march=native",
+  "b0": "-O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno -include /tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/ftz/ftz.h",
+  "b1": "-O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno -include /tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/ftz/ftz.h"
+ },
+ "rounds": 9,
+ "variants": {
+  "md-cpp-f": [
+   "cpp -single",
+   "d8a62f5bf\nEmbedded backends: \n   DSP to AssemblyScript\n   DSP to C\n   DSP to C++\n   DSP to Cmajor\n   DSP to Codebox\n   DSP to CSharp\n   DSP to DLang\n   DSP to Java\n   DSP to NNX\n   DSP to Linen\n   DSP to Julia\n   DSP to JSFX\n   DSP to old C++\n   DSP to Rust\n   DSP to SDF3\n   DSP to VHDL\n   DSP to WebAssembly (wast/wasm)\nCopyright (C) 2002-2026, GRAME - Centre National de Creation Musicale. All rights reserved."
+  ],
+  "md-ocpp-f": [
+   "ocpp -single",
+   "d8a62f5bf\nEmbedded backends: \n   DSP to AssemblyScript\n   DSP to C\n   DSP to C++\n   DSP to Cmajor\n   DSP to Codebox\n   DSP to CSharp\n   DSP to DLang\n   DSP to Java\n   DSP to NNX\n   DSP to Linen\n   DSP to Julia\n   DSP to JSFX\n   DSP to old C++\n   DSP to Rust\n   DSP to SDF3\n   DSP to VHDL\n   DSP to WebAssembly (wast/wasm)\nCopyright (C) 2002-2026, GRAME - Centre National de Creation Musicale. All rights reserved."
+  ],
+  "b0-cpp-f": [
+   "cpp -single",
+   "73642f744-modified\nEmbedded backends: \n   DSP to AssemblyScript\n   DSP to C\n   DSP to C++\n   DSP to Cmajor\n   DSP to Codebox\n   DSP to CSharp\n   DSP to DLang\n   DSP to Java\n   DSP to NNX\n   DSP to Linen\n   DSP to Julia\n   DSP to JSFX\n   DSP to old C++\n   DSP to Rust\n   DSP to SDF3\n   DSP to VHDL\n   DSP to WebAssembly (wast/wasm)\nCopyright (C) 2002-2026, GRAME - Centre National de Creation Musicale. All rights reserved."
+  ],
+  "b0-ocpp-f": [
+   "ocpp -single",
+   "73642f744-modified\nEmbedded backends: \n   DSP to AssemblyScript\n   DSP to C\n   DSP to C++\n   DSP to Cmajor\n   DSP to Codebox\n   DSP to CSharp\n   DSP to DLang\n   DSP to Java\n   DSP to NNX\n   DSP to Linen\n   DSP to Julia\n   DSP to JSFX\n   DSP to old C++\n   DSP to Rust\n   DSP to SDF3\n   DSP to VHDL\n   DSP to WebAssembly (wast/wasm)\nCopyright (C) 2002-2026, GRAME - Centre National de Creation Musicale. All rights reserved."
+  ],
+  "b1-cpp-f": [
+   "cpp -single",
+   "09cd1e554-modified\nEmbedded backends: \n   DSP to AssemblyScript\n   DSP to C\n   DSP to C++\n   DSP to Cmajor\n   DSP to Codebox\n   DSP to CSharp\n   DSP to DLang\n   DSP to Java\n   DSP to NNX\n   DSP to Linen\n   DSP to Julia\n   DSP to JSFX\n   DSP to old C++\n   DSP to Rust\n   DSP to SDF3\n   DSP to VHDL\n   DSP to WebAssembly (wast/wasm)\nCopyright (C) 2002-2026, GRAME - Centre National de Creation Musicale. All rights reserved."
+  ],
+  "b1-ocpp-f": [
+   "ocpp -single",
+   "09cd1e554-modified\nEmbedded backends: \n   DSP to AssemblyScript\n   DSP to C\n   DSP to C++\n   DSP to Cmajor\n   DSP to Codebox\n   DSP to CSharp\n   DSP to DLang\n   DSP to Java\n   DSP to NNX\n   DSP to Linen\n   DSP to Julia\n   DSP to JSFX\n   DSP to old C++\n   DSP to Rust\n   DSP to SDF3\n   DSP to VHDL\n   DSP to WebAssembly (wast/wasm)\nCopyright (C) 2002-2026, GRAME - Centre National de Creation Musicale. All rights reserved."
+  ],
+  "md-cpp-d": [
+   "cpp -double",
+   "d8a62f5bf\nEmbedded backends: \n   DSP to AssemblyScript\n   DSP to C\n   DSP to C++\n   DSP to Cmajor\n   DSP to Codebox\n   DSP to CSharp\n   DSP to DLang\n   DSP to Java\n   DSP to NNX\n   DSP to Linen\n   DSP to Julia\n   DSP to JSFX\n   DSP to old C++\n   DSP to Rust\n   DSP to SDF3\n   DSP to VHDL\n   DSP to WebAssembly (wast/wasm)\nCopyright (C) 2002-2026, GRAME - Centre National de Creation Musicale. All rights reserved."
+  ],
+  "md-ocpp-d": [
+   "ocpp -double",
+   "d8a62f5bf\nEmbedded backends: \n   DSP to AssemblyScript\n   DSP to C\n   DSP to C++\n   DSP to Cmajor\n   DSP to Codebox\n   DSP to CSharp\n   DSP to DLang\n   DSP to Java\n   DSP to NNX\n   DSP to Linen\n   DSP to Julia\n   DSP to JSFX\n   DSP to old C++\n   DSP to Rust\n   DSP to SDF3\n   DSP to VHDL\n   DSP to WebAssembly (wast/wasm)\nCopyright (C) 2002-2026, GRAME - Centre National de Creation Musicale. All rights reserved."
+  ],
+  "b0-cpp-d": [
+   "cpp -double",
+   "73642f744-modified\nEmbedded backends: \n   DSP to AssemblyScript\n   DSP to C\n   DSP to C++\n   DSP to Cmajor\n   DSP to Codebox\n   DSP to CSharp\n   DSP to DLang\n   DSP to Java\n   DSP to NNX\n   DSP to Linen\n   DSP to Julia\n   DSP to JSFX\n   DSP to old C++\n   DSP to Rust\n   DSP to SDF3\n   DSP to VHDL\n   DSP to WebAssembly (wast/wasm)\nCopyright (C) 2002-2026, GRAME - Centre National de Creation Musicale. All rights reserved."
+  ],
+  "b0-ocpp-d": [
+   "ocpp -double",
+   "73642f744-modified\nEmbedded backends: \n   DSP to AssemblyScript\n   DSP to C\n   DSP to C++\n   DSP to Cmajor\n   DSP to Codebox\n   DSP to CSharp\n   DSP to DLang\n   DSP to Java\n   DSP to NNX\n   DSP to Linen\n   DSP to Julia\n   DSP to JSFX\n   DSP to old C++\n   DSP to Rust\n   DSP to SDF3\n   DSP to VHDL\n   DSP to WebAssembly (wast/wasm)\nCopyright (C) 2002-2026, GRAME - Centre National de Creation Musicale. All rights reserved."
+  ],
+  "b1-cpp-d": [
+   "cpp -double",
+   "09cd1e554-modified\nEmbedded backends: \n   DSP to AssemblyScript\n   DSP to C\n   DSP to C++\n   DSP to Cmajor\n   DSP to Codebox\n   DSP to CSharp\n   DSP to DLang\n   DSP to Java\n   DSP to NNX\n   DSP to Linen\n   DSP to Julia\n   DSP to JSFX\n   DSP to old C++\n   DSP to Rust\n   DSP to SDF3\n   DSP to VHDL\n   DSP to WebAssembly (wast/wasm)\nCopyright (C) 2002-2026, GRAME - Centre National de Creation Musicale. All rights reserved."
+  ],
+  "b1-ocpp-d": [
+   "ocpp -double",
+   "09cd1e554-modified\nEmbedded backends: \n   DSP to AssemblyScript\n   DSP to C\n   DSP to C++\n   DSP to Cmajor\n   DSP to Codebox\n   DSP to CSharp\n   DSP to DLang\n   DSP to Java\n   DSP to NNX\n   DSP to Linen\n   DSP to Julia\n   DSP to JSFX\n   DSP to old C++\n   DSP to Rust\n   DSP to SDF3\n   DSP to VHDL\n   DSP to WebAssembly (wast/wasm)\nCopyright (C) 2002-2026, GRAME - Centre National de Creation Musicale. All rights reserved."
+  ]
+ },
+ "ns_per_frame": {
+  "2dKirchhoffThinPlate": {
+   "md-cpp-f": 1281.373,
+   "md-ocpp-f": 978.942,
+   "b0-cpp-f": 468.406,
+   "b0-ocpp-f": 460.72,
+   "b1-cpp-f": 488.341,
+   "b1-ocpp-f": 468.682,
+   "md-cpp-d": 599.644,
+   "md-ocpp-d": 683.333,
+   "b0-cpp-d": 443.301,
+   "b0-ocpp-d": 484.182,
+   "b1-cpp-d": 502.411,
+   "b1-ocpp-d": 481.726
+  },
+  "StiffString": {
+   "md-cpp-f": 208.526,
+   "md-ocpp-f": 159.881,
+   "b0-cpp-f": 203.494,
+   "b0-ocpp-f": 160.769,
+   "b1-cpp-f": 211.283,
+   "b1-ocpp-f": 146.996,
+   "md-cpp-d": 157.462,
+   "md-ocpp-d": 164.505,
+   "b0-cpp-d": 184.051,
+   "b0-ocpp-d": 152.035,
+   "b1-cpp-d": 178.303,
+   "b1-ocpp-d": 146.955
+  }
+ },
+ "best_ns_per_frame": {
+  "2dKirchhoffThinPlate": {
+   "md-cpp-f": 1234.887,
+   "md-ocpp-f": 960.302,
+   "b0-cpp-f": 461.761,
+   "b0-ocpp-f": 407.899,
+   "b1-cpp-f": 460.097,
+   "b1-ocpp-f": 409.506,
+   "md-cpp-d": 592.971,
+   "md-ocpp-d": 596.841,
+   "b0-cpp-d": 434.081,
+   "b0-ocpp-d": 425.521,
+   "b1-cpp-d": 440.779,
+   "b1-ocpp-d": 427.851
+  },
+  "StiffString": {
+   "md-cpp-f": 183.528,
+   "md-ocpp-f": 140.204,
+   "b0-cpp-f": 176.94,
+   "b0-ocpp-f": 137.468,
+   "b1-cpp-f": 181.494,
+   "b1-ocpp-f": 138.235,
+   "md-cpp-d": 147.422,
+   "md-ocpp-d": 143.391,
+   "b0-cpp-d": 155.798,
+   "b0-ocpp-d": 145.835,
+   "b1-cpp-d": 156.944,
+   "b1-ocpp-d": 145.845
+  }
+ },
+ "times": {
+  "2dKirchhoffThinPlate": {
+   "md-cpp-f": [
+    1281.373,
+    1241.068,
+    1389.706,
+    1234.887,
+    1277.797,
+    1283.101,
+    1302.751,
+    1237.331,
+    1436.393
+   ],
+   "md-ocpp-f": [
+    1009.932,
+    978.942,
+    973.249,
+    960.302,
+    1057.167,
+    999.103,
+    961.062,
+    976.321,
+    1018.077
+   ],
+   "b0-cpp-f": [
+    469.836,
+    469.594,
+    468.406,
+    462.113,
+    534.522,
+    461.761,
+    500.231,
+    464.813,
+    464.215
+   ],
+   "b0-ocpp-f": [
+    460.72,
+    489.173,
+    470.63,
+    427.868,
+    414.793,
+    518.6,
+    407.899,
+    476.829,
+    426.971
+   ],
+   "b1-cpp-f": [
+    551.641,
+    526.575,
+    462.988,
+    485.701,
+    533.979,
+    460.097,
+    527.823,
+    477.44,
+    488.341
+   ],
+   "b1-ocpp-f": [
+    518.97,
+    468.682,
+    412.736,
+    409.506,
+    480.616,
+    413.517,
+    483.308,
+    483.658,
+    429.291
+   ],
+   "md-cpp-d": [
+    621.32,
+    593.818,
+    592.971,
+    599.644,
+    598.894,
+    675.362,
+    597.905,
+    701.004,
+    742.454
+   ],
+   "md-ocpp-d": [
+    611.795,
+    596.841,
+    697.665,
+    683.333,
+    607.089,
+    685.254,
+    705.291,
+    611.992,
+    686.064
+   ],
+   "b0-cpp-d": [
+    435.509,
+    535.569,
+    496.22,
+    511.322,
+    434.081,
+    438.87,
+    435.239,
+    554.86,
+    443.301
+   ],
+   "b0-ocpp-d": [
+    447.807,
+    484.865,
+    426.464,
+    425.521,
+    453.919,
+    484.182,
+    485.898,
+    500.539,
+    516.682
+   ],
+   "b1-cpp-d": [
+    464.804,
+    502.483,
+    502.902,
+    502.411,
+    446.009,
+    440.779,
+    520.488,
+    460.155,
+    532.177
+   ],
+   "b1-ocpp-d": [
+    546.49,
+    492.648,
+    502.808,
+    427.851,
+    429.477,
+    432.892,
+    431.296,
+    490.802,
+    481.726
+   ]
+  },
+  "StiffString": {
+   "md-cpp-f": [
+    207.783,
+    195.878,
+    232.72,
+    220.809,
+    207.828,
+    183.528,
+    219.523,
+    208.526,
+    212.939
+   ],
+   "md-ocpp-f": [
+    140.204,
+    167.424,
+    171.091,
+    178.39,
+    141.843,
+    159.337,
+    178.985,
+    159.881,
+    157.283
+   ],
+   "b0-cpp-f": [
+    205.139,
+    177.729,
+    183.655,
+    203.494,
+    176.94,
+    210.635,
+    221.785,
+    181.007,
+    223.9
+   ],
+   "b0-ocpp-f": [
+    157.732,
+    166.876,
+    169.509,
+    159.616,
+    160.769,
+    137.778,
+    137.468,
+    161.006,
+    174.944
+   ],
+   "b1-cpp-f": [
+    206.363,
+    231.335,
+    213.676,
+    204.835,
+    218.914,
+    211.283,
+    204.019,
+    181.494,
+    225.406
+   ],
+   "b1-ocpp-f": [
+    177.498,
+    139.222,
+    157.246,
+    138.235,
+    139.459,
+    140.919,
+    163.419,
+    146.996,
+    163.302
+   ],
+   "md-cpp-d": [
+    150.122,
+    157.462,
+    147.422,
+    189.313,
+    168.393,
+    168.958,
+    149.672,
+    148.752,
+    174.695
+   ],
+   "md-ocpp-d": [
+    180.794,
+    149.125,
+    153.327,
+    164.505,
+    176.95,
+    160.66,
+    143.391,
+    167.325,
+    170.042
+   ],
+   "b0-cpp-d": [
+    155.798,
+    193.744,
+    184.051,
+    155.953,
+    186.009,
+    198.917,
+    199.334,
+    158.708,
+    155.812
+   ],
+   "b0-ocpp-d": [
+    149.497,
+    186.495,
+    167.784,
+    148.919,
+    152.035,
+    145.835,
+    187.916,
+    166.662,
+    146.925
+   ],
+   "b1-cpp-d": [
+    177.43,
+    178.303,
+    187.308,
+    159.956,
+    177.244,
+    188.783,
+    199.266,
+    185.33,
+    156.944
+   ],
+   "b1-ocpp-d": [
+    159.042,
+    146.233,
+    146.955,
+    145.845,
+    148.416,
+    146.268,
+    169.683,
+    146.159,
+    158.149
+   ]
+  }
+ },
+ "spread": {
+  "2dKirchhoffThinPlate": {
+   "md-cpp-f": 0.1631776834641551,
+   "md-ocpp-f": 0.10086930986293884,
+   "b0-cpp-f": 0.15757285695413867,
+   "b0-ocpp-f": 0.2713931635037105,
+   "b1-cpp-f": 0.198966739622297,
+   "b1-ocpp-f": 0.26730743871884677,
+   "md-cpp-d": 0.2520915862664446,
+   "md-ocpp-d": 0.1817066857002117,
+   "b0-cpp-d": 0.2782406970127695,
+   "b0-ocpp-d": 0.21423384509812676,
+   "b1-cpp-d": 0.2073556135841318,
+   "b1-ocpp-d": 0.27729045859423024
+  },
+  "StiffString": {
+   "md-cpp-f": 0.26803539514406527,
+   "md-ocpp-f": 0.2766040911814214,
+   "b0-cpp-f": 0.265400700802532,
+   "b0-ocpp-f": 0.27261617249105247,
+   "b1-cpp-f": 0.274615138792467,
+   "b1-ocpp-f": 0.2840308170868447,
+   "md-cpp-d": 0.28415704575979156,
+   "md-ocpp-d": 0.2608462176845131,
+   "b0-cpp-d": 0.27943876044621885,
+   "b0-ocpp-d": 0.2885521308327904,
+   "b1-cpp-d": 0.26966306453257216,
+   "b1-ocpp-d": 0.16344749562892108
+  }
+ },
+ "complete": false
+}

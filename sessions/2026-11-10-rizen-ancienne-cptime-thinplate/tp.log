@@ -1,0 +1,20 @@
+--- clang21 cpp
+built 1/1 in 4 s
+changed: 1 entries, geomean B/A 0.5978, min 0.598, max 0.598, >1.05: 0, <0.95: 1
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp     996.71    595.83 0.598 
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp     996.71    595.83 0.598 
+--- clang21 ocpp
+built 1/1 in 7 s
+changed: 1 entries, geomean B/A 0.5153, min 0.515, max 0.515, >1.05: 0, <0.95: 1
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp    1102.10    567.92 0.515 
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp    1102.10    567.92 0.515 
+--- clang22 cpp
+built 1/1 in 4 s
+changed: 1 entries, geomean B/A 0.5746, min 0.575, max 0.575, >1.05: 0, <0.95: 1
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp     993.62    570.98 0.575 
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp     993.62    570.98 0.575 
+--- clang22 ocpp
+built 1/1 in 7 s
+changed: 1 entries, geomean B/A 0.7784, min 0.778, max 0.778, >1.05: 0, <0.95: 1
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp     903.11    702.96 0.778 
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp     903.11    702.96 0.778 

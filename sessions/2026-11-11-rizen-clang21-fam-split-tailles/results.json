@@ -1,0 +1,1417 @@
+{
+ "meta": {
+  "date": "2026-11-11T09:52:29+00:00",
+  "machine": "AMD Ryzen AI 9 HX 370 w/ Radeon 890M, 24 cpus",
+  "cxx": "Ubuntu clang version 21.1.8 (6ubuntu1)",
+  "flags": {
+   "ref": "-O3 -ffast-math -march=native",
+   "branch": "-O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h"
+  },
+  "levers": [],
+  "faust_options": {
+   "s0": "-fam -fam-split 0",
+   "s1000": "-fam -fam-split 1000",
+   "l8": "-fam -fam-lanes 8"
+  },
+  "arch": [
+   "/home/orlarey/cert3/faust-r/libraries/arch/cpu_arch.cpp",
+   "1751aa6765af91e47f701c62588f39cf874f97833204ebe4e201fced701c9576"
+  ],
+  "rounds": 9,
+  "configs": [
+   "ocpp-f",
+   "ocpp-d"
+  ],
+  "versions": [
+   "cert3",
+   "s0",
+   "s1000",
+   "l8"
+  ],
+  "binaries": {
+   "ref": [
+    "/home/orlarey/cert3/faust-r/build/bin/faust",
+    "FAUST Version 2.92.3 ; Source commit: d8a62f5bf"
+   ],
+   "cert3": [
+    "/home/orlarey/cert3/faust-new/build/bin/faust",
+    "FAUST Version 2.92.4 ; Source commit: 4ca9b5278"
+   ],
+   "s0": [
+    "/home/orlarey/cert3/faust-fam/build/bin/faust",
+    "FAUST Version 2.92.4 ; Source commit: 16bd41356"
+   ],
+   "s1000": [
+    "/home/orlarey/cert3/faust-fam/build/bin/faust",
+    "FAUST Version 2.92.4 ; Source commit: 16bd41356"
+   ],
+   "l8": [
+    "/home/orlarey/cert3/faust-fam/build/bin/faust",
+    "FAUST Version 2.92.4 ; Source commit: 16bd41356"
+   ]
+  },
+  "entries": [
+   "insects",
+   "fire",
+   "englishBell",
+   "AdditiveSynth",
+   "vocoder",
+   "oteyPianoV2",
+   "statespace"
+  ],
+  "failed": {
+   "modalBar R-d": "/usr/bin/clang++ : /home/orlarey/cert3/seuil-run/modalBar.R-d.cpp:66:10: fatal error: 'instrument.h' file not found\n   66 | #include <instr",
+   "modalBar md-ocpp-d": "/usr/bin/clang++ : /home/orlarey/cert3/seuil-run/modalBar.md-ocpp-d.cpp:12:10: fatal error: 'instrument.h' file not found\n   12 | #include ",
+   "modalBar R-f": "/usr/bin/clang++ : /home/orlarey/cert3/seuil-run/modalBar.R-f.cpp:66:10: fatal error: 'instrument.h' file not found\n   66 | #include <instr",
+   "modalBar md-ocpp-f": "/usr/bin/clang++ : /home/orlarey/cert3/seuil-run/modalBar.md-ocpp-f.cpp:12:10: fatal error: 'instrument.h' file not found\n   12 | #include ",
+   "modalBar cert3-ocpp-f": "/usr/bin/clang++ : /home/orlarey/cert3/seuil-run/modalBar.cert3-ocpp-f.cpp:12:10: fatal error: 'instrument.h' file not found\n   12 | #inclu",
+   "modalBar cert3-ocpp-d": "/usr/bin/clang++ : /home/orlarey/cert3/seuil-run/modalBar.cert3-ocpp-d.cpp:12:10: fatal error: 'instrument.h' file not found\n   12 | #inclu",
+   "modalBar s0-ocpp-f": "/usr/bin/clang++ : /home/orlarey/cert3/seuil-run/modalBar.s0-ocpp-f.cpp:12:10: fatal error: 'instrument.h' file not found\n   12 | #include ",
+   "modalBar s0-ocpp-d": "/usr/bin/clang++ : /home/orlarey/cert3/seuil-run/modalBar.s0-ocpp-d.cpp:12:10: fatal error: 'instrument.h' file not found\n   12 | #include ",
+   "modalBar s1000-ocpp-f": "/usr/bin/clang++ : /home/orlarey/cert3/seuil-run/modalBar.s1000-ocpp-f.cpp:12:10: fatal error: 'instrument.h' file not found\n   12 | #inclu",
+   "modalBar s1000-ocpp-d": "/usr/bin/clang++ : /home/orlarey/cert3/seuil-run/modalBar.s1000-ocpp-d.cpp:12:10: fatal error: 'instrument.h' file not found\n   12 | #inclu",
+   "modalBar l8-ocpp-f": "/usr/bin/clang++ : /home/orlarey/cert3/seuil-run/modalBar.l8-ocpp-f.cpp:12:10: fatal error: 'instrument.h' file not found\n   12 | #include ",
+   "modalBar l8-ocpp-d": "/usr/bin/clang++ : /home/orlarey/cert3/seuil-run/modalBar.l8-ocpp-d.cpp:12:10: fatal error: 'instrument.h' file not found\n   12 | #include "
+  },
+  "provenance": {
+   "binaries": {
+    "ref": {
+     "path": "/home/orlarey/cert3/faust-r/build/bin/faust",
+     "version": "FAUST Version 2.92.3 ; Source commit: d8a62f5bf",
+     "sha256": "81d36ef685696d140d8a209a436d4eac29586b4defbba97d648f1f3c9812d129",
+     "commit": "d8a62f5bf",
+     "modified": false,
+     "repo": "/home/orlarey/cert3/faust-r",
+     "commit_full": "d8a62f5bfe40ccf8d0d3146deb0adc4e1a87d0c8",
+     "tree": "74d186222bf6d4683852910fe1aeab355b067ba7",
+     "subject": "lv2.cpp: omit epp:rangeSteps when a port has no step-wise control",
+     "committed": "2026-11-06T17:04:47+01:00",
+     "head_branch": "HEAD",
+     "branches": [
+      "grame/master-dev",
+      "grame/master-dev-certification-3"
+     ]
+    },
+    "cert3": {
+     "path": "/home/orlarey/cert3/faust-new/build/bin/faust",
+     "version": "FAUST Version 2.92.4 ; Source commit: 4ca9b5278",
+     "sha256": "cfdc0ad07c38352c76ac526063ebb3b9c8757a8e45e3e2a77552224367d2ce75",
+     "commit": "4ca9b5278",
+     "modified": false,
+     "repo": "/home/orlarey/cert3/faust-new",
+     "commit_full": "4ca9b5278fba51501ada8c0fc6196d1d69eccf41",
+     "tree": "3b1fcbdcc32c61ea6d68961e6973acafa7e68bcd",
+     "subject": "ocpp : an IIR and the FIR input it takes in are one node of the dependency graph",
+     "committed": "2026-11-10T10:07:21Z",
+     "head_branch": "HEAD",
+     "branches": [
+      "grame/master-dev-certification-3"
+     ]
+    },
+    "s0": {
+     "path": "/home/orlarey/cert3/faust-fam/build/bin/faust",
+     "version": "FAUST Version 2.92.4 ; Source commit: 16bd41356",
+     "sha256": "5c9667c0c6714238756ba5f91d6ce537343b6a1e7b876e03b3eb2970b9bc997d",
+     "commit": "16bd41356",
+     "modified": false,
+     "repo": "/home/orlarey/cert3/faust-fam",
+     "commit_full": "16bd41356f215aa92e2569f9b78ef6ff60ba9ff6",
+     "tree": "bdce9b72af15da8dd893e5ca3a0fc5cb8814b6d5",
+     "subject": "-fam-split <n> : the nodes of a member from which its loop is split",
+     "committed": "2026-11-11T10:50:57+01:00",
+     "head_branch": "HEAD",
+     "branches": []
+    },
+    "s1000": {
+     "path": "/home/orlarey/cert3/faust-fam/build/bin/faust",
+     "version": "FAUST Version 2.92.4 ; Source commit: 16bd41356",
+     "sha256": "5c9667c0c6714238756ba5f91d6ce537343b6a1e7b876e03b3eb2970b9bc997d",
+     "commit": "16bd41356",
+     "modified": false,
+     "repo": "/home/orlarey/cert3/faust-fam",
+     "commit_full": "16bd41356f215aa92e2569f9b78ef6ff60ba9ff6",
+     "tree": "bdce9b72af15da8dd893e5ca3a0fc5cb8814b6d5",
+     "subject": "-fam-split <n> : the nodes of a member from which its loop is split",
+     "committed": "2026-11-11T10:50:57+01:00",
+     "head_branch": "HEAD",
+     "branches": []
+    },
+    "l8": {
+     "path": "/home/orlarey/cert3/faust-fam/build/bin/faust",
+     "version": "FAUST Version 2.92.4 ; Source commit: 16bd41356",
+     "sha256": "5c9667c0c6714238756ba5f91d6ce537343b6a1e7b876e03b3eb2970b9bc997d",
+     "commit": "16bd41356",
+     "modified": false,
+     "repo": "/home/orlarey/cert3/faust-fam",
+     "commit_full": "16bd41356f215aa92e2569f9b78ef6ff60ba9ff6",
+     "tree": "bdce9b72af15da8dd893e5ca3a0fc5cb8814b6d5",
+     "subject": "-fam-split <n> : the nodes of a member from which its loop is split",
+     "committed": "2026-11-11T10:50:57+01:00",
+     "head_branch": "HEAD",
+     "branches": []
+    }
+   },
+   "sources": {
+    "path": "/home/orlarey/cert3/faust-new",
+    "commit": "4ca9b5278fba51501ada8c0fc6196d1d69eccf41",
+    "tree": "3b1fcbdcc32c61ea6d68961e6973acafa7e68bcd",
+    "subject": "ocpp : an IIR and the FIR input it takes in are one node of the dependency graph",
+    "branch": "HEAD",
+    "changes": [],
+    "changed": 0
+   },
+   "libraries": {
+    "path": "/home/orlarey/cert3/faust-new/libraries",
+    "commit": "42fab480c778df7bad5c6b620ca4fd005b2bfe9b",
+    "tree": "0daa892573dfe85e24754f84111bf2e585feda35",
+    "subject": "filters.lib: declare the author and license of _tanhalf and _tpt_df",
+    "branch": "HEAD",
+    "changes": [],
+    "changed": 0
+   },
+   "tool": {
+    "path": "/home/orlarey/cert3/fm/tools",
+    "commit": "cc8e85c512e62b68ed384463e270a9664d9f4a21",
+    "tree": "37b2d59cf2c1eb8fdc0f11bb275c33c501f08888",
+    "subject": "Familles de la forme de calcul : l'h\u00f4te \u00e9crit \u00e0 plat, les comparaisons ; la mesure de vocoder",
+    "branch": "HEAD",
+    "changes": [],
+    "changed": 0
+   },
+   "host": {
+    "hostname": "orlarey-AI-Series",
+    "system": "Linux-7.0.0-30-generic-x86_64-inconnu-with-glibc2.43",
+    "cpu": "AMD Ryzen AI 9 HX 370 w/ Radeon 890M, 24 cpus",
+    "load": [
+     4.02978515625,
+     1.20166015625,
+     0.5537109375
+    ],
+    "affinity": [
+     0,
+     1,
+     2,
+     3,
+     12,
+     13,
+     14,
+     15
+    ],
+    "governor": "powersave",
+    "load_end": [
+     1.32177734375,
+     1.43212890625,
+     0.8935546875
+    ]
+   },
+   "command": [
+    "/home/orlarey/cert3/fm/tools/mesure.py",
+    "run",
+    "--ref",
+    "/home/orlarey/cert3/faust-r/build/bin/faust",
+    "--version",
+    "cert3=/home/orlarey/cert3/faust-new/build/bin/faust",
+    "--version",
+    "s0=/home/orlarey/cert3/faust-fam/build/bin/faust",
+    "--version",
+    "s1000=/home/orlarey/cert3/faust-fam/build/bin/faust",
+    "--version",
+    "l8=/home/orlarey/cert3/faust-fam/build/bin/faust",
+    "--faust-options",
+    "s0=-fam -fam-split 0",
+    "--faust-options",
+    "s1000=-fam -fam-split 1000",
+    "--faust-options",
+    "l8=-fam -fam-lanes 8",
+    "--entries",
+    "/home/orlarey/cert3/seuil-entries.txt",
+    "--out",
+    "/home/orlarey/cert3/seuil-run",
+    "--faust-root",
+    "/home/orlarey/cert3/faust-new",
+    "--arch",
+    "/home/orlarey/cert3/faust-r/libraries/arch/cpu_arch.cpp",
+    "--cxx",
+    "/usr/bin/clang++",
+    "--configs",
+    "ocpp-f,ocpp-d",
+    "--jobs",
+    "8"
+   ],
+   "basket": {
+    "file": "/home/orlarey/cert3/seuil-entries.txt",
+    "sha256": "f589947035851b1b7a673a76f5b7b28600dc190de414e862f5ed889fb2bb3a62",
+    "programs": {
+     "insects": "4f737341b1a1ad1a0e91702bb9d4a05df7d51eed1a117965c5383beae56c4b27",
+     "fire": "93d8c7f5ae65746a27e9d97b6ef73d95530fe8c2147f3089b2b5abcea8be568d",
+     "englishBell": "607ac4df2b1fac03d1c9fce2ad544a41d86beb7b4f44401bcce2a3987598306e",
+     "AdditiveSynth": "469bb3e78b9e58ecf0b25c7e57162788b99ea47ee2a370be33c49a1398791ae5",
+     "vocoder": "68b36b4d37ab96a7e793498c434f62e0a904cdbfa38897195c1d72be23c88a60",
+     "oteyPianoV2": "cbe100fd4bc1305fb115f306df6adfb39e16e55407953f31945b95df64d1e707",
+     "statespace": "5cbf46a7caa36011ad9c83167996b38ba179d0b56a7893bff15692394a6ec5c3",
+     "modalBar": "6bc8fb79512caf5bcdce03f7ad8b9a77b0251edfea4f899386e30fac72eaa657"
+    }
+   },
+   "allow_modified": false,
+   "code": {
+    "insects R-d": "b534f326ce9e62d339629ea180716d50b109440822d18812b99d51f3999361b9",
+    "insects md-ocpp-d": "3df66aa50a844da5be91121ecac9e02116a58539769a0390cdd8abe568117585",
+    "insects R-f": "3acacdb9313bf452495fcabfc13511b887eae9e8988d7508122dda0b85722f62",
+    "insects md-ocpp-f": "839bdd0354085bf2ba5b363a1aa8b31e14e4ba025cd8fd1748f630922ccea8ee",
+    "insects cert3-ocpp-f": "b5d42609b7ffe71a06ac951969665e6290914f2218d4df17aff5e8a4f1f6b5b3",
+    "insects cert3-ocpp-d": "8ceb95bee4988eebdc754a395f1c616dae44d0a23c8c1d2dbbea53a8dcdea776",
+    "insects s0-ocpp-f": "eb9550d4e48251d6c867a322fff00588caa149b3bddc88fc172600aa9f3e8431",
+    "insects s0-ocpp-d": "6e9fd1baaa50532774f2a94537ad87bc9ada2a62a6317437db956e995d7b967c",
+    "insects s1000-ocpp-f": "1ca69f73841ca51d7e6391ab51e07d58c8c75132b1ea1693aec89e29b7bc5fbb",
+    "insects s1000-ocpp-d": "0fa9f8cf90e11c893891a7c5e40a3f9e12fc06c9163446b74d289ce7d81a0388",
+    "insects l8-ocpp-f": "1ca69f73841ca51d7e6391ab51e07d58c8c75132b1ea1693aec89e29b7bc5fbb",
+    "insects l8-ocpp-d": "0fa9f8cf90e11c893891a7c5e40a3f9e12fc06c9163446b74d289ce7d81a0388",
+    "fire R-d": "9aec20a317acd0c2a12379dd969f3c3c031001fe797c9d031c251a3e8e480d3e",
+    "fire md-ocpp-d": "f9f834e43cbb44fc3a9decb5bb460cf99409a38b1dcf407ab8c7ef796e581a06",
+    "fire R-f": "8015d32c71f0389e2ef20275f4ed68215eadf931fad5d3e86252e1583424675f",
+    "fire md-ocpp-f": "9209208f99baf418806cb7255e62c4eea51c86bfefc972f716c1963e911d3aea",
+    "fire cert3-ocpp-f": "80916a3769cd6a6ade7d1a3f89467514f6bbde62d707805218eed20dfbb56917",
+    "fire cert3-ocpp-d": "aa83e1171a7806e74014209aed6c7ce27e8461434e102576cc895d1bbd87ab69",
+    "fire s0-ocpp-f": "8972a17f448c2a768634f8a9d109b838c5bcea4b48dc4d262383012d68939582",
+    "fire s0-ocpp-d": "aa83e1171a7806e74014209aed6c7ce27e8461434e102576cc895d1bbd87ab69",
+    "fire s1000-ocpp-f": "5f3caa4eef35858aa679d551bd2f6fe88d010b6ead18d6e3fe08c5aa55431f08",
+    "fire s1000-ocpp-d": "aa83e1171a7806e74014209aed6c7ce27e8461434e102576cc895d1bbd87ab69",
+    "fire l8-ocpp-f": "5f3caa4eef35858aa679d551bd2f6fe88d010b6ead18d6e3fe08c5aa55431f08",
+    "fire l8-ocpp-d": "aa83e1171a7806e74014209aed6c7ce27e8461434e102576cc895d1bbd87ab69",
+    "englishBell R-d": "c8b170129a929d1480e1ce89644e64232b66f89efdf4301a7a2dae2c1862359e",
+    "englishBell md-ocpp-d": "4fdaa82db77da594635aae0f8ad5010bc0eb88889c4fe5df4ed1ef58e02e8d4c",
+    "englishBell R-f": "dff51066094252c19827def81fffb3f64d8baeef8bf7f18e70f7d3da3a48a042",
+    "englishBell md-ocpp-f": "e8d1483e192bc226875aa7857f5e73a0093fdc2e5bc88510d3e1218017894fe8",
+    "englishBell cert3-ocpp-f": "8da0f53a391e97a92d86492f27c1de85bc81dec5d1c756ba103e32f1b59abe38",
+    "englishBell cert3-ocpp-d": "ad7b4257430d7284b7963df9b62d3a2c132eb7d568a58d3eebde34f1597d69e3",
+    "englishBell s0-ocpp-f": "6e6a9585fed5b2154d538ed1e23040f49cae24400244416584d5b696356341a7",
+    "englishBell s0-ocpp-d": "09c643d8298d48b22de6dabe1db64c1e541f1c84d57888a2910a677a26b44bce",
+    "englishBell s1000-ocpp-f": "9f5642a1847fecccfa0f2d5fa6c3a94af8e1bf0aca2fc8635937cd672b726226",
+    "englishBell s1000-ocpp-d": "ab3e3ec73f94198677d294f47699dc2ecf32d32c70d3466d26371d6459a1cb6f",
+    "englishBell l8-ocpp-f": "46754ab16b75d36555299878c5d0f980994dc400b4b2ecd9bd8536e6a9e32b19",
+    "englishBell l8-ocpp-d": "006364f5aad569a0051c4440aec6d6c89f5390694f1782a34167aeea942c781d",
+    "AdditiveSynth R-d": "fab7610c708c128f545e9a5a940b63f887eba6043f0a87094428f8f367dc411c",
+    "AdditiveSynth md-ocpp-d": "7164c19a9e50f66740d3e4f8d8aa6391e92e74d080e8c240b605201975b8cbc3",
+    "AdditiveSynth R-f": "fd420c1c12372fdbbcaebd675788a66f609dff7ddd3e07f9937049f5817f8715",
+    "AdditiveSynth md-ocpp-f": "350d6871185ac7e152c2d0f928fc1f43ddccbbe42402b56fd450f793801fd15f",
+    "AdditiveSynth cert3-ocpp-f": "2211dba598ef76ee6a1b4325e8695e95b72eb20c79214a68d191b159a093366e",
+    "AdditiveSynth cert3-ocpp-d": "5cf6ed7257176b9b4086f7ac50ba393c5f27d13a14d04941a879503d801876fb",
+    "AdditiveSynth s0-ocpp-f": "0884264d76a3a53c8a898882c3b18ad327d98a3817b24e56da6d5f34d6269392",
+    "AdditiveSynth s0-ocpp-d": "06d855e38db295e8bb7ea3877070f5c508c35bfdee3d619cc628c4bb2b07e13b",
+    "AdditiveSynth s1000-ocpp-f": "a85b8410232fae5f8e3efbd318476fd77315fbcfe5c26d8fb92a88abd0139382",
+    "AdditiveSynth s1000-ocpp-d": "e84eb9db9a40bf8fb37dde70beb881090136cab797ebec065b9aec1aa29bd0e3",
+    "AdditiveSynth l8-ocpp-f": "ccc7a126dec4d7c74fb1036729e9d9444bf62d98657c597ce2053c0fff18b555",
+    "AdditiveSynth l8-ocpp-d": "8d2c304b81300442c3b0e9d17e875c97b2e695e36546fe495b73dc2abb8b6731",
+    "vocoder R-d": "9dc3cc99365ee966b7f6e1926d03b39e8d751cca5954385bb17686bf8df9f469",
+    "vocoder md-ocpp-d": "ee39af8817a7947187ca6e5d63e1ff898fc870a921f4682cb2fd093658299bfc",
+    "vocoder R-f": "c10cb6f5077a73b35d07719f8ade63fc689eccc13b16b83ada23cd2db10dbae8",
+    "vocoder md-ocpp-f": "c1290204b4107b98a1c57de6e9ade8fe24aeb7d7ef5cdb2d84031f7309245e44",
+    "vocoder cert3-ocpp-f": "36e3634bba85734b33c56154a741012db7d4258061417212ba870ba25b1e3e37",
+    "vocoder cert3-ocpp-d": "4938ff02c2f0196ce3ae784e1a3bd5aad8bdd12678271ebf9956295f7d4b56a9",
+    "vocoder s0-ocpp-f": "6403ef4be8002f3dabe4c921163274ee647a04a117ef7a278aee5db4ce8e575f",
+    "vocoder s0-ocpp-d": "ba4b8ba995eb140c83f29ac57d84b7f7afb5e49c725b5505835d2805a30424d8",
+    "vocoder s1000-ocpp-f": "dad9d9938e67ceda84c010f46e4590b76074c4b88d53c486337e456929ab30e9",
+    "vocoder s1000-ocpp-d": "02e3dcc371a8be032d77c98c6ad5f9e486ab58cdcd0fed45602e74cdc5bcc845",
+    "vocoder l8-ocpp-f": "85d5ed429477709aa156237c9dd7535d27ac539ab5cb11e1f1324ac939e11d87",
+    "vocoder l8-ocpp-d": "6b5a269ebc338491d57ae190786e21a4795cc97c03e42ff8b23a64d00d0002ae",
+    "oteyPianoV2 R-d": "65faf227a7cf22c277f1c98de13ff4af1726bc9a5937ef5880c7aaf4a1e871c3",
+    "oteyPianoV2 md-ocpp-d": "396d0ba2fd0e5c3ccd3c16b4c4a8d8143430e8b8cb4ce1b98fbe99f08a39a0cc",
+    "oteyPianoV2 R-f": "255e2f05ade45d002ec71022648c800bfa4e73c9489205ffbc601536256f4dd4",
+    "oteyPianoV2 md-ocpp-f": "3206c8badeae45903b1b38d8bb4e399969ebf2af9a557451225897a36dbbf13e",
+    "oteyPianoV2 cert3-ocpp-f": "26400ab7e9241da7b8aa5a8fa66336953aa671e2a72d1f4e67013bac2de1e86d",
+    "oteyPianoV2 cert3-ocpp-d": "67e661a9fbf22c7acb4d7032f95c6731bf517266c31c60648c38f477571d5582",
+    "oteyPianoV2 s0-ocpp-f": "b7f6533f6e78ef28dcf0a8161c3e7359ac197ce63723acd7ef91c7c580ce5934",
+    "oteyPianoV2 s0-ocpp-d": "0b7c4546fc7b8dbfae9cbdc998c847c21ee97789f3369bf4e5d3a83fa0af4c83",
+    "oteyPianoV2 s1000-ocpp-f": "b7f6533f6e78ef28dcf0a8161c3e7359ac197ce63723acd7ef91c7c580ce5934",
+    "oteyPianoV2 s1000-ocpp-d": "0b7c4546fc7b8dbfae9cbdc998c847c21ee97789f3369bf4e5d3a83fa0af4c83",
+    "oteyPianoV2 l8-ocpp-f": "b7f6533f6e78ef28dcf0a8161c3e7359ac197ce63723acd7ef91c7c580ce5934",
+    "oteyPianoV2 l8-ocpp-d": "0b7c4546fc7b8dbfae9cbdc998c847c21ee97789f3369bf4e5d3a83fa0af4c83",
+    "statespace R-d": "b3f580e7b916a88a3b3fdc07dd16ae9399a4f60ef2e5197e6a8e79eb3ff9fde2",
+    "statespace md-ocpp-d": "3e05bd90cb6c346ad1b7656b35f23b2676a2431f5e7518800f4265028106d1b0",
+    "statespace R-f": "c7e7ba708372c7926fa13192fd81afb55bd339b8b827e62adfc0c01a16105ba1",
+    "statespace md-ocpp-f": "68cbab608ee1c48d92fdc137b3608eab96fbcb45cf886c68574a63fd3a12d7d2",
+    "statespace cert3-ocpp-f": "d2c33b54d4a388307c34c88b9ab8667784adfb5ed121944579b10ca636b75caa",
+    "statespace cert3-ocpp-d": "c22dedf6cba6f91352f32efc3ea29d7a60652d68ffdd4380ea45ceb2b69fe35c",
+    "statespace s0-ocpp-f": "11f1c9d7551c4fef05da106bce77cfc15ea6c00d284efbb270fcfc84b8e7e531",
+    "statespace s0-ocpp-d": "7838cf2023d20739c20746d85256e8da4f3785d284d65f37232d16306c80b883",
+    "statespace s1000-ocpp-f": "11f1c9d7551c4fef05da106bce77cfc15ea6c00d284efbb270fcfc84b8e7e531",
+    "statespace s1000-ocpp-d": "7838cf2023d20739c20746d85256e8da4f3785d284d65f37232d16306c80b883",
+    "statespace l8-ocpp-f": "11f1c9d7551c4fef05da106bce77cfc15ea6c00d284efbb270fcfc84b8e7e531",
+    "statespace l8-ocpp-d": "7838cf2023d20739c20746d85256e8da4f3785d284d65f37232d16306c80b883"
+   }
+  }
+ },
+ "variants": {
+  "R-d": [
+   "/home/orlarey/cert3/faust-r/build/bin/faust",
+   "cpp",
+   "d",
+   "ref"
+  ],
+  "md-ocpp-d": [
+   "/home/orlarey/cert3/faust-r/build/bin/faust",
+   "ocpp",
+   "d",
+   "ref"
+  ],
+  "R-f": [
+   "/home/orlarey/cert3/faust-r/build/bin/faust",
+   "cpp",
+   "f",
+   "ref"
+  ],
+  "md-ocpp-f": [
+   "/home/orlarey/cert3/faust-r/build/bin/faust",
+   "ocpp",
+   "f",
+   "ref"
+  ],
+  "cert3-ocpp-f": [
+   "/home/orlarey/cert3/faust-new/build/bin/faust",
+   "ocpp",
+   "f",
+   "branch"
+  ],
+  "cert3-ocpp-d": [
+   "/home/orlarey/cert3/faust-new/build/bin/faust",
+   "ocpp",
+   "d",
+   "branch"
+  ],
+  "s0-ocpp-f": [
+   "/home/orlarey/cert3/faust-fam/build/bin/faust",
+   "ocpp",
+   "f",
+   "branch"
+  ],
+  "s0-ocpp-d": [
+   "/home/orlarey/cert3/faust-fam/build/bin/faust",
+   "ocpp",
+   "d",
+   "branch"
+  ],
+  "s1000-ocpp-f": [
+   "/home/orlarey/cert3/faust-fam/build/bin/faust",
+   "ocpp",
+   "f",
+   "branch"
+  ],
+  "s1000-ocpp-d": [
+   "/home/orlarey/cert3/faust-fam/build/bin/faust",
+   "ocpp",
+   "d",
+   "branch"
+  ],
+  "l8-ocpp-f": [
+   "/home/orlarey/cert3/faust-fam/build/bin/faust",
+   "ocpp",
+   "f",
+   "branch"
+  ],
+  "l8-ocpp-d": [
+   "/home/orlarey/cert3/faust-fam/build/bin/faust",
+   "ocpp",
+   "d",
+   "branch"
+  ]
+ },
+ "same": {
+  "insects s0-ocpp-f": false,
+  "insects s1000-ocpp-f": false,
+  "insects l8-ocpp-f": true,
+  "insects s0-ocpp-d": false,
+  "insects s1000-ocpp-d": false,
+  "insects l8-ocpp-d": true,
+  "fire s0-ocpp-f": false,
+  "fire s1000-ocpp-f": false,
+  "fire l8-ocpp-f": true,
+  "fire s0-ocpp-d": true,
+  "fire s1000-ocpp-d": true,
+  "fire l8-ocpp-d": true,
+  "englishBell s0-ocpp-f": false,
+  "englishBell s1000-ocpp-f": false,
+  "englishBell l8-ocpp-f": false,
+  "englishBell s0-ocpp-d": false,
+  "englishBell s1000-ocpp-d": false,
+  "englishBell l8-ocpp-d": false,
+  "AdditiveSynth s0-ocpp-f": false,
+  "AdditiveSynth s1000-ocpp-f": false,
+  "AdditiveSynth l8-ocpp-f": false,
+  "AdditiveSynth s0-ocpp-d": false,
+  "AdditiveSynth s1000-ocpp-d": false,
+  "AdditiveSynth l8-ocpp-d": false,
+  "vocoder s0-ocpp-f": false,
+  "vocoder s1000-ocpp-f": false,
+  "vocoder l8-ocpp-f": false,
+  "vocoder s0-ocpp-d": false,
+  "vocoder s1000-ocpp-d": false,
+  "vocoder l8-ocpp-d": false,
+  "oteyPianoV2 s0-ocpp-f": false,
+  "oteyPianoV2 s1000-ocpp-f": true,
+  "oteyPianoV2 l8-ocpp-f": true,
+  "oteyPianoV2 s0-ocpp-d": false,
+  "oteyPianoV2 s1000-ocpp-d": true,
+  "oteyPianoV2 l8-ocpp-d": true,
+  "statespace s0-ocpp-f": false,
+  "statespace s1000-ocpp-f": true,
+  "statespace l8-ocpp-f": true,
+  "statespace s0-ocpp-d": false,
+  "statespace s1000-ocpp-d": true,
+  "statespace l8-ocpp-d": true
+ },
+ "times": {
+  "insects": {
+   "R-d": [
+    238.133,
+    237.592,
+    236.965,
+    240.776,
+    241.049,
+    236.867,
+    239.818,
+    238.896,
+    237.452
+   ],
+   "md-ocpp-d": [
+    206.497,
+    206.597,
+    207.106,
+    205.486,
+    209.054,
+    205.647,
+    206.167,
+    205.956,
+    206.017
+   ],
+   "R-f": [
+    210.96,
+    211.485,
+    211.381,
+    211.316,
+    211.043,
+    212.652,
+    210.738,
+    211.129,
+    211.469
+   ],
+   "md-ocpp-f": [
+    176.856,
+    176.886,
+    177.133,
+    177.454,
+    177.225,
+    177.268,
+    176.904,
+    176.995,
+    176.994
+   ],
+   "cert3-ocpp-f": [
+    174.83,
+    175.512,
+    175.887,
+    175.114,
+    175.76,
+    176.121,
+    175.132,
+    175.039,
+    175.343
+   ],
+   "cert3-ocpp-d": [
+    220.68,
+    221.585,
+    221.107,
+    219.579,
+    219.808,
+    220.265,
+    219.836,
+    219.357,
+    219.957
+   ],
+   "s0-ocpp-f": [
+    171.838,
+    171.03,
+    171.362,
+    170.875,
+    171.71,
+    171.75,
+    171.408,
+    171.764,
+    171.258
+   ],
+   "s0-ocpp-d": [
+    226.855,
+    226.21,
+    226.408,
+    225.992,
+    226.46,
+    226.27,
+    226.696,
+    226.099,
+    226.215
+   ],
+   "s1000-ocpp-f": [
+    170.66,
+    171.319,
+    171.201,
+    170.627,
+    170.962,
+    171.135,
+    170.708,
+    170.739,
+    171.294
+   ],
+   "s1000-ocpp-d": [
+    226.488,
+    226.178,
+    226.266,
+    226.66,
+    226.193,
+    227.339,
+    226.26,
+    226.308,
+    225.821
+   ],
+   "l8-ocpp-f": [
+    170.813,
+    173.848,
+    171.137,
+    170.746,
+    171.073,
+    170.912,
+    171.24,
+    171.547,
+    171.277
+   ],
+   "l8-ocpp-d": [
+    226.452,
+    226.536,
+    226.215,
+    226.075,
+    226.119,
+    226.978,
+    225.968,
+    225.879,
+    226.151
+   ]
+  },
+  "fire": {
+   "R-d": [
+    38.772,
+    38.484,
+    38.8,
+    38.53,
+    38.387,
+    38.94,
+    38.538,
+    38.43,
+    38.495
+   ],
+   "md-ocpp-d": [
+    40.032,
+    40.11,
+    40.072,
+    40.232,
+    40.061,
+    40.255,
+    40.173,
+    40.197,
+    40.576
+   ],
+   "R-f": [
+    45.466,
+    45.486,
+    44.864,
+    44.808,
+    45.42,
+    45.484,
+    46.521,
+    46.882,
+    44.797
+   ],
+   "md-ocpp-f": [
+    35.24,
+    35.24,
+    35.265,
+    35.226,
+    35.282,
+    35.213,
+    35.223,
+    35.255,
+    35.306
+   ],
+   "cert3-ocpp-f": [
+    44.318,
+    44.313,
+    44.4,
+    44.873,
+    44.339,
+    44.446,
+    44.413,
+    44.344,
+    44.393
+   ],
+   "cert3-ocpp-d": [
+    46.364,
+    46.413,
+    46.116,
+    46.178,
+    46.311,
+    46.735,
+    46.362,
+    46.243,
+    46.491
+   ],
+   "s0-ocpp-f": [
+    37.202,
+    37.186,
+    37.168,
+    37.192,
+    37.162,
+    37.37,
+    37.235,
+    37.195,
+    37.208
+   ],
+   "s0-ocpp-d": [
+    46.331,
+    46.972,
+    46.72,
+    46.682,
+    46.291,
+    46.647,
+    46.731,
+    46.16,
+    46.222
+   ],
+   "s1000-ocpp-f": [
+    36.86,
+    36.863,
+    36.881,
+    36.949,
+    36.923,
+    36.89,
+    36.841,
+    36.854,
+    36.976
+   ],
+   "s1000-ocpp-d": [
+    46.404,
+    46.154,
+    46.311,
+    46.571,
+    46.243,
+    46.226,
+    46.519,
+    46.459,
+    46.458
+   ],
+   "l8-ocpp-f": [
+    36.877,
+    36.915,
+    36.9,
+    36.894,
+    36.907,
+    36.856,
+    36.911,
+    36.847,
+    36.897
+   ],
+   "l8-ocpp-d": [
+    46.493,
+    46.194,
+    46.304,
+    46.424,
+    46.228,
+    46.412,
+    46.228,
+    46.226,
+    46.41
+   ]
+  },
+  "englishBell": {
+   "R-d": [
+    45.937,
+    45.044,
+    45.244,
+    45.271,
+    46.387,
+    45.799,
+    45.438,
+    45.821,
+    45.184
+   ],
+   "md-ocpp-d": [
+    11.996,
+    12.0,
+    11.992,
+    11.947,
+    12.0,
+    11.991,
+    12.0,
+    11.998,
+    11.948
+   ],
+   "R-f": [
+    44.161,
+    44.173,
+    44.153,
+    44.179,
+    44.16,
+    44.186,
+    44.18,
+    44.152,
+    44.243
+   ],
+   "md-ocpp-f": [
+    17.878,
+    17.819,
+    17.543,
+    18.127,
+    18.077,
+    17.88,
+    17.804,
+    17.541,
+    17.8
+   ],
+   "cert3-ocpp-f": [
+    20.842,
+    20.916,
+    21.261,
+    20.506,
+    20.507,
+    20.623,
+    20.564,
+    20.721,
+    20.812
+   ],
+   "cert3-ocpp-d": [
+    16.109,
+    16.131,
+    16.123,
+    16.118,
+    16.127,
+    16.111,
+    16.126,
+    16.117,
+    16.128
+   ],
+   "s0-ocpp-f": [
+    15.68,
+    15.839,
+    15.646,
+    15.768,
+    16.331,
+    15.759,
+    15.726,
+    15.839,
+    15.839
+   ],
+   "s0-ocpp-d": [
+    19.584,
+    18.553,
+    18.315,
+    18.263,
+    20.171,
+    18.734,
+    18.256,
+    18.484,
+    18.688
+   ],
+   "s1000-ocpp-f": [
+    11.593,
+    11.584,
+    11.59,
+    11.594,
+    11.584,
+    11.595,
+    11.604,
+    11.588,
+    11.594
+   ],
+   "s1000-ocpp-d": [
+    11.723,
+    11.834,
+    11.841,
+    11.729,
+    11.853,
+    11.731,
+    11.726,
+    11.848,
+    11.723
+   ],
+   "l8-ocpp-f": [
+    25.332,
+    25.377,
+    25.356,
+    25.351,
+    25.331,
+    25.388,
+    25.343,
+    25.369,
+    25.409
+   ],
+   "l8-ocpp-d": [
+    20.611,
+    20.61,
+    20.641,
+    20.613,
+    20.61,
+    20.614,
+    20.643,
+    20.649,
+    20.625
+   ]
+  },
+  "AdditiveSynth": {
+   "R-d": [
+    3.357,
+    3.358,
+    3.364,
+    3.356,
+    3.353,
+    3.355,
+    3.356,
+    3.358,
+    3.354
+   ],
+   "md-ocpp-d": [
+    3.287,
+    3.252,
+    3.279,
+    3.302,
+    3.301,
+    3.301,
+    3.277,
+    3.264,
+    3.266
+   ],
+   "R-f": [
+    11.001,
+    10.977,
+    10.987,
+    11.211,
+    10.988,
+    10.984,
+    10.983,
+    11.005,
+    10.988
+   ],
+   "md-ocpp-f": [
+    2.35,
+    2.351,
+    2.348,
+    2.349,
+    2.347,
+    2.355,
+    2.346,
+    2.349,
+    2.349
+   ],
+   "cert3-ocpp-f": [
+    14.224,
+    14.225,
+    14.237,
+    14.228,
+    14.235,
+    14.22,
+    14.235,
+    14.237,
+    14.218
+   ],
+   "cert3-ocpp-d": [
+    14.568,
+    14.566,
+    14.564,
+    14.57,
+    14.566,
+    14.571,
+    14.568,
+    14.569,
+    14.568
+   ],
+   "s0-ocpp-f": [
+    5.03,
+    5.03,
+    5.03,
+    4.514,
+    4.52,
+    5.031,
+    5.049,
+    5.058,
+    4.516
+   ],
+   "s0-ocpp-d": [
+    6.782,
+    6.789,
+    6.783,
+    6.783,
+    6.782,
+    6.789,
+    6.809,
+    6.787,
+    6.781
+   ],
+   "s1000-ocpp-f": [
+    15.413,
+    15.446,
+    15.476,
+    15.444,
+    15.441,
+    15.435,
+    15.444,
+    15.447,
+    15.435
+   ],
+   "s1000-ocpp-d": [
+    15.79,
+    15.787,
+    15.824,
+    15.854,
+    15.817,
+    15.785,
+    15.804,
+    15.795,
+    15.853
+   ],
+   "l8-ocpp-f": [
+    4.933,
+    5.018,
+    4.926,
+    4.927,
+    4.922,
+    4.928,
+    4.923,
+    4.922,
+    5.018
+   ],
+   "l8-ocpp-d": [
+    6.333,
+    6.809,
+    6.794,
+    6.332,
+    6.335,
+    6.793,
+    6.795,
+    6.332,
+    6.81
+   ]
+  },
+  "vocoder": {
+   "R-d": [
+    85.448,
+    85.357,
+    85.51,
+    85.482,
+    85.647,
+    85.573,
+    85.627,
+    85.644,
+    85.503
+   ],
+   "md-ocpp-d": [
+    55.247,
+    59.011,
+    56.736,
+    54.86,
+    52.237,
+    51.126,
+    55.858,
+    50.342,
+    52.482
+   ],
+   "R-f": [
+    85.693,
+    85.726,
+    86.407,
+    85.959,
+    86.019,
+    86.472,
+    86.139,
+    85.78,
+    86.016
+   ],
+   "md-ocpp-f": [
+    51.763,
+    50.396,
+    51.117,
+    50.654,
+    50.44,
+    49.844,
+    49.885,
+    51.684,
+    49.668
+   ],
+   "cert3-ocpp-f": [
+    51.782,
+    49.174,
+    51.751,
+    51.786,
+    51.538,
+    49.385,
+    51.507,
+    51.607,
+    51.722
+   ],
+   "cert3-ocpp-d": [
+    63.352,
+    62.718,
+    57.101,
+    63.126,
+    65.661,
+    55.834,
+    55.772,
+    56.855,
+    61.726
+   ],
+   "s0-ocpp-f": [
+    10.558,
+    10.552,
+    10.567,
+    10.568,
+    10.544,
+    10.552,
+    10.558,
+    10.543,
+    10.542
+   ],
+   "s0-ocpp-d": [
+    14.942,
+    14.9,
+    14.7,
+    14.693,
+    14.91,
+    14.952,
+    14.975,
+    15.266,
+    14.966
+   ],
+   "s1000-ocpp-f": [
+    14.133,
+    14.128,
+    14.143,
+    14.171,
+    14.132,
+    14.135,
+    14.163,
+    14.142,
+    14.14
+   ],
+   "s1000-ocpp-d": [
+    15.366,
+    15.379,
+    15.41,
+    15.385,
+    15.421,
+    15.379,
+    15.388,
+    15.421,
+    15.376
+   ],
+   "l8-ocpp-f": [
+    10.176,
+    10.173,
+    10.182,
+    10.185,
+    10.174,
+    10.183,
+    10.171,
+    10.191,
+    10.183
+   ],
+   "l8-ocpp-d": [
+    15.571,
+    15.779,
+    15.735,
+    15.742,
+    15.781,
+    15.754,
+    15.811,
+    15.737,
+    15.771
+   ]
+  },
+  "oteyPianoV2": {
+   "R-d": [
+    26.41,
+    26.418,
+    26.254,
+    26.216,
+    26.226,
+    26.243,
+    26.424,
+    26.263,
+    26.302
+   ],
+   "md-ocpp-d": [
+    26.554,
+    26.637,
+    26.683,
+    26.598,
+    26.595,
+    26.582,
+    26.529,
+    26.584,
+    26.572
+   ],
+   "R-f": [
+    25.64,
+    25.639,
+    25.839,
+    25.622,
+    25.598,
+    25.958,
+    25.623,
+    25.665,
+    25.684
+   ],
+   "md-ocpp-f": [
+    24.392,
+    24.313,
+    24.306,
+    25.027,
+    24.406,
+    24.238,
+    24.459,
+    24.419,
+    24.329
+   ],
+   "cert3-ocpp-f": [
+    24.523,
+    24.688,
+    24.705,
+    25.457,
+    24.844,
+    24.601,
+    24.582,
+    24.6,
+    24.63
+   ],
+   "cert3-ocpp-d": [
+    26.593,
+    26.613,
+    26.707,
+    26.599,
+    26.586,
+    26.602,
+    26.614,
+    26.581,
+    26.655
+   ],
+   "s0-ocpp-f": [
+    49.409,
+    49.377,
+    49.494,
+    49.441,
+    49.663,
+    49.561,
+    49.729,
+    49.394,
+    49.344
+   ],
+   "s0-ocpp-d": [
+    52.843,
+    52.647,
+    52.802,
+    52.817,
+    52.953,
+    52.79,
+    52.774,
+    52.696,
+    52.784
+   ],
+   "s1000-ocpp-f": [
+    49.655,
+    49.352,
+    49.473,
+    49.668,
+    49.562,
+    49.442,
+    49.337,
+    49.659,
+    49.348
+   ],
+   "s1000-ocpp-d": [
+    52.786,
+    52.704,
+    52.654,
+    52.639,
+    52.66,
+    52.792,
+    52.688,
+    52.734,
+    52.68
+   ],
+   "l8-ocpp-f": [
+    49.572,
+    49.515,
+    49.761,
+    49.378,
+    49.444,
+    49.363,
+    49.788,
+    49.313,
+    49.446
+   ],
+   "l8-ocpp-d": [
+    52.82,
+    52.666,
+    52.63,
+    52.696,
+    52.65,
+    52.779,
+    52.706,
+    52.722,
+    52.707
+   ]
+  },
+  "statespace": {
+   "R-d": [
+    6.082,
+    6.096,
+    6.083,
+    6.096,
+    6.098,
+    6.092,
+    6.1,
+    6.087,
+    6.087
+   ],
+   "md-ocpp-d": [
+    7.074,
+    7.076,
+    7.098,
+    7.079,
+    7.076,
+    7.075,
+    7.094,
+    7.076,
+    7.075
+   ],
+   "R-f": [
+    6.354,
+    6.349,
+    6.348,
+    6.322,
+    6.324,
+    6.318,
+    6.306,
+    6.305,
+    6.351
+   ],
+   "md-ocpp-f": [
+    5.924,
+    5.855,
+    6.061,
+    5.88,
+    6.024,
+    5.865,
+    5.879,
+    6.187,
+    6.335
+   ],
+   "cert3-ocpp-f": [
+    4.859,
+    4.862,
+    4.862,
+    4.862,
+    4.861,
+    4.862,
+    4.862,
+    4.86,
+    4.858
+   ],
+   "cert3-ocpp-d": [
+    5.552,
+    5.547,
+    5.552,
+    5.553,
+    5.548,
+    5.555,
+    5.551,
+    5.549,
+    5.546
+   ],
+   "s0-ocpp-f": [
+    6.675,
+    6.665,
+    6.668,
+    6.673,
+    6.666,
+    6.663,
+    6.676,
+    6.668,
+    6.672
+   ],
+   "s0-ocpp-d": [
+    6.923,
+    6.914,
+    6.918,
+    6.918,
+    6.92,
+    6.915,
+    6.914,
+    6.918,
+    6.913
+   ],
+   "s1000-ocpp-f": [
+    6.665,
+    6.67,
+    6.687,
+    6.672,
+    6.669,
+    6.671,
+    6.664,
+    6.664,
+    6.666
+   ],
+   "s1000-ocpp-d": [
+    6.92,
+    6.922,
+    6.916,
+    6.923,
+    6.913,
+    6.914,
+    6.915,
+    6.919,
+    6.915
+   ],
+   "l8-ocpp-f": [
+    6.675,
+    6.662,
+    6.664,
+    6.668,
+    6.664,
+    6.674,
+    6.674,
+    6.66,
+    6.67
+   ],
+   "l8-ocpp-d": [
+    6.917,
+    6.919,
+    6.919,
+    6.917,
+    6.915,
+    6.92,
+    6.915,
+    6.918,
+    6.918
+   ]
+  }
+ },
+ "nonfinite": {
+  "statespace R-d": true,
+  "statespace md-ocpp-d": true,
+  "statespace R-f": true,
+  "statespace md-ocpp-f": true,
+  "statespace cert3-ocpp-f": true,
+  "statespace cert3-ocpp-d": true,
+  "statespace s0-ocpp-f": true,
+  "statespace s0-ocpp-d": true,
+  "statespace s1000-ocpp-f": true,
+  "statespace s1000-ocpp-d": true,
+  "statespace l8-ocpp-f": true,
+  "statespace l8-ocpp-d": true
+ },
+ "cxx_times": {}
+}

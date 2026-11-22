@@ -1,0 +1,1390 @@
+{
+ "meta": {
+  "date": "2026-11-13T14:23:21+00:00",
+  "machine": "Intel(R) Xeon(R) Processor @ 2.30GHz, 4 cpus",
+  "cxx": "Ubuntu clang version 18.1.3 (1ubuntu1)",
+  "flags": {
+   "ref": "-O3 -ffast-math -march=native",
+   "branch": "-O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h"
+  },
+  "levers": [],
+  "faust_options": {},
+  "arch": [
+   "/home/user/wt-head/libraries/arch/cpu_arch.cpp",
+   "1751aa6765af91e47f701c62588f39cf874f97833204ebe4e201fced701c9576"
+  ],
+  "rounds": 9,
+  "configs": [
+   "cpp-f",
+   "cpp-d",
+   "ocpp-f",
+   "ocpp-d"
+  ],
+  "versions": [
+   "cert4"
+  ],
+  "binaries": {
+   "ref": [
+    "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-mdd8a/faust",
+    "FAUST Version 2.92.3 ; Source commit: d8a62f5bf"
+   ],
+   "cert4": [
+    "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-cert4/faust",
+    "FAUST Version 2.92.5 ; Source commit: 106dda74a"
+   ]
+  },
+  "entries": [
+   "2dKirchhoffThinPlate",
+   "StiffString",
+   "dx7",
+   "FFT",
+   "englishBell",
+   "vocoder",
+   "oneSourceToStereo",
+   "karplus32",
+   "zitaRev",
+   "virtualAnalog",
+   "multibandfilter",
+   "parametric_eq"
+  ],
+  "failed": {},
+  "provenance": {
+   "binaries": {
+    "ref": {
+     "path": "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-mdd8a/faust",
+     "version": "FAUST Version 2.92.3 ; Source commit: d8a62f5bf",
+     "sha256": "6db007aa89168a216ea1652bfe5e189c4d528aec86d06ec51296b01e022380eb",
+     "commit": "d8a62f5bf",
+     "modified": false
+    },
+    "cert4": {
+     "path": "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-cert4/faust",
+     "version": "FAUST Version 2.92.5 ; Source commit: 106dda74a",
+     "sha256": "ba6e9a863b14aa3a314b98a2ff03ed9b20572cfa77ab4619ae853c424db3bd8a",
+     "commit": "106dda74a",
+     "modified": false
+    }
+   },
+   "sources": {
+    "path": "/home/user/wt-head",
+    "commit": "106dda74a549501a6d96624cc2adde0ffecf5106",
+    "tree": "318f2f665faf8ce8f0b08366c15d10b538a0c4c7",
+    "subject": "TESTING.md : two open defects of the branch, the refusals under -ftz and of int() of an unbounded value then masked",
+    "branch": "s4-dev",
+    "changes": [],
+    "changed": 0
+   },
+   "libraries": {
+    "path": "/home/user/wt-head/libraries",
+    "commit": "42fab480c778df7bad5c6b620ca4fd005b2bfe9b",
+    "tree": "0daa892573dfe85e24754f84111bf2e585feda35",
+    "subject": "filters.lib: declare the author and license of _tanhalf and _tpt_df",
+    "branch": "HEAD",
+    "changes": [],
+    "changed": 0
+   },
+   "tool": {
+    "path": "/home/user/faust-migration/tools",
+    "commit": "c891a86e945bcaea2526b54e97498d10a64da646",
+    "tree": "9e126b70a58620070e1c69baf0d7a3213c9c8bb6",
+    "subject": "Le panier dans le nuage, fam-port 175d29b74 contre sa base, g++ 13",
+    "branch": "main",
+    "changes": [],
+    "changed": 0
+   },
+   "host": {
+    "hostname": "vm",
+    "system": "Linux-6.18.44-fc-v445-x86_64-with-glibc2.39",
+    "cpu": "Intel(R) Xeon(R) Processor @ 2.30GHz, 4 cpus",
+    "load": [
+     3.2666015625,
+     1.55810546875,
+     0.60791015625
+    ],
+    "affinity": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "load_end": [
+     1.0732421875,
+     1.1513671875,
+     0.93505859375
+    ]
+   },
+   "command": [
+    "tools/mesure.py",
+    "run",
+    "--ref",
+    "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-mdd8a/faust",
+    "--version",
+    "cert4=/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-cert4/faust",
+    "--configs",
+    "cpp-f,cpp-d,ocpp-f,ocpp-d",
+    "--faust-root",
+    "/home/user/wt-head",
+    "--arch",
+    "/home/user/wt-head/libraries/arch/cpu_arch.cpp",
+    "--cxx",
+    "clang++",
+    "--jobs",
+    "4",
+    "--out",
+    "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/mes/cert4-clang"
+   ],
+   "basket": {
+    "file": "/home/user/faust-migration/panier/entries.txt",
+    "sha256": "fcba278c930b9becf6cc5d765d9482528d5d6da644ff63e44731bb737e70a8ea",
+    "programs": {
+     "2dKirchhoffThinPlate": "5a96a4ca227257efb1add52c14d0b4aa723d79fa9cc76a8ebbb362d43dc28be6",
+     "StiffString": "48d9b03911445284bad62118bc4869dae775184e93aade3f56158e0f44398cf0",
+     "dx7": "61cf04b203c2298e57ac10e429fa6a56b620917af01fec7abe4f5de496f550b8",
+     "FFT": "5c577d49d2f384b15b2b7393262309bc5515b992dae97037f96fa0ab9b95521a",
+     "englishBell": "607ac4df2b1fac03d1c9fce2ad544a41d86beb7b4f44401bcce2a3987598306e",
+     "vocoder": "68b36b4d37ab96a7e793498c434f62e0a904cdbfa38897195c1d72be23c88a60",
+     "oneSourceToStereo": "4295ac9ea07befeba5152a82653d79230a578c1bc7f02433e231f025ebe636cc",
+     "karplus32": "521feb3a8b73990d958885fb2eb0f071b0ff86fdb4d8ffef618452752b095489",
+     "zitaRev": "a2b975c9c616c546d47b745853f730d6c1ebb61fb988415be05285604cbe4e9b",
+     "virtualAnalog": "6fac24fbf917d3c43317ac5f181a05bf28fe14fb958605a22e956a3d346d978d",
+     "multibandfilter": "e87df5c15bb669229ebe7dbdd3fcc746f820140e7854fa8414db6fec2beee46a",
+     "parametric_eq": "f0bc3d2a1e04edb0f1897dbe80384e8e3a8d42ded618092d122d8b1ace90d9ba"
+    }
+   },
+   "allow_modified": false,
+   "code": {
+    "2dKirchhoffThinPlate R-d": "5d97f6d05470f05841de9832ce3fa09c537bd2daa039615bc080f590c69259bf",
+    "2dKirchhoffThinPlate md-ocpp-d": "ed85e65d7782d694baadfbad404b6c9e8639c0bc25039dc4636b5bdac4027928",
+    "2dKirchhoffThinPlate R-f": "0f2dcd2659b59a4e493e6df3a6663befe445563c1a9438b83e109d9f6ac4bab9",
+    "2dKirchhoffThinPlate md-ocpp-f": "d4eb852d83deabee9201dbbcb991a5a50c2d581c9fbede605520952a63dd54c4",
+    "2dKirchhoffThinPlate cert4-cpp-f": "c11ce339a51355005da65b8221b5973f209c731ae8e388cce3f6775ec048b129",
+    "2dKirchhoffThinPlate cert4-cpp-d": "0dbcf10be9bc60da962bcabcd47ef1bd37095082fef6394e8630889b41614bed",
+    "2dKirchhoffThinPlate cert4-ocpp-f": "f6c040af65d22dd1b054829454cb7ba5ab79dd6fb742c4fac578c040d6346d75",
+    "2dKirchhoffThinPlate cert4-ocpp-d": "63b9b42203ea9930ee4200cacfcc834103b18c906ebc230fce351ad33a2c83c2",
+    "StiffString R-d": "d40b194b58d7bc15d4f57d187d18fde674ea7723cc78920690c5d8ee4e4ff8b0",
+    "StiffString md-ocpp-d": "040f30bee70984a16926dfb9cc0a7141dfccd127926109cf406c22eb0aef399a",
+    "StiffString R-f": "79b4ad79d89486baf8e20e39c3ed58f417eff7e3284564ff464b0ef674c58d85",
+    "StiffString md-ocpp-f": "aab4ea75c7bdfe4c1292127c8f4d577016819ba697fda2f3c43d8b2477c05913",
+    "StiffString cert4-cpp-f": "dd4b58236d418d990582eecf8202e529552be017b988901941074afccc223b3c",
+    "StiffString cert4-cpp-d": "531d00ea8c96941c4f80721ec6f4da114d547845898b6d7b5d6810f36f61a71f",
+    "StiffString cert4-ocpp-f": "01abbfcfda6d53b526aead808e2548e06b60c81b313aca40ab43d0be12ea1674",
+    "StiffString cert4-ocpp-d": "49208a7f13533ee0daf742b205d1e59c07a1ec640ace437d2872c43fabedb488",
+    "dx7 R-d": "d9b632d836da105933b96b7ed794634a663c314c9a4f200604f6d92aae31cbad",
+    "dx7 md-ocpp-d": "c8acefab3bbb6862273eaf3f186a6e36da89eeec3c4925947b351b170ed396b2",
+    "dx7 R-f": "c80dc7473d6b220bb18e7a56bba0f8a2b6ed2b7fde2be0be7ebccf5c37ba9344",
+    "dx7 md-ocpp-f": "9571391fbf8b3ee1f788a7e7c7caea7774284078392f11c65a07122c0b466d2c",
+    "dx7 cert4-cpp-f": "5923fe95b50cb855a91e738f739e7b96f4d479a130d5130c85a490d0641c7b9b",
+    "dx7 cert4-cpp-d": "1ed22e5a1c60124d2dec7c44209fd4a40e5347fb0a52383f16fea053b184ede9",
+    "dx7 cert4-ocpp-f": "e30f440e4c8d09badbb7cf6ac4ca0d199acc3038371cfcd14992204f6f6e37c1",
+    "dx7 cert4-ocpp-d": "a0938fcfcfb360cbcea080b460d96575041303e34659022046ead3cca129e6ad",
+    "FFT R-d": "5659ccef7bf2992b4c121a0bac4588b743d749b9915d8963eb8716f98c422153",
+    "FFT md-ocpp-d": "1889f19365b2bb5bfff713471e32f67ba2dd66f13d6bfc7aca2bb729139e3051",
+    "FFT R-f": "822dfd8f168f3ef042d67a94d9580e550c89aa62e4331e5a1611542a79b537b2",
+    "FFT md-ocpp-f": "7a2489eca5b28358342bcd6e34a21670892c5297de8f76e5eb94ff7893cf6e5f",
+    "FFT cert4-cpp-f": "665d348ce5455580ad2fee4f65fe58b9bed20e216748566bbd49f1b5b4cbf866",
+    "FFT cert4-cpp-d": "4ed592e60dd2f981309bd97d26367e4a8caf46f253f3bfb192bdcf87721cb770",
+    "FFT cert4-ocpp-f": "710ab03684b8fc891533d8c4d6e4cc9a57fc6c908e56121723aa1c6593d3194d",
+    "FFT cert4-ocpp-d": "686ef669c4f83056e2fbca6125613b78db304069035a0be8d0af828e90dca5e7",
+    "englishBell R-d": "c8b170129a929d1480e1ce89644e64232b66f89efdf4301a7a2dae2c1862359e",
+    "englishBell md-ocpp-d": "4fdaa82db77da594635aae0f8ad5010bc0eb88889c4fe5df4ed1ef58e02e8d4c",
+    "englishBell R-f": "dff51066094252c19827def81fffb3f64d8baeef8bf7f18e70f7d3da3a48a042",
+    "englishBell md-ocpp-f": "e8d1483e192bc226875aa7857f5e73a0093fdc2e5bc88510d3e1218017894fe8",
+    "englishBell cert4-cpp-f": "44da910c580d0c6402a4155687a89b26ab50ae9dc14c71b54a9f1db5954e5734",
+    "englishBell cert4-cpp-d": "3577e4bd56182473e6d55700f842b4a2c64d5a0d8c5fb1c8c250209cfd43d754",
+    "englishBell cert4-ocpp-f": "862e9027d33711d985da7b5d634e1f5523db738bb8d22d71fc317e8d150c3761",
+    "englishBell cert4-ocpp-d": "bf802dc1b2f695672ec6a12180686ace43ebbc248a897404e8d62d578b46775e",
+    "vocoder R-d": "9dc3cc99365ee966b7f6e1926d03b39e8d751cca5954385bb17686bf8df9f469",
+    "vocoder md-ocpp-d": "ee39af8817a7947187ca6e5d63e1ff898fc870a921f4682cb2fd093658299bfc",
+    "vocoder R-f": "c10cb6f5077a73b35d07719f8ade63fc689eccc13b16b83ada23cd2db10dbae8",
+    "vocoder md-ocpp-f": "c1290204b4107b98a1c57de6e9ade8fe24aeb7d7ef5cdb2d84031f7309245e44",
+    "vocoder cert4-cpp-f": "f92b9bb4fa33b4971a9743d55811867bf7dd57b7b66b44ec1ad0f3d747c746a7",
+    "vocoder cert4-cpp-d": "a32af1ffc5a958eefdaae7fc33508cf80cda6aa0b4f637613e2938cae8e45d28",
+    "vocoder cert4-ocpp-f": "fc93e6b83459250d80747ae23c97693677c92245af0dc0280f3171dc6f762f4a",
+    "vocoder cert4-ocpp-d": "f150d5ac38c04a4c7ce0b1e0082397d145786ac684593b38a20d078d4e132c25",
+    "oneSourceToStereo R-d": "0ece1e63c72c8d85f045d8bf7a2819dca395912e76a221a6406329217f5448cf",
+    "oneSourceToStereo md-ocpp-d": "299251a79888804416666919bc9a2d19103be4166403862eb10dc04e405d56b1",
+    "oneSourceToStereo R-f": "76bbf4fd48f0da0e9723ba34f73d33a719bc46b821ecc09fbb45727beaaf8fa3",
+    "oneSourceToStereo md-ocpp-f": "7fac971616e769643fe7628925a5204c06f6594b19aa899bf501421b32909f8d",
+    "oneSourceToStereo cert4-cpp-f": "e1c03426316fc419603e13ae4b6981205f034ac4546f99e077d983b986c689ee",
+    "oneSourceToStereo cert4-cpp-d": "4469c0d58559c5c8d0aa813bd2ec4441ad26c37682072025575155fb7ce00b01",
+    "oneSourceToStereo cert4-ocpp-f": "eee164421c5401140017a8876d1e294d4142f31ea514748754f899d3e519a6a2",
+    "oneSourceToStereo cert4-ocpp-d": "bf7a1ee99300d44545754660ccb90a2607c7b984aa0dd49c2e33880c65a77846",
+    "karplus32 R-d": "aeb507f8a0023d743a45eedeacbfed2a3a5aa41ab236d55c55ada081d915c58c",
+    "karplus32 md-ocpp-d": "37e993bcf4e3ae44e25ee66c7b6968892db5279dcb66ffb339c4f68aa0ec23e2",
+    "karplus32 R-f": "3074ca3b6eb095041067e489c1a20d66754b6e7438f5e6989222c0765072e1ac",
+    "karplus32 md-ocpp-f": "e20e0f031184fade39ddb59c7b8ab9ea8b34388e90b1b4053a30051c73017a9a",
+    "karplus32 cert4-cpp-f": "11744b723f9617348afef399fa78b8c32f812675de139bd094dddb299cfb0fb8",
+    "karplus32 cert4-cpp-d": "a3ae5570fe6cd5538d89b103b0c90941636bc3b44d368932ebb04c46a054cc9d",
+    "karplus32 cert4-ocpp-f": "fa57bad5aed7561c118d3956d1267bd9ff39cf746bd7fa746a6c014ae6776400",
+    "karplus32 cert4-ocpp-d": "e2c74a1b5519f8888f3d03ddaf49954481f3f57c34195cff2fb5aa4368befc91",
+    "zitaRev R-d": "805332f6e2a01a4c5dbf6631ef241c06ef29b5b0b173d88df68aeb7dac681399",
+    "zitaRev md-ocpp-d": "868abda9139f76df452f5b15d36e77e9142957990abeff791065ad07d3cfaa06",
+    "zitaRev R-f": "d2a1112f5a8f3dffecfc14bd5ae4beb2ee3ae4c94add2683d3558e3bb23c0e51",
+    "zitaRev md-ocpp-f": "79416779d36c5dd9a01603a793222ec140e4ee053ca80800b36d6a943bc54457",
+    "zitaRev cert4-cpp-f": "299504d111fbb4fa3a3f84671b9f5928b45bb77f4d389a545f57e77d89c261dd",
+    "zitaRev cert4-cpp-d": "3c4d8c4a6d53166e6049297cd90181fb083469e655505582b5658ec2af350bba",
+    "zitaRev cert4-ocpp-f": "5aaca55c84b6833eb2fced2ed55a29cd0d2ea9037e6642f40929c4bd098f6e36",
+    "zitaRev cert4-ocpp-d": "fa2c5bbf5bcc390b056fc97fd73e835700da24320adbfd805f769f337ade34b5",
+    "virtualAnalog R-d": "3007bddb6aeafee02b140ced1714c261a5d2cc431985311b53e64baf695ea218",
+    "virtualAnalog md-ocpp-d": "e19cc25d48dfee0baf0263b69d757e18b52e81e393e86a52afc5c5764f1dab5f",
+    "virtualAnalog R-f": "d3c50646181f3577cb8731d1e0056533deaf250130a392dacf8e6534db616d6c",
+    "virtualAnalog md-ocpp-f": "d44a2c7f16e37dba018c978bbfae0afc3100fc226d7dd9d70d481fe19f008763",
+    "virtualAnalog cert4-cpp-f": "5226551e6450cbf36a6cbf807e46b2f49d9da093460de57987fc44e7a9a312a9",
+    "virtualAnalog cert4-cpp-d": "a66008c1278ebd533842e0ec668bd72d81a80a8e7d86d55523947cd376801c41",
+    "virtualAnalog cert4-ocpp-f": "9f3c300a9f137579f4c17b91f2b8f0bd4849a20ee723833081c85e93b7907089",
+    "virtualAnalog cert4-ocpp-d": "0efcdb93035e0e19a4dfcc3a410d00ddedf228c8f0901d2aa9740fc7986ccf24",
+    "multibandfilter R-d": "43aa733ad813a7861de5aebaa1593d910c90c39f273d2a42eb3d0965f4eede1b",
+    "multibandfilter md-ocpp-d": "c47661736bcd82352c0b8d62e4ff53331237007190063749e8177611333548d6",
+    "multibandfilter R-f": "f7cc632689fa1ba3718d6609c7c4eca1e4eb6ce149ec02227f1b3eb9f8d26c8a",
+    "multibandfilter md-ocpp-f": "60a3b839bf829adc0362f7fdb2a6cfad9e83c711e2559a579a40262af6a0c59d",
+    "multibandfilter cert4-cpp-f": "e0099a1ab483fa624d4f5b8ea0e3e3f1b82aa12858e875888e8355fc2827c6b6",
+    "multibandfilter cert4-cpp-d": "cf65490829184e25b0e7145ea6cfa311a656e7430a08fd3b97520306d639e319",
+    "multibandfilter cert4-ocpp-f": "528e55216f8dc81208f606238d40bdaa2bd0f54fb26d42ba20d4416d0fae7bd8",
+    "multibandfilter cert4-ocpp-d": "f68b316620e72efac3a648a68cf521f44c3602e5b0311faae5498f0e09fd7a02",
+    "parametric_eq R-d": "5c4f1e3d55e12a95b9678b718d5e949b85a00a961f486ebc5032c0fee46dbcbb",
+    "parametric_eq md-ocpp-d": "dd2064265e2523d4bc9b14328f65c3b7629f23dd7c60e149fc6cebf8285b9b02",
+    "parametric_eq R-f": "802e9371537554496d7ea0d74d6d5816fbe79c50c0d538268444b9e7e3b0a36d",
+    "parametric_eq md-ocpp-f": "d869db252bff24dfbcae6e5e6e9e5b3a8bde5e00c05aae871a0b080469f61979",
+    "parametric_eq cert4-cpp-f": "10ec8e95508659a2b3213731690a2d22e9a9f282b521f2960e19754bf4dd3626",
+    "parametric_eq cert4-cpp-d": "d091adc997f9649c72f8237e9483af53208bb20a077f2b5c2ca2c100cf9dabe1",
+    "parametric_eq cert4-ocpp-f": "acb66ef19a9d0998ed3e910f8b67819d44b5758832667436d755f2f651c2090e",
+    "parametric_eq cert4-ocpp-d": "5bab2db330db244bf6c27b5d43148b1cd715567917a27e4bb430af40762cf0b5"
+   }
+  }
+ },
+ "variants": {
+  "R-d": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-mdd8a/faust",
+   "cpp",
+   "d",
+   "ref"
+  ],
+  "md-ocpp-d": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-mdd8a/faust",
+   "ocpp",
+   "d",
+   "ref"
+  ],
+  "R-f": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-mdd8a/faust",
+   "cpp",
+   "f",
+   "ref"
+  ],
+  "md-ocpp-f": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-mdd8a/faust",
+   "ocpp",
+   "f",
+   "ref"
+  ],
+  "cert4-cpp-f": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-cert4/faust",
+   "cpp",
+   "f",
+   "branch"
+  ],
+  "cert4-cpp-d": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-cert4/faust",
+   "cpp",
+   "d",
+   "branch"
+  ],
+  "cert4-ocpp-f": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-cert4/faust",
+   "ocpp",
+   "f",
+   "branch"
+  ],
+  "cert4-ocpp-d": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-cert4/faust",
+   "ocpp",
+   "d",
+   "branch"
+  ]
+ },
+ "same": {},
+ "times": {
+  "2dKirchhoffThinPlate": {
+   "R-d": [
+    559.17,
+    556.277,
+    551.041,
+    556.885,
+    555.462,
+    556.286,
+    549.053,
+    558.657,
+    556.56
+   ],
+   "md-ocpp-d": [
+    566.538,
+    562.71,
+    549.721,
+    563.573,
+    562.467,
+    548.082,
+    566.937,
+    561.064,
+    550.438
+   ],
+   "R-f": [
+    555.208,
+    551.66,
+    554.928,
+    552.159,
+    546.737,
+    549.959,
+    546.011,
+    545.68,
+    551.396
+   ],
+   "md-ocpp-f": [
+    1377.508,
+    1363.063,
+    1384.213,
+    1361.985,
+    1337.633,
+    1360.854,
+    1376.544,
+    1359.97,
+    1382.904
+   ],
+   "cert4-cpp-f": [
+    379.675,
+    379.973,
+    380.596,
+    373.05,
+    372.131,
+    380.81,
+    381.409,
+    381.465,
+    375.438
+   ],
+   "cert4-cpp-d": [
+    389.576,
+    389.525,
+    383.523,
+    389.977,
+    386.919,
+    393.677,
+    389.249,
+    391.964,
+    380.987
+   ],
+   "cert4-ocpp-f": [
+    407.709,
+    407.473,
+    414.505,
+    413.282,
+    414.937,
+    413.669,
+    413.256,
+    413.668,
+    404.164
+   ],
+   "cert4-ocpp-d": [
+    399.235,
+    405.292,
+    391.306,
+    406.348,
+    396.925,
+    408.675,
+    402.027,
+    395.342,
+    403.654
+   ]
+  },
+  "StiffString": {
+   "R-d": [
+    229.698,
+    236.734,
+    233.213,
+    236.375,
+    225.477,
+    224.53,
+    236.667,
+    236.165,
+    234.19
+   ],
+   "md-ocpp-d": [
+    154.458,
+    159.892,
+    139.324,
+    142.528,
+    142.122,
+    143.169,
+    141.052,
+    154.844,
+    147.757
+   ],
+   "R-f": [
+    228.972,
+    235.075,
+    236.381,
+    234.587,
+    235.104,
+    232.725,
+    229.621,
+    234.295,
+    234.166
+   ],
+   "md-ocpp-f": [
+    128.476,
+    128.88,
+    126.642,
+    120.739,
+    128.731,
+    125.56,
+    123.155,
+    127.1,
+    127.854
+   ],
+   "cert4-cpp-f": [
+    173.154,
+    172.046,
+    172.724,
+    169.897,
+    173.617,
+    172.031,
+    172.769,
+    170.117,
+    172.618
+   ],
+   "cert4-cpp-d": [
+    166.832,
+    175.642,
+    170.882,
+    173.629,
+    174.79,
+    175.656,
+    170.185,
+    175.229,
+    174.223
+   ],
+   "cert4-ocpp-f": [
+    65.831,
+    66.094,
+    66.146,
+    65.736,
+    66.092,
+    62.857,
+    66.074,
+    65.872,
+    65.854
+   ],
+   "cert4-ocpp-d": [
+    92.447,
+    91.664,
+    90.379,
+    91.629,
+    87.797,
+    92.275,
+    90.904,
+    91.603,
+    88.479
+   ]
+  },
+  "dx7": {
+   "R-d": [
+    259.663,
+    270.089,
+    271.049,
+    271.317,
+    265.43,
+    271.511,
+    269.903,
+    270.032,
+    269.924
+   ],
+   "md-ocpp-d": [
+    223.39,
+    214.913,
+    223.62,
+    227.51,
+    226.668,
+    225.524,
+    226.11,
+    226.072,
+    225.714
+   ],
+   "R-f": [
+    224.771,
+    222.72,
+    223.922,
+    221.708,
+    223.612,
+    224.016,
+    223.441,
+    223.433,
+    225.068
+   ],
+   "md-ocpp-f": [
+    180.284,
+    175.862,
+    175.884,
+    180.356,
+    176.375,
+    180.329,
+    178.826,
+    175.605,
+    180.07
+   ],
+   "cert4-cpp-f": [
+    229.0,
+    221.208,
+    233.607,
+    232.744,
+    232.437,
+    230.099,
+    232.591,
+    232.807,
+    227.447
+   ],
+   "cert4-cpp-d": [
+    283.869,
+    279.286,
+    281.227,
+    276.402,
+    273.479,
+    276.173,
+    280.918,
+    285.014,
+    278.743
+   ],
+   "cert4-ocpp-f": [
+    196.768,
+    197.928,
+    192.719,
+    198.419,
+    195.427,
+    198.686,
+    197.335,
+    197.928,
+    197.551
+   ],
+   "cert4-ocpp-d": [
+    259.615,
+    259.132,
+    259.613,
+    260.168,
+    252.762,
+    261.576,
+    257.979,
+    260.949,
+    258.683
+   ]
+  },
+  "FFT": {
+   "R-d": [
+    199.768,
+    200.015,
+    198.816,
+    203.254,
+    201.32,
+    202.51,
+    203.722,
+    198.997,
+    200.267
+   ],
+   "md-ocpp-d": [
+    155.192,
+    158.032,
+    154.477,
+    155.361,
+    158.813,
+    155.05,
+    156.612,
+    158.959,
+    156.654
+   ],
+   "R-f": [
+    169.426,
+    169.503,
+    169.316,
+    168.327,
+    169.255,
+    165.056,
+    169.457,
+    164.693,
+    165.339
+   ],
+   "md-ocpp-f": [
+    147.75,
+    147.466,
+    147.937,
+    144.133,
+    146.955,
+    144.405,
+    148.244,
+    146.692,
+    147.104
+   ],
+   "cert4-cpp-f": [
+    137.69,
+    137.076,
+    136.999,
+    137.329,
+    137.534,
+    136.875,
+    137.153,
+    137.823,
+    137.22
+   ],
+   "cert4-cpp-d": [
+    155.645,
+    157.719,
+    157.437,
+    157.436,
+    156.972,
+    157.485,
+    157.682,
+    159.839,
+    157.57
+   ],
+   "cert4-ocpp-f": [
+    127.614,
+    127.973,
+    126.482,
+    128.534,
+    127.311,
+    126.874,
+    127.176,
+    124.703,
+    127.543
+   ],
+   "cert4-ocpp-d": [
+    140.101,
+    140.367,
+    138.61,
+    136.311,
+    141.764,
+    139.708,
+    139.797,
+    140.572,
+    139.974
+   ]
+  },
+  "englishBell": {
+   "R-d": [
+    49.172,
+    47.967,
+    49.292,
+    49.234,
+    49.187,
+    49.37,
+    49.763,
+    49.291,
+    49.177
+   ],
+   "md-ocpp-d": [
+    27.136,
+    27.241,
+    27.153,
+    27.166,
+    27.092,
+    27.176,
+    27.228,
+    27.312,
+    27.077
+   ],
+   "R-f": [
+    46.706,
+    47.984,
+    46.121,
+    47.846,
+    48.037,
+    47.869,
+    47.92,
+    48.49,
+    47.917
+   ],
+   "md-ocpp-f": [
+    21.303,
+    21.334,
+    21.275,
+    21.351,
+    21.318,
+    20.967,
+    20.992,
+    20.993,
+    21.334
+   ],
+   "cert4-cpp-f": [
+    48.451,
+    47.179,
+    48.096,
+    48.672,
+    48.626,
+    48.732,
+    48.558,
+    48.546,
+    48.627
+   ],
+   "cert4-cpp-d": [
+    49.552,
+    49.355,
+    48.787,
+    49.31,
+    49.413,
+    49.294,
+    48.957,
+    48.806,
+    48.932
+   ],
+   "cert4-ocpp-f": [
+    32.275,
+    32.823,
+    32.303,
+    32.849,
+    32.828,
+    32.378,
+    32.201,
+    32.512,
+    32.463
+   ],
+   "cert4-ocpp-d": [
+    30.881,
+    30.12,
+    30.563,
+    31.823,
+    30.855,
+    30.665,
+    31.571,
+    31.718,
+    31.198
+   ]
+  },
+  "vocoder": {
+   "R-d": [
+    107.127,
+    107.815,
+    107.248,
+    102.613,
+    107.365,
+    107.407,
+    107.378,
+    107.766,
+    107.318
+   ],
+   "md-ocpp-d": [
+    58.25,
+    66.71,
+    65.992,
+    65.614,
+    58.31,
+    58.327,
+    56.445,
+    69.421,
+    58.03
+   ],
+   "R-f": [
+    109.247,
+    107.952,
+    108.583,
+    103.355,
+    107.876,
+    108.795,
+    108.422,
+    104.966,
+    107.842
+   ],
+   "md-ocpp-f": [
+    58.885,
+    56.293,
+    57.98,
+    57.585,
+    57.285,
+    57.677,
+    57.509,
+    57.375,
+    57.282
+   ],
+   "cert4-cpp-f": [
+    83.882,
+    88.207,
+    88.49,
+    88.829,
+    88.388,
+    88.178,
+    88.784,
+    89.287,
+    87.896
+   ],
+   "cert4-cpp-d": [
+    90.148,
+    90.04,
+    90.192,
+    90.35,
+    90.846,
+    90.55,
+    90.907,
+    90.455,
+    88.891
+   ],
+   "cert4-ocpp-f": [
+    14.674,
+    14.577,
+    14.53,
+    14.552,
+    14.551,
+    14.587,
+    14.501,
+    14.676,
+    14.565
+   ],
+   "cert4-ocpp-d": [
+    27.969,
+    28.51,
+    28.134,
+    29.372,
+    28.88,
+    28.693,
+    29.272,
+    28.401,
+    29.158
+   ]
+  },
+  "oneSourceToStereo": {
+   "R-d": [
+    52.918,
+    53.827,
+    52.788,
+    53.071,
+    53.231,
+    53.779,
+    52.989,
+    54.148,
+    52.632
+   ],
+   "md-ocpp-d": [
+    52.866,
+    53.045,
+    53.005,
+    52.361,
+    53.224,
+    52.374,
+    52.475,
+    52.627,
+    53.065
+   ],
+   "R-f": [
+    35.536,
+    35.613,
+    35.384,
+    35.616,
+    35.541,
+    35.561,
+    35.374,
+    36.604,
+    35.398
+   ],
+   "md-ocpp-f": [
+    37.695,
+    39.651,
+    39.608,
+    39.612,
+    39.646,
+    39.608,
+    39.601,
+    39.494,
+    39.65
+   ],
+   "cert4-cpp-f": [
+    18.27,
+    18.626,
+    18.919,
+    18.948,
+    18.745,
+    18.713,
+    18.817,
+    18.635,
+    18.601
+   ],
+   "cert4-cpp-d": [
+    27.267,
+    27.627,
+    27.676,
+    27.61,
+    27.536,
+    27.921,
+    28.066,
+    27.702,
+    27.821
+   ],
+   "cert4-ocpp-f": [
+    19.197,
+    19.39,
+    19.403,
+    18.505,
+    19.541,
+    19.329,
+    19.203,
+    18.614,
+    19.294
+   ],
+   "cert4-ocpp-d": [
+    27.515,
+    27.514,
+    27.554,
+    27.537,
+    27.555,
+    27.456,
+    27.595,
+    27.373,
+    27.426
+   ]
+  },
+  "karplus32": {
+   "R-d": [
+    32.013,
+    35.098,
+    32.184,
+    32.386,
+    35.667,
+    32.403,
+    32.333,
+    31.547,
+    32.349
+   ],
+   "md-ocpp-d": [
+    38.919,
+    37.259,
+    37.1,
+    37.873,
+    37.299,
+    39.99,
+    37.505,
+    36.257,
+    40.704
+   ],
+   "R-f": [
+    42.11,
+    42.356,
+    40.725,
+    42.452,
+    40.912,
+    40.72,
+    40.871,
+    40.205,
+    40.369
+   ],
+   "md-ocpp-f": [
+    33.332,
+    33.149,
+    32.935,
+    34.142,
+    33.105,
+    33.137,
+    34.12,
+    31.79,
+    32.382
+   ],
+   "cert4-cpp-f": [
+    37.659,
+    36.042,
+    35.026,
+    36.379,
+    35.052,
+    35.102,
+    35.607,
+    33.911,
+    34.606
+   ],
+   "cert4-cpp-d": [
+    32.201,
+    31.76,
+    34.84,
+    32.143,
+    31.527,
+    31.388,
+    32.549,
+    40.041,
+    36.009
+   ],
+   "cert4-ocpp-f": [
+    35.496,
+    34.49,
+    34.271,
+    35.146,
+    35.344,
+    35.011,
+    34.539,
+    34.751,
+    35.626
+   ],
+   "cert4-ocpp-d": [
+    38.126,
+    40.191,
+    41.796,
+    37.884,
+    40.766,
+    41.27,
+    37.974,
+    37.831,
+    37.733
+   ]
+  },
+  "zitaRev": {
+   "R-d": [
+    28.73,
+    28.672,
+    28.273,
+    28.804,
+    28.198,
+    30.198,
+    28.83,
+    28.188,
+    28.5
+   ],
+   "md-ocpp-d": [
+    31.832,
+    32.548,
+    33.02,
+    32.664,
+    34.544,
+    33.418,
+    31.018,
+    34.186,
+    32.988
+   ],
+   "R-f": [
+    31.291,
+    31.293,
+    31.132,
+    31.203,
+    30.997,
+    30.495,
+    30.66,
+    30.785,
+    31.52
+   ],
+   "md-ocpp-f": [
+    27.422,
+    29.411,
+    28.745,
+    29.054,
+    28.556,
+    28.687,
+    27.387,
+    29.389,
+    28.634
+   ],
+   "cert4-cpp-f": [
+    28.735,
+    28.584,
+    28.69,
+    28.245,
+    28.607,
+    28.697,
+    28.287,
+    30.103,
+    30.569
+   ],
+   "cert4-cpp-d": [
+    26.848,
+    26.338,
+    27.252,
+    28.207,
+    28.253,
+    28.216,
+    26.381,
+    27.241,
+    25.874
+   ],
+   "cert4-ocpp-f": [
+    22.947,
+    23.099,
+    23.424,
+    22.846,
+    22.553,
+    23.342,
+    24.558,
+    22.952,
+    23.349
+   ],
+   "cert4-ocpp-d": [
+    25.11,
+    24.196,
+    23.916,
+    24.084,
+    24.978,
+    25.101,
+    23.571,
+    23.991,
+    23.865
+   ]
+  },
+  "virtualAnalog": {
+   "R-d": [
+    34.257,
+    35.415,
+    35.021,
+    35.011,
+    35.012,
+    34.433,
+    34.677,
+    34.332,
+    34.536
+   ],
+   "md-ocpp-d": [
+    27.685,
+    27.738,
+    29.33,
+    27.57,
+    27.734,
+    27.779,
+    27.368,
+    28.191,
+    27.665
+   ],
+   "R-f": [
+    65.236,
+    64.742,
+    65.141,
+    67.141,
+    61.876,
+    65.151,
+    65.257,
+    65.24,
+    64.692
+   ],
+   "md-ocpp-f": [
+    55.231,
+    56.189,
+    55.074,
+    55.327,
+    55.339,
+    55.322,
+    55.934,
+    54.911,
+    55.823
+   ],
+   "cert4-cpp-f": [
+    59.052,
+    59.563,
+    59.493,
+    59.234,
+    59.025,
+    59.458,
+    59.172,
+    59.488,
+    59.373
+   ],
+   "cert4-cpp-d": [
+    29.448,
+    29.219,
+    29.304,
+    29.646,
+    29.515,
+    29.216,
+    28.991,
+    29.55,
+    28.698
+   ],
+   "cert4-ocpp-f": [
+    56.43,
+    56.362,
+    54.775,
+    56.352,
+    56.258,
+    56.082,
+    56.622,
+    54.804,
+    56.227
+   ],
+   "cert4-ocpp-d": [
+    31.003,
+    30.878,
+    31.137,
+    30.291,
+    30.678,
+    30.607,
+    31.264,
+    31.021,
+    30.845
+   ]
+  },
+  "multibandfilter": {
+   "R-d": [
+    12.085,
+    12.275,
+    12.264,
+    12.22,
+    12.543,
+    13.329,
+    12.301,
+    12.071,
+    12.06
+   ],
+   "md-ocpp-d": [
+    13.132,
+    12.818,
+    13.141,
+    13.429,
+    13.134,
+    13.153,
+    13.128,
+    13.442,
+    17.329
+   ],
+   "R-f": [
+    16.397,
+    16.493,
+    16.604,
+    16.432,
+    16.397,
+    16.392,
+    16.423,
+    16.384,
+    16.386
+   ],
+   "md-ocpp-f": [
+    8.837,
+    8.914,
+    8.859,
+    8.972,
+    8.704,
+    8.702,
+    8.86,
+    8.916,
+    8.847
+   ],
+   "cert4-cpp-f": [
+    20.312,
+    20.313,
+    20.313,
+    21.61,
+    20.312,
+    20.316,
+    20.34,
+    20.296,
+    20.317
+   ],
+   "cert4-cpp-d": [
+    11.588,
+    11.481,
+    11.508,
+    11.492,
+    11.512,
+    11.49,
+    11.51,
+    11.513,
+    11.49
+   ],
+   "cert4-ocpp-f": [
+    7.313,
+    7.689,
+    9.029,
+    7.687,
+    9.391,
+    7.689,
+    7.912,
+    7.692,
+    7.778
+   ],
+   "cert4-ocpp-d": [
+    9.874,
+    9.818,
+    9.791,
+    9.807,
+    9.823,
+    9.806,
+    9.821,
+    9.842,
+    9.785
+   ]
+  },
+  "parametric_eq": {
+   "R-d": [
+    398.305,
+    396.097,
+    393.389,
+    397.983,
+    397.373,
+    398.296,
+    400.268,
+    398.098,
+    397.962
+   ],
+   "md-ocpp-d": [
+    256.24,
+    254.44,
+    256.287,
+    254.721,
+    245.025,
+    257.075,
+    256.336,
+    256.293,
+    256.875
+   ],
+   "R-f": [
+    367.054,
+    365.821,
+    347.567,
+    356.526,
+    357.212,
+    351.613,
+    364.669,
+    365.338,
+    365.665
+   ],
+   "md-ocpp-f": [
+    277.483,
+    270.924,
+    271.399,
+    272.574,
+    270.861,
+    269.021,
+    272.414,
+    271.277,
+    271.215
+   ],
+   "cert4-cpp-f": [
+    297.743,
+    297.371,
+    289.832,
+    291.08,
+    292.678,
+    295.53,
+    298.212,
+    295.16,
+    298.062
+   ],
+   "cert4-cpp-d": [
+    334.943,
+    336.619,
+    328.861,
+    336.194,
+    336.452,
+    333.364,
+    335.921,
+    334.732,
+    327.263
+   ],
+   "cert4-ocpp-f": [
+    209.737,
+    206.154,
+    208.96,
+    209.609,
+    203.467,
+    209.306,
+    208.716,
+    208.703,
+    209.85
+   ],
+   "cert4-ocpp-d": [
+    204.743,
+    206.128,
+    212.496,
+    207.859,
+    209.207,
+    207.888,
+    214.158,
+    211.058,
+    207.054
+   ]
+  }
+ },
+ "nonfinite": {},
+ "cxx_times": {}
+}

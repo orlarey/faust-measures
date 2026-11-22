@@ -1,0 +1,73 @@
+2026-11-12T01:31:21+00:00 - Intel(R) Xeon(R) Processor @ 2.10GHz, 4 cpus - g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+reference R : FAUST Version 2.92.3 ; Source commit: d8a62f5bf - cpp - -O3 -ffast-math -march=native
+base : FAUST Version 2.92.4 ; Source commit: b31e7ca37 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+new : FAUST Version 2.92.4 ; Source commit: bab90f0b0 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+basefir : FAUST Version 2.92.4 ; Source commit: b31e7ca37 - faust -fir - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the median ; every time / R of its precision
+
+== cpp-f
+program                        base          new      basefir
+2dKirchhoffThinPlate           0.60     0.60 (=)     0.60 (=)
+StiffString                    1.04     1.04 (=)     1.04 (=)
+dx7                            1.24     1.24 (=)     1.24 (=)
+FFT                            0.30     0.30 (=)     0.30 (=)
+englishBell                    0.69     0.69 (=)     0.69 (=)
+vocoder                        0.98     0.98 (=)     0.98 (=)
+oneSourceToStereo              1.02         0.63         1.01
+karplus32                      1.01     1.01 (=)     1.01 (=)
+zitaRev                        0.98     0.98 (=)     0.98 (=)
+virtualAnalog                  1.12     1.12 (=)     1.12 (=)
+multibandfilter                0.79     0.79 (=)     0.79 (=)
+parametric_eq                  0.82     0.82 (=)     0.82 (=)
+geometric mean                 0.84         0.80         0.84
+
+== cpp-d
+program                        base          new      basefir
+2dKirchhoffThinPlate           0.62     0.62 (=)     0.62 (=)
+StiffString                    1.12     1.12 (=)     1.12 (=)
+dx7                            1.59     1.59 (=)     1.59 (=)
+FFT                            0.23     0.23 (=)     0.23 (=)
+englishBell                    1.15     1.15 (=)     1.15 (=)
+vocoder                        1.09     1.09 (=)     1.09 (=)
+oneSourceToStereo              0.74         0.57         0.74
+karplus32                      1.02     1.02 (=)     1.02 (=)
+zitaRev                        0.79     0.79 (=)     0.79 (=)
+virtualAnalog                  1.14     1.14 (=)     1.14 (=)
+multibandfilter                0.73     0.73 (=)     0.73 (=)
+parametric_eq                  0.84     0.84 (=)     0.84 (=)
+geometric mean                 0.84         0.83         0.84
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp         base          new      basefir
+2dKirchhoffThinPlate           0.98         0.62     0.62 (=)         0.62
+StiffString                    0.77         0.19     0.19 (=)         0.77
+dx7                            0.95         1.28     1.28 (=)         1.27
+FFT                            1.03         0.27     0.27 (=)         0.26
+englishBell                    0.82         0.53     0.53 (=)         0.53
+vocoder                        0.46         0.11     0.11 (=)         0.11
+oneSourceToStereo              0.94         0.78         0.61         0.63
+karplus32                      0.48         0.51     0.51 (=)         0.53
+zitaRev                        0.77         0.61     0.61 (=)         0.60
+virtualAnalog                  1.05         1.01     1.01 (=)         1.03
+multibandfilter                0.95         0.93     0.93 (=)     0.93 (=)
+parametric_eq                  0.55         0.44     0.44 (=)         0.43
+geometric mean                 0.78         0.50         0.49         0.55
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp         base          new      basefir
+2dKirchhoffThinPlate           1.01         0.64     0.64 (=)         0.64
+StiffString                    0.95         0.39     0.39 (=)         1.00
+dx7                            0.97         1.69     1.69 (=)         1.69
+FFT                            0.97         0.21     0.21 (=)         0.20
+englishBell                    1.32         0.54     0.54 (=)         0.54
+vocoder                        1.13         0.31     0.31 (=)         0.31
+oneSourceToStereo              0.86         0.63         0.49         0.47
+karplus32                      0.78         0.91     0.91 (=)         0.89
+zitaRev                        0.94         0.73     0.73 (=)         0.73
+virtualAnalog                  0.99         1.12     1.12 (=)         1.10
+multibandfilter                1.03         0.96     0.96 (=)     0.96 (=)
+parametric_eq                  0.58         0.54     0.54 (=)         0.54
+geometric mean                 0.94         0.63         0.61         0.66
+
+above 1.05 : StiffString base-cpp-d 1.12, StiffString basefir-cpp-d 1.12, StiffString new-cpp-d 1.12, dx7 base-cpp-d 1.59, dx7 base-cpp-f 1.24, dx7 base-ocpp-d 1.69, dx7 base-ocpp-f 1.28, dx7 basefir-cpp-d 1.59, dx7 basefir-cpp-f 1.24, dx7 basefir-ocpp-d 1.69, dx7 basefir-ocpp-f 1.27, dx7 new-cpp-d 1.59, dx7 new-cpp-f 1.24, dx7 new-ocpp-d 1.69, dx7 new-ocpp-f 1.28, englishBell base-cpp-d 1.15, englishBell basefir-cpp-d 1.15, englishBell new-cpp-d 1.15, virtualAnalog base-cpp-d 1.14, virtualAnalog base-cpp-f 1.12, virtualAnalog base-ocpp-d 1.12, virtualAnalog basefir-cpp-d 1.14, virtualAnalog basefir-cpp-f 1.12, virtualAnalog basefir-ocpp-d 1.10, virtualAnalog new-cpp-d 1.14, virtualAnalog new-cpp-f 1.12, virtualAnalog new-ocpp-d 1.12, vocoder base-cpp-d 1.09, vocoder basefir-cpp-d 1.09, vocoder new-cpp-d 1.09
+noise, the gap between the two best rounds : median 0.1 %, 90th percentile 0.6 %

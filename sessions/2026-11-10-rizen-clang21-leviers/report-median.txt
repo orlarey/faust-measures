@@ -1,0 +1,112 @@
+2026-11-10T15:34:13+00:00 - AMD Ryzen AI 9 HX 370 w/ Radeon 890M, 24 cpus - Ubuntu clang version 21.1.8 (6ubuntu1)
+reference R : FAUST Version 2.92.3 ; Source commit: d8a62f5bf - cpp - -O3 -ffast-math -march=native
+cert3 : FAUST Version 2.92.4 ; Source commit: 4ca9b5278 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the median ; every time / R of its precision
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3
+2dKirchhoffThinPlate           1.24         0.42
+StiffString                    0.52         0.74
+dx7                            0.87         0.92
+FFT                            0.91         0.67
+englishBell                    0.40         0.47
+vocoder                        0.59         0.60
+oneSourceToStereo              1.12         0.94
+karplus32                      0.90         0.94
+zitaRev                        0.93         0.81
+virtualAnalog                  0.81         0.85
+multibandfilter                0.58         0.45
+parametric_eq                  0.83         0.61
+geometric mean                 0.77         0.67
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3
+2dKirchhoffThinPlate           1.10         0.38
+StiffString                    0.79         0.72
+dx7                            0.80         0.93
+FFT                            1.03         0.75
+englishBell                    0.26         0.36
+vocoder                        0.63         0.73
+oneSourceToStereo              1.06         0.80
+karplus32                      0.99         1.07
+zitaRev                        1.04         0.81
+virtualAnalog                  0.59         0.71
+multibandfilter                1.11         0.85
+parametric_eq                  0.68         0.58
+geometric mean                 0.79         0.69
+
+above 1.05 : karplus32 cert3-ocpp-d 1.07
+noise, the gap between the two best rounds : median 0.0 %, 90th percentile 0.5 %
+
+the levers of -ffast-math, one at a time over the contract, every time / R of its precision :
+  contract  -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno -include ftz.h
+  reassoc   -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno -fassociative-math -fno-signed-zeros -fno-trapping-math -include ftz.h
+  nsz       -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno -fno-signed-zeros -include ftz.h
+  recip     -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno -freciprocal-math -include ftz.h
+  finite    -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno -ffinite-math-only -include ftz.h
+  approx    -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno -fapprox-func -include ftz.h
+  fastmath  -O3 -ffast-math -march=native
+
+== ocpp-f master-dev
+program                 contract   reassoc       nsz     recip    finite    approx  fastmath
+2dKirchhoffThinPlate        1.28      1.25      1.28      1.28      1.28      1.28      1.24
+StiffString                 0.62      0.50      0.62      0.63      0.63      0.62      0.52
+dx7                         0.83      0.83      0.83      0.83      0.86      0.83      0.87
+FFT                         1.03      0.90      1.02      1.03      1.03      1.03      0.91
+englishBell                 0.72      0.39      0.71      0.71      0.66      0.71      0.40
+vocoder                     0.69      0.63      0.68      0.68      0.68      0.69      0.59
+oneSourceToStereo           1.33      1.07      1.33      1.32      1.32      1.33      1.12
+karplus32                   1.02      0.84      1.02      1.02      1.02      1.02      0.90
+zitaRev                     1.04      0.96      1.03      1.05      1.03      1.04      0.93
+virtualAnalog               0.88      0.87      0.89      0.87      0.87      0.86      0.81
+multibandfilter             1.04      0.56      1.04      1.04      1.04      1.04      0.58
+parametric_eq               1.09      0.91      1.10      1.08      1.10      1.04      0.83
+geometric mean              0.94      0.77      0.94      0.94      0.93      0.93      0.77
+
+== ocpp-f cert3
+program                 contract   reassoc       nsz     recip    finite    approx  fastmath
+2dKirchhoffThinPlate        0.42      0.35      0.42      0.70      0.69      0.42      0.39
+StiffString                 0.74      0.99      0.73      0.74      0.74      0.73      1.01
+dx7                         0.92      0.92      0.92      0.92      0.90      0.92      0.86
+FFT                         0.67      0.67      0.67      0.67      0.67      0.67      0.67
+englishBell                 0.47      0.39      0.47      0.47      0.46      0.47      0.40
+vocoder                     0.60      0.57      0.60      0.60      0.60      0.60      0.58
+oneSourceToStereo           0.94      1.14      0.94      0.93      0.94      0.94      1.18
+karplus32                   0.94      0.85      0.94      0.94      0.93      0.94      0.89
+zitaRev                     0.81      0.74      0.80      0.81      0.80      0.81      0.75
+virtualAnalog               0.85      0.85      0.85      0.85      0.83      0.85      0.85
+multibandfilter             0.45      1.50      0.43      0.45      0.41      0.45      0.71
+parametric_eq               0.61      0.76      0.61      0.59      0.61      0.61      0.74
+geometric mean              0.67      0.75      0.67      0.70      0.69      0.67      0.72
+
+== ocpp-d master-dev
+program                 contract   reassoc       nsz     recip    finite    approx  fastmath
+2dKirchhoffThinPlate        1.24      1.11      1.24      1.49      1.24      1.24      1.10
+StiffString                 1.04      0.78      1.03      1.03      1.04      1.04      0.79
+dx7                         0.81      0.81      0.81      0.81      0.85      0.81      0.80
+FFT                         1.08      1.18      1.08      1.08      1.08      1.08      1.03
+englishBell                 0.47      0.25      0.47      0.47      0.48      0.47      0.26
+vocoder                     0.68      0.62      0.66      0.66      0.65      0.67      0.63
+oneSourceToStereo           1.11      1.16      1.11      1.07      1.10      1.11      1.06
+karplus32                   1.20      0.97      1.21      1.21      1.21      1.20      0.99
+zitaRev                     1.10      1.01      1.08      1.09      1.17      1.10      1.04
+virtualAnalog               2.19      2.10      2.19      2.18      2.19      0.64      0.59
+multibandfilter             1.35      1.11      1.35      1.35      1.35      1.35      1.11
+parametric_eq               1.05      0.78      1.05      1.03      1.05      0.96      0.68
+geometric mean              1.04      0.90      1.04      1.05      1.05      0.93      0.79
+
+== ocpp-d cert3
+program                 contract   reassoc       nsz     recip    finite    approx  fastmath
+2dKirchhoffThinPlate        0.38      0.41      0.38      0.66      0.69      0.38      0.67
+StiffString                 0.72      0.49      0.72      0.72      0.72      0.72      0.50
+dx7                         0.93      0.89      0.93      0.93      0.97      0.93      0.92
+FFT                         0.75      0.75      0.75      0.74      0.75      0.75      0.75
+englishBell                 0.36      0.25      0.36      0.36      0.38      0.36      0.27
+vocoder                     0.73      0.59      0.68      0.72      0.72      0.72      0.61
+oneSourceToStereo           0.80      0.87      0.80      0.80      0.80      0.80      0.88
+karplus32                   1.07      1.01      1.07      1.07      1.09      1.08      1.03
+zitaRev                     0.81      0.78      0.82      0.82      0.82      0.81      0.80
+virtualAnalog               0.71      0.81      0.72      0.66      0.72      0.71      0.68
+multibandfilter             0.85      2.52      0.85      0.79      0.85      0.85      1.32
+parametric_eq               0.58      0.69      0.58      0.58      0.58      0.58      0.64
+geometric mean              0.69      0.72      0.69      0.72      0.74      0.69      0.71

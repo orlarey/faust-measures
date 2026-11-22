@@ -1,0 +1,23 @@
+2026-11-10T12:35:36+00:00 - AMD Ryzen AI 9 HX 370 w/ Radeon 890M, 24 cpus - faust CPU time, the minimum of 3, 371 programs
+reference R : FAUST Version 2.92.3 ; Source commit: d8a62f5bf -lang cpp
+cert3 : FAUST Version 2.92.4 ; Source commit: 4ca9b5278
+cert3-cpp-f    programs  358  total 1.36  geometric mean 1.24  median 1.18  max 6.00
+cert3-cpp-d    programs  358  total 1.36  geometric mean 1.26  median 1.17  max 6.12
+cert3-ocpp-f   programs  358  total 1.75  geometric mean 1.37  median 1.27  max 6.37
+cert3-ocpp-d   programs  358  total 1.74  geometric mean 1.39  median 1.27  max 6.39
+slowest (cert3-cpp-f, at least 0.5 s) :
+  examples/reverb/fdnRev.dsp                                     1.09 s ->   2.77 s  x2.54
+  examples/reverb/reverbDesigner.dsp                             1.09 s ->   2.76 s  x2.53
+  examples/physicalModeling/fds/2dKirchhoffThinPlate.dsp         2.00 s ->   2.14 s  x1.07
+  examples/physicalModeling/mi-faust/10_PluckedString/pluckedString.dsp   1.04 s ->   1.92 s  x1.84
+  examples/physicalModeling/mi-faust/11_BowedString/bowedString.dsp   1.03 s ->   1.65 s  x1.59
+  examples/reverb/reverbTank.dsp                                 1.52 s ->   1.56 s  x1.03
+  examples/physicalModeling/vocalFOFMIDI.dsp                     0.90 s ->   0.95 s  x1.06
+  examples/physicalModeling/vocalFOF.dsp                         0.88 s ->   0.94 s  x1.06
+  examples/filtering/graphicEqLab.dsp                            0.55 s ->   0.92 s  x1.68
+  examples/physicalModeling/faust-stk/piano1.dsp                 1.09 s ->   0.92 s  x0.84
+  examples/generator/dx7.dsp                                     0.67 s ->   0.81 s  x1.21
+  examples/physicalModeling/mi-faust/13_Construction/construction.dsp   0.38 s ->   0.75 s  x1.97
+  examples/reverb/vital_rev.dsp                                  0.60 s ->   0.71 s  x1.17
+  examples/physicalModeling/vocalBPMIDI.dsp                      0.65 s ->   0.69 s  x1.05
+  examples/physicalModeling/vocalBP.dsp                          0.65 s ->   0.68 s  x1.05

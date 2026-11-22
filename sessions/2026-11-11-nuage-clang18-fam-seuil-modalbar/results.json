@@ -1,0 +1,421 @@
+{
+ "meta": {
+  "date": "2026-11-11T10:12:48+00:00",
+  "machine": "Intel(R) Xeon(R) Processor @ 2.10GHz, 4 cpus",
+  "cxx": "Ubuntu clang version 18.1.3 (1ubuntu1)",
+  "flags": {
+   "ref": "-O3 -ffast-math -march=native",
+   "branch": "-O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h"
+  },
+  "levers": [],
+  "faust_options": {
+   "s0": "-fam -fam-split 0",
+   "s1000": "-fam -fam-split 1000",
+   "l8": "-fam -fam-lanes 8"
+  },
+  "arch": [
+   "/home/user/wt-head/libraries/arch/cpu_arch.cpp",
+   "1751aa6765af91e47f701c62588f39cf874f97833204ebe4e201fced701c9576"
+  ],
+  "rounds": 9,
+  "configs": [
+   "ocpp-f",
+   "ocpp-d"
+  ],
+  "versions": [
+   "cert3",
+   "s0",
+   "s1000",
+   "l8"
+  ],
+  "binaries": {
+   "ref": [
+    "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-mdd8a/faust",
+    "FAUST Version 2.92.3 ; Source commit: d8a62f5bf"
+   ],
+   "cert3": [
+    "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-cert3/faust",
+    "FAUST Version 2.92.4 ; Source commit: 4ca9b5278"
+   ],
+   "s0": [
+    "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-famsplit/faust",
+    "FAUST Version 2.92.4 ; Source commit: 397cd20ab"
+   ],
+   "s1000": [
+    "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-famsplit/faust",
+    "FAUST Version 2.92.4 ; Source commit: 397cd20ab"
+   ],
+   "l8": [
+    "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-famsplit/faust",
+    "FAUST Version 2.92.4 ; Source commit: 397cd20ab"
+   ]
+  },
+  "entries": [
+   "modalBar"
+  ],
+  "failed": {},
+  "provenance": {
+   "binaries": {
+    "ref": {
+     "path": "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-mdd8a/faust",
+     "version": "FAUST Version 2.92.3 ; Source commit: d8a62f5bf",
+     "sha256": "6db007aa89168a216ea1652bfe5e189c4d528aec86d06ec51296b01e022380eb",
+     "commit": "d8a62f5bf",
+     "modified": false
+    },
+    "cert3": {
+     "path": "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-cert3/faust",
+     "version": "FAUST Version 2.92.4 ; Source commit: 4ca9b5278",
+     "sha256": "a6479acf5cd2ad6d3355c55bec0b8290037ed172125a686a257507ecfb57b1f3",
+     "commit": "4ca9b5278",
+     "modified": false
+    },
+    "s0": {
+     "path": "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-famsplit/faust",
+     "version": "FAUST Version 2.92.4 ; Source commit: 397cd20ab",
+     "sha256": "8976e5488b2b5065af470f6ab4126492c8eb4eb9bceec4478b53622527ce6f69",
+     "commit": "397cd20ab",
+     "modified": false
+    },
+    "s1000": {
+     "path": "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-famsplit/faust",
+     "version": "FAUST Version 2.92.4 ; Source commit: 397cd20ab",
+     "sha256": "8976e5488b2b5065af470f6ab4126492c8eb4eb9bceec4478b53622527ce6f69",
+     "commit": "397cd20ab",
+     "modified": false
+    },
+    "l8": {
+     "path": "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-famsplit/faust",
+     "version": "FAUST Version 2.92.4 ; Source commit: 397cd20ab",
+     "sha256": "8976e5488b2b5065af470f6ab4126492c8eb4eb9bceec4478b53622527ce6f69",
+     "commit": "397cd20ab",
+     "modified": false
+    }
+   },
+   "sources": {
+    "path": "/home/user/wt-head",
+    "commit": "4ca9b5278fba51501ada8c0fc6196d1d69eccf41",
+    "tree": "3b1fcbdcc32c61ea6d68961e6973acafa7e68bcd",
+    "subject": "ocpp : an IIR and the FIR input it takes in are one node of the dependency graph",
+    "branch": "s3-dev",
+    "changes": [],
+    "changed": 0
+   },
+   "libraries": {
+    "path": "/home/user/wt-head/libraries",
+    "commit": "42fab480c778df7bad5c6b620ca4fd005b2bfe9b",
+    "tree": "0daa892573dfe85e24754f84111bf2e585feda35",
+    "subject": "filters.lib: declare the author and license of _tanhalf and _tpt_df",
+    "branch": "HEAD",
+    "changes": [],
+    "changed": 0
+   },
+   "tool": {
+    "path": "/home/user/faust-migration/tools",
+    "commit": "d3ebac89c2a03a868146e50da7e8941ca27c0740",
+    "tree": "6ee6b9f412dbba2708cbbdf7089bbf4c563bfcbb",
+    "subject": "La campagne du seuil de -fam-split dans le nuage, clang 18 et g++ 13",
+    "branch": "main",
+    "changes": [],
+    "changed": 0
+   },
+   "host": {
+    "hostname": "vm",
+    "system": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz, 4 cpus",
+    "load": [
+     0.47314453125,
+     0.95068359375,
+     0.8994140625
+    ],
+    "affinity": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "load_end": [
+     1.04052734375,
+     1.0595703125,
+     0.9521484375
+    ]
+   },
+   "command": [
+    "tools/mesure.py",
+    "run",
+    "--ref",
+    "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-mdd8a/faust",
+    "--version",
+    "cert3=/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-cert3/faust",
+    "--version",
+    "s0=/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-famsplit/faust",
+    "--version",
+    "s1000=/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-famsplit/faust",
+    "--version",
+    "l8=/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-famsplit/faust",
+    "--faust-options",
+    "s0=-fam -fam-split 0",
+    "--faust-options",
+    "s1000=-fam -fam-split 1000",
+    "--faust-options",
+    "l8=-fam -fam-lanes 8",
+    "--entries",
+    "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/modalbar-entries.txt",
+    "--faust-root",
+    "/home/user/wt-head",
+    "--arch",
+    "/home/user/wt-head/libraries/arch/cpu_arch.cpp",
+    "--cxx",
+    "clang++",
+    "--configs",
+    "ocpp-f,ocpp-d",
+    "--jobs",
+    "4",
+    "--out",
+    "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/mes/seuil-modalbar-clang"
+   ],
+   "basket": {
+    "file": "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/modalbar-entries.txt",
+    "sha256": "2e60c4459796e35cee7b6a164d1b99ea65722ee58757df2151491db88a270ff4",
+    "programs": {
+     "modalBar": "6bc8fb79512caf5bcdce03f7ad8b9a77b0251edfea4f899386e30fac72eaa657"
+    }
+   },
+   "allow_modified": false,
+   "code": {
+    "modalBar R-d": "924d0dc33de874e13a27c931b1527cd5a38b5d2962468a0f26daa5df19ee6047",
+    "modalBar md-ocpp-d": "59b3e623f238eddb4f3fef039ad50a031d90df12752962b29652e84188b935fc",
+    "modalBar R-f": "46691038f990bffe56c11bc6487e845509178acfee4d3b08aa35c30d94bfe5dd",
+    "modalBar md-ocpp-f": "6116b12f526502cf14594025ccf1c9435f87992a43fd630cf9ebe313dbf9a5d8",
+    "modalBar cert3-ocpp-f": "f30afe58f3ee6366398d30f756c4850d5029e836ca47330925461d458905e2aa",
+    "modalBar cert3-ocpp-d": "8f0fe21c598adb97c7005fb604f3f9e1d3758489bd138573508b964d1af5611c",
+    "modalBar s0-ocpp-f": "92e6812dc3218eef53d1f4e6110e2a6fc867f4cb5a254f51d43518be8fbb83cf",
+    "modalBar s0-ocpp-d": "d22a972aa158b9b315c3dab14be4a471d9ebca2d2305d55bc72e44ff3cffd352",
+    "modalBar s1000-ocpp-f": "92e6812dc3218eef53d1f4e6110e2a6fc867f4cb5a254f51d43518be8fbb83cf",
+    "modalBar s1000-ocpp-d": "d22a972aa158b9b315c3dab14be4a471d9ebca2d2305d55bc72e44ff3cffd352",
+    "modalBar l8-ocpp-f": "92e6812dc3218eef53d1f4e6110e2a6fc867f4cb5a254f51d43518be8fbb83cf",
+    "modalBar l8-ocpp-d": "d22a972aa158b9b315c3dab14be4a471d9ebca2d2305d55bc72e44ff3cffd352"
+   }
+  }
+ },
+ "variants": {
+  "R-d": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-mdd8a/faust",
+   "cpp",
+   "d",
+   "ref"
+  ],
+  "md-ocpp-d": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-mdd8a/faust",
+   "ocpp",
+   "d",
+   "ref"
+  ],
+  "R-f": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-mdd8a/faust",
+   "cpp",
+   "f",
+   "ref"
+  ],
+  "md-ocpp-f": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-mdd8a/faust",
+   "ocpp",
+   "f",
+   "ref"
+  ],
+  "cert3-ocpp-f": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-cert3/faust",
+   "ocpp",
+   "f",
+   "branch"
+  ],
+  "cert3-ocpp-d": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-cert3/faust",
+   "ocpp",
+   "d",
+   "branch"
+  ],
+  "s0-ocpp-f": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-famsplit/faust",
+   "ocpp",
+   "f",
+   "branch"
+  ],
+  "s0-ocpp-d": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-famsplit/faust",
+   "ocpp",
+   "d",
+   "branch"
+  ],
+  "s1000-ocpp-f": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-famsplit/faust",
+   "ocpp",
+   "f",
+   "branch"
+  ],
+  "s1000-ocpp-d": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-famsplit/faust",
+   "ocpp",
+   "d",
+   "branch"
+  ],
+  "l8-ocpp-f": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-famsplit/faust",
+   "ocpp",
+   "f",
+   "branch"
+  ],
+  "l8-ocpp-d": [
+   "/tmp/claude-0/-home-user/6884c1c9-ab40-5824-9d10-1af6860e6ebd/scratchpad/bin-famsplit/faust",
+   "ocpp",
+   "d",
+   "branch"
+  ]
+ },
+ "same": {
+  "modalBar s0-ocpp-f": false,
+  "modalBar s1000-ocpp-f": true,
+  "modalBar l8-ocpp-f": true,
+  "modalBar s0-ocpp-d": false,
+  "modalBar s1000-ocpp-d": true,
+  "modalBar l8-ocpp-d": true
+ },
+ "times": {
+  "modalBar": {
+   "R-d": [
+    166.657,
+    166.863,
+    130.61,
+    144.528,
+    147.644,
+    162.061,
+    153.062,
+    167.564,
+    158.203
+   ],
+   "md-ocpp-d": [
+    134.126,
+    132.027,
+    132.312,
+    106.123,
+    104.363,
+    124.218,
+    120.426,
+    115.436,
+    121.234
+   ],
+   "R-f": [
+    118.776,
+    128.91,
+    129.824,
+    120.151,
+    137.242,
+    137.685,
+    110.379,
+    135.252,
+    106.663
+   ],
+   "md-ocpp-f": [
+    94.393,
+    87.211,
+    89.885,
+    110.573,
+    110.741,
+    112.279,
+    89.218,
+    106.805,
+    105.821
+   ],
+   "cert3-ocpp-f": [
+    136.748,
+    115.238,
+    144.385,
+    112.076,
+    126.506,
+    111.273,
+    126.734,
+    132.822,
+    140.799
+   ],
+   "cert3-ocpp-d": [
+    153.429,
+    161.306,
+    146.543,
+    158.036,
+    151.565,
+    162.75,
+    151.745,
+    149.061,
+    151.113
+   ],
+   "s0-ocpp-f": [
+    148.851,
+    184.174,
+    179.261,
+    177.858,
+    179.575,
+    175.599,
+    185.866,
+    189.79,
+    187.962
+   ],
+   "s0-ocpp-d": [
+    182.102,
+    202.744,
+    202.276,
+    200.318,
+    201.143,
+    193.589,
+    170.93,
+    210.987,
+    218.671
+   ],
+   "s1000-ocpp-f": [
+    151.267,
+    186.355,
+    177.141,
+    165.097,
+    187.626,
+    185.901,
+    166.163,
+    187.565,
+    153.813
+   ],
+   "s1000-ocpp-d": [
+    194.196,
+    177.808,
+    173.285,
+    167.718,
+    204.966,
+    208.388,
+    189.587,
+    166.685,
+    192.385
+   ],
+   "l8-ocpp-f": [
+    174.497,
+    148.466,
+    181.103,
+    176.498,
+    146.562,
+    146.972,
+    173.53,
+    157.316,
+    160.327
+   ],
+   "l8-ocpp-d": [
+    176.682,
+    202.63,
+    199.031,
+    199.957,
+    199.178,
+    214.375,
+    170.178,
+    193.647,
+    194.983
+   ]
+  }
+ },
+ "nonfinite": {},
+ "cxx_times": {}
+}

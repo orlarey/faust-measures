@@ -1,0 +1,71 @@
+2026-11-13T14:23:21+00:00 - Intel(R) Xeon(R) Processor @ 2.30GHz, 4 cpus - Ubuntu clang version 18.1.3 (1ubuntu1)
+reference R : FAUST Version 2.92.3 ; Source commit: d8a62f5bf - cpp - -O3 -ffast-math -march=native
+cert4 : FAUST Version 2.92.5 ; Source commit: 106dda74a - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the median ; every time / R of its precision
+
+== cpp-f
+program                       cert4
+2dKirchhoffThinPlate           0.69
+StiffString                    0.74
+dx7                            1.04
+FFT                            0.81
+englishBell                    1.01
+vocoder                        0.82
+oneSourceToStereo              0.53
+karplus32                      0.86
+zitaRev                        0.92
+virtualAnalog                  0.91
+multibandfilter                1.24
+parametric_eq                  0.81
+geometric mean                 0.85
+
+== cpp-d
+program                       cert4
+2dKirchhoffThinPlate           0.70
+StiffString                    0.74
+dx7                            1.03
+FFT                            0.79
+englishBell                    1.00
+vocoder                        0.84
+oneSourceToStereo              0.52
+karplus32                      1.00
+zitaRev                        0.95
+virtualAnalog                  0.85
+multibandfilter                0.94
+parametric_eq                  0.84
+geometric mean                 0.84
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert4
+2dKirchhoffThinPlate           2.47         0.75
+StiffString                    0.54         0.28
+dx7                            0.80         0.88
+FFT                            0.87         0.75
+englishBell                    0.44         0.68
+vocoder                        0.53         0.13
+oneSourceToStereo              1.11         0.54
+karplus32                      0.81         0.86
+zitaRev                        0.92         0.74
+virtualAnalog                  0.85         0.86
+multibandfilter                0.54         0.47
+parametric_eq                  0.74         0.57
+geometric mean                 0.79         0.56
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert4
+2dKirchhoffThinPlate           1.01         0.72
+StiffString                    0.61         0.39
+dx7                            0.84         0.96
+FFT                            0.78         0.70
+englishBell                    0.55         0.63
+vocoder                        0.54         0.27
+oneSourceToStereo              1.00         0.52
+karplus32                      1.16         1.18
+zitaRev                        1.15         0.84
+virtualAnalog                  0.80         0.89
+multibandfilter                1.07         0.80
+parametric_eq                  0.64         0.52
+geometric mean                 0.82         0.65
+
+above 1.05 : karplus32 cert4-ocpp-d 1.18, multibandfilter cert4-cpp-f 1.24
+noise, the gap between the two best rounds : median 0.7 %, 90th percentile 2.6 %

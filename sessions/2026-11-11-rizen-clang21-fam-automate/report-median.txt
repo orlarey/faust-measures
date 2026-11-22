@@ -1,0 +1,40 @@
+2026-11-11T04:11:34+00:00 - AMD Ryzen AI 9 HX 370 w/ Radeon 890M, 24 cpus - Ubuntu clang version 21.1.8 (6ubuntu1)
+reference R : FAUST Version 2.92.3 ; Source commit: d8a62f5bf - cpp - -O3 -ffast-math -march=native
+cert3 : FAUST Version 2.92.4 ; Source commit: 4ca9b5278 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+fam : FAUST Version 2.92.4 ; Source commit: 4ca9b5278-modified - faust -fam - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the median ; every time / R of its precision
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3          fam
+2dKirchhoffThinPlate           1.24         0.42     0.42 (=)
+StiffString                    0.50         0.73         0.23
+dx7                            0.87         0.92     0.92 (=)
+FFT                            0.91         0.67     0.67 (=)
+englishBell                    0.40         0.47         0.26
+vocoder                        0.59         0.60         0.16
+oneSourceToStereo              1.11         0.94     0.94 (=)
+karplus32                      0.90         0.93     0.93 (=)
+zitaRev                        0.93         0.81     0.81 (=)
+virtualAnalog                  0.81         0.85     0.85 (=)
+multibandfilter                0.58         0.45     0.45 (=)
+parametric_eq                  0.83         0.61     0.61 (=)
+geometric mean                 0.77         0.67         0.52
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3          fam
+2dKirchhoffThinPlate           1.10         0.38     0.38 (=)
+StiffString                    0.77         0.72         0.26
+dx7                            0.80         0.93     0.93 (=)
+FFT                            1.03         0.75     0.75 (=)
+englishBell                    0.26         0.36         0.26
+vocoder                        0.61         0.74         0.18
+oneSourceToStereo              1.06         0.80     0.80 (=)
+karplus32                      0.99         1.08     1.08 (=)
+zitaRev                        1.04         0.81     0.81 (=)
+virtualAnalog                  0.59         0.72     0.72 (=)
+multibandfilter                1.11         0.85     0.85 (=)
+parametric_eq                  0.66         0.70     0.70 (=)
+geometric mean                 0.78         0.70         0.56
+
+above 1.05 : karplus32 cert3-ocpp-d 1.08, karplus32 fam-ocpp-d 1.08
+noise, the gap between the two best rounds : median 0.0 %, 90th percentile 0.3 %

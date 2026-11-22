@@ -1,0 +1,34 @@
+2026-11-11T09:58:47+00:00 - Apple M1, 8 cpus - Apple clang version 21.0.0 (clang-2100.1.1.101)
+reference R : FAUST Version 2.92.3 ; Source commit: d8a62f5bf - cpp - -O3 -ffast-math -march=native
+cert3 : FAUST Version 2.92.4 ; Source commit: 4ca9b5278 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+s0 : FAUST Version 2.92.4 ; Source commit: 16bd41356 - faust -fam -fam-split 0 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+s1000 : FAUST Version 2.92.4 ; Source commit: 16bd41356 - faust -fam -fam-split 1000 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+l8 : FAUST Version 2.92.4 ; Source commit: 16bd41356 - faust -fam -fam-lanes 8 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the median ; every time / R of its precision
+not built : modalBar R-d, modalBar R-f, modalBar cert3-ocpp-d, modalBar cert3-ocpp-f, modalBar l8-ocpp-d, modalBar l8-ocpp-f, modalBar md-ocpp-d, modalBar md-ocpp-f, modalBar s0-ocpp-d, modalBar s0-ocpp-f, modalBar s1000-ocpp-d, modalBar s1000-ocpp-f
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3           s0        s1000           l8
+insects                        0.80         0.89         0.85         0.86     0.86 (=)
+fire                           0.80         1.03         0.83         0.83     0.83 (=)
+englishBell                    0.31         0.43         0.39         0.40         0.26
+AdditiveSynth                  0.26         1.97         0.79         2.39         0.75
+vocoder                        0.41         0.48         0.17         0.44         0.17
+oteyPianoV2                    0.87         0.94         1.79     1.79 (=)     1.79 (=)
+statespace                     1.18         0.77         1.12     1.12 (=)     1.12 (=)
+geometric mean                 0.58         0.83         0.69         0.93         0.64
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3           s0        s1000           l8
+insects                        0.78         0.87         0.84         0.84     0.84 (=)
+fire                           1.13         1.43     1.43 (=)     1.43 (=)     1.43 (=)
+englishBell                    0.30         0.42         0.51         0.38         0.61
+AdditiveSynth                  0.51         2.19         1.42         2.53         1.40
+vocoder                        0.51         0.38         0.34         0.65         0.36
+oteyPianoV2                    1.01         1.10         2.01     2.01 (=)     2.01 (=)
+statespace                     1.35         0.95         1.25     1.25 (=)     1.25 (=)
+geometric mean                 0.71         0.89         0.96         1.09         0.99
+
+above 1.05 : AdditiveSynth cert3-ocpp-d 2.19, AdditiveSynth cert3-ocpp-f 1.97, AdditiveSynth l8-ocpp-d 1.40, AdditiveSynth s0-ocpp-d 1.42, AdditiveSynth s1000-ocpp-d 2.53, AdditiveSynth s1000-ocpp-f 2.39, fire cert3-ocpp-d 1.43, fire l8-ocpp-d 1.43, fire s0-ocpp-d 1.43, fire s1000-ocpp-d 1.43, oteyPianoV2 cert3-ocpp-d 1.10, oteyPianoV2 l8-ocpp-d 2.01, oteyPianoV2 l8-ocpp-f 1.79, oteyPianoV2 s0-ocpp-d 2.01, oteyPianoV2 s0-ocpp-f 1.79, oteyPianoV2 s1000-ocpp-d 2.01, oteyPianoV2 s1000-ocpp-f 1.79, statespace l8-ocpp-d 1.25, statespace l8-ocpp-f 1.12, statespace s0-ocpp-d 1.25, statespace s0-ocpp-f 1.12, statespace s1000-ocpp-d 1.25, statespace s1000-ocpp-f 1.12
+noise, the gap between the two best rounds : median 0.0 %, 90th percentile 0.1 %
+non-finite outputs : statespace R-d, statespace R-f, statespace cert3-ocpp-d, statespace cert3-ocpp-f, statespace l8-ocpp-d, statespace l8-ocpp-f, statespace md-ocpp-d, statespace md-ocpp-f, statespace s0-ocpp-d, statespace s0-ocpp-f, statespace s1000-ocpp-d, statespace s1000-ocpp-f

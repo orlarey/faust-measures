@@ -1,0 +1,34 @@
+2026-11-11T10:06:41+00:00 - AMD Ryzen AI 9 HX 370 w/ Radeon 890M, 24 cpus - Ubuntu clang version 21.1.8 (6ubuntu1)
+reference R : FAUST Version 2.92.3 ; Source commit: d8a62f5bf - cpp - -O3 -ffast-math -march=native
+cert3 : FAUST Version 2.92.4 ; Source commit: 4ca9b5278 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+fam : FAUST Version 2.92.4 ; Source commit: 16bd41356 - faust -fam - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the median ; every time / R of its precision
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3          fam
+corde6                         0.52         0.60         0.72
+corde8                         0.51         0.81         0.83
+corde12                        0.38         0.53         0.71
+corde16                        0.37         0.44         0.88
+corde24                        0.40         0.43         0.62
+corde32                        0.48         0.38         0.49
+corde48                        0.49         0.47         0.34
+corde64                        0.55         0.45         0.28
+corde100                       0.55         0.44         0.19
+geometric mean                 0.47         0.50         0.50
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3          fam
+corde6                         1.20         1.10         1.31
+corde8                         0.72         1.08         1.03
+corde12                        0.67         0.91         1.03
+corde16                        0.53         0.76         1.23
+corde24                        0.42         0.59         0.61
+corde32                        0.39         0.58         0.53
+corde48                        0.31         0.59         0.39
+corde64                        0.69         0.48         0.29
+corde100                       0.72         0.61         0.26
+geometric mean                 0.58         0.71         0.63
+
+above 1.05 : corde16 fam-ocpp-d 1.23, corde6 cert3-ocpp-d 1.10, corde6 fam-ocpp-d 1.31, corde8 cert3-ocpp-d 1.08
+noise, the gap between the two best rounds : median 0.1 %, 90th percentile 1.3 %

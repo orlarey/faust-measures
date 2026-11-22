@@ -1,0 +1,20 @@
+2026-11-11T10:12:48+00:00 - Intel(R) Xeon(R) Processor @ 2.10GHz, 4 cpus - Ubuntu clang version 18.1.3 (1ubuntu1)
+reference R : FAUST Version 2.92.3 ; Source commit: d8a62f5bf - cpp - -O3 -ffast-math -march=native
+cert3 : FAUST Version 2.92.4 ; Source commit: 4ca9b5278 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+s0 : FAUST Version 2.92.4 ; Source commit: 397cd20ab - faust -fam -fam-split 0 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+s1000 : FAUST Version 2.92.4 ; Source commit: 397cd20ab - faust -fam -fam-split 1000 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+l8 : FAUST Version 2.92.4 ; Source commit: 397cd20ab - faust -fam -fam-lanes 8 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the median ; every time / R of its precision
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3           s0        s1000           l8
+modalBar                       0.82         0.98         1.37     1.37 (=)     1.37 (=)
+geometric mean                 0.82         0.98         1.37         1.37         1.37
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3           s0        s1000           l8
+modalBar                       0.77         0.96         1.23     1.23 (=)     1.23 (=)
+geometric mean                 0.77         0.96         1.23         1.23         1.23
+
+above 1.05 : modalBar l8-ocpp-d 1.23, modalBar l8-ocpp-f 1.37, modalBar s0-ocpp-d 1.23, modalBar s0-ocpp-f 1.37, modalBar s1000-ocpp-d 1.23, modalBar s1000-ocpp-f 1.37
+noise, the gap between the two best rounds : median 2.3 %, 90th percentile 6.5 %

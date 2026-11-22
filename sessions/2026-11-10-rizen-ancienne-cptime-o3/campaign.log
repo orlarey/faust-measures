@@ -1,0 +1,196 @@
+=== campaign start mar. 10 nov 2026 12:14:28 CET
+EXIT 0
+EXIT 0
+A (reference) /home/orlarey/cert3/faust-ref/build/bin/faust : 523288afc
+B (measured)  /home/orlarey/cert3/faust-new/build/bin/faust : 4ca9b5278
+Linux orlarey-AI-Series 7.0.0-30-generic #30-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 18:22:54 UTC 2026 x86_64 GNU/Linux
+--- judge clang21: Ubuntu clang version 21.1.8 (6ubuntu1)
+--- clang21 cpp start 12:15:28
+command: CPT_LANG=cpp CPT_BASE_FAUST=/home/orlarey/cert3/faust-ref/build/bin/faust taskset -c 0-3,12-15 python3 cptime.py entries.txt /home/orlarey/cert3/faust-new/build/bin/faust '' /usr/bin/clang++ -O3 /home/orlarey/cert3/faust-ref /home/orlarey/cert3/runs/clang21-cpp 7
+built 10/10 in 8 s
+round 1/7 done at 23 s
+round 2/7 done at 39 s
+round 3/7 done at 54 s
+round 4/7 done at 70 s
+round 5/7 done at 85 s
+round 6/7 done at 101 s
+round 7/7 done at 117 s
+changed: 10 entries, geomean B/A 0.8522, min 0.614, max 1.108, >1.05: 2, <0.95: 7
+  examples_generator_dx7.dsp                                 121.59    134.78 1.108 
+  examples_physicalModeling_englishBell.dsp                   91.87     99.84 1.087 
+  examples_physicalModeling_old_karplus32.dsp                 23.11     22.94 0.993 
+  examples_reverb_zitaRev.dsp                                 34.23     31.94 0.933 
+  examples_generator_virtualAnalog.dsp                        70.97     61.95 0.873 
+  examples_filtering_vocoder.dsp                             117.96    102.03 0.865 
+  examples_analysis_FFT.dsp                                  108.56     80.94 0.746 
+  examples_ambisonics_oneSourceToStereo.dsp                   37.12     27.08 0.730 
+  examples_physicalModeling_fds_StiffString.dsp              188.91    135.62 0.718 
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp     970.66    595.91 0.614 
+  ...
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp     970.66    595.91 0.614 
+  examples_physicalModeling_fds_StiffString.dsp              188.91    135.62 0.718 
+  examples_ambisonics_oneSourceToStereo.dsp                   37.12     27.08 0.730 
+  examples_analysis_FFT.dsp                                  108.56     80.94 0.746 
+  examples_filtering_vocoder.dsp                             117.96    102.03 0.865 
+  examples_generator_virtualAnalog.dsp                        70.97     61.95 0.873 
+  examples_reverb_zitaRev.dsp                                 34.23     31.94 0.933 
+  examples_physicalModeling_old_karplus32.dsp                 23.11     22.94 0.993 
+--- clang21 cpp end 12:17:24 exit 0
+--- clang21 ocpp start 12:17:24
+command: CPT_LANG=ocpp CPT_BASE_FAUST=/home/orlarey/cert3/faust-ref/build/bin/faust taskset -c 0-3,12-15 python3 cptime.py entries.txt /home/orlarey/cert3/faust-new/build/bin/faust '' /usr/bin/clang++ -O3 /home/orlarey/cert3/faust-ref /home/orlarey/cert3/runs/clang21-ocpp 7
+built 10/10 in 12 s
+round 1/7 done at 25 s
+round 2/7 done at 39 s
+round 3/7 done at 52 s
+round 4/7 done at 66 s
+round 5/7 done at 80 s
+round 6/7 done at 94 s
+round 7/7 done at 107 s
+changed: 10 entries, geomean B/A 0.7502, min 0.457, max 1.095, >1.05: 1, <0.95: 7
+  examples_generator_dx7.dsp                                 119.69    131.04 1.095 
+  examples_physicalModeling_old_karplus32.dsp                 23.32     23.17 0.993 
+  examples_generator_virtualAnalog.dsp                        61.48     60.49 0.984 
+  examples_analysis_FFT.dsp                                   78.49     64.33 0.820 
+  examples_physicalModeling_englishBell.dsp                   57.33     46.28 0.807 
+  examples_physicalModeling_fds_StiffString.dsp              200.64    145.22 0.724 
+  examples_reverb_zitaRev.dsp                                 31.43     22.68 0.722 
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp     914.61    566.79 0.620 
+  examples_filtering_vocoder.dsp                              67.17     36.24 0.540 
+  examples_ambisonics_oneSourceToStereo.dsp                   66.44     30.35 0.457 
+  ...
+  examples_ambisonics_oneSourceToStereo.dsp                   66.44     30.35 0.457 
+  examples_filtering_vocoder.dsp                              67.17     36.24 0.540 
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp     914.61    566.79 0.620 
+  examples_reverb_zitaRev.dsp                                 31.43     22.68 0.722 
+  examples_physicalModeling_fds_StiffString.dsp              200.64    145.22 0.724 
+  examples_physicalModeling_englishBell.dsp                   57.33     46.28 0.807 
+  examples_analysis_FFT.dsp                                   78.49     64.33 0.820 
+  examples_generator_virtualAnalog.dsp                        61.48     60.49 0.984 
+--- clang21 ocpp end 12:19:12 exit 0
+--- judge clang22: clang version 22.1.8 (https://github.com/llvm/llvm-project ca7933e47d3a3451d81e72ac174dcb5aa28b59d1)
+--- clang22 cpp start 12:19:12
+command: CPT_LANG=cpp CPT_BASE_FAUST=/home/orlarey/cert3/faust-ref/build/bin/faust taskset -c 0-3,12-15 python3 cptime.py entries.txt /home/orlarey/cert3/faust-new/build/bin/faust '' /home/orlarey/opt/llvm-22/bin/clang++ -O3 /home/orlarey/cert3/faust-ref /home/orlarey/cert3/runs/clang22-cpp 7
+built 10/10 in 6 s
+round 1/7 done at 23 s
+round 2/7 done at 39 s
+round 3/7 done at 55 s
+round 4/7 done at 70 s
+round 5/7 done at 86 s
+round 6/7 done at 102 s
+round 7/7 done at 117 s
+changed: 10 entries, geomean B/A 0.8666, min 0.592, max 1.196, >1.05: 2, <0.95: 5
+  examples_generator_dx7.dsp                                 121.52    145.31 1.196 
+  examples_physicalModeling_englishBell.dsp                   94.24     99.79 1.059 
+  examples_physicalModeling_old_karplus32.dsp                 23.18     23.20 1.001 
+  examples_generator_virtualAnalog.dsp                        63.38     61.34 0.968 
+  examples_reverb_zitaRev.dsp                                 33.55     31.96 0.952 
+  examples_filtering_vocoder.dsp                             118.45    102.18 0.863 
+  examples_analysis_FFT.dsp                                  107.88     81.72 0.758 
+  examples_ambisonics_oneSourceToStereo.dsp                   37.12     27.28 0.735 
+  examples_physicalModeling_fds_StiffString.dsp              188.75    135.75 0.719 
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp     966.19    571.62 0.592 
+  ...
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp     966.19    571.62 0.592 
+  examples_physicalModeling_fds_StiffString.dsp              188.75    135.75 0.719 
+  examples_ambisonics_oneSourceToStereo.dsp                   37.12     27.28 0.735 
+  examples_analysis_FFT.dsp                                  107.88     81.72 0.758 
+  examples_filtering_vocoder.dsp                             118.45    102.18 0.863 
+  examples_reverb_zitaRev.dsp                                 33.55     31.96 0.952 
+  examples_generator_virtualAnalog.dsp                        63.38     61.34 0.968 
+  examples_physicalModeling_old_karplus32.dsp                 23.18     23.20 1.001 
+--- clang22 cpp end 12:21:09 exit 0
+--- clang22 ocpp start 12:21:09
+command: CPT_LANG=ocpp CPT_BASE_FAUST=/home/orlarey/cert3/faust-ref/build/bin/faust taskset -c 0-3,12-15 python3 cptime.py entries.txt /home/orlarey/cert3/faust-new/build/bin/faust '' /home/orlarey/opt/llvm-22/bin/clang++ -O3 /home/orlarey/cert3/faust-ref /home/orlarey/cert3/runs/clang22-ocpp 7
+built 10/10 in 9 s
+round 1/7 done at 23 s
+round 2/7 done at 37 s
+round 3/7 done at 52 s
+round 4/7 done at 66 s
+round 5/7 done at 80 s
+round 6/7 done at 94 s
+round 7/7 done at 108 s
+changed: 10 entries, geomean B/A 0.7843, min 0.468, max 1.097, >1.05: 1, <0.95: 7
+  examples_generator_dx7.dsp                                 119.59    131.21 1.097 
+  examples_physicalModeling_old_karplus32.dsp                 23.27     23.31 1.002 
+  examples_generator_virtualAnalog.dsp                        62.41     60.68 0.972 
+  examples_reverb_zitaRev.dsp                                 28.73     24.56 0.855 
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp     862.94    702.87 0.815 
+  examples_analysis_FFT.dsp                                   77.64     62.72 0.808 
+  examples_physicalModeling_fds_StiffString.dsp              200.15    158.38 0.791 
+  examples_physicalModeling_englishBell.dsp                   57.37     42.62 0.743 
+  examples_filtering_vocoder.dsp                              67.13     35.78 0.533 
+  examples_ambisonics_oneSourceToStereo.dsp                   63.72     29.80 0.468 
+  ...
+  examples_ambisonics_oneSourceToStereo.dsp                   63.72     29.80 0.468 
+  examples_filtering_vocoder.dsp                              67.13     35.78 0.533 
+  examples_physicalModeling_englishBell.dsp                   57.37     42.62 0.743 
+  examples_physicalModeling_fds_StiffString.dsp              200.15    158.38 0.791 
+  examples_analysis_FFT.dsp                                   77.64     62.72 0.808 
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp     862.94    702.87 0.815 
+  examples_reverb_zitaRev.dsp                                 28.73     24.56 0.855 
+  examples_generator_virtualAnalog.dsp                        62.41     60.68 0.972 
+--- clang22 ocpp end 12:22:58 exit 0
+--- judge gcc15: g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+--- gcc15 cpp start 12:22:58
+command: CPT_LANG=cpp CPT_BASE_FAUST=/home/orlarey/cert3/faust-ref/build/bin/faust taskset -c 0-3,12-15 python3 cptime.py entries.txt /home/orlarey/cert3/faust-new/build/bin/faust '' /usr/bin/g++ -O3 /home/orlarey/cert3/faust-ref /home/orlarey/cert3/runs/gcc15-cpp 7
+built 10/10 in 16 s
+round 1/7 done at 33 s
+round 2/7 done at 50 s
+round 3/7 done at 67 s
+round 4/7 done at 83 s
+round 5/7 done at 100 s
+round 6/7 done at 117 s
+round 7/7 done at 133 s
+changed: 10 entries, geomean B/A 0.8791, min 0.681, max 1.121, >1.05: 2, <0.95: 6
+  examples_physicalModeling_englishBell.dsp                   99.14    111.15 1.121 
+  examples_generator_dx7.dsp                                 128.64    136.29 1.060 
+  examples_generator_virtualAnalog.dsp                        56.19     55.95 0.996 
+  examples_filtering_vocoder.dsp                             148.98    142.06 0.954 
+  examples_reverb_zitaRev.dsp                                 34.33     30.97 0.902 
+  examples_physicalModeling_old_karplus32.dsp                 34.50     31.06 0.900 
+  examples_ambisonics_oneSourceToStereo.dsp                   34.24     27.39 0.800 
+  examples_physicalModeling_fds_StiffString.dsp              182.56    139.89 0.766 
+  examples_analysis_FFT.dsp                                  118.75     85.57 0.721 
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp    1029.14    701.17 0.681 
+  ...
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp    1029.14    701.17 0.681 
+  examples_analysis_FFT.dsp                                  118.75     85.57 0.721 
+  examples_physicalModeling_fds_StiffString.dsp              182.56    139.89 0.766 
+  examples_ambisonics_oneSourceToStereo.dsp                   34.24     27.39 0.800 
+  examples_physicalModeling_old_karplus32.dsp                 34.50     31.06 0.900 
+  examples_reverb_zitaRev.dsp                                 34.33     30.97 0.902 
+  examples_filtering_vocoder.dsp                             148.98    142.06 0.954 
+  examples_generator_virtualAnalog.dsp                        56.19     55.95 0.996 
+--- gcc15 cpp end 12:25:11 exit 0
+--- gcc15 ocpp start 12:25:11
+command: CPT_LANG=ocpp CPT_BASE_FAUST=/home/orlarey/cert3/faust-ref/build/bin/faust taskset -c 0-3,12-15 python3 cptime.py entries.txt /home/orlarey/cert3/faust-new/build/bin/faust '' /usr/bin/g++ -O3 /home/orlarey/cert3/faust-ref /home/orlarey/cert3/runs/gcc15-ocpp 7
+built 10/10 in 36 s
+round 1/7 done at 51 s
+round 2/7 done at 67 s
+round 3/7 done at 83 s
+round 4/7 done at 99 s
+round 5/7 done at 115 s
+round 6/7 done at 131 s
+round 7/7 done at 147 s
+changed: 10 entries, geomean B/A 0.7986, min 0.640, max 1.080, >1.05: 1, <0.95: 8
+  examples_generator_dx7.dsp                                 116.80    126.11 1.080 
+  examples_physicalModeling_old_karplus32.dsp                 24.30     23.77 0.978 
+  examples_generator_virtualAnalog.dsp                        60.33     53.99 0.895 
+  examples_filtering_vocoder.dsp                             104.38     89.27 0.855 
+  examples_physicalModeling_englishBell.dsp                   74.63     63.05 0.845 
+  examples_ambisonics_oneSourceToStereo.dsp                   33.87     24.73 0.730 
+  examples_reverb_zitaRev.dsp                                 34.01     23.85 0.701 
+  examples_analysis_FFT.dsp                                  110.92     77.78 0.701 
+  examples_physicalModeling_fds_StiffString.dsp              174.82    117.56 0.672 
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp    1091.12    698.06 0.640 
+  ...
+  examples_physicalModeling_fds_2dKirchhoffThinPlate.dsp    1091.12    698.06 0.640 
+  examples_physicalModeling_fds_StiffString.dsp              174.82    117.56 0.672 
+  examples_analysis_FFT.dsp                                  110.92     77.78 0.701 
+  examples_reverb_zitaRev.dsp                                 34.01     23.85 0.701 
+  examples_ambisonics_oneSourceToStereo.dsp                   33.87     24.73 0.730 
+  examples_physicalModeling_englishBell.dsp                   74.63     63.05 0.845 
+  examples_filtering_vocoder.dsp                             104.38     89.27 0.855 
+  examples_generator_virtualAnalog.dsp                        60.33     53.99 0.895 
+--- gcc15 ocpp end 12:27:38 exit 0
+=== campaign end mar. 10 nov 2026 12:27:38 CET

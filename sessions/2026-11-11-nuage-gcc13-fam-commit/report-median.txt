@@ -1,0 +1,72 @@
+2026-11-11T07:36:51+00:00 - Intel(R) Xeon(R) Processor @ 2.10GHz, 4 cpus - g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+reference R : FAUST Version 2.92.3 ; Source commit: d8a62f5bf - cpp - -O3 -ffast-math -march=native
+cert3 : FAUST Version 2.92.4 ; Source commit: 4ca9b5278 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+fam : FAUST Version 2.92.4 ; Source commit: d7bcb67f6 - faust -fam - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the median ; every time / R of its precision
+
+== cpp-f
+program                       cert3          fam
+2dKirchhoffThinPlate           0.38     0.38 (=)
+StiffString                    0.98     0.98 (=)
+dx7                            1.37     1.37 (=)
+FFT                            0.35     0.35 (=)
+englishBell                    0.73     0.73 (=)
+vocoder                        0.93     0.93 (=)
+oneSourceToStereo              0.83     0.83 (=)
+karplus32                      1.01     1.01 (=)
+zitaRev                        0.93     0.93 (=)
+virtualAnalog                  1.07     1.07 (=)
+multibandfilter                0.77     0.77 (=)
+parametric_eq                  0.84     0.84 (=)
+geometric mean                 0.80         0.80
+
+== cpp-d
+program                       cert3          fam
+2dKirchhoffThinPlate           0.76     0.76 (=)
+StiffString                    1.13     1.13 (=)
+dx7                            1.43     1.43 (=)
+FFT                            0.26     0.26 (=)
+englishBell                    1.05     1.05 (=)
+vocoder                        1.15     1.15 (=)
+oneSourceToStereo              0.68     0.68 (=)
+karplus32                      0.92     0.92 (=)
+zitaRev                        0.77     0.77 (=)
+virtualAnalog                  1.08     1.08 (=)
+multibandfilter                0.69     0.69 (=)
+parametric_eq                  0.88     0.88 (=)
+geometric mean                 0.84         0.84
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3          fam
+2dKirchhoffThinPlate           0.76         0.33     0.33 (=)
+StiffString                    0.82         0.81         0.26
+dx7                            1.04         1.43     1.43 (=)
+FFT                            1.02         0.32     0.32 (=)
+englishBell                    0.77         0.79         0.49
+vocoder                        0.46         0.50         0.28
+oneSourceToStereo              1.02         0.83     0.83 (=)
+karplus32                      0.47         0.48     0.48 (=)
+zitaRev                        0.80         0.71     0.71 (=)
+virtualAnalog                  1.04         0.99     0.99 (=)
+multibandfilter                0.95         0.91     0.91 (=)
+parametric_eq                  0.52         0.46     0.46 (=)
+geometric mean                 0.77         0.65         0.54
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3          fam
+2dKirchhoffThinPlate           0.97         0.75     0.75 (=)
+StiffString                    0.97         1.00         0.90
+dx7                            0.89         1.50     1.50 (=)
+FFT                            0.87         0.25     0.25 (=)
+englishBell                    1.19         1.49         0.46
+vocoder                        1.15         1.06         0.40
+oneSourceToStereo              0.77         0.62     0.62 (=)
+karplus32                      0.72         0.85     0.85 (=)
+zitaRev                        0.95         0.75     0.75 (=)
+virtualAnalog                  0.99         1.10     1.10 (=)
+multibandfilter                0.95         0.90     0.90 (=)
+parametric_eq                  0.63         0.57     0.57 (=)
+geometric mean                 0.91         0.82         0.68
+
+above 1.05 : StiffString cert3-cpp-d 1.13, StiffString fam-cpp-d 1.13, dx7 cert3-cpp-d 1.43, dx7 cert3-cpp-f 1.37, dx7 cert3-ocpp-d 1.50, dx7 cert3-ocpp-f 1.43, dx7 fam-cpp-d 1.43, dx7 fam-cpp-f 1.37, dx7 fam-ocpp-d 1.50, dx7 fam-ocpp-f 1.43, englishBell cert3-ocpp-d 1.49, virtualAnalog cert3-cpp-d 1.08, virtualAnalog cert3-cpp-f 1.07, virtualAnalog cert3-ocpp-d 1.10, virtualAnalog fam-cpp-d 1.08, virtualAnalog fam-cpp-f 1.07, virtualAnalog fam-ocpp-d 1.10, vocoder cert3-cpp-d 1.15, vocoder cert3-ocpp-d 1.06, vocoder fam-cpp-d 1.15
+noise, the gap between the two best rounds : median 2.1 %, 90th percentile 10.8 %

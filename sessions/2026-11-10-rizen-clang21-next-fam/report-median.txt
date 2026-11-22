@@ -1,0 +1,41 @@
+2026-11-10T17:23:05+00:00 - AMD Ryzen AI 9 HX 370 w/ Radeon 890M, 24 cpus - Ubuntu clang version 21.1.8 (6ubuntu1)
+reference R : FAUST Version 2.92.3 ; Source commit: d8a62f5bf - cpp - -O3 -ffast-math -march=native
+cert3 : FAUST Version 2.92.4 ; Source commit: 4ca9b5278 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+next : FAUST Version 2.89.4 ; Source commit: e0e2581bc - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+nextfam : FAUST Version 2.89.4 ; Source commit: e0e2581bc - faust -fam - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the median ; every time / R of its precision
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3         next      nextfam
+2dKirchhoffThinPlate           1.24         0.42         1.29         0.62
+StiffString                    0.50         0.74         0.62         0.64
+dx7                            0.86         0.87         0.83     0.83 (=)
+FFT                            0.91         0.67         1.00         0.87
+englishBell                    0.59         1.00         0.95         0.90
+vocoder                        0.15         0.60         0.49         0.76
+oneSourceToStereo              1.12         0.94         1.29     1.29 (=)
+karplus32                      0.90         0.94         1.02     1.02 (=)
+zitaRev                        1.00         0.83         1.11     1.11 (=)
+virtualAnalog                  0.66         0.79         0.72     0.72 (=)
+multibandfilter                0.58         0.45         1.02     1.02 (=)
+parametric_eq                  0.83         0.61         1.04         1.07
+geometric mean                 0.70         0.71         0.92         0.88
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert3         next      nextfam
+2dKirchhoffThinPlate           1.10         0.67         1.24         0.68
+StiffString                    0.78         0.71         1.02         0.74
+dx7                            0.80         0.93         0.81     0.81 (=)
+FFT                            1.03         0.75         1.04         0.97
+englishBell                    0.60         0.55         0.64         0.60
+vocoder                        0.38         0.63         0.69         0.75
+oneSourceToStereo              1.06         0.80         1.11     1.11 (=)
+karplus32                      1.01         1.08         1.21     1.21 (=)
+zitaRev                        0.99         0.85         1.13     1.13 (=)
+virtualAnalog                  0.56         0.71         0.64     0.64 (=)
+multibandfilter                1.11         0.85         1.35     1.35 (=)
+parametric_eq                  0.66         0.58         0.96         0.99
+geometric mean                 0.80         0.75         0.96         0.89
+
+above 1.05 : 2dKirchhoffThinPlate next-ocpp-d 1.24, 2dKirchhoffThinPlate next-ocpp-f 1.29, karplus32 cert3-ocpp-d 1.08, karplus32 next-ocpp-d 1.21, karplus32 nextfam-ocpp-d 1.21, multibandfilter next-ocpp-d 1.35, multibandfilter nextfam-ocpp-d 1.35, oneSourceToStereo next-ocpp-d 1.11, oneSourceToStereo next-ocpp-f 1.29, oneSourceToStereo nextfam-ocpp-d 1.11, oneSourceToStereo nextfam-ocpp-f 1.29, parametric_eq nextfam-ocpp-f 1.07, zitaRev next-ocpp-d 1.13, zitaRev next-ocpp-f 1.11, zitaRev nextfam-ocpp-d 1.13, zitaRev nextfam-ocpp-f 1.11
+noise, the gap between the two best rounds : median 0.0 %, 90th percentile 0.5 %
