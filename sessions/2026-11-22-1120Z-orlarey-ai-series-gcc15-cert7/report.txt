@@ -1,0 +1,71 @@
+2026-11-22T11:20:35+00:00 - AMD Ryzen AI 9 HX 370 w/ Radeon 890M, 24 cpus - g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+reference R : FAUST Version 2.94.1 ; Source commit: e3665b800 - cpp - -O3 -ffast-math -march=native
+cert7 : FAUST Version 2.94.1 ; Source commit: 06dd38660 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the minimum ; every time / R of its precision
+
+== cpp-f
+program                       cert7
+2dKirchhoffThinPlate           0.65
+StiffString                    0.97
+dx7                            1.00
+FFT                            0.72
+englishBell                    0.92
+vocoder                        1.02
+oneSourceToStereo              0.41
+karplus32                      1.00
+zitaRev                        0.92
+virtualAnalog                  1.04
+multibandfilter                0.86
+parametric_eq                  0.81
+geometric mean                 0.84
+
+== cpp-d
+program                       cert7
+2dKirchhoffThinPlate           0.36
+StiffString                    0.99
+dx7                            1.03
+FFT                            0.71
+englishBell                    0.74
+vocoder                        0.99
+oneSourceToStereo              0.76
+karplus32                      0.99
+zitaRev                        0.85
+virtualAnalog                  0.97
+multibandfilter                0.66
+parametric_eq                  0.77
+geometric mean                 0.79
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert7
+2dKirchhoffThinPlate           1.09         0.37
+StiffString                    0.90         0.25
+dx7                            0.91         0.90
+FFT                            0.93         0.68
+englishBell                    0.61         0.24
+vocoder                        0.61         0.12
+oneSourceToStereo              0.94         0.43
+karplus32                      0.63         0.75
+zitaRev                        0.70         0.58
+virtualAnalog                  0.91         1.15
+multibandfilter                0.87         0.57
+parametric_eq                  0.82         0.54
+geometric mean                 0.81         0.47
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert7
+2dKirchhoffThinPlate           1.04         0.36
+StiffString                    0.99         0.37
+dx7                            0.90         0.96
+FFT                            0.98         0.74
+englishBell                    0.68         0.26
+vocoder                        1.04         0.30
+oneSourceToStereo              1.13         0.68
+karplus32                      0.90         0.91
+zitaRev                        0.98         0.83
+virtualAnalog                  0.99         1.02
+multibandfilter                0.99         0.67
+parametric_eq                  0.61         0.49
+geometric mean                 0.92         0.57
+
+above 1.05 : virtualAnalog cert7-ocpp-f 1.15
+noise, the gap between the two best rounds : median 0.0 %, 90th percentile 0.1 %
