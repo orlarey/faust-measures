@@ -15,6 +15,7 @@ compared.
 | `sessions/` | one directory per session, never rewritten, and `INDEX.tsv`, one line per version measured |
 | `table/` | the flat table, `measures.json` and `measures.csv`, rebuilt from `sessions/` |
 | `docs/` | the site (GitHub Pages) and its copy of the table, `measures.json` |
+| `versions.json` | what each measured version tries to do, shown on the site |
 | `SPEC.md` | what a session is, what makes two measures comparable |
 
 ## Measuring
@@ -43,7 +44,9 @@ are measured in alternated rounds so that their ratio is taken under the same co
 ## Contributing
 
 One session per pull request : the session directory, its lines in `sessions/INDEX.tsv`, and the
-table and the site's copy rebuilt by `tools/table.py`. Say in the description which machine, which C++ compiler, and
+table and the site's copy rebuilt by `tools/table.py`. Say what a new version tries to do, with
+`mesure.py run --describe NAME="..."` or with an entry of `versions.json` (its name, the start of
+its commit, a sentence) ; the site shows it above the subject of its last commit. Say in the description which machine, which C++ compiler, and
 what the versions are.
 
 ## Reading

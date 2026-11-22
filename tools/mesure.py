@@ -12,7 +12,7 @@ in ocpp is given for information, against the same reference.
       [--entries basket/entries.txt] [--faust-root DIR] [--cxx clang++] [--rounds 9]
       [--configs cpp-f,cpp-d,ocpp-f,ocpp-d] [--no-info] [--cxx-times] [--jobs 4]
       [--allow-modified] [--archive NAME [--machine NAME]] [--levers LEVER,...]
-      [--faust-options NAME="<options>" ...]
+      [--faust-options NAME="<options>" ...] [--describe NAME="<text>" ...]
     generates the code of every program of the basket for the reference, master-dev ocpp
     and every version of the branch, compiles it with the harness cpu_arch.cpp, then runs
     the executables program after program, 9 rounds, the versions of a program in an order
@@ -28,6 +28,8 @@ in ocpp is given for information, against the same reference.
     finite, approx, fastmath), and the report gives every time / R for every lever.
     --faust-options NAME="-fam ..." gives the options of faust for one version (none by
     default) ; they are recorded in results.json and shown by the report.
+    --describe NAME="..." says in a sentence what a version tries to do (master-dev for the
+    reference) ; recorded in results.json, shown on the site (see also versions.json).
 
   mesure.py report DIR [--median]
     the report again, from DIR/results.json.
@@ -173,6 +175,17 @@ def parse_faust_options(items, versions):
         if name not in names:
             sys.exit(f"--faust-options {it} : no version named {name}")
         out[name] = shlex.split(opts)
+    return out
+
+
+def parse_descriptions(items, versions):
+    """--describe NAME="<text>" : what a version tries to do, master-dev for the reference"""
+    names, out = {n for n, _ in versions} | {"master-dev"}, {}
+    for it in items:
+        name, _, text = it.partition("=")
+        if name not in names or not text.strip():
+            sys.exit(f"--describe {it} : NAME=<text>, NAME a version or master-dev")
+        out[name] = text.strip()
     return out
 
 
@@ -438,6 +451,7 @@ def cmd_run(args):
                      (args.levers.split(",") if args.levers else [])}},
         "levers": args.levers.split(",") if args.levers else [],
         "faust_options": {n: " ".join(o) for n, o in fopts.items()},
+        "descriptions": parse_descriptions(args.describe, args.versions),
         "arch": [arch, sha256_file(arch) if os.path.exists(arch) else None],
         "rounds": args.rounds,
         "configs": args.configs.split(","),
@@ -1111,6 +1125,8 @@ def main():
     r.add_argument("--machine")
     r.add_argument("--faust-options", action="append", default=[], metavar='NAME="<options>"',
                    help="options of faust for the version NAME")
+    r.add_argument("--describe", action="append", default=[], metavar='NAME="<text>"',
+                   help="what the version NAME tries to do (master-dev : the reference)")
     r.add_argument("--levers", help="the diagnostic : a comma-separated list among " + ",".join(LEVERS))
     r.set_defaults(func=cmd_run)
     q = S.add_parser("report")

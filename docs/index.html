@@ -43,6 +43,12 @@
   th:nth-child(-n+5), td:nth-child(-n+5) { text-align: left; }
   th { color: var(--muted); font-weight: 600; }
   .good { color: var(--ok); } .bad { color: var(--bad); }
+  .versions { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+  .version { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .version .head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+  .version .name { font-weight: 600; }
+  .version .what { margin: 0; }
+  .version .detail { margin: 0; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
   a { color: var(--c1); }
   :focus-visible { outline: 2px solid var(--c1); outline-offset: 2px; }
 </style>
@@ -88,6 +94,11 @@
   <div class="legend" id="legend"></div>
 
   <section>
+    <h2>Versions</h2>
+    <div class="versions" id="versions"></div>
+  </section>
+
+  <section>
     <h2>Times relative to the centre of each program</h2>
     <div class="chartwrap" id="chart"></div>
   </section>
@@ -114,7 +125,7 @@ const gmean = (xs) => {
 };
 const fmt = (x) => (x == null ? '—' : x.toFixed(3));
 const S = { campaign: null, reference: 'master-dev', cxx: null, series: null, centre: 'own', stat: 'min', precs: ['float', 'double'], fixed: true };
-let ROWS = [], CAMPAIGNS = [];
+let ROWS = [], CAMPAIGNS = [], VERSIONS = {};
 
 // a campaign : the sessions of one master-dev commit and one set of compared versions, one per C++ compiler
 function prepare(rows) {
@@ -150,6 +161,8 @@ const compared = () => versions().filter((v) => v !== S.reference);
 const shade = (v) => [1, 0.62, 0.4, 0.26][Math.max(0, compared().indexOf(v)) % 4];
 const symbolOf = (gen) => (gen === 'cpp' ? d3.symbolSquare : d3.symbolCircle);
 const commitOf = (v) => { const r = inCampaign().find((q) => q.version === v); return r ? r.commit : ''; };
+// what a version is : its branch, its last commit, its options, and what it tries to do (versions.json)
+const infoOf = (v) => VERSIONS[v + '|' + commitOf(v)] || { version: v, commit: commitOf(v) };
 
 // the ratios of the campaign to the centre (own : the reference of the same session ; machine :
 // the reference of every session of the machine) and to the reference in cpp of the same session
@@ -237,6 +250,31 @@ function drawLegend() {
   document.getElementById('legend').replaceChildren(...items);
 }
 
+function drawVersions() {
+  const list = [S.reference, ...compared()];
+  document.getElementById('versions').replaceChildren(...list.map((v) => {
+    const e = infoOf(v), card = document.createElement('div');
+    card.className = 'version';
+    const head = document.createElement('div'); head.className = 'head';
+    const n = document.createElement('span'); n.className = 'name'; n.textContent = v + (v === S.reference ? ' (reference)' : '');
+    const h = document.createElement('span'); h.className = 'sha'; h.textContent = e.commit;
+    head.append(n, h);
+    if (e.branch) { const b = document.createElement('span'); b.className = 'muted'; b.textContent = e.branch; head.append(b); }
+    if (e.options) { const o = document.createElement('code'); o.textContent = e.options; head.append(o); }
+    const what = document.createElement('p'); what.className = 'what';
+    what.textContent = e.description || e.subject || 'No description yet: add one in versions.json.';
+    card.append(head, what);
+    if (e.subject && e.description) {
+      const d = document.createElement('p'); d.className = 'detail';
+      d.textContent = 'Last commit' + (e.date ? ' (' + e.date + ')' : '') + ': ' + e.subject;
+      card.append(d);
+    } else if (e.date) {
+      const d = document.createElement('p'); d.className = 'detail'; d.textContent = 'Committed ' + e.date; card.append(d);
+    }
+    return card;
+  }));
+}
+
 function drawChart(R) {
   const wrap = document.getElementById('chart');
   wrap.replaceChildren();
@@ -286,7 +324,7 @@ function drawChart(R) {
       const box = wrap.getBoundingClientRect();
       tip.replaceChildren();
       [r.program + ' · ' + (r.precision === 'float' ? 'single' : 'double') + (what ? ' · ' + what : ''), r.cx,
-        r.version + ' ' + r.generator + ' (' + r.commit + ')' + (r.options ? ' ' + r.options : ''), 'session ' + r.session,
+        r.version + ' ' + r.generator + ' (' + r.commit + ')' + (r.options ? ' ' + r.options : '') + (infoOf(r.version).branch ? ' · ' + infoOf(r.version).branch : ''), 'session ' + r.session,
         'time: ' + fmt(S.stat === 'min' ? r.ns_min : r.ns_median) + ' ns/frame (' + S.stat + ' of ' + r.rounds + ' rounds)',
         '/ centre: ' + fmt(r.y), '/ reference cpp: ' + fmt(r.vsref)]
         .forEach((t, i) => { const d = document.createElement('div'); d.textContent = t; if (i === 0) d.style.fontWeight = '600'; tip.append(d); });
@@ -371,6 +409,7 @@ function draw() {
   ensure();
   drawControls();
   drawLegend();
+  drawVersions();
   const R = ratios();
   drawChart(R);
   drawSummary(R);
@@ -387,7 +426,7 @@ let lastW = 0;
 new ResizeObserver(() => { const w = document.getElementById('chart').clientWidth; if (ROWS.length && Math.abs(w - lastW) > 4) { lastW = w; draw(); } }).observe(document.getElementById('chart'));
 
 fetch('measures.json').then((r) => { if (!r.ok) throw new Error('measures.json: HTTP ' + r.status); return r.json(); })
-  .then((d) => { prepare(d.rows); draw(); })
+  .then((d) => { VERSIONS = d.versions || {}; prepare(d.rows); draw(); })
   .catch((e) => { document.getElementById('lead').textContent = 'The measures could not be read (' + e.message + ').'; });
 </script>
 </body>

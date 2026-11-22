@@ -5,8 +5,11 @@ its commit), its generator (cpp, ocpp) and its Faust options.
 
     table.py [SESSIONS_DIR] [--out table/measures]
 
-writes table/measures.json ({rows, meta}), table/measures.csv, and docs/measures.json, the
-copy the site reads.
+writes table/measures.json ({rows, versions, meta}), table/measures.csv, and docs/measures.json,
+the copy the site reads. versions describes every version measured, by its name and commit : its
+branch, its last commit (subject, date, full hash), its Faust options and what it tries to do, from
+the provenance of the sessions, their --describe, and versions.json, which completes and overrides
+them.
 A session without results.json (an older protocol, see its NOTICE.md) has no rows.
 """
 import argparse
@@ -44,7 +47,34 @@ def short_cxx(c):
     return "clang " + m.group(1) if m else c
 
 
-def rows_of(path):
+def note_version(info, name, commit, prov, options, description):
+    """what a session says of a version : the most informative of its sessions"""
+    e = info.setdefault(name + "|" + commit, {"version": name, "commit": commit, "branch": "", "subject": "",
+                                              "date": "", "commit_full": "", "options": options, "description": ""})
+    if prov.get("head_branch") and prov["head_branch"] != "HEAD":
+        e["branch"] = prov["head_branch"]
+    elif not e["branch"]:
+        others = [b for b in prov.get("branches", []) if b != "HEAD"]
+        e["branch"] = others[0] if others else ""
+    for k, src in (("subject", "subject"), ("commit_full", "commit_full")):
+        e[k] = e[k] or prov.get(src, "")
+    e["date"] = e["date"] or prov.get("committed", "")[:10]
+    e["description"] = description or e["description"]
+
+
+def apply_versions_file(info, path):
+    """versions.json : an entry matches a version by its name and the start of its commit"""
+    if not os.path.exists(path):
+        return
+    for v in json.load(open(path))["versions"]:
+        for e in info.values():
+            if e["commit"].startswith(v["commit"]) and v.get("version", e["version"]) == e["version"]:
+                for k in ("branch", "subject", "date", "description"):
+                    if v.get(k):
+                        e[k] = v[k]
+
+
+def rows_of(path, info):
     D = json.load(open(path))
     if "meta" not in D:
         return []
@@ -54,6 +84,11 @@ def rows_of(path):
     fopts = meta.get("faust_options", {})
     when = meta["date"][:16].replace("T", " ") + "Z"
     machine, cxx = short_machine(meta["machine"]), short_cxx(meta["cxx"])
+    prov = meta.get("provenance", {}).get("binaries", {})
+    for b in meta["binaries"]:
+        vname = "master-dev" if b == "ref" else b
+        note_version(info, vname, commit.get(b, ""), prov.get(b, {}), fopts.get(vname, ""),
+                     meta.get("descriptions", {}).get(vname, ""))
     series = [("R", "master-dev", "cpp", "ref"), ("md-ocpp", "master-dev", "ocpp", "ref")]
     series += [(f"{n}-{g}", n, g, n) for n in meta["versions"] for g in ("cpp", "ocpp")]
     out = []
@@ -78,17 +113,18 @@ def main():
     ap.add_argument("sessions", nargs="?", default=os.path.join(ROOT, "sessions"))
     ap.add_argument("--out", default=os.path.join(ROOT, "table", "measures"))
     a = ap.parse_args()
-    rows = []
+    rows, info = [], {}
     for f in sorted(glob.glob(os.path.join(a.sessions, "*", "results.json"))):
-        rows += rows_of(f)
+        rows += rows_of(f, info)
+    apply_versions_file(info, os.path.join(ROOT, "versions.json"))
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
-    json.dump({"rows": rows, "meta": [
+    json.dump({"rows": rows, "versions": info, "meta": [
         {"label": "table.py", "value": open(__file__).read(), "type": "code", "lang": "python"},
         {"label": "Input", "value": "faust-measures/sessions/*/results.json"},
     ]}, open(a.out + ".json", "w"), separators=(",", ":"))
     # the copy the site reads (GitHub Pages serves docs/)
     site = os.path.join(ROOT, "docs", "measures.json")
-    json.dump({"rows": rows}, open(site, "w"), separators=(",", ":"))
+    json.dump({"rows": rows, "versions": info}, open(site, "w"), separators=(",", ":"))
     with open(a.out + ".csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=COLUMNS)
         w.writeheader()

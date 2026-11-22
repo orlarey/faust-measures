@@ -1,0 +1,45 @@
+{
+  "about": "What each measured version tries to do. A version is matched by its name and the start of its commit; an entry without a name matches every version of that commit. branch, subject and date fill what a session without provenance lacks. Shown on the site above the commit subject.",
+  "versions": [
+    {"commit": "d8a62f5bf", "version": "master-dev", "branch": "master-dev", "description": "master-dev, the development branch of Faust: the reference."},
+    {"commit": "523288afc", "version": "master-dev", "branch": "master-dev", "description": "master-dev, the development branch of Faust: the reference."},
+    {"commit": "0a95e67fe", "version": "master-dev", "branch": "master-dev", "description": "master-dev, the development branch of Faust: the reference."},
+    {"commit": "e3665b800", "version": "master-dev", "branch": "master-dev", "description": "master-dev, the development branch of Faust (2.94.1): the reference."},
+
+    {"commit": "4ca9b5278", "version": "cert3", "branch": "master-dev-certification-3", "description": "The certification branch, third version: a normal form of the signals, and an interval analysis that certifies what the generated code computes (delays, tables, integer operations)."},
+    {"commit": "8e660b1af", "version": "cert4", "branch": "master-dev-certification-4", "description": "The certification branch, fourth version, rebased on master-dev 523288afc: the certified normal form and its computation form."},
+    {"commit": "106dda74a", "version": "cert4", "branch": "master-dev-certification-4", "description": "The certification branch, fourth version: the certified normal form and its computation form."},
+    {"commit": "e656f54eb", "version": "cert6", "branch": "master-dev-certification-6", "description": "The certification branch, sixth version, rebased on master-dev 0a95e67fe."},
+    {"commit": "1e18103c3", "version": "perf", "branch": "master-dev-certification-6", "description": "cert6 with corrections of the speed of the generated code, program by program (the taps of a FIR fused into the IIR that reads it, paired by delay)."},
+    {"commit": "1e18103c3", "version": "norcp", "branch": "master-dev-certification-6", "description": "perf under -norcp: a division by a slow value stays a division, instead of a product by its reciprocal computed once per block."},
+    {"commit": "40ff44fb0", "version": "gt", "branch": "master-dev-certification-6", "description": "cert6 with guarded temporaries: a costly value read in one branch of a slow select2 is computed under that branch only."},
+
+    {"commit": "c457c6def", "version": "fv", "branch": "fam-vec", "description": "Families of signals (-fam) brought to the vector code: the members of a family computed together in one loop."},
+    {"commit": "af01878be", "version": "cf", "branch": "compute-form-slow", "description": "The computation form: every decision the certification takes on the code (forms of mix and smoother, phases, integer operations) carried by the nodes; the weights of the smoother written out."},
+
+    {"commit": "e0e2581bc", "version": "next", "branch": "master-dev-next", "description": "master-dev-next, an earlier development line of the normal form."},
+    {"commit": "e0e2581bc", "version": "nextfam", "branch": "master-dev-next", "description": "master-dev-next under -fam: families of signals computed together."},
+
+    {"commit": "049a8a2a5", "version": "def", "branch": "master-dev-certification-3", "description": "The certification branch with its default options, measured beside -fir and -iirt before their removal."},
+    {"commit": "049a8a2a5", "version": "fir", "branch": "master-dev-certification-3", "description": "Under -fir: FIR filters emitted as such."},
+    {"commit": "049a8a2a5", "version": "iirt", "branch": "master-dev-certification-3", "description": "Under -iirt: IIR filters emitted in transposed form."},
+    {"commit": "049a8a2a5", "version": "firiirt", "branch": "master-dev-certification-3", "description": "Under -fir -iirt together."},
+    {"commit": "e1d42d944", "version": "nofir", "description": "The -fir option removed."},
+    {"commit": "dd3799ea5", "version": "nofir", "branch": "fam-port", "description": "The -fir option removed."},
+
+    {"commit": "175d29b74", "version": "gather", "branch": "fam-port", "description": "The nested sums gathered before their sharing, when like terms merge."},
+    {"commit": "217579045", "version": "base", "branch": "fam-port", "description": "The point of comparison of the measure: one layout of the filters for every emitter."},
+
+    {"commit": "4e78b0c0e", "version": "fam", "branch": "fam-port", "description": "Families of signals (-fam): the members of a family, such as the cells of a cellular automaton, computed together in one loop."},
+    {"commit": "4e78b0c0e", "version": "fam0", "branch": "fam-port", "description": "-fam at its committed state, beside a local change measured as fam."},
+    {"commit": "16bd41356", "version": "fam", "branch": "fam-port", "description": "-fam with -fam-split: the loop of a member split from a given number of nodes."},
+    {"commit": "16bd41356", "version": "s0", "branch": "fam-port", "description": "-fam -fam-split 0: every loop of a family split."},
+    {"commit": "16bd41356", "version": "s1000", "branch": "fam-port", "description": "-fam -fam-split 1000: no loop split."},
+    {"commit": "16bd41356", "version": "l8", "branch": "fam-port", "description": "-fam -fam-lanes 8: families computed by lanes of 8."},
+    {"commit": "0aeb7a153", "version": "fam", "branch": "fam-port", "description": "-fam with its settings chosen: split from 24 nodes per member, automata of 40 cells or more."},
+    {"commit": "6a4660037", "version": "split", "branch": "fam-port", "description": "-fam with the loop of a family split in two."},
+    {"commit": "397cd20ab", "version": "s0", "description": "-fam -fam-split 0: every loop of a family split."},
+    {"commit": "397cd20ab", "version": "s1000", "description": "-fam -fam-split 1000: no loop split."},
+    {"commit": "397cd20ab", "version": "l8", "description": "-fam -fam-lanes 8: families computed by lanes of 8."}
+  ]
+}
