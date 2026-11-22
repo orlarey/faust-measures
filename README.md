@@ -41,7 +41,9 @@ cd faust && git submodule update --init libraries && cd ..
 
 ### Building the binaries
 
-One worktree per commit, built with `make` at its root :
+One worktree per commit, built with `make` at its root (a branch, a tag or a commit : a campaign
+usually aims at a commit, `git worktree add ../faust-ref e3665b800`). Two binaries take about three
+minutes to build :
 
 ```sh
 cd faust
@@ -71,7 +73,8 @@ program, and their geometric mean.
 ### A session
 
 The whole basket, 9 rounds, in cpp and ocpp, single and double precision, archived in
-`sessions/` :
+`sessions/`. It takes about ten minutes. Give the machine one stable name with `--machine`, the
+same in every session (without it, the session takes the host name of the machine) :
 
 ```sh
 python3 faust-measures/tools/mesure.py run --faust-root faust \
@@ -103,6 +106,9 @@ A ratio is only as good as the conditions of its two terms. The reference and th
 measured in alternated rounds so that they share the conditions ; the machine must still be quiet :
 
 - on mains power, nothing else running (a browser, an indexer, a build) ;
+- on macOS, a new clone of Faust (about 1 GB) is indexed by Spotlight right away, at a whole core
+  for minutes : wait for it, or exclude the working directory from Spotlight (System Settings,
+  Spotlight, Privacy) ; the end of a build leaves the load high for a minute too ;
 - on Linux with a hybrid processor (performance and efficiency cores), pin the measure on the
   performance cores : `taskset -c 0-3 python3 …` (the cores depend on the processor) ;
 - one session at a time on a machine.
@@ -119,8 +125,10 @@ measured in alternated rounds so that they share the conditions ; the machine mu
    `versions.json` (its name, the start of its commit, a sentence).
 5. Open a pull request : the machine, the C++ compiler, the versions and what they try to do.
 
-One session per pull request. A session is never rewritten : a mistake is corrected by a new
-session, or a note beside it.
+One campaign per pull request : the sessions of one reference and one version, one per C++
+compiler. When they come from several machines, gather them in one clone before step 3 : copy
+each session directory into `sessions/`, and append its lines of `sessions/INDEX.tsv`. A session is
+never rewritten : a mistake is corrected by a new session, or a note beside it.
 
 ## Reading
 

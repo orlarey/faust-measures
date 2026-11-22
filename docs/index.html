@@ -437,7 +437,8 @@ document.getElementById('fixed').addEventListener('change', (e) => { S.fixed = e
 let lastW = 0;
 new ResizeObserver(() => { const w = document.getElementById('chart').clientWidth; if (ROWS.length && Math.abs(w - lastW) > 4) { lastW = w; draw(); } }).observe(document.getElementById('chart'));
 
-fetch('measures.json').then((r) => { if (!r.ok) throw new Error('measures.json: HTTP ' + r.status); return r.json(); })
+// Revalidated on every load : a new campaign must show as soon as it is published.
+fetch('measures.json', { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error('measures.json: HTTP ' + r.status); return r.json(); })
   .then((d) => { VERSIONS = d.versions || {}; LIBS = d.libraries || {}; prepare(d.rows); draw(); })
   .catch((e) => { document.getElementById('lead').textContent = 'The measures could not be read (' + e.message + ').'; });
 </script>
