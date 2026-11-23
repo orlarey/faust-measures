@@ -17,7 +17,7 @@ the median the check.
 | the C++ compiler and its options | `meta.cxx`, `meta.flags` |
 | the machine | `meta.machine`, the host's provenance |
 | the session | the directory name: the date and hour (UTC) of its start, the machine, the C++ compiler, a name |
-| the basket | `basket/entries.txt` and the hash of every program |
+| the basket | its name (`meta.basket`: `basket`, `basket-lang`), its file and the hash of every program; an entry `prog:PATH` is a path in the Faust tree, `local:PATH` a path in this repository |
 
 **The generated code.** A Faust binary is built on each machine, by that machine's C++ compiler
 and against its libm. The same commit may then generate slightly different code from one machine
@@ -59,8 +59,8 @@ program whose code differs makes the session a measure of its own.
 ## The reference of a session
 
 Every session so far measures master-dev, `R`, in cpp and in ocpp, besides the versions it compares.
-The site groups the sessions in campaigns: one master-dev commit, one commit of the libraries and one
-set of compared versions, one session per C++ compiler; two sessions compiled with other libraries
+The site groups the sessions in campaigns: one master-dev commit, one commit of the libraries, one
+basket and one set of compared versions, one session per C++ compiler; two sessions compiled with other libraries
 never share a centre. It centres every program on the geometric mean of the chosen reference in cpp
 and ocpp: of each compiler, of each machine, or of one compiler for every column. The centre of one
 compiler can be locked: its nanoseconds stay the unit when the campaign changes, and a measure pinned

@@ -210,13 +210,26 @@ def faust_options(v, fopts):
 
 
 def entries_of(path):
+    """the programs of a basket : prog:PATH, a path in the Faust tree ; local:PATH, a path in this
+    repository (basket-lang/dsp/...), returned absolute (os.path.join(root, e) then keeps it), so
+    that a part of the file copied elsewhere names the same programs"""
     E = []
     for line in open(path):
         line = line.strip()
         if line and not line.startswith("#"):
             kind, _, rest = line.partition(":")
-            E.append(rest if kind == "prog" else line)
+            E.append(rest if kind == "prog" else
+                     os.path.join(os.path.dirname(HERE), rest) if kind == "local" else line)
     return E
+
+
+def basket_name(path):
+    """the name of a basket : the directory of its file in this repository (basket, basket-lang),
+    or the name of a file kept elsewhere (two.txt : two)"""
+    path = os.path.abspath(path)
+    if os.path.dirname(os.path.dirname(path)) == os.path.dirname(HERE):
+        return os.path.basename(os.path.dirname(path))
+    return os.path.splitext(os.path.basename(path))[0]
 
 
 def short(entry):
@@ -327,12 +340,17 @@ def provenance(ref, versions, root, entries=None):
     P = {"binaries": {"ref": binary_provenance(ref), **{n: binary_provenance(b) for n, b in versions}},
          "sources": tree_provenance(root, "examples", "tests"),
          "libraries": tree_provenance(os.path.join(root, "libraries")),
-         "tool": tree_provenance(HERE, "tools", "basket"),
+         # the basket directory when it is one of this repository (a pathspec outside the repository
+         # makes git status fail, and the local changes would go unseen)
+         "tool": tree_provenance(HERE, "tools", "basket",
+                                 *([os.path.dirname(os.path.abspath(entries))] if entries and
+                                   os.path.dirname(os.path.dirname(os.path.abspath(entries))) == os.path.dirname(HERE)
+                                   else [])),
          "host": host_provenance(),
          "command": sys.argv}
     if entries:
         present = [e for e in entries_of(entries) if os.path.exists(os.path.join(root, e))]
-        P["basket"] = {"file": os.path.abspath(entries), "sha256": sha256_file(entries),
+        P["basket"] = {"name": basket_name(entries), "file": os.path.abspath(entries), "sha256": sha256_file(entries),
                        "programs": {short(e): sha256_file(os.path.join(root, e)) for e in present},
                        # the .lib files beside a program, which its imports find before the libraries
                        "imports": {short(e): {os.path.basename(f): sha256_file(f) for f in
@@ -481,6 +499,7 @@ def cmd_run(args):
         "versions": names,
         "binaries": {"ref": [args.ref, version_line(args.ref)],
                      **{n: [b, version_line(b)] for n, b in args.versions}},
+        "basket": basket_name(args.entries),
         "entries": [short(e) for e in ok],
         "failed": failed,
         "provenance": prov,

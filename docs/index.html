@@ -171,20 +171,21 @@ function load() {
   } catch (e) { S.pins = []; S.lock = null; }
 }
 
-// a campaign : the sessions of one reference (its name and commit), one commit of the libraries and one set of
-// compared versions, one per C++ compiler
+// a campaign : the sessions of one reference (its name and commit), one commit of the libraries, one basket and one
+// set of compared versions, one per C++ compiler
 function prepare(rows) {
-  const versionsOf = {}, md = {}, refName = {}, lib = {};
+  const versionsOf = {}, md = {}, refName = {}, lib = {}, basket = {};
   for (const r of rows) {
     r.role = r.role || (r.version === 'master-dev' ? 'reference' : 'version');
     (versionsOf[r.session] ??= new Set()).add(r.version);
     if (r.role === 'reference') { md[r.session] = r.commit; refName[r.session] = r.version; }
     lib[r.session] = r.libraries || '';
+    basket[r.session] = r.basket || 'basket';
   }
   const campaignOf = {}, repeats = {};
   for (const r of rows) if (r.repeats) repeats[r.session] = r.repeats;
   for (const s of Object.keys(versionsOf)) {
-    campaignOf[s] = (refName[s] || '?') + ' ' + (md[s] || '?') + '|' + [...versionsOf[s]].filter((v) => v !== refName[s]).sort().join(',') + '|' + lib[s];
+    campaignOf[s] = (refName[s] || '?') + ' ' + (md[s] || '?') + '|' + [...versionsOf[s]].filter((v) => v !== refName[s]).sort().join(',') + '|' + lib[s] + '|' + basket[s];
   }
   // a repetition joins the campaign of the session it repeats
   for (const [s, o] of Object.entries(repeats)) if (campaignOf[o]) campaignOf[s] = campaignOf[o];
@@ -199,8 +200,8 @@ function prepare(rows) {
     if (r.date < c.date) c.date = r.date;
   }
   CAMPAIGNS = Object.values(by).map((c) => {
-    const [mdc, vs, lb] = c.id.split('|');
-    return { ...c, libraries: lb, refName: mdc.split(' ')[0], label: c.date.slice(0, 10) + ' · ' + (vs || '—').replaceAll(',', ', ') + ' · ' + mdc + ' · libraries ' + (lb ? lb.slice(0, 7) : '?') + ' · ' + c.cxx.size + ' compiler' + (c.cxx.size > 1 ? 's' : '')
+    const [mdc, vs, lb, bk] = c.id.split('|');
+    return { ...c, libraries: lb, basket: bk, refName: mdc.split(' ')[0], label: c.date.slice(0, 10) + ' · ' + (vs || '—').replaceAll(',', ', ') + ' · ' + mdc + ' · libraries ' + (lb ? lb.slice(0, 7) : '?') + (bk !== 'basket' ? ' · ' + bk : '') + ' · ' + c.cxx.size + ' compiler' + (c.cxx.size > 1 ? 's' : '')
       + (c.reps.size ? ' · ' + c.reps.size + ' repetition' + (c.reps.size > 1 ? 's' : '') : '') };
   }).sort((a, b) => b.date.localeCompare(a.date) || b.cxx.size - a.cxx.size);
   ROWS = rows;

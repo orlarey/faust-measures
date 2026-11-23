@@ -12,6 +12,7 @@ compared.
 | path | what it holds |
 | :--- | :--- |
 | `basket/entries.txt` | the programs of the basket, as paths in a Faust source tree |
+| `basket-lang/` | a second basket: the 38 Faust programs of [audio-dsl-bench](https://github.com/sletz/audio-dsl-bench), kept here (`local:` entries; see its `SOURCE.md`); `--entries faust-measures/basket-lang/entries.txt` |
 | `tools/mesure.py` | measures, reports, plots and archives a session |
 | `tools/table.py` | builds the flat table of every session |
 | `sessions/` | one directory per session, never rewritten, and `INDEX.tsv`, one line per version measured |
@@ -192,8 +193,8 @@ never rewritten: a mistake is corrected by a new session, or a note beside it.
 
 ## Reading
 
-The site shows every campaign: the sessions of one reference, one commit of the libraries and one
-set of compared versions, one session per C++ compiler. The campaign and the reference are chosen
+The site shows every campaign: the sessions of one reference, one commit of the libraries, one
+basket and one set of compared versions, one session per C++ compiler. The campaign and the reference are chosen
 at the top of the page, with the commit, the branch and the description of every version; below,
 a bar chooses what the charts show: the C++ compilers, the series, the precisions, the statistic
 and the centre. The page opens on the campaign with the most C++ compilers, the latest among
