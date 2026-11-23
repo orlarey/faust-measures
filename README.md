@@ -182,7 +182,11 @@ measured in alternated rounds so that they share the conditions; the machine mus
    compilers, the versions and what they try to do.
 
 One campaign per pull request: the sessions of one reference and one set of versions, one per C++
-compiler. When they come from several machines, gather them in one clone before step 3: copy
+compiler. A session that measures again the code of a campaign already on the site (the same
+machine, compiler, options, libraries, basket and generated code, under other commits or at another
+time) is welcome too: it is recognised as a repetition of the earlier session and shows how far two
+measures of the same code lie apart. When the sessions come from several machines, gather them in
+one clone before step 3: copy
 each session directory into `sessions/`, and append its lines of `sessions/INDEX.tsv`. A session is
 never rewritten: a mistake is corrected by a new session, or a note beside it.
 
@@ -202,7 +206,8 @@ the reference of one chosen compiler for every column, which then divides all co
 nanoseconds, so that machines and compilers compare in absolute time. *Lock* keeps the centre of
 one compiler as the unit when the campaign changes. *Combined* draws single and double
 precision on one chart, both centred on the single precision reference, so that the cost of double
-shows. A click on a mark pins it: a pinned measure stays on the charts of every campaign, at its
+shows. A repetition joins the campaign it repeats: the charts leave it out unless *Repetitions* is
+ticked, and a table gives its gaps to the first measure. A click on a mark pins it: a pinned measure stays on the charts of every campaign, at its
 time divided by the current centre. The lock and the pins are kept in the browser.
 
 The site reads `docs/measures.json`. To look at it locally:

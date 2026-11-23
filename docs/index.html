@@ -83,6 +83,7 @@
     </div>
     <div class="versions" id="versions"></div>
     <p class="muted" id="libraries"></p>
+    <p class="muted" id="repeated" hidden></p>
   </section>
 
   <section class="bar" id="bar" aria-label="What is shown">
@@ -102,6 +103,8 @@
       <select id="centreCx" aria-label="The compiler whose reference is the centre" hidden></select>
       <label class="chip" id="lockChip" title="keep these nanoseconds as the centre when the campaign changes" hidden><input type="checkbox" id="lock">lock</label>
       <span class="key" id="lockInfo" hidden></span></div>
+    <div class="grp" id="repsGrp" hidden><span class="tag">Repetitions</span>
+      <label class="chip" title="the marks of the sessions that measured the same code again, hollow"><input type="checkbox" id="reps">show</label></div>
     <div class="grp"><span class="tag">Axis</span>
       <label class="chip" title="the vertical axis covers every measure of the campaign"><input type="checkbox" id="fixed" checked>fixed</label></div>
     <span class="key"><svg width="24" height="14" aria-hidden="true"><line x1="1" x2="23" y1="7" y2="7" stroke="currentColor" stroke-width="0.8"/></svg>fastest of the campaign</span>
@@ -123,10 +126,21 @@
     </div>
   </section>
 
+  <section id="repsSection" hidden>
+    <h2>Repetitions</h2>
+    <p class="muted">A repetition measured again, on the same machine with the same C++ compiler, options, libraries and basket, exactly the same generated code, under other commits or at another time. For every series shown: the geometric mean over the programs of the time of the repetition divided by the time of the first measure, and of its ratio to the reference in cpp divided by the first one, with the program that moved most. They say how far two measures of the same code lie apart.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Compiler</th><th>Version</th><th>Generator</th><th>Precision</th><th>Repetition</th><th>time, / first</th><th>most moved</th><th>/ reference cpp, / first</th><th>most moved</th><th>programs</th></tr></thead>
+        <tbody id="repsTable"></tbody>
+      </table>
+    </div>
+  </section>
+
   <details>
     <summary>How to read the charts</summary>
     <p class="muted">Every time, in nanoseconds per frame, is divided by the centre of its program: the geometric mean of the reference in cpp and in ocpp, on a logarithmic axis; below 1, faster than the centre. The reference is a level line, solid for cpp, dashed for ocpp; a compared version is a filled square for cpp, a filled circle for ocpp; several versions follow each other in a column, each a little lighter. The colour says the C++ compiler. A thin grey line marks, in each column, the fastest value of the campaign, every series and compiler included, shown or not.</p>
-    <p class="muted">The centre decides what compares. With <em>same compiler</em> or <em>whole machine</em>, each column is divided by the reference of its own compiler or machine: two machines then compare in gain over their own reference, not in speed. With <em>one compiler</em>, every column is divided by the same nanoseconds, those of the reference of the chosen compiler: machines and compilers compare in absolute time. <em>Lock</em> keeps those nanoseconds when the campaign changes, so that every campaign reads in the same unit. A click on a mark pins it: the pin keeps its time and is placed, in any campaign, at that time divided by the centre of its column there (under <em>one compiler</em>, in any column; otherwise only where its compiler was measured); a click on the pin removes it. Two sessions of one machine differ by about 0.2 % in geometric mean and by a few percent on one program, and two campaigns with other libraries compile slightly different programs: a gap of one or two percent between campaigns says nothing. Pins and the lock are kept in this browser. Data: <a href="https://github.com/orlarey/faust-measures">faust-measures</a>, <code>table/measures.csv</code>.</p>
+    <p class="muted">The centre decides what compares. With <em>same compiler</em> or <em>whole machine</em>, each column is divided by the reference of its own compiler or machine: two machines then compare in gain over their own reference, not in speed. With <em>one compiler</em>, every column is divided by the same nanoseconds, those of the reference of the chosen compiler: machines and compilers compare in absolute time. <em>Lock</em> keeps those nanoseconds when the campaign changes, so that every campaign reads in the same unit. A click on a mark pins it: the pin keeps its time and is placed, in any campaign, at that time divided by the centre of its column there (under <em>one compiler</em>, in any column; otherwise only where its compiler was measured); a click on the pin removes it. Two sessions of one machine differ by about 0.2 % in geometric mean and by a few percent on one program, and two campaigns with other libraries compile slightly different programs: a gap of one or two percent between campaigns says nothing. A session that measured the same code again (the same machine, compiler, options, libraries, basket and generated code, whatever the commits) is a repetition: it joins the campaign of the first measure, the charts leave it out unless <em>Repetitions</em> is ticked (hollow marks, thin lines), and its gaps to the first measure are in the table <em>Repetitions</em>. Pins and the lock are kept in this browser. Data: <a href="https://github.com/orlarey/faust-measures">faust-measures</a>, <code>table/measures.csv</code>.</p>
   </details>
 </div>
 
@@ -142,7 +156,7 @@ const fmt = (x) => (x == null ? '—' : x.toFixed(3));
 // centre : own (the reference of the same session), machine (of every session of the machine) or one (of the
 // compiler centreCx, for every column) ; lock : the centres of one, kept when the campaign changes ; pins : measures
 // kept with their times, placed in any campaign by the centre of that campaign
-const S = { campaign: null, reference: null, cxx: null, series: null, centre: 'own', centreCx: null, lock: null, pins: [], stat: 'min', precs: ['float', 'double'], combined: false, fixed: true };
+const S = { campaign: null, reference: null, cxx: null, series: null, centre: 'own', centreCx: null, lock: null, pins: [], stat: 'min', precs: ['float', 'double'], combined: false, fixed: true, reps: false };
 let ROWS = [], CAMPAIGNS = [], VERSIONS = {}, LIBS = {};
 
 // the lock and the pins stay in this browser ; the page works without them
@@ -167,26 +181,34 @@ function prepare(rows) {
     if (r.role === 'reference') { md[r.session] = r.commit; refName[r.session] = r.version; }
     lib[r.session] = r.libraries || '';
   }
-  const campaignOf = {};
+  const campaignOf = {}, repeats = {};
+  for (const r of rows) if (r.repeats) repeats[r.session] = r.repeats;
   for (const s of Object.keys(versionsOf)) {
     campaignOf[s] = (refName[s] || '?') + ' ' + (md[s] || '?') + '|' + [...versionsOf[s]].filter((v) => v !== refName[s]).sort().join(',') + '|' + lib[s];
   }
+  // a repetition joins the campaign of the session it repeats
+  for (const [s, o] of Object.entries(repeats)) if (campaignOf[o]) campaignOf[s] = campaignOf[o];
   const by = {};
   for (const r of rows) {
     r.campaign = campaignOf[r.session];
     r.cx = r.machine + ' · ' + r.cxx;
-    const c = (by[r.campaign] ??= { id: r.campaign, date: r.date, cxx: new Set() });
+    r.rep = !!repeats[r.session] && !!campaignOf[repeats[r.session]];
+    const c = (by[r.campaign] ??= { id: r.campaign, date: r.date, cxx: new Set(), reps: new Set() });
+    if (r.rep) { c.reps.add(r.session); continue; }
     c.cxx.add(r.cx);
     if (r.date < c.date) c.date = r.date;
   }
   CAMPAIGNS = Object.values(by).map((c) => {
     const [mdc, vs, lb] = c.id.split('|');
-    return { ...c, libraries: lb, refName: mdc.split(' ')[0], label: c.date.slice(0, 10) + ' · ' + (vs || '—').replaceAll(',', ', ') + ' · ' + mdc + ' · libraries ' + (lb ? lb.slice(0, 7) : '?') + ' · ' + c.cxx.size + ' compiler' + (c.cxx.size > 1 ? 's' : '') };
+    return { ...c, libraries: lb, refName: mdc.split(' ')[0], label: c.date.slice(0, 10) + ' · ' + (vs || '—').replaceAll(',', ', ') + ' · ' + mdc + ' · libraries ' + (lb ? lb.slice(0, 7) : '?') + ' · ' + c.cxx.size + ' compiler' + (c.cxx.size > 1 ? 's' : '')
+      + (c.reps.size ? ' · ' + c.reps.size + ' repetition' + (c.reps.size > 1 ? 's' : '') : '') };
   }).sort((a, b) => b.date.localeCompare(a.date) || b.cxx.size - a.cxx.size);
   ROWS = rows;
 }
 
-const inCampaign = () => ROWS.filter((r) => r.campaign === S.campaign);
+// the measures of the campaign, its repetitions aside ; and with them
+const inCampaign = () => ROWS.filter((r) => r.campaign === S.campaign && !r.rep);
+const inCampaignAll = () => ROWS.filter((r) => r.campaign === S.campaign);
 const cxxList = () => [...new Set(inCampaign().map((r) => r.cx))].sort();
 const colorOf = (cx) => COLORS[Math.max(0, cxxList().indexOf(cx)) % COLORS.length];
 const campaignRef = () => { const c = CAMPAIGNS.find((x) => x.id === S.campaign); return c ? c.refName : ''; };
@@ -216,14 +238,14 @@ const oneCentres = () => (S.lock ? S.lock.centres : centresOf(inCampaign(), S.ce
 // cpp of the same session, each in the same precision, or in single precision (the f keys) so that both
 // precisions share a centre
 function ratios() {
-  const rows = inCampaign(), stat = S.stat === 'min' ? 'ns_min' : 'ns_median', one = oneCentres();
+  const rows = inCampaignAll(), stat = S.stat === 'min' ? 'ns_min' : 'ns_median', one = oneCentres();
   const own = {}, mach = {};
   for (const r of rows) {
     if (r.version !== S.reference) continue;
     const k1 = [r.session, r.precision, r.program].join('|'), k2 = [r.machine, r.precision, r.program].join('|');
     for (const s of ['ns_min', 'ns_median']) {
       ((own[k1] ??= {})[s] ??= []).push(r[s]);
-      ((mach[k2] ??= {})[s] ??= []).push(r[s]);
+      if (!r.rep) ((mach[k2] ??= {})[s] ??= []).push(r[s]);
       if (r.generator === 'cpp') (own[k1].cpp ??= {})[s] = r[s];
     }
   }
@@ -339,6 +361,9 @@ function drawControls() {
   li.hidden = !one || !S.lock;
   li.textContent = S.lock ? lockText() : '';
   document.getElementById('pinsGrp').hidden = !S.pins.length;
+  const camp = CAMPAIGNS.find((c) => c.id === S.campaign);
+  document.getElementById('repsGrp').hidden = !(camp && camp.reps.size);
+  document.getElementById('reps').checked = S.reps;
   const stat = S.stat === 'min' ? 'ns_min' : 'ns_median';
   document.getElementById('pins').replaceChildren(...S.pins.map((p, i) => {
     const c = document.createElement('span'), away = pinY(p, stat) == null;
@@ -369,6 +394,13 @@ function drawVersions() {
   libLine.textContent = lb
     ? 'Every series of this campaign compiled with the Faust libraries ' + lb + (li && li.date ? ' (' + li.date + ')' : '') + (li && li.subject ? ': ' + li.subject : '') + (lb.endsWith('-modified') ? ' — with local changes' : '') + '.'
     : 'The libraries of this campaign were not recorded (a session without provenance).';
+  const rp = document.getElementById('repeated'), repRows = inCampaignAll().filter((r) => r.rep);
+  const repSessions = [...new Set(repRows.map((r) => r.session))].sort();
+  rp.hidden = !repSessions.length;
+  rp.textContent = repSessions.length ? 'Repeated, the same generated code measured again: ' + repSessions.map((s) => {
+    const q = repRows.find((r) => r.session === s && r.role === 'reference') || repRows.find((r) => r.session === s);
+    return s + ' (' + q.version + ' ' + q.commit + ') repeats ' + q.repeats;
+  }).join('; ') + '.' : '';
   document.getElementById('versions').replaceChildren(...list.map((v) => {
     const e = infoOf(v), card = document.createElement('div');
     card.className = 'version';
@@ -393,7 +425,7 @@ function drawVersions() {
   }));
 }
 
-function drawChart(R) {
+function drawChart(R, REPS) {
   const wrap = document.getElementById('chart');
   wrap.replaceChildren();
   const shown = R.filter((r) => S.cxx.includes(r.cx) && S.series.includes(r.version + ' ' + r.generator) && S.precs.includes(r.precision) && r.y != null);
@@ -412,8 +444,8 @@ function drawChart(R) {
     : ['own' + f + 'ns_min', 'own' + f + 'ns_median', 'machine' + f + 'ns_min', 'machine' + f + 'ns_median'];
   const statK = S.stat === 'min' ? 'ns_min' : 'ns_median';
   const pinned = S.pins.filter((p) => S.precs.includes(p.precision));
-  const vals = S.fixed ? [...R.flatMap((r) => keys.map((k) => r[k])), ...pinned.flatMap((p) => [pinY(p, 'ns_min'), pinY(p, 'ns_median')])].filter((v) => v > 0)
-    : [...shown.map((r) => r.y), ...Object.values(fastest).map((r) => r.y), ...pinned.map((p) => pinY(p, statK)).filter((v) => v > 0)];
+  const vals = S.fixed ? [...[...R, ...REPS].flatMap((r) => keys.map((k) => r[k])), ...pinned.flatMap((p) => [pinY(p, 'ns_min'), pinY(p, 'ns_median')])].filter((v) => v > 0)
+    : [...shown.map((r) => r.y), ...REPS.filter((r) => r.y != null).map((r) => r.y), ...Object.values(fastest).map((r) => r.y), ...pinned.map((p) => pinY(p, statK)).filter((v) => v > 0)];
   const lo = Math.min(...vals, 1) / 1.06, hi = Math.max(...vals, 1) * 1.06;
   // one chart per precision, or a single chart where each compiler's column holds single precision, then double
   const precsShown = S.precs.filter((p) => shown.some((r) => r.precision === p));
@@ -455,7 +487,7 @@ function drawChart(R) {
       const box = wrap.getBoundingClientRect();
       tip.replaceChildren();
       [r.program + ' · ' + (r.precision === 'float' ? 'single' : 'double') + (what ? ' · ' + what : ''), r.cx,
-        r.version + ' ' + r.generator + ' (' + r.commit + ')' + (r.options ? ' ' + r.options : '') + (infoOf(r.version).branch ? ' · ' + infoOf(r.version).branch : ''), 'session ' + r.session + (r.libraries ? ' · libraries ' + r.libraries : ''),
+        r.version + ' ' + r.generator + ' (' + r.commit + ')' + (r.options ? ' ' + r.options : '') + (infoOf(r.version).branch ? ' · ' + infoOf(r.version).branch : ''), 'session ' + r.session + (r.repeats ? ' · repeats ' + r.repeats : '') + (r.libraries ? ' · libraries ' + r.libraries : ''),
         'time: ' + fmt(S.stat === 'min' ? r.ns_min : r.ns_median) + ' ns/frame (' + S.stat + ' of ' + r.rounds + ' rounds)',
         '/ centre' + (S.combined ? ' in single precision' : '') + ': ' + fmt(r.y), '/ reference cpp: ' + fmt(r.vsref),
         '/ reference cpp in single precision: ' + fmt(r.vsreff)]
@@ -497,6 +529,17 @@ function drawChart(R) {
             hover(g.append('path').attr('d', d3.symbol(symbolOf(gen), 46)()).attr('transform', 'translate(' + (sx + cw * (bi + 0.5) / branch.length) + ',' + y(r.y) + ')')
               .style('fill', col).style('fill-opacity', shade(v)).style('stroke', col).style('stroke-width', 1), r);
           });
+          // the repetitions : a thin line for the reference, a hollow mark for a version, at the place of the first measure
+          for (const q of REPS.filter((q) => q.program === p && q.cx === cx && q.precision === prec && q.y != null && S.series.includes(q.version + ' ' + q.generator))) {
+            if (q.version === S.reference) {
+              hover(g.append('line').attr('x1', sx + 2).attr('x2', sx + cw - 2).attr('y1', y(q.y)).attr('y2', y(q.y)).style('stroke', col).style('stroke-width', 1)
+                .style('stroke-dasharray', q.generator === 'ocpp' ? '2 2' : null), q, 'repetition');
+            } else {
+              const bi = branch.indexOf(q.version + ' ' + q.generator);
+              hover(g.append('path').attr('d', d3.symbol(symbolOf(q.generator), 46)()).attr('transform', 'translate(' + (sx + cw * (bi + 0.5) / branch.length) + ',' + y(q.y) + ')')
+                .style('fill', 'transparent').style('stroke', col).style('stroke-width', 1.2), q, 'repetition');
+            }
+          }
         });
       });
     }
@@ -526,7 +569,7 @@ function drawSummary(R) {
     groups[k].y.push(r.y); groups[k].v.push(r.vsref); groups[k].f.push(r.vsreff);
   }
   const rows = Object.values(groups).sort((a, b) => a.r.precision.localeCompare(b.r.precision) || a.r.cx.localeCompare(b.r.cx)
-    || (a.r.version === S.reference ? -1 : b.r.version === S.reference ? 1 : a.r.version.localeCompare(b.r.version)) || a.r.generator.localeCompare(b.r.generator));
+    || ((a.r.version === S.reference ? 0 : 1) - (b.r.version === S.reference ? 0 : 1) || a.r.version.localeCompare(b.r.version)) || a.r.generator.localeCompare(b.r.generator));
   document.getElementById('summary').replaceChildren(...rows.map(({ r, y, v, f }) => {
     const tr = document.createElement('tr');
     const gy = gmean(y.filter((z) => z != null)), gv = gmean(v.filter((z) => z != null)), gf = gmean(f.filter((z) => z != null));
@@ -535,6 +578,41 @@ function drawSummary(R) {
       if (i === 0) { const s = document.createElement('span'); s.className = 'swatch'; s.style.background = colorOf(r.cx); s.style.marginRight = '6px'; td.prepend(s); }
       if (i === 2) td.className = 'sha';
       if (i === 6 && gv != null && r.version !== S.reference) td.className = gv < 0.995 ? 'good' : gv > 1.005 ? 'bad' : '';
+      tr.append(td);
+    });
+    return tr;
+  }));
+}
+
+// every repetition beside the first measure of the same series : the times, and the ratios to the reference in cpp
+function drawRepetitions(R, REPS) {
+  const sec = document.getElementById('repsSection');
+  sec.hidden = !REPS.length;
+  if (!REPS.length) return;
+  const stat = S.stat === 'min' ? 'ns_min' : 'ns_median', first = {};
+  for (const r of R) first[[r.session, r.program, r.version, r.generator, r.precision].join('|')] = r;
+  const groups = {};
+  for (const q of REPS) {
+    if (!S.cxx.includes(q.cx) || !S.series.includes(q.version + ' ' + q.generator) || !S.precs.includes(q.precision)) continue;
+    const r = first[[q.repeats, q.program, q.version, q.generator, q.precision].join('|')];
+    if (!r || !r[stat] || !q[stat]) continue;
+    const k = [q.session, q.version, q.generator, q.precision].join('|');
+    const e = (groups[k] ??= { q, t: [], v: [] });
+    e.t.push({ p: q.program, x: q[stat] / r[stat] });
+    if (q.vsref != null && r.vsref != null) e.v.push({ p: q.program, x: q.vsref / r.vsref });
+  }
+  const most = (xs) => xs.reduce((a, b) => (Math.abs(Math.log(b.x)) > Math.abs(Math.log(a.x)) ? b : a), xs[0]);
+  const rows = Object.values(groups).sort((a, b) => a.q.precision.localeCompare(b.q.precision) || a.q.cx.localeCompare(b.q.cx)
+    || ((a.q.version === S.reference ? 0 : 1) - (b.q.version === S.reference ? 0 : 1) || a.q.version.localeCompare(b.q.version)) || a.q.generator.localeCompare(b.q.generator));
+  document.getElementById('repsTable').replaceChildren(...rows.map(({ q, t, v }) => {
+    const tr = document.createElement('tr'), mt = most(t), mv = v.length ? most(v) : null;
+    // the reference in cpp is its own ratio's unit : 1 by definition
+    const unit = q.version === S.reference && q.generator === 'cpp';
+    [q.cx, q.version, q.generator, q.precision === 'float' ? 'single' : 'double', q.session + ' (' + q.commit + ')',
+      fmt(gmean(t.map((e) => e.x))), mt.p + ' ' + fmt(mt.x), unit ? '—' : fmt(gmean(v.map((e) => e.x))),
+      unit || !mv ? '—' : mv.p + ' ' + fmt(mv.x), String(t.length)].forEach((x, i) => {
+      const td = document.createElement('td'); td.textContent = x;
+      if (i === 0) { const s = document.createElement('span'); s.className = 'swatch'; s.style.background = colorOf(q.cx); s.style.marginRight = '6px'; td.prepend(s); }
       tr.append(td);
     });
     return tr;
@@ -564,9 +642,10 @@ function draw() {
   ensure();
   drawControls();
   drawVersions();
-  const R = ratios();
-  drawChart(R);
+  const all = ratios(), R = all.filter((r) => !r.rep), REPS = all.filter((r) => r.rep);
+  drawChart(R, S.reps ? REPS : []);
   drawSummary(R);
+  drawRepetitions(R, REPS);
   drawLead(R);
   window.scrollTo(0, sy);
 }
@@ -577,6 +656,7 @@ for (const el of document.querySelectorAll('input[name="centre"]')) el.addEventL
 for (const el of document.querySelectorAll('input[name="stat"]')) el.addEventListener('change', () => { S.stat = el.value; draw(); });
 for (const el of document.querySelectorAll('input.prec')) el.addEventListener('change', () => { S.precs = [...document.querySelectorAll('input.prec')].filter((c) => c.checked).map((c) => c.value); draw(); });
 document.getElementById('fixed').addEventListener('change', (e) => { S.fixed = e.target.checked; draw(); });
+document.getElementById('reps').addEventListener('change', (e) => { S.reps = e.target.checked; draw(); });
 document.getElementById('combined').addEventListener('change', (e) => { S.combined = e.target.checked; draw(); });
 document.getElementById('centreCx').addEventListener('change', (e) => { S.centreCx = e.target.value; draw(); });
 document.getElementById('lock').addEventListener('change', (e) => {

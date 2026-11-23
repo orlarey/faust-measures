@@ -46,6 +46,16 @@ comparing two series.
    Divided both by the same nanoseconds, the reference of one compiler of one machine, they compare
    in absolute time (which machine and compiler run the program faster).
 
+## Repetitions
+
+A session repeats an earlier one when both have the same machine, C++ compiler and options,
+libraries, basket and versions, and the same generated code for every variant
+(`meta.provenance.code`), whatever the commits: master-dev may move without changing the code of
+the basket. `table.py` finds repetitions by these hashes and marks every row of a repetition with the
+session it repeats (`repeats`). A repetition is not a new comparison: it joins the campaign of the
+session it repeats, and its gaps to that session measure the reproducibility of the measure. One
+program whose code differs makes the session a measure of its own.
+
 ## The reference of a session
 
 Every session so far measures master-dev, `R`, in cpp and in ocpp, besides the versions it compares.

@@ -10,7 +10,9 @@ the copy the site reads. versions describes every version measured, by its name 
 branch, its last commit (subject, date, full hash), its Faust options and what it tries to do, from
 the provenance of the sessions, their --describe, and versions.json, which completes and overrides
 them. libraries describes the commits of the Faust libraries the sessions compiled with (their date
-from the repository named by FAUST_LIBRARIES_REPO, when given).
+from the repository named by FAUST_LIBRARIES_REPO, when given). repeats names, on every row of a
+repetition, the earlier session it repeats : the same machine, compiler, options, libraries, basket
+and generated code, whatever the commits.
 A session without results.json (an older protocol, see its NOTICE.md) has no rows.
 """
 import argparse
@@ -25,7 +27,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 COLUMNS = ["session", "date", "machine", "cxx", "cxx_full", "libraries", "role", "version", "commit", "options",
-           "generator", "precision", "program", "ns_min", "ns_median", "rounds"]
+           "generator", "precision", "program", "ns_min", "ns_median", "rounds", "repeats"]
 LIBRARIES_REPO = os.environ.get("FAUST_LIBRARIES_REPO", "")
 
 
@@ -135,14 +137,40 @@ def rows_of(path, info, libs):
     return out
 
 
+def repetitions(paths):
+    """{session : the earlier session it repeats} : the same machine, C++ compiler and options, libraries,
+    basket and versions, and the same generated code for every variant (meta.provenance.code), whatever the
+    commits ; the earliest session of such a group is the one the others repeat"""
+    groups = {}
+    for f in paths:
+        D = json.load(open(f))
+        meta = D.get("meta")
+        prov = (meta or {}).get("provenance") or {}
+        if not meta or not prov.get("code"):
+            continue
+        key = json.dumps([short_machine(meta["machine"]), meta["cxx"], meta["flags"], prov.get("libraries", {}).get("commit"),
+                          prov.get("basket", {}).get("programs"), meta["versions"], prov["code"]], sort_keys=True)
+        groups.setdefault(key, []).append((meta["date"], os.path.basename(os.path.dirname(f))))
+    out = {}
+    for members in groups.values():
+        members.sort()
+        for _, name in members[1:]:
+            out[name] = members[0][1]
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("sessions", nargs="?", default=os.path.join(ROOT, "sessions"))
     ap.add_argument("--out", default=os.path.join(ROOT, "table", "measures"))
     a = ap.parse_args()
     rows, info, libs = [], {}, {}
-    for f in sorted(glob.glob(os.path.join(a.sessions, "*", "results.json"))):
+    paths = sorted(glob.glob(os.path.join(a.sessions, "*", "results.json")))
+    for f in paths:
         rows += rows_of(f, info, libs)
+    repeats = repetitions(paths)
+    for r in rows:
+        r["repeats"] = repeats.get(r["session"], "")
     apply_versions_file(info, os.path.join(ROOT, "versions.json"))
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
     json.dump({"rows": rows, "versions": info, "libraries": libs, "meta": [
