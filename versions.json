@@ -5,6 +5,7 @@
     {"commit": "523288afc", "version": "master-dev", "date": "2026-11-09", "branch": "master-dev", "description": "master-dev, the development branch of Faust: the reference."},
     {"commit": "0a95e67fe", "version": "master-dev", "date": "2026-11-18", "branch": "master-dev", "description": "master-dev, the development branch of Faust: the reference."},
     {"commit": "e3665b800", "version": "master-dev", "date": "2026-11-20", "branch": "master-dev", "description": "master-dev, the development branch of Faust (2.94.1): the reference."},
+    {"commit": "955f6e2ad", "version": "master-dev", "date": "2026-11-21", "branch": "master-dev", "description": "master-dev, the development branch of Faust (2.95.1): the reference."},
     {"commit": "4ca9b5278", "version": "cert3", "date": "2026-11-10", "branch": "master-dev-certification-3", "description": "The certification branch, third version: a normal form of the signals, and an interval analysis that certifies what the generated code computes (delays, tables, integer operations)."},
     {"commit": "8e660b1af", "version": "cert4", "date": "2026-11-12", "branch": "master-dev-certification-4", "description": "The certification branch, fourth version, rebased on master-dev 523288afc: the certified normal form and its computation form."},
     {"commit": "106dda74a", "version": "cert4", "date": "2026-11-12", "branch": "master-dev-certification-4", "description": "The certification branch, fourth version: the certified normal form and its computation form."},
