@@ -71,6 +71,7 @@ relative gap between the two best rounds of every measure (median, 90th percenti
 import argparse
 import csv
 import datetime
+import glob
 import hashlib
 import json
 import math
@@ -330,9 +331,13 @@ def provenance(ref, versions, root, entries=None):
          "host": host_provenance(),
          "command": sys.argv}
     if entries:
+        present = [e for e in entries_of(entries) if os.path.exists(os.path.join(root, e))]
         P["basket"] = {"file": os.path.abspath(entries), "sha256": sha256_file(entries),
-                       "programs": {short(e): sha256_file(os.path.join(root, e)) for e in entries_of(entries)
-                                    if os.path.exists(os.path.join(root, e))}}
+                       "programs": {short(e): sha256_file(os.path.join(root, e)) for e in present},
+                       # the .lib files beside a program, which its imports find before the libraries
+                       "imports": {short(e): {os.path.basename(f): sha256_file(f) for f in
+                                              sorted(glob.glob(os.path.join(root, os.path.dirname(e), "*.lib")))}
+                                   for e in present}}
     return P
 
 

@@ -19,6 +19,14 @@ the median the check.
 | the session | the directory name: the date and hour (UTC) of its start, the machine, the C++ compiler, a name |
 | the basket | `basket/entries.txt` and the hash of every program |
 
+**The generated code.** A Faust binary is built on each machine, by that machine's C++ compiler
+and against its libm. The same commit may then generate slightly different code from one machine
+to the next: the order of some operands, a constant folded at compilation that differs in its last
+bit. Every session records the hash of the code generated for every program and series
+(`meta.provenance.code`), so that a difference shows: two machines compare the same commits, not
+always the same code. The basket records the hash of every program and of the `.lib` files beside
+it (`meta.provenance.basket.imports`), which its imports find before the libraries.
+
 A **series** is the measures of every program of the basket that share all the other dimensions.
 Comparing two branches, two options, two C++ compilers, or one branch at two dates, is always
 comparing two series.
@@ -31,6 +39,8 @@ comparing two series.
    Every time is first divided by the reference of its own session. On the machines of the first
    sessions, with nothing else running, the same binaries measured a day apart moved by about 0.2 %
    in geometric mean, and up to a few percent on single programs.
+   A cloud machine is a kind of machine, not one machine: its host may change between two sessions,
+   and two of its sessions compare less well than two sessions of one physical machine.
 3. **Across machines**: two ways, which answer two questions. Divided each by its own reference,
    two machines compare in gain over that reference (which version gains more, here or there).
    Divided both by the same nanoseconds, the reference of one compiler of one machine, they compare

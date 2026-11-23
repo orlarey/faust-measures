@@ -18,6 +18,7 @@ compared.
 | `table/` | the flat table, `measures.json` and `measures.csv`, rebuilt from `sessions/` |
 | `docs/` | the site (GitHub Pages) and its copy of the table, `measures.json` |
 | `versions.json` | what each measured version tries to do, shown on the site |
+| `machines.json` | the names the site gives to machines, from their processor |
 | `SPEC.md` | what a session is, what makes two measures comparable |
 
 ## Getting started
@@ -79,7 +80,8 @@ python3 faust-measures/tools/mesure.py run --faust-root faust \
 ```
 
 It prints a report: every time of `mine` divided by the time of the reference, program by
-program, and their geometric mean.
+program, and their geometric mean. Give it the options the session will take (`--contract`,
+`--faust-options`, `--cxx`…), so that it checks what the session will run.
 
 `--faust-root` names the Faust tree that gives the sources of the basket and the libraries every
 series compiles with, the reference and the versions alike: the plain clone `faust` (the default
@@ -89,9 +91,11 @@ in that tree, the commit of the libraries you mean to measure with: it is record
 ### A session
 
 The whole basket, 9 rounds, in cpp and ocpp, single and double precision, archived in
-`faust-measures/sessions/`. It takes about ten minutes. Give the machine one stable name with
-`--machine`, the same in every session (without it, the session takes the host name of the
-machine):
+`faust-measures/sessions/`. It takes about ten minutes on an Apple M1, fifteen on a cloud machine
+of 4 virtual cores. Give the machine one stable name with `--machine`, the same in every session
+(without it, the session takes the host name of the machine). A cloud machine has no identity of
+its own: name the kind of machine (`--machine cloud-xeon-4`), knowing that the host behind it may
+change from one session to the next:
 
 ```sh
 python3 faust-measures/tools/mesure.py run --faust-root faust \
@@ -130,9 +134,17 @@ under an execution contract: `-O3 -march=native -fno-fast-math -ffp-contract=fas
 (`-ffast-math` by default, as master-dev is used), so the ratio compares each side as it is
 meant to run. `--contract` and `--version-flags` exclude each other.
 
+**Choosing the reference.** To compare a branch with master-dev, measure master-dev at the commit
+the branch starts from (`git merge-base origin/master-dev origin/<branch>`): the difference is
+then the branch's own. A later master-dev also measures what master-dev did since. To add sessions
+to a campaign already on the site (another machine, another compiler), measure the same two
+commits, with the same libraries, under the same version names and the same `--describe` texts,
+which the earlier sessions record (`meta.descriptions` in their `results.json`).
+
 The session holds every round of every program (`results.json`), the provenance of every binary
-(commit, tree hash, branch, local changes), of the sources, the libraries and the basket, and the
-reports. `python3 faust-measures/tools/mesure.py report DIR` prints the report again.
+(commit, tree hash, branch, local changes), of the sources, the libraries and the basket, the
+hash of the code generated for every program, and the reports.
+`python3 faust-measures/tools/mesure.py report DIR` prints the report again.
 
 ### A clean machine
 
@@ -147,7 +159,8 @@ measured in alternated rounds so that they share the conditions; the machine mus
   performance cores: `taskset -c 0-3 python3 …` (the cores depend on the processor);
 - one session at a time on a machine.
 
-`results.json` records the load of the machine at the start and at the end of the session.
+`results.json` records the load of the machine at the start and at the end of the session
+(`meta.provenance.host.load` and `load_end`).
 
 ## Contributing a campaign
 

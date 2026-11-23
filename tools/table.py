@@ -29,13 +29,21 @@ COLUMNS = ["session", "date", "machine", "cxx", "cxx_full", "libraries", "role",
 LIBRARIES_REPO = os.environ.get("FAUST_LIBRARIES_REPO", "")
 
 
+def load_machines():
+    """machines.json : the names the site gives to machines, matched in their processor"""
+    try:
+        return json.load(open(os.path.join(ROOT, "machines.json"))).get("machines", [])
+    except FileNotFoundError:
+        return []
+
+
+MACHINES = load_machines()
+
+
 def short_machine(m):
-    if m.startswith("Apple M1"):
-        return "Mac M1"
-    if "Ryzen" in m:
-        return "rizen (Ryzen AI 9)"
-    if "Xeon" in m:
-        return "nuage (Xeon)"
+    for e in MACHINES:
+        if e["match"] in m:
+            return e["name"]
     return m
 
 

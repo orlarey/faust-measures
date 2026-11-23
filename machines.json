@@ -1,0 +1,8 @@
+{
+  "about": "The names the site gives to machines. A session records its processor (meta.machine) ; the first entry whose match is found in it names the machine on the site, and a processor matched by no entry is shown as recorded. The site groups the sessions of one name as one machine : a cloud machine may run on different hosts under one name.",
+  "machines": [
+    {"match": "Apple M1", "name": "Mac M1"},
+    {"match": "Ryzen", "name": "rizen (Ryzen AI 9)"},
+    {"match": "Xeon", "name": "cloud VM (Xeon)"}
+  ]
+}
