@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """The flat table of every session : one row per session, program, series and precision, with
 the minimum and the median of its rounds (ns per frame). A series is a Faust binary (its role,
-its commit), its generator (cpp, ocpp) and its Faust options.
+its commit), its generator (cpp, ocpp) and its Faust options. basket names the basket of the session
+(basket, the examples of the Faust tree ; basket-lang, the programs of audio-dsl-bench).
 
     table.py [SESSIONS_DIR] [--out table/measures]
 
@@ -26,7 +27,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-COLUMNS = ["session", "date", "machine", "cxx", "cxx_full", "libraries", "role", "version", "commit", "options",
+COLUMNS = ["session", "date", "machine", "cxx", "cxx_full", "libraries", "basket", "role", "version", "commit", "options",
            "generator", "precision", "program", "ns_min", "ns_median", "rounds", "repeats"]
 LIBRARIES_REPO = os.environ.get("FAUST_LIBRARIES_REPO", "")
 
@@ -129,7 +130,8 @@ def rows_of(path, info, libs):
                     continue
                 out.append({
                     "session": name, "date": when, "machine": machine, "cxx": cxx, "cxx_full": meta["cxx"],
-                    "libraries": lib, "role": "reference" if b == "ref" else "version",
+                    "libraries": lib, "basket": meta.get("basket", "basket"),
+                    "role": "reference" if b == "ref" else "version",
                     "version": version, "commit": commit.get(b, ""), "options": fopts.get(version, ""),
                     "generator": gen, "precision": "float" if p == "f" else "double", "program": prog,
                     "ns_min": round(min(t), 4), "ns_median": round(statistics.median(t), 4), "rounds": len(t),
