@@ -35,6 +35,13 @@
     {"commit": "6a4660037", "version": "split", "date": "2026-11-11", "branch": "fam-port", "description": "-fam with the loop of a family split in two."},
     {"commit": "397cd20ab", "version": "s0", "description": "-fam -fam-split 0: every loop of a family split."},
     {"commit": "397cd20ab", "version": "s1000", "description": "-fam -fam-split 1000: no loop split."},
-    {"commit": "397cd20ab", "version": "l8", "description": "-fam -fam-lanes 8: families computed by lanes of 8."}
+    {"commit": "397cd20ab", "version": "l8", "description": "-fam -fam-lanes 8: families computed by lanes of 8."},
+    {"commit": "06dd38660", "version": "cert7", "date": "2026-11-22", "branch": "master-dev-certification-7", "description": "The certification branch, seventh version, before the steps that follow."},
+    {"commit": "ac4e1f8ea", "version": "in", "date": "2026-11-23", "branch": "master-dev-certification-7", "description": "cert7 with the integer narrowing: a conversion to int of a real computed from integers written in integers (the read indices of de.fdelay)."},
+    {"commit": "446adb21e", "version": "sbf", "date": "2026-11-23", "branch": "master-dev-certification-7", "description": "in, and the common sub-sums shared before the sums of products are factored."},
+    {"commit": "0b7f4cb7c", "version": "fmod", "date": "2026-11-23", "branch": "master-dev-certification-7", "description": "sbf, and the real fmod without its call when the dividend lies in [0, 2w)."},
+    {"commit": "289d3362a", "version": "cm", "date": "2026-11-24", "branch": "master-dev-certification-7", "description": "fmod, and a costly call whose arguments settle (a smoothed control) made again only when an argument changes."},
+    {"commit": "38a10d58e", "version": "fl", "date": "2026-11-24", "branch": "master-dev-certification-7", "description": "cm, and a long FIR (8 taps or more) in 4 partial sums."},
+    {"commit": "0cc0698be", "version": "rd", "date": "2026-11-24", "branch": "master-dev-certification-7", "description": "fl, and in ocpp a cache line after each ring, and a projection read only delayed read in the ring of the signal it delays."}
   ]
 }
