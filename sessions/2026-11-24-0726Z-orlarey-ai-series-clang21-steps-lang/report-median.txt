@@ -1,0 +1,181 @@
+2026-11-24T07:26:11+00:00 - AMD Ryzen AI 9 HX 370 w/ Radeon 890M, 24 cpus - Ubuntu clang version 21.1.8 (6ubuntu1)
+reference R : FAUST Version 2.94.1 ; Source commit: e3665b800 - cpp - -O3 -ffast-math -march=native
+cert7 : FAUST Version 2.94.1 ; Source commit: 06dd38660 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+in : FAUST Version 2.94.1 ; Source commit: ac4e1f8ea - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+sbf : FAUST Version 2.94.1 ; Source commit: 446adb21e - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+fmod : FAUST Version 2.94.1 ; Source commit: 0b7f4cb7c - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+cm : FAUST Version 2.94.1 ; Source commit: 289d3362a - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+fl : FAUST Version 2.94.1 ; Source commit: 38a10d58e - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+rd : FAUST Version 2.94.1 ; Source commit: 0cc0698be - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the median ; every time / R of its precision
+
+== cpp-f
+program                       cert7           in          sbf         fmod           cm           fl           rd
+sine                           0.87     0.87 (=)     0.87 (=)     0.87 (=)     0.87 (=)     0.87 (=)     0.87 (=)
+fm_pad                         1.00     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)
+additive64                     0.98     0.98 (=)     0.98 (=)     0.98 (=)     0.98 (=)     0.98 (=)     0.98 (=)
+noise                          0.81     0.81 (=)     0.81 (=)     0.81 (=)     0.81 (=)     0.81 (=)     0.81 (=)
+tanh_drive                     1.00     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)
+biquad8                        0.63     0.63 (=)     0.63 (=)     0.63 (=)     0.63 (=)     0.63 (=)     0.63 (=)
+peq10                          0.86     0.86 (=)     0.86 (=)     0.86 (=)     0.86 (=)     0.86 (=)     0.86 (=)
+svf_mod                        1.09     1.09 (=)     1.09 (=)     1.09 (=)     1.09 (=)     1.09 (=)     1.09 (=)
+fir32c                         1.69     1.69 (=)     1.69 (=)     1.69 (=)     1.69 (=)         0.91     0.91 (=)
+hoa_decoder_x                  0.83     0.83 (=)     0.83 (=)     0.83 (=)     0.83 (=)     0.83 (=)     0.83 (=)
+mixer16_x                      1.12     1.12 (=)     1.12 (=)     1.12 (=)     1.12 (=)     1.12 (=)     1.12 (=)
+freeverb                       1.00     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)
+fdn8                           1.05     1.05 (=)     1.05 (=)     1.05 (=)     1.05 (=)     1.05 (=)     1.05 (=)
+diffuser32                     0.87     0.87 (=)     0.87 (=)     0.87 (=)     0.87 (=)     0.87 (=)     0.87 (=)
+zita_rev                       0.82     0.82 (=)     0.82 (=)     0.82 (=)     0.82 (=)     0.82 (=)     0.82 (=)
+clarinet                       0.91         0.81     0.81 (=)     0.81 (=)     0.81 (=)     0.81 (=)     0.81 (=)
+violin                         0.83         0.81     0.81 (=)     0.81 (=)     0.81 (=)     0.81 (=)     0.81 (=)
+frenchbell                     1.00     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)
+crybaby                        1.18     1.18 (=)     1.18 (=)     1.18 (=)     1.18 (=)     1.18 (=)     1.18 (=)
+moog_vcf                       1.28     1.28 (=)     1.28 (=)     1.28 (=)     1.28 (=)     1.28 (=)     1.28 (=)
+compressor                     1.31     1.31 (=)     1.31 (=)     1.31 (=)     1.31 (=)     1.31 (=)     1.31 (=)
+distortion                     0.89     0.89 (=)     0.89 (=)     0.89 (=)         0.88     0.88 (=)     0.88 (=)
+phaser                         1.00     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)
+flanger                        0.98     0.98 (=)     0.98 (=)     0.98 (=)     0.98 (=)     0.98 (=)     0.98 (=)
+pitch_shifter                  0.96     0.96 (=)     0.96 (=)         0.39     0.39 (=)     0.39 (=)     0.39 (=)
+dattorro                       0.93     0.93 (=)     0.93 (=)     0.93 (=)     0.93 (=)     0.93 (=)     0.93 (=)
+karplus                        1.33         1.11         0.96     0.96 (=)     0.96 (=)     0.96 (=)     0.96 (=)
+bubble                         1.02     1.02 (=)     1.02 (=)     1.02 (=)     1.02 (=)     1.02 (=)     1.02 (=)
+virtual_analog                 0.92     0.92 (=)     0.92 (=)     0.92 (=)     0.92 (=)     0.92 (=)     0.92 (=)
+diode_ladder                   1.22     1.22 (=)     1.22 (=)     1.22 (=)         1.08     1.08 (=)     1.08 (=)
+filter_bank                    1.24     1.24 (=)     1.24 (=)     1.24 (=)         1.05     1.05 (=)     1.05 (=)
+noise_gate                     1.16     1.16 (=)     1.16 (=)     1.16 (=)     1.16 (=)     1.16 (=)     1.16 (=)
+exciter                        1.17     1.17 (=)     1.17 (=)     1.17 (=)     1.17 (=)     1.17 (=)     1.17 (=)
+autopan                        1.00     1.00 (=)     1.00 (=)     1.00 (=)         0.58     0.58 (=)     0.58 (=)
+greyhole                       1.00     1.00 (=)     1.00 (=)     1.00 (=)         0.88     0.88 (=)     0.88 (=)
+tapiir                         1.35     1.35 (=)     1.35 (=)     1.35 (=)     1.35 (=)     1.35 (=)     1.35 (=)
+hoa_octo                       0.95     0.95 (=)     0.95 (=)     0.95 (=)         1.24     1.24 (=)     1.24 (=)
+flute                          1.11         1.00     1.00 (=)     1.00 (=)         0.49     0.49 (=)     0.49 (=)
+geometric mean                 1.02         1.01         1.00         0.98         0.94         0.93         0.93
+
+== cpp-d
+program                       cert7           in          sbf         fmod           cm           fl           rd
+sine                           0.99     0.99 (=)     0.99 (=)     0.99 (=)     0.99 (=)     0.99 (=)     0.99 (=)
+fm_pad                         1.00     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)
+additive64                     0.95     0.95 (=)     0.95 (=)     0.95 (=)     0.95 (=)     0.95 (=)     0.95 (=)
+noise                          0.63     0.63 (=)     0.63 (=)     0.63 (=)     0.63 (=)     0.63 (=)     0.63 (=)
+tanh_drive                     1.01     1.01 (=)     1.01 (=)     1.01 (=)     1.01 (=)     1.01 (=)     1.01 (=)
+biquad8                        0.72     0.72 (=)     0.72 (=)     0.72 (=)     0.72 (=)     0.72 (=)     0.72 (=)
+peq10                          0.87     0.87 (=)     0.87 (=)     0.87 (=)     0.87 (=)     0.87 (=)     0.87 (=)
+svf_mod                        1.15     1.15 (=)     1.15 (=)     1.15 (=)     1.15 (=)     1.15 (=)     1.15 (=)
+fir32c                         1.63     1.63 (=)     1.63 (=)     1.63 (=)     1.63 (=)         0.90     0.90 (=)
+hoa_decoder_x                  0.83     0.83 (=)     0.83 (=)     0.83 (=)     0.83 (=)     0.83 (=)     0.83 (=)
+mixer16_x                      1.44     1.44 (=)     1.44 (=)     1.44 (=)     1.44 (=)     1.44 (=)     1.44 (=)
+freeverb                       1.07     1.07 (=)     1.07 (=)     1.07 (=)     1.07 (=)     1.07 (=)     1.07 (=)
+fdn8                           0.97     0.97 (=)     0.97 (=)     0.97 (=)     0.97 (=)     0.97 (=)     0.97 (=)
+diffuser32                     0.78     0.78 (=)     0.78 (=)     0.78 (=)     0.78 (=)     0.78 (=)     0.78 (=)
+zita_rev                       0.58     0.58 (=)     0.58 (=)     0.58 (=)     0.58 (=)     0.58 (=)     0.58 (=)
+clarinet                       0.98         0.75     0.75 (=)     0.75 (=)     0.75 (=)     0.75 (=)     0.75 (=)
+violin                         1.11         1.01     1.01 (=)     1.01 (=)     1.01 (=)     1.01 (=)     1.01 (=)
+frenchbell                     0.98     0.98 (=)     0.98 (=)     0.98 (=)     0.98 (=)     0.98 (=)     0.98 (=)
+crybaby                        1.38     1.38 (=)     1.38 (=)     1.38 (=)     1.38 (=)     1.38 (=)     1.38 (=)
+moog_vcf                       1.38     1.38 (=)     1.38 (=)     1.38 (=)     1.38 (=)     1.38 (=)     1.38 (=)
+compressor                     1.24     1.24 (=)     1.24 (=)     1.24 (=)     1.24 (=)     1.24 (=)     1.24 (=)
+distortion                     0.91     0.91 (=)     0.91 (=)     0.91 (=)         0.32     0.32 (=)     0.32 (=)
+phaser                         1.00     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)
+flanger                        1.12     1.12 (=)     1.12 (=)     1.12 (=)     1.12 (=)     1.12 (=)     1.12 (=)
+pitch_shifter                  1.01     1.01 (=)     1.01 (=)         0.45     0.45 (=)     0.45 (=)     0.45 (=)
+dattorro                       0.81     0.81 (=)     0.81 (=)     0.81 (=)     0.81 (=)     0.81 (=)     0.81 (=)
+karplus                        1.47         1.33         0.99     0.99 (=)     0.99 (=)     0.99 (=)     0.99 (=)
+bubble                         1.09     1.09 (=)     1.09 (=)     1.09 (=)     1.09 (=)     1.09 (=)     1.09 (=)
+virtual_analog                 0.84     0.84 (=)     0.84 (=)     0.84 (=)     0.84 (=)     0.84 (=)     0.84 (=)
+diode_ladder                   0.99     0.99 (=)     0.99 (=)     0.99 (=)         0.86     0.86 (=)     0.86 (=)
+filter_bank                    1.60     1.60 (=)     1.60 (=)     1.60 (=)         0.83     0.83 (=)     0.83 (=)
+noise_gate                     1.23     1.23 (=)     1.23 (=)     1.23 (=)     1.23 (=)     1.23 (=)     1.23 (=)
+exciter                        1.25     1.25 (=)     1.25 (=)     1.25 (=)     1.25 (=)     1.25 (=)     1.25 (=)
+autopan                        1.06     1.06 (=)     1.06 (=)     1.06 (=)         0.69     0.69 (=)     0.69 (=)
+greyhole                       0.96     0.96 (=)     0.96 (=)     0.96 (=)         0.84     0.84 (=)     0.84 (=)
+tapiir                         0.88     0.88 (=)     0.88 (=)     0.88 (=)     0.88 (=)     0.88 (=)     0.88 (=)
+hoa_octo                       1.05     1.05 (=)     1.05 (=)     1.05 (=)         0.45     0.45 (=)     0.45 (=)
+flute                          1.05         0.97     0.97 (=)     0.97 (=)         0.36     0.36 (=)     0.36 (=)
+geometric mean                 1.03         1.01         1.00         0.98         0.88         0.86         0.86
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert7           in          sbf         fmod           cm           fl           rd
+sine                           0.98         0.85     0.85 (=)     0.85 (=)     0.85 (=)     0.85 (=)     0.85 (=)     0.85 (=)
+fm_pad                         0.99         1.00     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)
+additive64                     0.93         0.96     0.96 (=)     0.96 (=)     0.96 (=)     0.96 (=)     0.96 (=)     0.96 (=)
+noise                          0.44         0.28     0.28 (=)     0.28 (=)     0.28 (=)     0.28 (=)     0.28 (=)     0.28 (=)
+tanh_drive                     1.00         1.00     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)
+biquad8                        0.42         0.33     0.33 (=)     0.33 (=)     0.33 (=)     0.33 (=)     0.33 (=)     0.33 (=)
+peq10                          1.06         0.53     0.53 (=)     0.53 (=)     0.53 (=)     0.53 (=)     0.53 (=)     0.53 (=)
+svf_mod                        1.00         1.06     1.06 (=)     1.06 (=)     1.06 (=)     1.06 (=)     1.06 (=)     1.06 (=)
+fir32c                         0.48         1.20     1.20 (=)     1.20 (=)     1.20 (=)     1.20 (=)         0.70     0.70 (=)
+hoa_decoder_x                  1.01         0.85     0.85 (=)     0.85 (=)     0.85 (=)     0.85 (=)     0.85 (=)     0.85 (=)
+mixer16_x                      1.00         1.09     1.09 (=)     1.09 (=)     1.09 (=)     1.09 (=)     1.09 (=)     1.09 (=)
+freeverb                       0.53         0.53     0.53 (=)     0.53 (=)     0.53 (=)     0.53 (=)     0.53 (=)         0.52
+fdn8                           1.02         1.03     1.03 (=)     1.03 (=)     1.03 (=)     1.03 (=)     1.03 (=)         1.02
+diffuser32                     1.82         0.89     0.89 (=)     0.89 (=)     0.89 (=)     0.89 (=)     0.89 (=)         0.81
+zita_rev                       0.60         0.42     0.42 (=)     0.42 (=)     0.42 (=)     0.42 (=)     0.42 (=)         0.42
+clarinet                       0.92         0.94         0.81     0.81 (=)     0.81 (=)     0.81 (=)     0.81 (=)         0.81
+violin                         0.66         0.74         0.75     0.75 (=)     0.75 (=)     0.75 (=)     0.75 (=)         0.75
+frenchbell                     0.39         0.26     0.26 (=)     0.26 (=)     0.26 (=)     0.26 (=)     0.26 (=)     0.26 (=)
+crybaby                        0.48         0.67     0.67 (=)     0.67 (=)     0.67 (=)     0.67 (=)     0.67 (=)     0.67 (=)
+moog_vcf                       0.74         1.02     1.02 (=)     1.02 (=)     1.02 (=)     1.02 (=)     1.02 (=)     1.02 (=)
+compressor                     0.92         1.28     1.28 (=)     1.28 (=)     1.28 (=)     1.28 (=)     1.28 (=)     1.28 (=)
+distortion                     0.66         0.54     0.54 (=)     0.54 (=)     0.54 (=)         0.26     0.26 (=)     0.26 (=)
+phaser                         0.75         0.69     0.69 (=)     0.69 (=)     0.69 (=)     0.69 (=)     0.69 (=)     0.69 (=)
+flanger                        0.80         0.91     0.91 (=)     0.91 (=)     0.91 (=)     0.91 (=)     0.91 (=)         0.93
+pitch_shifter                  0.75         0.76     0.76 (=)     0.76 (=)         0.33     0.33 (=)     0.33 (=)         0.33
+dattorro                       0.49         0.51     0.51 (=)     0.51 (=)     0.51 (=)     0.51 (=)     0.51 (=)         0.50
+karplus                        0.72         1.29         1.10         0.81     0.81 (=)     0.81 (=)     0.81 (=)         0.81
+bubble                         0.70         0.75     0.75 (=)     0.75 (=)     0.75 (=)     0.75 (=)     0.75 (=)         0.75
+virtual_analog                 0.78         0.91     0.91 (=)     0.91 (=)     0.91 (=)     0.91 (=)     0.91 (=)         0.91
+diode_ladder                   0.95         1.23     1.23 (=)     1.23 (=)     1.23 (=)         1.05     1.05 (=)     1.05 (=)
+filter_bank                    0.90         1.11     1.11 (=)     1.11 (=)     1.11 (=)         0.93     0.93 (=)     0.93 (=)
+noise_gate                     0.56         0.72     0.72 (=)     0.72 (=)     0.72 (=)     0.72 (=)     0.72 (=)     0.72 (=)
+exciter                        0.97         1.14     1.14 (=)     1.14 (=)     1.14 (=)     1.14 (=)     1.14 (=)     1.14 (=)
+autopan                        0.86         0.91     0.91 (=)     0.91 (=)     0.91 (=)         0.62     0.62 (=)     0.62 (=)
+greyhole                       0.78         0.81     0.81 (=)     0.81 (=)     0.81 (=)         0.67     0.67 (=)         0.67
+tapiir                         0.94         0.89     0.89 (=)     0.89 (=)     0.89 (=)     0.89 (=)     0.89 (=)         0.89
+hoa_octo                       0.82         0.98     0.98 (=)     0.98 (=)     0.98 (=)         1.21     1.21 (=)     1.21 (=)
+flute                          0.90         1.05         0.91     0.91 (=)     0.91 (=)         0.58     0.58 (=)         0.58
+geometric mean                 0.77         0.79         0.78         0.78         0.76         0.72         0.71         0.71
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert7           in          sbf         fmod           cm           fl           rd
+sine                           1.01         0.99     0.99 (=)     0.99 (=)     0.99 (=)     0.99 (=)     0.99 (=)     0.99 (=)
+fm_pad                         1.02         1.02     1.02 (=)     1.02 (=)     1.02 (=)     1.02 (=)     1.02 (=)     1.02 (=)
+additive64                     0.99         1.00     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)
+noise                          1.00         0.63     0.63 (=)     0.63 (=)     0.63 (=)     0.63 (=)     0.63 (=)     0.63 (=)
+tanh_drive                     0.99         1.01     1.01 (=)     1.01 (=)     1.01 (=)     1.01 (=)     1.01 (=)     1.01 (=)
+biquad8                        0.93         0.70     0.70 (=)     0.70 (=)     0.70 (=)     0.70 (=)     0.70 (=)     0.70 (=)
+peq10                          1.02         0.88     0.88 (=)     0.88 (=)     0.88 (=)     0.88 (=)     0.88 (=)     0.88 (=)
+svf_mod                        1.03         1.16     1.16 (=)     1.16 (=)     1.16 (=)     1.16 (=)     1.16 (=)     1.16 (=)
+fir32c                         1.04         1.12     1.12 (=)     1.12 (=)     1.12 (=)     1.12 (=)         0.64     0.64 (=)
+hoa_decoder_x                  0.98         0.85     0.85 (=)     0.85 (=)     0.85 (=)     0.85 (=)     0.85 (=)     0.85 (=)
+mixer16_x                      1.00         1.45     1.45 (=)     1.45 (=)     1.45 (=)     1.45 (=)     1.45 (=)     1.45 (=)
+freeverb                       1.10         1.09     1.09 (=)     1.09 (=)     1.09 (=)     1.09 (=)     1.09 (=)         0.99
+fdn8                           1.04         1.05     1.05 (=)     1.05 (=)     1.05 (=)     1.05 (=)     1.05 (=)         1.05
+diffuser32                     5.78         5.77     5.77 (=)     5.77 (=)     5.77 (=)     5.77 (=)     5.77 (=)         0.78
+zita_rev                       0.79         0.53     0.53 (=)     0.53 (=)     0.53 (=)     0.53 (=)     0.53 (=)         0.54
+clarinet                       0.91         0.91         0.76     0.76 (=)     0.76 (=)     0.76 (=)     0.76 (=)         0.76
+violin                         0.93         1.10         1.09     1.09 (=)     1.09 (=)     1.09 (=)     1.09 (=)         1.09
+frenchbell                     0.25         0.25     0.25 (=)     0.25 (=)     0.25 (=)     0.25 (=)     0.25 (=)     0.25 (=)
+crybaby                        1.02         1.35     1.35 (=)     1.35 (=)     1.35 (=)     1.35 (=)     1.35 (=)     1.35 (=)
+moog_vcf                       0.88         1.38     1.38 (=)     1.38 (=)     1.38 (=)     1.38 (=)     1.38 (=)     1.38 (=)
+compressor                     0.96         1.24     1.24 (=)     1.24 (=)     1.24 (=)     1.24 (=)     1.24 (=)     1.24 (=)
+distortion                     0.99         0.95     0.95 (=)     0.95 (=)     0.95 (=)         0.32     0.32 (=)     0.32 (=)
+phaser                         0.86         0.78     0.78 (=)     0.78 (=)     0.78 (=)     0.78 (=)     0.78 (=)     0.78 (=)
+flanger                        1.02         1.18     1.18 (=)     1.18 (=)     1.18 (=)     1.18 (=)     1.18 (=)         1.18
+pitch_shifter                  1.00         1.01     1.01 (=)     1.01 (=)         0.46     0.46 (=)     0.46 (=)         0.46
+dattorro                       1.15         0.84     0.84 (=)     0.84 (=)     0.84 (=)     0.84 (=)     0.84 (=)         0.80
+karplus                        0.86         1.52         1.34         0.96     0.96 (=)     0.96 (=)     0.96 (=)         0.96
+bubble                         1.00         1.06     1.06 (=)     1.06 (=)     1.06 (=)     1.06 (=)     1.06 (=)         1.07
+virtual_analog                 0.71         0.77     0.77 (=)     0.77 (=)     0.77 (=)     0.77 (=)     0.77 (=)         0.77
+diode_ladder                   0.99         0.98     0.98 (=)     0.98 (=)     0.98 (=)         0.86     0.86 (=)     0.86 (=)
+filter_bank                    0.88         1.51     1.51 (=)     1.51 (=)     1.51 (=)         0.89     0.89 (=)     0.89 (=)
+noise_gate                     1.00         1.24     1.24 (=)     1.24 (=)     1.24 (=)     1.24 (=)     1.24 (=)     1.24 (=)
+exciter                        1.00         1.23     1.23 (=)     1.23 (=)     1.23 (=)     1.23 (=)     1.23 (=)     1.23 (=)
+autopan                        1.00         1.04     1.04 (=)     1.04 (=)     1.04 (=)         0.67     0.67 (=)     0.67 (=)
+greyhole                       0.82         0.89     0.89 (=)     0.89 (=)     0.89 (=)         0.67     0.67 (=)         0.66
+tapiir                         0.95         0.89     0.89 (=)     0.89 (=)     0.89 (=)     0.89 (=)     0.89 (=)         0.88
+hoa_octo                       1.01         1.05     1.05 (=)     1.05 (=)     1.05 (=)         0.44     0.44 (=)     0.44 (=)
+flute                          0.96         1.02         1.04     1.04 (=)     1.04 (=)         0.43     0.43 (=)         0.43
+geometric mean                 0.98         1.02         1.02         1.01         0.99         0.88         0.87         0.82
+
+above 1.05 : autopan cert7-cpp-d 1.06, autopan fmod-cpp-d 1.06, autopan in-cpp-d 1.06, autopan sbf-cpp-d 1.06, bubble cert7-cpp-d 1.09, bubble cert7-ocpp-d 1.06, bubble cm-cpp-d 1.09, bubble cm-ocpp-d 1.06, bubble fl-cpp-d 1.09, bubble fl-ocpp-d 1.06, bubble fmod-cpp-d 1.09, bubble fmod-ocpp-d 1.06, bubble in-cpp-d 1.09, bubble in-ocpp-d 1.06, bubble rd-cpp-d 1.09, bubble rd-ocpp-d 1.07, bubble sbf-cpp-d 1.09, bubble sbf-ocpp-d 1.06, compressor cert7-cpp-d 1.24, compressor cert7-cpp-f 1.31, compressor cert7-ocpp-d 1.24, compressor cert7-ocpp-f 1.28, compressor cm-cpp-d 1.24, compressor cm-cpp-f 1.31, compressor cm-ocpp-d 1.24, compressor cm-ocpp-f 1.28, compressor fl-cpp-d 1.24, compressor fl-cpp-f 1.31, compressor fl-ocpp-d 1.24, compressor fl-ocpp-f 1.28, compressor fmod-cpp-d 1.24, compressor fmod-cpp-f 1.31, compressor fmod-ocpp-d 1.24, compressor fmod-ocpp-f 1.28, compressor in-cpp-d 1.24, compressor in-cpp-f 1.31, compressor in-ocpp-d 1.24, compressor in-ocpp-f 1.28, compressor rd-cpp-d 1.24, compressor rd-cpp-f 1.31, compressor rd-ocpp-d 1.24, compressor rd-ocpp-f 1.28, compressor sbf-cpp-d 1.24, compressor sbf-cpp-f 1.31, compressor sbf-ocpp-d 1.24, compressor sbf-ocpp-f 1.28, crybaby cert7-cpp-d 1.38, crybaby cert7-cpp-f 1.18, crybaby cert7-ocpp-d 1.35, crybaby cm-cpp-d 1.38, crybaby cm-cpp-f 1.18, crybaby cm-ocpp-d 1.35, crybaby fl-cpp-d 1.38, crybaby fl-cpp-f 1.18, crybaby fl-ocpp-d 1.35, crybaby fmod-cpp-d 1.38, crybaby fmod-cpp-f 1.18, crybaby fmod-ocpp-d 1.35, crybaby in-cpp-d 1.38, crybaby in-cpp-f 1.18, crybaby in-ocpp-d 1.35, crybaby rd-cpp-d 1.38, crybaby rd-cpp-f 1.18, crybaby rd-ocpp-d 1.35, crybaby sbf-cpp-d 1.38, crybaby sbf-cpp-f 1.18, crybaby sbf-ocpp-d 1.35, diffuser32 cert7-ocpp-d 5.77, diffuser32 cm-ocpp-d 5.77, diffuser32 fl-ocpp-d 5.77, diffuser32 fmod-ocpp-d 5.77, diffuser32 in-ocpp-d 5.77, diffuser32 sbf-ocpp-d 5.77, diode_ladder cert7-cpp-f 1.22, diode_ladder cert7-ocpp-f 1.23, diode_ladder cm-cpp-f 1.08, diode_ladder fl-cpp-f 1.08, diode_ladder fmod-cpp-f 1.22, diode_ladder fmod-ocpp-f 1.23, diode_ladder in-cpp-f 1.22, diode_ladder in-ocpp-f 1.23, diode_ladder rd-cpp-f 1.08, diode_ladder sbf-cpp-f 1.22, diode_ladder sbf-ocpp-f 1.23, exciter cert7-cpp-d 1.25, exciter cert7-cpp-f 1.17, exciter cert7-ocpp-d 1.23, exciter cert7-ocpp-f 1.14, exciter cm-cpp-d 1.25, exciter cm-cpp-f 1.17, exciter cm-ocpp-d 1.23, exciter cm-ocpp-f 1.14, exciter fl-cpp-d 1.25, exciter fl-cpp-f 1.17, exciter fl-ocpp-d 1.23, exciter fl-ocpp-f 1.14, exciter fmod-cpp-d 1.25, exciter fmod-cpp-f 1.17, exciter fmod-ocpp-d 1.23, exciter fmod-ocpp-f 1.14, exciter in-cpp-d 1.25, exciter in-cpp-f 1.17, exciter in-ocpp-d 1.23, exciter in-ocpp-f 1.14, exciter rd-cpp-d 1.25, exciter rd-cpp-f 1.17, exciter rd-ocpp-d 1.23, exciter rd-ocpp-f 1.14, exciter sbf-cpp-d 1.25, exciter sbf-cpp-f 1.17, exciter sbf-ocpp-d 1.23, exciter sbf-ocpp-f 1.14, filter_bank cert7-cpp-d 1.60, filter_bank cert7-cpp-f 1.24, filter_bank cert7-ocpp-d 1.51, filter_bank cert7-ocpp-f 1.11, filter_bank fmod-cpp-d 1.60, filter_bank fmod-cpp-f 1.24, filter_bank fmod-ocpp-d 1.51, filter_bank fmod-ocpp-f 1.11, filter_bank in-cpp-d 1.60, filter_bank in-cpp-f 1.24, filter_bank in-ocpp-d 1.51, filter_bank in-ocpp-f 1.11, filter_bank sbf-cpp-d 1.60, filter_bank sbf-cpp-f 1.24, filter_bank sbf-ocpp-d 1.51, filter_bank sbf-ocpp-f 1.11, fir32c cert7-cpp-d 1.63, fir32c cert7-cpp-f 1.69, fir32c cert7-ocpp-d 1.12, fir32c cert7-ocpp-f 1.20, fir32c cm-cpp-d 1.63, fir32c cm-cpp-f 1.69, fir32c cm-ocpp-d 1.12, fir32c cm-ocpp-f 1.20, fir32c fmod-cpp-d 1.63, fir32c fmod-cpp-f 1.69, fir32c fmod-ocpp-d 1.12, fir32c fmod-ocpp-f 1.20, fir32c in-cpp-d 1.63, fir32c in-cpp-f 1.69, fir32c in-ocpp-d 1.12, fir32c in-ocpp-f 1.20, fir32c sbf-cpp-d 1.63, fir32c sbf-cpp-f 1.69, fir32c sbf-ocpp-d 1.12, fir32c sbf-ocpp-f 1.20, flanger cert7-cpp-d 1.12, flanger cert7-ocpp-d 1.18, flanger cm-cpp-d 1.12, flanger cm-ocpp-d 1.18, flanger fl-cpp-d 1.12, flanger fl-ocpp-d 1.18, flanger fmod-cpp-d 1.12, flanger fmod-ocpp-d 1.18, flanger in-cpp-d 1.12, flanger in-ocpp-d 1.18, flanger rd-cpp-d 1.12, flanger rd-ocpp-d 1.18, flanger sbf-cpp-d 1.12, flanger sbf-ocpp-d 1.18, flute cert7-cpp-f 1.11, freeverb cert7-cpp-d 1.07, freeverb cert7-ocpp-d 1.09, freeverb cm-cpp-d 1.07, freeverb cm-ocpp-d 1.09, freeverb fl-cpp-d 1.07, freeverb fl-ocpp-d 1.09, freeverb fmod-cpp-d 1.07, freeverb fmod-ocpp-d 1.09, freeverb in-cpp-d 1.07, freeverb in-ocpp-d 1.09, freeverb rd-cpp-d 1.07, freeverb sbf-cpp-d 1.07, freeverb sbf-ocpp-d 1.09, hoa_octo cert7-cpp-d 1.05, hoa_octo cert7-ocpp-d 1.05, hoa_octo cm-cpp-f 1.24, hoa_octo cm-ocpp-f 1.21, hoa_octo fl-cpp-f 1.24, hoa_octo fl-ocpp-f 1.21, hoa_octo fmod-cpp-d 1.05, hoa_octo fmod-ocpp-d 1.05, hoa_octo in-cpp-d 1.05, hoa_octo in-ocpp-d 1.05, hoa_octo rd-cpp-f 1.24, hoa_octo rd-ocpp-f 1.21, hoa_octo sbf-cpp-d 1.05, hoa_octo sbf-ocpp-d 1.05, karplus cert7-cpp-d 1.47, karplus cert7-cpp-f 1.33, karplus cert7-ocpp-d 1.52, karplus cert7-ocpp-f 1.29, karplus in-cpp-d 1.33, karplus in-cpp-f 1.11, karplus in-ocpp-d 1.34, karplus in-ocpp-f 1.10, mixer16_x cert7-cpp-d 1.44, mixer16_x cert7-cpp-f 1.12, mixer16_x cert7-ocpp-d 1.45, mixer16_x cert7-ocpp-f 1.09, mixer16_x cm-cpp-d 1.44, mixer16_x cm-cpp-f 1.12, mixer16_x cm-ocpp-d 1.45, mixer16_x cm-ocpp-f 1.09, mixer16_x fl-cpp-d 1.44, mixer16_x fl-cpp-f 1.12, mixer16_x fl-ocpp-d 1.45, mixer16_x fl-ocpp-f 1.09, mixer16_x fmod-cpp-d 1.44, mixer16_x fmod-cpp-f 1.12, mixer16_x fmod-ocpp-d 1.45, mixer16_x fmod-ocpp-f 1.09, mixer16_x in-cpp-d 1.44, mixer16_x in-cpp-f 1.12, mixer16_x in-ocpp-d 1.45, mixer16_x in-ocpp-f 1.09, mixer16_x rd-cpp-d 1.44, mixer16_x rd-cpp-f 1.12, mixer16_x rd-ocpp-d 1.45, mixer16_x rd-ocpp-f 1.09, mixer16_x sbf-cpp-d 1.44, mixer16_x sbf-cpp-f 1.12, mixer16_x sbf-ocpp-d 1.45, mixer16_x sbf-ocpp-f 1.09, moog_vcf cert7-cpp-d 1.38, moog_vcf cert7-cpp-f 1.28, moog_vcf cert7-ocpp-d 1.38, moog_vcf cm-cpp-d 1.38, moog_vcf cm-cpp-f 1.28, moog_vcf cm-ocpp-d 1.38, moog_vcf fl-cpp-d 1.38, moog_vcf fl-cpp-f 1.28, moog_vcf fl-ocpp-d 1.38, moog_vcf fmod-cpp-d 1.38, moog_vcf fmod-cpp-f 1.28, moog_vcf fmod-ocpp-d 1.38, moog_vcf in-cpp-d 1.38, moog_vcf in-cpp-f 1.28, moog_vcf in-ocpp-d 1.38, moog_vcf rd-cpp-d 1.38, moog_vcf rd-cpp-f 1.28, moog_vcf rd-ocpp-d 1.38, moog_vcf sbf-cpp-d 1.38, moog_vcf sbf-cpp-f 1.28, moog_vcf sbf-ocpp-d 1.38, noise_gate cert7-cpp-d 1.23, noise_gate cert7-cpp-f 1.16, noise_gate cert7-ocpp-d 1.24, noise_gate cm-cpp-d 1.23, noise_gate cm-cpp-f 1.16, noise_gate cm-ocpp-d 1.24, noise_gate fl-cpp-d 1.23, noise_gate fl-cpp-f 1.16, noise_gate fl-ocpp-d 1.24, noise_gate fmod-cpp-d 1.23, noise_gate fmod-cpp-f 1.16, noise_gate fmod-ocpp-d 1.24, noise_gate in-cpp-d 1.23, noise_gate in-cpp-f 1.16, noise_gate in-ocpp-d 1.24, noise_gate rd-cpp-d 1.23, noise_gate rd-cpp-f 1.16, noise_gate rd-ocpp-d 1.24, noise_gate sbf-cpp-d 1.23, noise_gate sbf-cpp-f 1.16, noise_gate sbf-ocpp-d 1.24, svf_mod cert7-cpp-d 1.15, svf_mod cert7-cpp-f 1.09, svf_mod cert7-ocpp-d 1.16, svf_mod cert7-ocpp-f 1.06, svf_mod cm-cpp-d 1.15, svf_mod cm-cpp-f 1.09, svf_mod cm-ocpp-d 1.16, svf_mod cm-ocpp-f 1.06, svf_mod fl-cpp-d 1.15, svf_mod fl-cpp-f 1.09, svf_mod fl-ocpp-d 1.16, svf_mod fl-ocpp-f 1.06, svf_mod fmod-cpp-d 1.15, svf_mod fmod-cpp-f 1.09, svf_mod fmod-ocpp-d 1.16, svf_mod fmod-ocpp-f 1.06, svf_mod in-cpp-d 1.15, svf_mod in-cpp-f 1.09, svf_mod in-ocpp-d 1.16, svf_mod in-ocpp-f 1.06, svf_mod rd-cpp-d 1.15, svf_mod rd-cpp-f 1.09, svf_mod rd-ocpp-d 1.16, svf_mod rd-ocpp-f 1.06, svf_mod sbf-cpp-d 1.15, svf_mod sbf-cpp-f 1.09, svf_mod sbf-ocpp-d 1.16, svf_mod sbf-ocpp-f 1.06, tapiir cert7-cpp-f 1.35, tapiir cm-cpp-f 1.35, tapiir fl-cpp-f 1.35, tapiir fmod-cpp-f 1.35, tapiir in-cpp-f 1.35, tapiir rd-cpp-f 1.35, tapiir sbf-cpp-f 1.35, violin cert7-cpp-d 1.11, violin cert7-ocpp-d 1.10, violin cm-ocpp-d 1.09, violin fl-ocpp-d 1.09, violin fmod-ocpp-d 1.09, violin in-ocpp-d 1.09, violin rd-ocpp-d 1.09, violin sbf-ocpp-d 1.09
+noise, the gap between the two best rounds : median 0.0 %, 90th percentile 0.3 %

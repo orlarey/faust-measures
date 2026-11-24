@@ -1,0 +1,77 @@
+2026-11-24T09:29:57+00:00 - AMD Ryzen AI 9 HX 370 w/ Radeon 890M, 24 cpus - Ubuntu clang version 21.1.8 (6ubuntu1)
+reference R : FAUST Version 2.94.1 ; Source commit: e3665b800 - cpp - -O3 -ffast-math -march=native
+cert7 : FAUST Version 2.94.1 ; Source commit: 06dd38660 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+in : FAUST Version 2.94.1 ; Source commit: ac4e1f8ea - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+sbf : FAUST Version 2.94.1 ; Source commit: 446adb21e - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+fmod : FAUST Version 2.94.1 ; Source commit: 0b7f4cb7c - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+cm : FAUST Version 2.94.1 ; Source commit: 289d3362a - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+fl : FAUST Version 2.94.1 ; Source commit: 38a10d58e - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+rd : FAUST Version 2.94.1 ; Source commit: 0cc0698be - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the median ; every time / R of its precision
+
+== cpp-f
+program                       cert7           in          sbf         fmod           cm           fl           rd
+2dKirchhoffThinPlate           0.37     0.37 (=)     0.37 (=)     0.37 (=)     0.37 (=)     0.37 (=)     0.37 (=)
+StiffString                    0.78     0.78 (=)     0.78 (=)     0.78 (=)     0.78 (=)     0.78 (=)     0.78 (=)
+dx7                            1.08     1.08 (=)     1.08 (=)     1.08 (=)     1.08 (=)     1.08 (=)     1.08 (=)
+FFT                            0.68     0.68 (=)     0.68 (=)     0.68 (=)     0.68 (=)     0.68 (=)     0.68 (=)
+englishBell                    1.00     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)
+vocoder                        0.86     0.86 (=)     0.86 (=)     0.86 (=)     0.86 (=)     0.86 (=)     0.86 (=)
+oneSourceToStereo              0.47     0.47 (=)     0.47 (=)     0.47 (=)         0.43     0.43 (=)     0.43 (=)
+karplus32                      1.00     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)     1.00 (=)
+zitaRev                        0.98     0.98 (=)     0.98 (=)     0.98 (=)     0.98 (=)     0.98 (=)     0.98 (=)
+virtualAnalog                  0.90     0.90 (=)     0.90 (=)     0.90 (=)         0.91     0.91 (=)     0.91 (=)
+multibandfilter                0.78     0.78 (=)     0.78 (=)     0.78 (=)     0.78 (=)     0.78 (=)     0.78 (=)
+parametric_eq                  0.80     0.80 (=)     0.80 (=)     0.80 (=)         0.73     0.73 (=)     0.73 (=)
+geometric mean                 0.77         0.77         0.77         0.77         0.76         0.76         0.76
+
+== cpp-d
+program                       cert7           in          sbf         fmod           cm           fl           rd
+2dKirchhoffThinPlate           0.38     0.38 (=)     0.38 (=)     0.38 (=)     0.38 (=)     0.38 (=)     0.38 (=)
+StiffString                    0.76     0.76 (=)     0.76 (=)     0.76 (=)     0.76 (=)     0.76 (=)     0.76 (=)
+dx7                            0.94     0.94 (=)     0.94 (=)     0.94 (=)     0.94 (=)     0.94 (=)     0.94 (=)
+FFT                            0.67     0.67 (=)     0.67 (=)     0.67 (=)     0.67 (=)     0.67 (=)     0.67 (=)
+englishBell                    0.97     0.97 (=)     0.97 (=)     0.97 (=)     0.97 (=)     0.97 (=)     0.97 (=)
+vocoder                        0.87     0.87 (=)     0.87 (=)     0.87 (=)     0.87 (=)     0.87 (=)     0.87 (=)
+oneSourceToStereo              0.73     0.73 (=)     0.73 (=)     0.73 (=)         0.21     0.21 (=)     0.21 (=)
+karplus32                      1.02     1.02 (=)     1.02 (=)     1.02 (=)     1.02 (=)     1.02 (=)     1.02 (=)
+zitaRev                        0.78     0.78 (=)     0.78 (=)     0.78 (=)     0.78 (=)     0.78 (=)     0.78 (=)
+virtualAnalog                  0.98     0.98 (=)     0.98 (=)     0.98 (=)     0.98 (=)     0.98 (=)     0.98 (=)
+multibandfilter                0.55     0.55 (=)     0.55 (=)     0.55 (=)     0.55 (=)     0.55 (=)     0.55 (=)
+parametric_eq                  0.82     0.82 (=)     0.82 (=)     0.82 (=)         0.77     0.77 (=)     0.77 (=)
+geometric mean                 0.76         0.76         0.76         0.76         0.68         0.68         0.68
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert7           in          sbf         fmod           cm           fl           rd
+2dKirchhoffThinPlate           1.24         0.40     0.40 (=)     0.40 (=)     0.40 (=)     0.40 (=)     0.40 (=)     0.40 (=)
+StiffString                    0.48         0.18     0.18 (=)     0.18 (=)     0.18 (=)     0.18 (=)     0.18 (=)     0.18 (=)
+dx7                            1.07         0.94     0.94 (=)     0.94 (=)     0.94 (=)     0.94 (=)     0.94 (=)     0.94 (=)
+FFT                            0.83         0.59     0.59 (=)     0.59 (=)     0.59 (=)     0.59 (=)     0.59 (=)         0.59
+englishBell                    0.38         0.26     0.26 (=)     0.26 (=)     0.26 (=)     0.26 (=)     0.26 (=)     0.26 (=)
+vocoder                        0.63         0.12     0.12 (=)     0.12 (=)     0.12 (=)     0.12 (=)     0.12 (=)     0.12 (=)
+oneSourceToStereo              1.06         0.58     0.58 (=)     0.58 (=)     0.58 (=)         0.45     0.45 (=)     0.45 (=)
+karplus32                      0.89         0.92     0.92 (=)     0.92 (=)     0.92 (=)     0.92 (=)     0.92 (=)         0.91
+zitaRev                        0.63         0.51     0.51 (=)     0.51 (=)     0.51 (=)     0.51 (=)     0.51 (=)         0.51
+virtualAnalog                  0.82         0.76     0.76 (=)     0.76 (=)     0.76 (=)         0.85     0.85 (=)         0.85
+multibandfilter                0.58         0.41     0.41 (=)     0.41 (=)     0.41 (=)     0.41 (=)     0.41 (=)     0.41 (=)
+parametric_eq                  0.83         0.61     0.61 (=)     0.61 (=)     0.61 (=)         0.54     0.54 (=)     0.54 (=)
+geometric mean                 0.75         0.45         0.45         0.45         0.45         0.44         0.44         0.44
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp        cert7           in          sbf         fmod           cm           fl           rd
+2dKirchhoffThinPlate           1.10         0.67     0.67 (=)     0.67 (=)     0.67 (=)     0.67 (=)     0.67 (=)     0.67 (=)
+StiffString                    1.13         0.29     0.29 (=)     0.29 (=)     0.29 (=)     0.29 (=)     0.29 (=)     0.29 (=)
+dx7                            1.13         0.96     0.96 (=)     0.96 (=)     0.96 (=)     0.96 (=)     0.96 (=)     0.96 (=)
+FFT                            0.88         0.63     0.63 (=)     0.63 (=)     0.63 (=)     0.63 (=)     0.63 (=)         0.63
+englishBell                    0.25         0.25     0.25 (=)     0.25 (=)     0.25 (=)     0.25 (=)     0.25 (=)     0.25 (=)
+vocoder                        0.65         0.18     0.18 (=)     0.18 (=)     0.18 (=)     0.18 (=)     0.18 (=)     0.18 (=)
+oneSourceToStereo              1.03         0.82     0.82 (=)     0.82 (=)     0.82 (=)         0.21     0.21 (=)     0.21 (=)
+karplus32                      1.01         1.09     1.09 (=)     1.09 (=)     1.09 (=)     1.09 (=)     1.09 (=)         1.09
+zitaRev                        0.87         0.68     0.68 (=)     0.68 (=)     0.68 (=)     0.68 (=)     0.68 (=)         0.68
+virtualAnalog                  0.84         0.81     0.81 (=)     0.81 (=)     0.81 (=)     0.81 (=)     0.81 (=)         0.81
+multibandfilter                1.11         0.63     0.63 (=)     0.63 (=)     0.63 (=)     0.63 (=)     0.63 (=)     0.63 (=)
+parametric_eq                  0.66         0.59     0.59 (=)     0.59 (=)     0.59 (=)         0.56     0.56 (=)     0.56 (=)
+geometric mean                 0.83         0.56         0.56         0.56         0.56         0.50         0.50         0.50
+
+above 1.05 : dx7 cert7-cpp-f 1.08, dx7 cm-cpp-f 1.08, dx7 fl-cpp-f 1.08, dx7 fmod-cpp-f 1.08, dx7 in-cpp-f 1.08, dx7 rd-cpp-f 1.08, dx7 sbf-cpp-f 1.08, karplus32 cert7-ocpp-d 1.09, karplus32 cm-ocpp-d 1.09, karplus32 fl-ocpp-d 1.09, karplus32 fmod-ocpp-d 1.09, karplus32 in-ocpp-d 1.09, karplus32 rd-ocpp-d 1.09, karplus32 sbf-ocpp-d 1.09
+noise, the gap between the two best rounds : median 0.0 %, 90th percentile 0.3 %
