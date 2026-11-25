@@ -1,0 +1,72 @@
+2026-11-25T05:22:25+00:00 - AMD Ryzen AI 9 HX 370 w/ Radeon 890M, 24 cpus - g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+reference R : FAUST Version 2.94.1 ; Source commit: e3665b800 - cpp - -O3 -ffast-math -march=native
+st : FAUST Version 2.94.1 ; Source commit: 7db73ba19 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+nost : FAUST Version 2.94.1 ; Source commit: 7db73ba19 - faust -nost - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the minimum ; every time / R of its precision
+
+== cpp-f
+program                          st         nost
+2dKirchhoffThinPlate           0.65     0.65 (=)
+StiffString                    0.92         0.97
+dx7                            1.00     1.00 (=)
+FFT                            0.72     0.72 (=)
+englishBell                    0.92     0.92 (=)
+vocoder                        0.96         1.02
+oneSourceToStereo              0.00         0.43
+karplus32                      1.00     1.00 (=)
+zitaRev                        0.89         0.92
+virtualAnalog                  0.79         1.01
+multibandfilter                0.86     0.86 (=)
+parametric_eq                  0.80         0.81
+geometric mean                 0.54         0.84
+
+== cpp-d
+program                          st         nost
+2dKirchhoffThinPlate           0.36     0.36 (=)
+StiffString                    0.93         0.99
+dx7                            1.03     1.03 (=)
+FFT                            0.71     0.71 (=)
+englishBell                    0.74     0.74 (=)
+vocoder                        0.99         0.99
+oneSourceToStereo              0.00         0.21
+karplus32                      0.99     0.99 (=)
+zitaRev                        0.82         0.86
+virtualAnalog                  0.65         0.97
+multibandfilter                0.66     0.66 (=)
+parametric_eq                  0.77         0.77
+geometric mean                 0.49         0.71
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp           st         nost
+2dKirchhoffThinPlate           1.09         0.37     0.37 (=)
+StiffString                    0.90         0.24         0.25
+dx7                            0.91         0.90     0.90 (=)
+FFT                            0.93         0.68     0.68 (=)
+englishBell                    0.61         0.24     0.24 (=)
+vocoder                        0.61         0.11         0.12
+oneSourceToStereo              0.94         0.00         0.46
+karplus32                      0.63         0.75     0.75 (=)
+zitaRev                        0.70         0.56         0.59
+virtualAnalog                  0.91         0.86         1.17
+multibandfilter                0.87         0.57     0.57 (=)
+parametric_eq                  0.82         0.52         0.54
+geometric mean                 0.81         0.30         0.47
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp           st         nost
+2dKirchhoffThinPlate           1.04         0.36     0.36 (=)
+StiffString                    0.99         0.37         0.38
+dx7                            0.90         0.96     0.96 (=)
+FFT                            0.99         0.74     0.74 (=)
+englishBell                    0.68         0.26     0.26 (=)
+vocoder                        1.04         0.29         0.30
+oneSourceToStereo              1.14         0.00         0.21
+karplus32                      0.90         0.91     0.91 (=)
+zitaRev                        0.99         0.80         0.83
+virtualAnalog                  0.99         0.63         1.02
+multibandfilter                0.99         0.67     0.67 (=)
+parametric_eq                  0.61         0.45         0.49
+geometric mean                 0.93         0.35         0.52
+
+above 1.05 : virtualAnalog nost-ocpp-f 1.17
+noise, the gap between the two best rounds : median 0.0 %, 90th percentile 0.2 %

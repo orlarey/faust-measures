@@ -1,0 +1,72 @@
+2026-11-25T05:37:45+00:00 - Apple M1, 8 cpus - clang version 22.1.8
+reference R : FAUST Version 2.94.1 ; Source commit: e3665b800 - cpp - -O3 -ffast-math -march=native
+st : FAUST Version 2.94.1 ; Source commit: 7db73ba19 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+nost : FAUST Version 2.94.1 ; Source commit: 7db73ba19 - faust -nost - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the median ; every time / R of its precision
+
+== cpp-f
+program                          st         nost
+2dKirchhoffThinPlate           0.51     0.51 (=)
+StiffString                    0.43         0.63
+dx7                            0.97     0.97 (=)
+FFT                            0.56     0.56 (=)
+englishBell                    1.00     1.00 (=)
+vocoder                        0.95         0.95
+oneSourceToStereo              0.01         0.43
+karplus32                      1.00     1.00 (=)
+zitaRev                        0.97         0.97
+virtualAnalog                  0.67         0.82
+multibandfilter                0.77     0.77 (=)
+parametric_eq                  0.74         0.74
+geometric mean                 0.50         0.75
+
+== cpp-d
+program                          st         nost
+2dKirchhoffThinPlate           0.57     0.57 (=)
+StiffString                    0.42         0.62
+dx7                            1.00     1.00 (=)
+FFT                            0.58     0.58 (=)
+englishBell                    0.98     0.98 (=)
+vocoder                        1.08         1.04
+oneSourceToStereo              0.01         0.46
+karplus32                      1.02     1.02 (=)
+zitaRev                        0.75         0.81
+virtualAnalog                  0.65         0.90
+multibandfilter                0.70     0.70 (=)
+parametric_eq                  0.80         0.80
+geometric mean                 0.53         0.77
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp           st         nost
+2dKirchhoffThinPlate           1.02         0.45     0.45 (=)
+StiffString                    0.50         0.25         0.25
+dx7                            0.98         0.99     0.99 (=)
+FFT                            0.75         0.56     0.56 (=)
+englishBell                    0.32         0.30     0.30 (=)
+vocoder                        0.19         0.16         0.17
+oneSourceToStereo              1.04         0.00         0.43
+karplus32                      0.93         0.91     0.91 (=)
+zitaRev                        0.74         0.57         0.62
+virtualAnalog                  0.74         0.58         0.75
+multibandfilter                0.74         0.51     0.51 (=)
+parametric_eq                  0.98         0.67         0.67
+geometric mean                 0.68         0.33         0.49
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp           st         nost
+2dKirchhoffThinPlate           0.99         0.46     0.46 (=)
+StiffString                    0.54         0.40         0.40
+dx7                            0.99         1.02     1.02 (=)
+FFT                            0.88         0.52     0.52 (=)
+englishBell                    0.34         0.39     0.39 (=)
+vocoder                        0.42         0.35         0.36
+oneSourceToStereo              1.15         0.01         0.49
+karplus32                      1.03         1.05     1.05 (=)
+zitaRev                        0.99         0.74         0.80
+virtualAnalog                  1.06         0.59         0.80
+multibandfilter                1.03         0.71     0.71 (=)
+parametric_eq                  0.92         0.72         0.72
+geometric mean                 0.81         0.42         0.60
+
+above 1.05 : vocoder st-cpp-d 1.08
+noise, the gap between the two best rounds : median 0.0 %, 90th percentile 0.1 %
