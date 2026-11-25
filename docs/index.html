@@ -107,6 +107,10 @@
       <label class="chip" title="the marks of the sessions that measured the same code again, hollow"><input type="checkbox" id="reps">show</label></div>
     <div class="grp"><span class="tag">Axis</span>
       <label class="chip" title="the vertical axis covers every measure of the campaign"><input type="checkbox" id="fixed" checked>fixed</label></div>
+    <div class="grp"><span class="tag">Order</span>
+      <label class="chip" title="the programs in the order of the basket"><input type="radio" name="order" value="basket" checked>basket</label>
+      <label class="chip" title="the programs by the fastest value of the campaign, the lowest first"><input type="radio" name="order" value="gain">largest gain first</label>
+      <label class="chip" title="the programs by the fastest value of the campaign, the highest first"><input type="radio" name="order" value="loss">smallest gain first</label></div>
     <span class="key"><svg width="24" height="14" aria-hidden="true"><line x1="1" x2="23" y1="7" y2="7" stroke="currentColor" stroke-width="0.8"/></svg>fastest of the campaign</span>
     <div class="grp" id="pinsGrp" hidden><span class="tag" title="click a mark to pin it ; a pin keeps its time when the campaign changes">Pins</span><span id="pins" class="grp"></span></div>
   </section>
@@ -139,7 +143,7 @@
 
   <details>
     <summary>How to read the charts</summary>
-    <p class="muted">Every time, in nanoseconds per frame, is divided by the centre of its program: the geometric mean of the reference in cpp and in ocpp, on a logarithmic axis; below 1, faster than the centre. The reference is a level line, solid for cpp, dashed for ocpp; a compared version is a filled square for cpp, a filled circle for ocpp; several versions follow each other in a column, each a little lighter. The colour says the C++ compiler. A thin grey line marks, in each column, the fastest value of the campaign, every series and compiler included, shown or not.</p>
+    <p class="muted">Every time, in nanoseconds per frame, is divided by the centre of its program: the geometric mean of the reference in cpp and in ocpp, on a logarithmic axis; below 1, faster than the centre. The reference is a level line, solid for cpp, dashed for ocpp; a compared version is a filled square for cpp, a filled circle for ocpp; several versions follow each other in a column, each a little lighter. The colour says the C++ compiler. A thin grey line marks, in each column, the fastest value of the campaign, every series and compiler included, shown or not. The programs follow the order of the basket. <em>Order</em> sorts them by gain instead: each chart follows its thin grey line, the program whose fastest value is the lowest first, or last; this order depends on the centre, not on what is ticked.</p>
     <p class="muted">The centre decides what compares. With <em>same compiler</em> or <em>whole machine</em>, each column is divided by the reference of its own compiler or machine: two machines then compare in gain over their own reference, not in speed. With <em>one compiler</em>, every column is divided by the same nanoseconds, those of the reference of the chosen compiler: machines and compilers compare in absolute time. <em>Lock</em> keeps those nanoseconds when the campaign changes, so that every campaign reads in the same unit. A click on a mark pins it: the pin keeps its time and is placed, in any campaign, at that time divided by the centre of its column there (under <em>one compiler</em>, in any column; otherwise only where its compiler was measured); a click on the pin removes it. Two sessions of one machine differ by about 0.2 % in geometric mean and by a few percent on one program, and two campaigns with other libraries compile slightly different programs: a gap of one or two percent between campaigns says nothing. A session that measured the same code again (the same machine, compiler, options, libraries, basket and generated code, whatever the commits) is a repetition: it joins the campaign of the first measure, the charts leave it out unless <em>Repetitions</em> is ticked (hollow marks, thin lines), and its gaps to the first measure are in the table <em>Repetitions</em>. Pins and the lock are kept in this browser. Data: <a href="https://github.com/orlarey/faust-measures">faust-measures</a>, <code>table/measures.csv</code>.</p>
   </details>
 </div>
@@ -155,8 +159,9 @@ const gmean = (xs) => {
 const fmt = (x) => (x == null ? '—' : x.toFixed(3));
 // centre : own (the reference of the same session), machine (of every session of the machine) or one (of the
 // compiler centreCx, for every column) ; lock : the centres of one, kept when the campaign changes ; pins : measures
-// kept with their times, placed in any campaign by the centre of that campaign
-const S = { campaign: null, reference: null, cxx: null, series: null, centre: 'own', centreCx: null, lock: null, pins: [], stat: 'min', precs: ['float', 'double'], combined: false, fixed: true, reps: false };
+// kept with their times, placed in any campaign by the centre of that campaign ; order : the programs as in the
+// basket, or by their gain, the largest first (gain) or the smallest first (loss)
+const S = { campaign: null, reference: null, cxx: null, series: null, centre: 'own', centreCx: null, lock: null, pins: [], stat: 'min', precs: ['float', 'double'], combined: false, fixed: true, reps: false, order: 'basket' };
 let ROWS = [], CAMPAIGNS = [], VERSIONS = {}, LIBS = {};
 
 // the lock and the pins stay in this browser ; the page works without them
@@ -352,6 +357,7 @@ function drawControls() {
     }, glyphOf(v, gen), commitOf(v) + (v === S.reference ? ' (reference)' : ''));
   }));
   for (const el of document.querySelectorAll('input[name="centre"]')) el.checked = el.value === S.centre;
+  for (const el of document.querySelectorAll('input[name="order"]')) el.checked = el.value === S.order;
   const one = S.centre === 'one', cs = document.getElementById('centreCx');
   cs.replaceChildren(...cxxList().map((cx) => new Option(cx, cx)));
   cs.value = S.centreCx;
@@ -459,13 +465,21 @@ function drawChart(R, REPS) {
   const barH = window.matchMedia('(min-width: 720px)').matches ? document.getElementById('bar').getBoundingClientRect().height : 0;
   const H = Math.max(260, Math.floor((window.innerHeight - barH - 28) / panels.length));
   for (const precs of panels) {
+    // by gain : each chart sorts its programs by its mark of the fastest value of the campaign, the lower of the two
+    // marks when the chart holds both precisions ; two programs with the same mark keep the order of the basket
+    const ps = [...progs];
+    if (S.order !== 'basket') {
+      const mark = Object.fromEntries(ps.map((p) => [p, Math.min(...precs.map((c) => fastest[c + '|' + p]?.y ?? Infinity))]));
+      const sign = S.order === 'gain' ? 1 : -1;
+      ps.sort((a, b) => (mark[a] === Infinity) - (mark[b] === Infinity) || sign * (Math.log(mark[a]) - Math.log(mark[b])) || 0);
+    }
     const pr = shown.filter((r) => precs.includes(r.precision));
     const name = precs.length > 1 ? 'Single and double precision' : precs[0] === 'float' ? 'Single precision (float)' : 'Double precision';
     // the left margin leaves room for the first label, rotated to the left
-    const m = { l: Math.max(46, Math.round(progs[0].length * 7 * 0.87 - 20)), r: 12, t: 24, b: 66 };
+    const m = { l: Math.max(46, Math.round(ps[0].length * 7 * 0.87 - 20)), r: 12, t: 24, b: 66 };
     const svg = d3.create('svg').attr('width', W).attr('height', H).attr('role', 'img')
-      .attr('aria-label', 'Times relative to the centre, ' + name.toLowerCase() + ', ' + progs.length + ' programs');
-    const x = d3.scaleBand().domain(progs).range([m.l, W - m.r]).paddingInner(0.12);
+      .attr('aria-label', 'Times relative to the centre, ' + name.toLowerCase() + ', ' + ps.length + ' programs');
+    const x = d3.scaleBand().domain(ps).range([m.l, W - m.r]).paddingInner(0.12);
     const y = d3.scaleLog().domain([lo, hi]).range([H - m.b, m.t]);
     const bands = svg.append('g');
     const ticks = [];
@@ -475,10 +489,10 @@ function drawChart(R, REPS) {
     svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', m.l).attr('x2', W - m.r)
       .attr('y1', (t) => y(t)).attr('y2', (t) => y(t)).style('stroke', (t) => (t === 1 ? 'var(--ref)' : 'var(--grid)')).style('stroke-width', (t) => (t === 1 ? 1.2 : 0.7));
     svg.append('g').selectAll('text').data(ticks).join('text').attr('x', m.l - 6).attr('y', (t) => y(t) + 4).attr('text-anchor', 'end').text((t) => String(t));
-    svg.append('g').selectAll('line').data(progs).join('line')
+    svg.append('g').selectAll('line').data(ps).join('line')
       .attr('x1', (p) => x(p) - x.step() * x.paddingInner() / 2).attr('x2', (p) => x(p) - x.step() * x.paddingInner() / 2)
       .attr('y1', m.t).attr('y2', H - m.b).style('stroke', 'var(--grid)').style('stroke-width', 0.7);
-    svg.append('g').selectAll('text').data(progs).join('text')
+    svg.append('g').selectAll('text').data(ps).join('text')
       .attr('transform', (p) => 'translate(' + (x(p) + x.bandwidth() / 2) + ',' + (H - m.b + 10) + ') rotate(-30)').attr('text-anchor', 'end').text((p) => p);
     svg.append('text').attr('x', m.l).attr('y', 15).style('font-weight', '600')
       .text(name + ' — time / centre' + (S.combined ? ' in single precision' : '') + ', logarithmic scale; ' + centreText()
@@ -505,7 +519,7 @@ function drawChart(R, REPS) {
       g.append('line').attr('x1', x1).attr('x2', x2).attr('y1', y(fr.y)).attr('y2', y(fr.y)).style('stroke', 'var(--muted)').style('stroke-width', 0.8);
       hover(g.append('line').attr('x1', x1).attr('x2', x2).attr('y1', y(fr.y)).attr('y2', y(fr.y)).style('stroke', 'transparent').style('stroke-width', 6), fr, 'fastest of the campaign');
     };
-    for (const p of progs) {
+    for (const p of ps) {
       const x0 = x(p), bw = x.bandwidth(), slotW = bw / Math.max(1, cxxs.length), cw = slotW / precs.length;
       if (precs.length === 1 && fastest[precs[0] + '|' + p]) fastestLine(fastest[precs[0] + '|' + p], x0, x0 + bw);
       cxxs.forEach((cx, ci) => {
@@ -655,6 +669,7 @@ document.getElementById('campaign').addEventListener('change', (e) => { S.campai
 document.getElementById('reference').addEventListener('change', (e) => { S.reference = e.target.value; S.series = null; draw(); });
 for (const el of document.querySelectorAll('input[name="centre"]')) el.addEventListener('change', () => { S.centre = el.value; draw(); });
 for (const el of document.querySelectorAll('input[name="stat"]')) el.addEventListener('change', () => { S.stat = el.value; draw(); });
+for (const el of document.querySelectorAll('input[name="order"]')) el.addEventListener('change', () => { S.order = el.value; draw(); });
 for (const el of document.querySelectorAll('input.prec')) el.addEventListener('change', () => { S.precs = [...document.querySelectorAll('input.prec')].filter((c) => c.checked).map((c) => c.value); draw(); });
 document.getElementById('fixed').addEventListener('change', (e) => { S.fixed = e.target.checked; draw(); });
 document.getElementById('reps').addEventListener('change', (e) => { S.reps = e.target.checked; draw(); });
