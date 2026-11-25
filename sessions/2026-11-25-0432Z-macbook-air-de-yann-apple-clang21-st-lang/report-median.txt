@@ -1,0 +1,176 @@
+2026-11-25T04:32:44+00:00 - Apple M1, 8 cpus - Apple clang version 21.0.0 (clang-2100.1.1.101)
+reference R : FAUST Version 2.94.1 ; Source commit: e3665b800 - cpp - -O3 -ffast-math -march=native
+st : FAUST Version 2.94.1 ; Source commit: 7db73ba19 - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+nost : FAUST Version 2.94.1 ; Source commit: 7db73ba19 - faust -nost - -O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno + ftz.h
+9 rounds, the median ; every time / R of its precision
+
+== cpp-f
+program                          st         nost
+sine                           0.86     0.86 (=)
+fm_pad                         1.01     1.01 (=)
+additive64                     1.00     1.00 (=)
+noise                          0.73     0.73 (=)
+tanh_drive                     1.00     1.00 (=)
+biquad8                        0.81     0.81 (=)
+peq10                          0.74     0.74 (=)
+svf_mod                        0.91     0.91 (=)
+fir32c                         1.13     1.13 (=)
+hoa_decoder_x                  0.85     0.85 (=)
+mixer16_x                      0.96     0.96 (=)
+freeverb                       0.94     0.94 (=)
+fdn8                           0.92     0.92 (=)
+diffuser32                     0.71     0.71 (=)
+zita_rev                       1.00     1.00 (=)
+clarinet                       0.87         0.86
+violin                         0.97         1.01
+frenchbell                     1.03     1.03 (=)
+crybaby                        1.00         1.00
+moog_vcf                       1.44         1.44
+compressor                     1.06     1.06 (=)
+distortion                     0.63         0.91
+phaser                         1.16     1.16 (=)
+flanger                        0.97     0.97 (=)
+pitch_shifter                  0.28     0.28 (=)
+dattorro                       0.60         0.71
+karplus                        0.86         0.88
+bubble                         1.01     1.01 (=)
+virtual_analog                 0.48         0.98
+diode_ladder                   1.04         1.08
+filter_bank                    0.95         1.05
+noise_gate                     1.19     1.19 (=)
+exciter                        1.21     1.21 (=)
+autopan                        0.57         0.68
+greyhole                       0.98     0.98 (=)
+tapiir                         1.11     1.11 (=)
+hoa_octo                       0.05         1.40
+flute                          0.25         0.53
+geometric mean                 0.79         0.92
+
+== cpp-d
+program                          st         nost
+sine                           0.83     0.83 (=)
+fm_pad                         1.01     1.01 (=)
+additive64                     0.96     0.96 (=)
+noise                          0.53     0.53 (=)
+tanh_drive                     1.00     1.00 (=)
+biquad8                        1.03     1.03 (=)
+peq10                          0.82     0.82 (=)
+svf_mod                        1.06     1.06 (=)
+fir32c                         1.10     1.10 (=)
+hoa_decoder_x                  0.88     0.88 (=)
+mixer16_x                      0.80     0.80 (=)
+freeverb                       0.95     0.95 (=)
+fdn8                           0.87     0.87 (=)
+diffuser32                     0.77     0.77 (=)
+zita_rev                       0.88     0.88 (=)
+clarinet                       0.79         0.80
+violin                         1.41         1.45
+frenchbell                     0.97     0.97 (=)
+crybaby                        1.00         1.01
+moog_vcf                       1.59         1.58
+compressor                     1.07     1.07 (=)
+distortion                     0.34         0.39
+phaser                         0.98     0.98 (=)
+flanger                        0.98     0.98 (=)
+pitch_shifter                  0.20     0.20 (=)
+dattorro                       0.60         0.60
+karplus                        0.68         0.68
+bubble                         1.16     1.16 (=)
+virtual_analog                 0.65         0.95
+diode_ladder                   1.12         1.12
+filter_bank                    0.78         0.82
+noise_gate                     1.34     1.34 (=)
+exciter                        1.28     1.28 (=)
+autopan                        0.58         0.60
+greyhole                       0.89     0.89 (=)
+tapiir                         1.07     1.07 (=)
+hoa_octo                       0.10         1.20
+flute                          0.18         0.42
+geometric mean                 0.78         0.87
+
+== ocpp-f   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp           st         nost
+sine                           0.66         0.54     0.54 (=)
+fm_pad                         1.04         1.04     1.04 (=)
+additive64                     0.95         1.09     1.09 (=)
+noise                          0.53         0.27     0.27 (=)
+tanh_drive                     1.01         1.01     1.01 (=)
+biquad8                        0.56         0.55     0.55 (=)
+peq10                          0.57         0.45     0.45 (=)
+svf_mod                        0.84         0.90     0.90 (=)
+fir32c                         0.85         0.67     0.67 (=)
+hoa_decoder_x                  1.00         0.86     0.86 (=)
+mixer16_x                      1.02         0.90     0.90 (=)
+freeverb                       0.64         0.54     0.54 (=)
+fdn8                           0.90         0.71     0.71 (=)
+diffuser32                     0.53         0.56     0.56 (=)
+zita_rev                       0.74         0.57     0.57 (=)
+clarinet                       0.73         0.59         0.62
+violin                         0.72         0.96         1.00
+frenchbell                     0.32         0.25     0.25 (=)
+crybaby                        0.63         0.63         0.63
+moog_vcf                       0.75         1.18         1.19
+compressor                     0.92         1.03     1.03 (=)
+distortion                     0.47         0.23         0.39
+phaser                         0.93         1.14     1.14 (=)
+flanger                        0.62         0.57     0.57 (=)
+pitch_shifter                  0.91         0.17     0.17 (=)
+dattorro                       0.44         0.26         0.44
+karplus                        0.65         0.59         0.69
+bubble                         0.61         0.71     0.71 (=)
+virtual_analog                 0.83         0.44         0.89
+diode_ladder                   1.04         0.96         1.05
+filter_bank                    0.82         0.73         0.94
+noise_gate                     0.54         0.74     0.74 (=)
+exciter                        0.89         1.22     1.22 (=)
+autopan                        0.85         0.57         0.69
+greyhole                       0.85         0.81     0.81 (=)
+tapiir                         0.85         0.91     0.91 (=)
+hoa_octo                       0.97         0.05         1.38
+flute                          0.79         0.18         0.48
+geometric mean                 0.74         0.57         0.69
+
+== ocpp-d   (md-ocpp : master-dev ocpp, for information)
+program                     md-ocpp           st         nost
+sine                           1.00         0.85     0.85 (=)
+fm_pad                         1.00         1.01     1.01 (=)
+additive64                     1.00         1.13     1.13 (=)
+noise                          1.00         0.52     0.52 (=)
+tanh_drive                     1.00         1.00     1.00 (=)
+biquad8                        1.00         0.96     0.96 (=)
+peq10                          1.19         0.82     0.82 (=)
+svf_mod                        1.00         1.07     1.07 (=)
+fir32c                         0.87         0.71     0.71 (=)
+hoa_decoder_x                  0.99         0.88     0.88 (=)
+mixer16_x                      0.99         0.80     0.80 (=)
+freeverb                       1.11         0.76     0.76 (=)
+fdn8                           1.02         0.81     0.81 (=)
+diffuser32                     1.53         0.68     0.68 (=)
+zita_rev                       1.10         0.86     0.86 (=)
+clarinet                       1.00         0.81         0.81
+violin                         1.01         1.41         1.49
+frenchbell                     0.29         0.36     0.36 (=)
+crybaby                        1.00         1.01         1.00
+moog_vcf                       1.00         1.59         1.59
+compressor                     0.97         1.08     1.08 (=)
+distortion                     1.00         0.34         0.40
+phaser                         0.91         0.98     0.98 (=)
+flanger                        0.96         0.94     0.94 (=)
+pitch_shifter                  1.00         0.19     0.19 (=)
+dattorro                       1.00         0.60         0.61
+karplus                        0.88         0.67         0.68
+bubble                         1.10         1.03     1.03 (=)
+virtual_analog                 0.86         0.64         0.96
+diode_ladder                   1.11         1.09         1.13
+filter_bank                    0.87         0.52         0.78
+noise_gate                     1.00         1.34     1.34 (=)
+exciter                        0.97         1.27     1.27 (=)
+autopan                        0.98         0.59         0.61
+greyhole                       0.88         0.74     0.74 (=)
+tapiir                         1.02         1.08     1.08 (=)
+hoa_octo                       1.02         0.10         1.21
+flute                          0.99         0.18         0.52
+geometric mean                 0.97         0.73         0.83
+
+above 1.05 : additive64 nost-ocpp-d 1.13, additive64 nost-ocpp-f 1.09, additive64 st-ocpp-d 1.13, additive64 st-ocpp-f 1.09, bubble nost-cpp-d 1.16, bubble st-cpp-d 1.16, compressor nost-cpp-d 1.07, compressor nost-cpp-f 1.06, compressor nost-ocpp-d 1.08, compressor st-cpp-d 1.07, compressor st-cpp-f 1.06, compressor st-ocpp-d 1.08, diode_ladder nost-cpp-d 1.12, diode_ladder nost-cpp-f 1.08, diode_ladder nost-ocpp-d 1.13, diode_ladder st-cpp-d 1.12, diode_ladder st-ocpp-d 1.09, exciter nost-cpp-d 1.28, exciter nost-cpp-f 1.21, exciter nost-ocpp-d 1.27, exciter nost-ocpp-f 1.22, exciter st-cpp-d 1.28, exciter st-cpp-f 1.21, exciter st-ocpp-d 1.27, exciter st-ocpp-f 1.22, filter_bank nost-cpp-f 1.05, fir32c nost-cpp-d 1.10, fir32c nost-cpp-f 1.13, fir32c st-cpp-d 1.10, fir32c st-cpp-f 1.13, hoa_octo nost-cpp-d 1.20, hoa_octo nost-cpp-f 1.40, hoa_octo nost-ocpp-d 1.21, hoa_octo nost-ocpp-f 1.38, moog_vcf nost-cpp-d 1.58, moog_vcf nost-cpp-f 1.44, moog_vcf nost-ocpp-d 1.59, moog_vcf nost-ocpp-f 1.19, moog_vcf st-cpp-d 1.59, moog_vcf st-cpp-f 1.44, moog_vcf st-ocpp-d 1.59, moog_vcf st-ocpp-f 1.18, noise_gate nost-cpp-d 1.34, noise_gate nost-cpp-f 1.19, noise_gate nost-ocpp-d 1.34, noise_gate st-cpp-d 1.34, noise_gate st-cpp-f 1.19, noise_gate st-ocpp-d 1.34, phaser nost-cpp-f 1.16, phaser nost-ocpp-f 1.14, phaser st-cpp-f 1.16, phaser st-ocpp-f 1.14, svf_mod nost-cpp-d 1.06, svf_mod nost-ocpp-d 1.07, svf_mod st-cpp-d 1.06, svf_mod st-ocpp-d 1.07, tapiir nost-cpp-d 1.07, tapiir nost-cpp-f 1.11, tapiir nost-ocpp-d 1.08, tapiir st-cpp-d 1.07, tapiir st-cpp-f 1.11, tapiir st-ocpp-d 1.08, violin nost-cpp-d 1.45, violin nost-ocpp-d 1.49, violin st-cpp-d 1.41, violin st-ocpp-d 1.41
+noise, the gap between the two best rounds : median 0.0 %, 90th percentile 0.1 %
