@@ -130,7 +130,10 @@ The options that change what is compared:
 
 **The certification branch.** Its generated code is meant to be compiled without `-ffast-math`,
 under an execution contract: `-O3 -march=native -fno-fast-math -ffp-contract=fast
--fno-math-errno`, with denormals flushed to zero by a header the tool includes (`ftz.h`). Pass
+-fno-math-errno -fno-trapping-math`, with denormals flushed to zero by a header the tool includes
+(`ftz.h`). The last option says that the program does not read the floating-point exception
+flags: it changes the code under gcc and nothing under clang, and the sessions measured before
+it was added record the options they were compiled with. Pass
 `--contract` whenever a version comes from that branch. The reference keeps its own options
 (`-ffast-math` by default, as master-dev is used), so the ratio compares each side as it is
 meant to run. `--contract` and `--version-flags` exclude each other.

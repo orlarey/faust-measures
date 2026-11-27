@@ -6,8 +6,9 @@ One reference per precision, R_f and R_d : the reference binary (named by --ref-
 by default) in cpp, default options, compiled by the C++ compiler with --ref-flags (-O3
 -ffast-math -march=native by default). Every version, in cpp and ocpp, is compiled with
 --version-flags (by default the same as the reference) or, under --contract, under the execution
-contract of the certification branch (-fno-fast-math -ffp-contract=fast -fno-math-errno, the
-denormals flushed to zero at start), and divided by the reference of its precision ; the
+contract of the certification branch (-fno-fast-math -ffp-contract=fast -fno-math-errno
+-fno-trapping-math, the denormals flushed to zero at start), and divided by the reference of its
+precision ; the
 reference in ocpp is given for information, against the same reference.
 
   mesure.py run --ref <faust> --version NAME=<faust> [--version NAME=<faust> ...] --out DIR
@@ -92,7 +93,10 @@ MESURES = os.path.join(os.path.dirname(HERE), "sessions")
 FAUST_ROOT = os.path.join(os.path.dirname(os.path.dirname(HERE)), "faust")
 
 REF_FLAGS = "-O3 -ffast-math -march=native"
-BRANCH_FLAGS = "-O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno"
+# -fno-trapping-math : the generated code never reads the floating-point exception flags. gcc
+# assumes by default that they may be read, and leaves loops scalar for it ; clang assumes they
+# are not, and compiles the same code with and without the option
+BRANCH_FLAGS = "-O3 -march=native -fno-fast-math -ffp-contract=fast -fno-math-errno -fno-trapping-math"
 FTZ_H = """// flush-to-zero and denormals-are-zero from the start of the program, as -ffast-math does
 // at link time (crtfastmath.o) and -mdaz-ftz (clang 18 lacks the option) : the execution
 // contract of the branch. x86 : FTZ (bit 15) and DAZ (bit 6) of MXCSR ; arm64 : FZ (bit 24)
