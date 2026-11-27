@@ -44,6 +44,8 @@
     {"commit": "38a10d58e", "version": "fl", "date": "2026-11-24", "branch": "master-dev-certification-7", "description": "cm, and a long FIR (8 taps or more) in 4 partial sums."},
     {"commit": "0cc0698be", "version": "rd", "date": "2026-11-24", "branch": "master-dev-certification-7", "description": "fl, and in ocpp a cache line after each ring, and a projection read only delayed read in the ring of the signal it delays."},
     {"commit": "7db73ba19", "version": "st", "date": "2026-11-24", "branch": "master-dev-certification-7", "description": "cert7 with the settled regime (-st, on by default): while every smoothed control stays at its target, the computations that depend on these controls alone are made once per block instead of once per sample."},
-    {"commit": "7db73ba19", "version": "nost", "date": "2026-11-24", "branch": "master-dev-certification-7", "description": "st under -nost: the settled regime off."}
+    {"commit": "7db73ba19", "version": "nost", "date": "2026-11-24", "branch": "master-dev-certification-7", "description": "st under -nost: the settled regime off."},
+    {"commit": "89cfbad3b", "version": "im", "date": "2026-11-27", "branch": "master-dev-certification-7", "description": "st, and the mathematical functions written in the generated code (-im, on by default): the sine and the cosine of a bounded argument and the hyperbolic tangent without a call of libm where the fused multiply-add is an instruction, and one loop of terms for the hosts of a family whose member calls one of them. Also since st: the hyperbolic functions as primitives, a mix computed from its weight when an operand lies between 0 and the other, the power of two integers as its products."},
+    {"commit": "89cfbad3b", "version": "noim", "date": "2026-11-27", "branch": "master-dev-certification-7", "description": "im under -noim: the calls of libm."}
   ]
 }
